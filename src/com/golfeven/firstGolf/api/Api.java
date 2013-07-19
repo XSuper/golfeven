@@ -2,6 +2,7 @@ package com.golfeven.firstGolf.api;
 
 import java.io.InputStream;
 
+import com.golfeven.firstGolf.bean.Integral;
 import com.golfeven.firstGolf.bean.User;
 import com.golfeven.firstGolf.common.Constant;
 import com.golfeven.firstGolf.common.StringUtils;
@@ -145,14 +146,85 @@ public class Api {
 		fh.post(Constant.URL_BASE, params, mCallBack);
 		
 	}
+	/**
+	 * 删除个人照片
+	 * @param user
+	 * @param id
+	 * @param mCallBack
+	 */
 	public void deletPhoto(User user,String id,AjaxCallBack<String> mCallBack){
 		AjaxParams params = new AjaxParams();
-		params.put("cmd", "Member.Member.deleteFile");
+		params.put("cmd", "Member.deleteFile");
 		params.put("mid",user.getMid());
 		params.put("token",user.getToken());
 		params.put("id",id);
 		fh.get(Constant.URL_BASE, params, mCallBack);
 		
+	}
+	/**
+	 * 增加积分
+	 * @param user
+	 * @param integral
+	 * @param mCallBack
+	 */
+	public void addCredits(User user,int type,AjaxCallBack<String> mCallBack){
+		int integral = 0;
+		switch (type) {
+		case 0://登陆
+			integral = 50;
+			break;
+		case 1://完善个人资料
+			integral = 100;
+			break;
+		case 2://上传真实图片
+			integral = 50;
+			break;
+		case 3://上传成绩
+			integral = 150;
+			break;
+		case 4://绑定微博(第一期没有)
+			integral = 80;
+			break;
+		case 5://常出没地
+			integral = 100;
+			break;
+		case 6://完成签名
+			integral = 50;
+			break;
+		case 7://完成标签
+			integral = 50;
+			break;
+		case 8://客户端好评
+			integral = 100;
+			break;
+
+		
+		}
+		if(user==null){
+			mCallBack.onFailure(null, "当前用户未登陆");
+		}
+		AjaxParams params = new AjaxParams();
+		params.put("cmd", "Member.setcredits");
+		params.put("uid",user.getMid());
+		params.put("token",user.getToken());
+		params.put("type",type+"");
+		params.put("credits",integral+"");
+		fh.get(Constant.URL_BASE, params, mCallBack);
+	}
+	/**
+	 * 读取积分信息
+	 * @param user
+	 * @param mCallBack
+	 */
+	public void readCredits(User user,AjaxCallBack<String> mCallBack){
+		if(user==null){
+			mCallBack.onFailure(null, "当前用户未登陆");
+		}
+		AjaxParams params = new AjaxParams();
+		params.put("cmd", "Member.getcredits");
+		params.put("uid",user.getMid());
+		params.put("token",user.getToken());
+		fh.get(Constant.URL_BASE, params, mCallBack);
 	}
 
 }

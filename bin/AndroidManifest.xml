@@ -107,6 +107,7 @@
         <activity android:name="com.golfeven.firstGolf.ui.ChoicePhotoActivity" android:theme="@style/ChoicePhotoActivity"/>
         <activity android:name="com.golfeven.firstGolf.ui.PhotosActivity"/>
         <activity android:name="com.golfeven.firstGolf.ui.PhotoShowActivity"/>
+        <activity android:name="com.golfeven.firstGolf.ui.IntegralActivity"/>
         <activity android:name="com.golfeven.firstGolf.ui.MapActivity"  android:hardwareAccelerated="false"/>
         
         <activity android:name="com.golfeven.firstGolf.ui.mWelcomeActivity"  android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"/>

@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.R.bool;
+import android.R.integer;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 
+import com.golfeven.firstGolf.bean.Integral;
 import com.golfeven.firstGolf.bean.Score;
 
 /**
@@ -80,6 +82,19 @@ public class Utils {
 
 		return scores;
 
+	}
+	
+	/**
+	 * 计算总积分
+	 * @param integrals
+	 * @return
+	 */
+	public static int getToTleIntegral(List<Integral> integrals){
+		int totle = 0;
+		for (int i = 0; i < integrals.size(); i++) {
+			totle += integrals.get(i).getCredits();
+		}
+		return totle;
 	}
 
 }

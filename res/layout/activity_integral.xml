@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.golfeven.firstGolf"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+    <com.golfeven.firstGolf.widget.HeadBack 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        app:htitle="积分"
+        app:progress_visible="true"
+        android:id="@+id/activity_integral_headback"
+        />
+    <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <TextView 
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="我的积分:"
+            />
+        <TextView 
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:id="@+id/activity_integral_totle"
+            android:text="1000"
+            />
+    </LinearLayout>
+    <TextView 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/blue"
+        android:text="每日登陆"
+        />
+    <TextView 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="每日登陆可以自动获取50积分"
+        />
+    <TextView 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/blue"
+        android:text="完善个人资料"
+        />
+    <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        >
+        <TextView 
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="完善账户资料"
+            />
+
+        <TextView
+            android:id="@+id/activity_integral_completeCount_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="100" />
+
+        <Button
+            android:id="@+id/activity_integral_completeCount_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="去完成" />
+
+    </LinearLayout>
+     <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="上传真实图片" />
+
+        <TextView
+            android:id="@+id/activity_integral_uploadImage_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="100" />
+
+        <Button
+            android:id="@+id/activity_integral_uploadImage_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="去完成" />
+
+    </LinearLayout>
+     <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="上传成绩" />
+
+        <TextView
+            android:id="@+id/activity_integral_uploadGrade_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="100" />
+
+        <Button
+            android:id="@+id/activity_integral_uploadGrade_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="去完成" />
+
+    </LinearLayout>
+     
+     <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="常出没地" />
+
+        <TextView
+            android:id="@+id/activity_integral_place_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="100" />
+
+        <Button
+            android:id="@+id/activity_integral_place_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="去完成" />
+
+    </LinearLayout>
+     <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="完成签名" />
+
+        <TextView
+            android:id="@+id/activity_integral_loveMsg_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="100" />
+
+        <Button
+            android:id="@+id/activity_integral_liveMsg_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="去完成" />
+
+    </LinearLayout>
+     <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="完成标签" />
+
+        <TextView
+            android:id="@+id/activity_integral_lable_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="100" />
+
+        <Button
+            android:id="@+id/activity_integral_lable_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="去完成" />
+
+    </LinearLayout>
+     <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="客户端好评" />
+
+        <TextView
+            android:id="@+id/activity_integral_evaluate_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="100" />
+
+        <Button
+            android:id="@+id/activity_integral_evaluate_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="去完成" />
+
+    </LinearLayout>
+</LinearLayout>

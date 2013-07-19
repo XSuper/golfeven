@@ -21,6 +21,7 @@ import com.golfeven.firstGolf.common.FileUtils;
 import com.golfeven.firstGolf.common.SharedPreferencesUtil;
 import com.golfeven.firstGolf.common.ToOtherActivity;
 import com.golfeven.firstGolf.common.Utils;
+import com.golfeven.firstGolf.ui.IntegralActivity;
 import com.golfeven.firstGolf.ui.LoginActivity;
 import com.golfeven.firstGolf.ui.MainActivity;
 import com.golfeven.firstGolf.ui.MyDetailActivity;
@@ -155,17 +156,18 @@ public class SettingFrame extends LinearLayout {
 		update = view.findViewById(R.id.frame_setting_updating);
 		about = view.findViewById(R.id.frame_setting_about);
 		my = (TextView) view.findViewById(R.id.frame_setting_mydetail_text);
-
+		evaluate.setOnClickListener(new ToOtherActivity((Activity)getContext(),IntegralActivity.class));
+		
 		clear.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View arg0) {
 
+				handler.sendEmptyMessage(CLEARING);
 				Runnable r = new Runnable() {
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
-						handler.sendEmptyMessage(CLEARING);
 						boolean flag = FileUtils
 								.deleteDirectory("/golfeven_cache");
 						if (flag) {
