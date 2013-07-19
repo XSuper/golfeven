@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.golfeven.firstGolf"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+    <com.golfeven.firstGolf.widget.HeadBack 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        app:htitle="球队"
+        app:progress_visible="false"
+        android:id="@+id/activity_ballteam_detail_headback"
+        />
+
+    <TextView
+        android:id="@+id/activity_ballteam_detail_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textColor="@color/black"
+        android:text="队名" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+         android:textColor="@color/black"
+        android:text="球队介绍" />
+
+    <TextView
+        android:id="@+id/activity_ballteam_detail_introduce"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+         android:textColor="@color/black"
+        android:text="." />
+
+    <Button
+        android:id="@+id/activity_ballteam_detail_join"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="申请加入" />
+
+</LinearLayout>

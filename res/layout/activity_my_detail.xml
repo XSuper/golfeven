@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.golfeven.firstGolf"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <com.golfeven.firstGolf.widget.HeadBack
+        android:id="@+id/activity_my_detail_headback"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        app:htitle="我的主页"
+        app:progress_visible="false" />
+
+    <ImageView
+        android:id="@+id/activity_my_detail_photo"
+        android:layout_width="fill_parent"
+        android:layout_height="180dip"
+        android:src="@drawable/img_default" />
+
+    <!--  
+    <ImageView
+        android:id="@+id/activity_my_detail_count"
+        android:layout_width="15dip"
+        android:layout_height="15dip"
+        android:layout_gravity="right"
+        android:layout_marginRight="5dip"
+        android:layout_marginTop="-180dip"
+        android:src="@drawable/ic_launcher" />
+    -->
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="70dp"
+        android:layout_gravity="right"
+        android:layout_marginTop="-30dip"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/activity_my_detail_face"
+            android:layout_width="50dip"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="15dip"
+            android:src="@drawable/ic_launcher" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="@null"
+                android:gravity="left|center_vertical"
+               android:id="@+id/activity_my_detail_name"
+                android:text="姓名" />
+            <ImageView 
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:id="@+id/activity_my_detail_sex"
+                android:src="@drawable/ic_launcher"
+                />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:gravity="left|center_vertical"
+                android:id="@+id/activity_my_detail_age"
+                android:text="0-18岁" />
+
+            
+        </LinearLayout>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:minHeight="200dip"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal" >
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="5"
+                    android:gravity="center" 
+                    android:text="常出没地："
+                    />
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:background="@null"
+                    android:id="@+id/activity_my_detail_place"
+                    android:text="松江九亭"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal" >
+                 <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:gravity="center" 
+                    android:layout_weight="5"
+                    android:text="个性签名："
+                    />
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="2"
+                    android:gravity="center" 
+                    android:background="@null"
+                    android:id="@+id/activity_my_detail_lovemsg"
+                    android:text="松江九亭"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal" >
+                 <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="5"
+                    android:gravity="center" 
+                    android:text="个性标签："
+                    />
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:background="@null"
+                    android:id="@+id/activity_my_detail_tags"
+                    android:text="松江九亭"
+                    />
+            </LinearLayout>
+
+            
+        </LinearLayout>
+    </ScrollView>
+
+   <Button 
+       android:layout_width="fill_parent"
+       android:layout_height="50dip"
+       android:id="@+id/activity_my_detail_btn"
+       android:text="完善资料"
+       />
+
+</LinearLayout>

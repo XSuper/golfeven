@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+
+    <style name="ThemeActivity">
+        <item name="android:windowAnimationStyle">@style/AnimationActivity</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+    <style name="ChoicePhotoActivity">
+        <item name="android:windowAnimationStyle">@style/photoAnimationActivity</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+</resources>

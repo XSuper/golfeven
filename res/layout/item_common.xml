@@ -1,0 +1,51 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="horizontal" >
+
+    <ImageView
+        style="@style/frame_home_img"
+        android:id="@+id/item_common_img"
+         />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" 
+        android:layout_weight="1"
+        >
+
+        <TextView
+            android:id="@+id/item_common_title"
+            android:layout_width="fill_parent"
+            android:layout_height="26dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="4dp"
+            android:textColor="@color/red"
+            android:text="标题"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/item_common_digest"
+            android:layout_width="fill_parent"
+            android:layout_height="26dp"
+            android:layout_below="@id/item_common_title"
+            android:paddingLeft="10dp"
+            android:paddingTop="4dp"
+            android:textColor="@color/black"
+            android:text="摘要"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/item_common_time"
+            android:layout_width="fill_parent"
+            android:layout_height="26dp"
+            android:layout_below="@id/item_common_digest"
+            android:paddingLeft="10dp"
+            android:paddingTop="4dp"
+            android:text="时间"
+            android:textColor="@color/red"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+</LinearLayout>

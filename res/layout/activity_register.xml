@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.golfeven.firstGolf"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <com.golfeven.firstGolf.widget.HeadBack
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/activity_register_headback"
+        app:htitle="注册" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/white"
+         >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/activity_register_id"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入手机号或邮箱"
+            android:layout_weight="1" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/white"
+         >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/activity_register_name"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="昵称"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/white"
+         >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/activity_register_upass"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="输入密码"
+            android:password="true"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" 
+        android:background="@color/white"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/activity_register_repeat"
+            android:layout_width="fill_parent"
+            android:password="true"
+            android:layout_height="wrap_content"
+            android:hint="请重发输入"
+            android:layout_weight="1" />
+    </LinearLayout>
+    <CheckBox 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="同意注册条款"
+        android:id="@+id/activity_register_agree"
+        />
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="提交注册"
+        android:id="@+id/activity_register_btn"
+        />
+
+</LinearLayout>

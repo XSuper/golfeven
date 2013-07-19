@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">firstGolf</string>
+    <string name="menu_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    
+    
+    <string name="loading">正在加载...</string>
+    
+    
+    <string name="list_lastUpdate">最新刷新时间</string>
+    
+    <string name="news">最新资讯</string>
+    <string name="hotActivity">热门活动</string>
+    <string name="gallery">精彩图集</string>
+    <string name="ball_park">球场</string>
+    <string name="ball_team">球队</string>
+    <string name="ball_friends">球友</string>
+    <string name="golfInfo">高尔夫知识</string>
+    
+    
+    <string name="pull_to_refresh_pull_label">下拉可以刷新</string>
+    <string name="pull_to_refresh_release_label">松开可以刷新</string>
+    <string name="pull_to_refresh_refreshing_label">加载中...</string>
+    <string name="pull_to_refresh_tap_label">下拉可以刷新</string>
+    <string name="pull_to_refresh_update">最近更新：</string>
+
+    
+    <string name="img_contentDescription">图片加载失败</string>
+</resources>

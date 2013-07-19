@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:alpha="10"
+    android:background="#00000000"
+    android:orientation="vertical" >
+   <Button 
+       android:layout_width="fill_parent"
+       android:layout_height="100dp" 
+       android:layout_marginTop="100dp"
+       android:text="拍照"
+       android:id="@+id/activity_choicephoto_take"
+       />
+   <Button 
+       android:layout_width="fill_parent"
+       android:layout_height="100dp" 
+       android:text="现有"
+       android:id="@+id/activity_choicephoto_choice"
+       />
+   <Button 
+       android:layout_width="fill_parent"
+       android:layout_height="100dp" 
+       android:text="取消"
+       android:id="@+id/activity_choicephoto_cancle"
+       />
+    
+
+</LinearLayout>

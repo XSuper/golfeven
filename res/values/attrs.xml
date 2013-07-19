@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="widget_home_navigation">
+	<attr name="title" format="string|reference"/>
+    </declare-styleable>
+    <declare-styleable name="head_back">
+	<attr name="htitle" format="string|reference"/>
+	<attr name="progress_visible" format="boolean"/>
+	<attr name="rbtn1_visible" format="boolean"/>
+	<attr name="rbtn1_src" format="reference"/>
+	<attr name="rbtn2_visible" format="boolean"/>
+	<attr name="rbtn2_src" format="reference"/>
+    </declare-styleable>
+</resources>

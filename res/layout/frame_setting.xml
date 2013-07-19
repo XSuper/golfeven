@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:orientation="vertical" 
+    android:id="@+id/frame_setting"
+    >
+    
+
+    <LinearLayout
+        android:id="@+id/frame_setting_mydetail"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp" >
+
+        <TextView
+            android:id="@+id/frame_setting_mydetail_text"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_gravity="left|center_vertical"
+            android:gravity="center_vertical"
+            android:text="我的主页" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|center_vertical"
+            android:background="@drawable/btn_down" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/frame_setting_integral"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_gravity="left|center_vertical"
+            android:gravity="center_vertical"
+            android:text="获取积分" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|center_vertical"
+            android:background="@drawable/btn_down" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="50dp" >
+
+        <TextView
+        android:id="@+id/frame_setting_clearcache"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_gravity="left|center_vertical"
+            android:gravity="center_vertical"
+            android:text="清除缓存图片" />
+
+        <Button
+            android:id="@+id/frame_setting_clear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|center_vertical"
+            android:background="@drawable/btn_down" 
+            android:text="清除"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/frame_setting_evaluate"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_gravity="left|center_vertical"
+            android:gravity="center_vertical"
+            android:text="评价" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|center_vertical"
+            android:background="@drawable/btn_down" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/frame_setting_about"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp" 
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:layout_gravity="left|center_vertical"
+            android:gravity="center_vertical"
+            android:text="关于我们" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|center_vertical"
+            android:background="@drawable/btn_down" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/frame_setting_updating"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp" >
+
+        <TextView
+            android:id="@+id/frame_setting_updating_text"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_gravity="left|center_vertical"
+            android:gravity="center_vertical"
+            android:text="版本更新" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|center_vertical"
+            android:background="@drawable/btn_down" />
+    </LinearLayout>
+
+      <Button 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:text="登录"
+        android:id="@+id/frame_setting_login"
+        />
+
+</LinearLayout>

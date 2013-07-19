@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_linearlayout_footer"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/widget_bar_bg_n"
+    android:gravity="center_vertical"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <RadioGroup
+            android:id="@+id/main_footbar_radiogroup"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/main_footbar_home"
+                style="@style/main_footbar_radio"
+                android:checked="true"
+                android:drawableTop="@drawable/widget_bar_home" />
+
+            <ImageView
+                style="@style/main_footbar_cutline"
+                android:src="@drawable/widget_bar_cut_off" />
+
+            <RadioButton
+                android:id="@+id/main_footbar_playball"
+                style="@style/main_footbar_radio"
+                android:drawableTop="@drawable/widget_bar_playball" />
+
+            <ImageView
+                style="@style/main_footbar_cutline"
+                android:src="@drawable/widget_bar_cut_off" />
+
+            <RadioButton
+                android:id="@+id/main_footbar_attention"
+                style="@style/main_footbar_radio"
+                android:drawableTop="@drawable/widget_bar_attention" />
+
+            <ImageView
+                style="@style/main_footbar_cutline"
+                android:src="@drawable/widget_bar_cut_off" />
+
+            <RadioButton
+                android:id="@+id/main_footbar_grade"
+                style="@style/main_footbar_radio"
+                android:drawableTop="@drawable/widget_bar_grade" />
+
+            <ImageView
+                style="@style/main_footbar_cutline"
+                android:src="@drawable/widget_bar_cut_off" />
+
+            <RadioButton
+                android:id="@+id/main_footbar_setting"
+                style="@style/main_footbar_radio"
+                android:drawableTop="@drawable/widget_bar_setting" />
+        </RadioGroup>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:text="首页" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:text="打球" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:text="成绩" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:text="关注" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:text="设置" />
+    </LinearLayout>
+
+</LinearLayout>

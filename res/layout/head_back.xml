@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="40dip"
+    android:background="@drawable/title_bk" >
+
+    <ImageButton
+        android:id="@+id/btn_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_back_selector"
+        android:src="@drawable/btn_back" />
+
+    <View
+        android:id="@+id/line0"
+        android:layout_width="1px"
+        android:layout_height="fill_parent"
+        android:layout_toRightOf="@id/btn_back"
+        android:background="#aa11264f" />
+
+    <ProgressBar
+        android:id="@+id/head_back_progress"
+        style="@style/loading_small"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dip"
+        android:layout_toRightOf="@id/line0"
+        android:visibility="invisible" />
+
+    <View
+        android:layout_width="1px"
+        android:layout_height="fill_parent"
+        android:layout_toRightOf="@id/line0"
+        android:background="#009ad6" />
+
+    <TextView
+        android:id="@+id/head_back_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="第一高尔夫"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp" />
+
+    <ImageButton
+        android:id="@+id/head_back_rbtn2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/head_back_rbtn1"
+        android:background="@drawable/btn_back_selector"
+        android:visibility="invisible" />
+
+    <ImageButton
+        android:id="@+id/head_back_rbtn1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/btn_back_selector"
+        android:visibility="invisible" />
+
+</RelativeLayout>

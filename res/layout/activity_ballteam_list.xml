@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.golfeven.firstGolf"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+    <com.golfeven.firstGolf.widget.HeadBack 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        app:htitle="球队"
+        app:progress_visible="true"
+        android:id="@+id/activity_ballteam_list_headback"
+        />
+      <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="50dip"
+        android:orientation="horizontal"
+        >
+        
+        <Spinner 
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/activity_ballteam_list_spinner_city"
+            
+            />
+       
+        <Spinner 
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/activity_ballteam_list_spinner_peoplecount"
+            />
+    </LinearLayout>
+    <com.golfeven.firstGolf.widget.PullToRefreshListView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/activity_ballteam_list"
+        />
+    
+
+</LinearLayout>

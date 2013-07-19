@@ -1,0 +1,45 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".WeartherActivity" >
+
+    <include layout="@layout/main_weather_head"
+        android:id="@+id/main_weather_head"/>
+    <com.golfeven.firstGolf.widget.ScrollLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:id="@+id/main_scroll">
+        <com.golfeven.firstGolf.widget.frame.HomeFrame
+            android:layout_width="fill_parent"
+        	android:layout_height="fill_parent"
+        	android:id="@+id/frame_home"
+            />
+        <com.golfeven.firstGolf.widget.frame.PlayBallFrame
+            android:layout_width="fill_parent"
+        	android:layout_height="fill_parent"
+        	android:id="@+id/frame_playball"
+            />
+        <com.golfeven.firstGolf.widget.frame.AttentitonFrame
+            android:layout_width="fill_parent"
+        	android:layout_height="fill_parent"
+        	android:id="@+id/frame_attention"
+            />
+        <com.golfeven.firstGolf.widget.frame.GradeFrame
+            android:layout_width="fill_parent"
+        	android:layout_height="fill_parent"
+        	android:id="@+id/frame_grade"
+            />
+        <com.golfeven.firstGolf.widget.frame.SettingFrame
+            android:layout_width="fill_parent"
+        	android:layout_height="fill_parent"
+        	android:id="@+id/frame_setting"
+            />
+    </com.golfeven.firstGolf.widget.ScrollLayout>
+    
+    <include layout="@layout/main_footer"
+        android:id="@+id/main_footer"/>
+    
+</LinearLayout>

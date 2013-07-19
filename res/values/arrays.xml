@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="spinner_hole">
+        <item >9 洞</item>
+        <item >18洞</item>
+        <item >27洞</item>
+        <item >36洞</item>
+        <item >45洞</item>
+    </string-array>
+    
+    <string-array name="spinner_xunsai">
+        <item >美巡赛</item>
+        <item >欧巡赛</item>
+        <item >俱乐部赛</item>
+    </string-array>
+    <string-array name="spinner_newsType">
+        <item >文字</item>
+        <item >视频</item>
+    </string-array>
+    <string-array name="spinner_sort">
+        <item >日排序</item>
+        <item >周排序</item>
+        <item >月排序</item>
+    </string-array>
+    <string-array name="spinner_city">
+        <item >上海</item>
+        <item >北京</item>
+        <item >广州</item>
+    </string-array>
+    <string-array name="spinner_ballparktype">
+        <item >俱乐部</item>
+        <item >练习场</item>
+        <item >高级私人会所</item>
+    </string-array>
+    <string-array name="spinner_price">
+        <item >由高到低</item>
+        <item >由低到高</item>
+    </string-array>
+    <string-array name="spinner_peoplecount">
+        <item >由多到少</item>
+        <item >由少到多</item>
+    </string-array>
+    <string-array name="spinner_sex">
+        <item >全部</item>
+        <item >男</item>
+        <item >女</item>
+    </string-array>
+    <string-array name="spinner_age">
+        <item >全部</item>
+        <item >18-20</item>
+        <item >20-30</item>
+        <item >30-40</item>
+        <item >40-50</item>
+    </string-array>
+</resources>
