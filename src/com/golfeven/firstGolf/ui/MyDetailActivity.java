@@ -212,6 +212,7 @@ public class MyDetailActivity extends BaseActivity {
 					// TODO Auto-generated method stub
 					super.onFailure(t, strMsg);
 					MyLog.v("face", strMsg);
+		
 					progressDialog.dismiss();
 					MyToast.customToast(MyDetailActivity.this, Toast.LENGTH_SHORT, "失败","头像更换失败",Constant.TOAST_IMG_SUCCESS);
 				}

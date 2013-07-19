@@ -63,7 +63,7 @@ public class MainActivity extends BaseActivity {
 
 	// 页面初始化
 	@ViewInject(id = R.id.main_scroll)
-	ScrollLayout mScrollLayout;// 页面滑动控制器
+	public ScrollLayout mScrollLayout;// 页面滑动控制器
 
 	@ViewInject(id = R.id.frame_home)
 	View viewHome;

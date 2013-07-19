@@ -1,5 +1,6 @@
 package com.golfeven;
 
+import java.util.Iterator;
 import java.util.Stack;
 
 import android.app.Activity;
@@ -69,6 +70,17 @@ public class AppManager {
 				finishActivity(activity);
 			}
 		}
+	}
+	/**
+	 * 得到指定类名的Activity
+	 */
+	public Activity getActivity(Class<?> cls){
+		for (Activity activity : activityStack) {
+			if(activity.getClass().equals(cls) ){
+				return activity;
+			}
+		}
+		return null;
 	}
 	/**
 	 * 结束所有Activity

@@ -169,6 +169,24 @@ public class ValidateUtil {
 			wrongResponse.msg = "无效的好友id";
 		}
 		
+		if(t.startsWith("601")){
+			wrongResponse.code =501;
+			wrongResponse.show = false;
+			wrongResponse.msg = "无效的图片格式";
+		}
+		
+		if(t.startsWith("602")){
+			wrongResponse.code =501;
+			wrongResponse.show = false;
+			wrongResponse.msg = "空文件";
+		}
+		
+		if(t.startsWith("603")){
+			wrongResponse.code =501;
+			wrongResponse.show = false;
+			wrongResponse.msg = "文件超过大小";
+		}
+		
 		return wrongResponse;
 		
 	}

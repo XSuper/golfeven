@@ -156,8 +156,20 @@ public class SettingFrame extends LinearLayout {
 		update = view.findViewById(R.id.frame_setting_updating);
 		about = view.findViewById(R.id.frame_setting_about);
 		my = (TextView) view.findViewById(R.id.frame_setting_mydetail_text);
-		evaluate.setOnClickListener(new ToOtherActivity((Activity)getContext(),IntegralActivity.class));
-		
+		integral.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				if(appContext.isLogin){
+					Utils.ToActivity((Activity)getContext(), IntegralActivity.class, false);
+				}else{
+					Utils.ToActivity((Activity)getContext(), LoginActivity.class, false);
+					
+				}
+				
+			}
+		});
 		clear.setOnClickListener(new OnClickListener() {
 
 			@Override

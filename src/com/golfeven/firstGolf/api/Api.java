@@ -2,14 +2,13 @@ package com.golfeven.firstGolf.api;
 
 import java.io.InputStream;
 
-import com.golfeven.firstGolf.bean.Integral;
-import com.golfeven.firstGolf.bean.User;
-import com.golfeven.firstGolf.common.Constant;
-import com.golfeven.firstGolf.common.StringUtils;
-
 import net.tsz.afinal.FinalHttp;
 import net.tsz.afinal.http.AjaxCallBack;
 import net.tsz.afinal.http.AjaxParams;
+
+import com.golfeven.firstGolf.bean.User;
+import com.golfeven.firstGolf.common.Constant;
+import com.golfeven.firstGolf.common.StringUtils;
 
 public class Api {
 	private static Api api;
@@ -202,6 +201,7 @@ public class Api {
 		}
 		if(user==null){
 			mCallBack.onFailure(null, "当前用户未登陆");
+			return;
 		}
 		AjaxParams params = new AjaxParams();
 		params.put("cmd", "Member.setcredits");
@@ -219,6 +219,7 @@ public class Api {
 	public void readCredits(User user,AjaxCallBack<String> mCallBack){
 		if(user==null){
 			mCallBack.onFailure(null, "当前用户未登陆");
+			return;
 		}
 		AjaxParams params = new AjaxParams();
 		params.put("cmd", "Member.getcredits");

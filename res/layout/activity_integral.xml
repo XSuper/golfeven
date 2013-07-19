@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res/com.golfeven.firstGolf"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/lightblue"
     android:orientation="vertical" >
     <com.golfeven.firstGolf.widget.HeadBack 
         android:layout_width="fill_parent"
@@ -172,7 +172,7 @@
             android:text="100" />
 
         <Button
-            android:id="@+id/activity_integral_liveMsg_btn"
+            android:id="@+id/activity_integral_loveMsg_btn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
