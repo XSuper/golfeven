@@ -3,8 +3,6 @@ package com.golfeven.firstGolf.common;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.R.bool;
-import android.R.integer;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
