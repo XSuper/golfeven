@@ -150,7 +150,7 @@ public class HomeNavigation extends LinearLayout {
 	}
 
 	public void initData(List datas) {
-		if(datas.size()<=0){
+		if(datas==null||datas.size()<=0){
 			return;
 		}
 		this.datas = datas;

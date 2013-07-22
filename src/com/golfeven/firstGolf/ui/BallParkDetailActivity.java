@@ -71,7 +71,12 @@ public class BallParkDetailActivity extends BaseActivity {
 				super.onSuccess(t);
 				MyLog.v("tag", t+"");
 				headBack.setProgressVisible(false);
-				parkDetail = JSON.parseObject(t, BallParkDetail.class);
+				try {
+					
+					parkDetail = JSON.parseObject(t, BallParkDetail.class);
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
 				setValue();
 			}
 
@@ -89,6 +94,9 @@ public class BallParkDetailActivity extends BaseActivity {
 	}
 	
 	private void setValue() {
+		if(parkDetail == null){
+			return;
+		}
 		mainPageView.setImages(parkDetail.getImgurls());
 		MyLog.v("tag", parkDetail.getBody()+"");
 		headBack.setTitle(parkDetail.getTitle());

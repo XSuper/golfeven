@@ -20,6 +20,8 @@ public class Constant {
 	public static final String FILE_USER="file_user";
 	public static final String FILE_USER_USERID="file_user_userid";
 	public static final String FILE_USER_UPASS="file_user_upass";
+	public static final String FILE_INTEGRAL_TYPE="file_user_upass";
+	
 	
 	
 	public static final String FILE_MAP="file_map";//百度地图保存的信息

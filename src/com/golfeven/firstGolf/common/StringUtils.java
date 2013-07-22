@@ -69,6 +69,19 @@ public class StringUtils
 		}
 	}
 	
+	public static boolean isOneDay(String sdate){
+		Date time = toDate(sdate);
+		if(time == null) {
+			return false;
+		}	
+		Calendar cal = Calendar.getInstance();
+		
+		//判断是否是同一天
+		String curDate = dateFormater2.get().format(cal.getTime());
+		String paramDate = dateFormater2.get().format(time);
+		return curDate.equals(paramDate);
+		
+	}
 	/**
 	 * 以友好的方式显示时间
 	 * @param sdate
@@ -282,7 +295,7 @@ public class StringUtils
 	 * @return
 	 */
 	public static boolean responseError(String str){
-		if(isEmpty(str)||"[]".equals(str)||"{}".equals(str)){
+		if(isEmpty(str.trim())||"[]".equals(str.trim())||"{}".equals(str.trim())){
 			return true;
 		}
 		return false;

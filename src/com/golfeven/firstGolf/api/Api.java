@@ -1,14 +1,23 @@
 package com.golfeven.firstGolf.api;
 
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 import net.tsz.afinal.FinalHttp;
 import net.tsz.afinal.http.AjaxCallBack;
 import net.tsz.afinal.http.AjaxParams;
 
+import android.app.Activity;
+import android.content.Context;
+import android.widget.Toast;
+
 import com.golfeven.firstGolf.bean.User;
 import com.golfeven.firstGolf.common.Constant;
+import com.golfeven.firstGolf.common.SharedPreferencesUtil;
 import com.golfeven.firstGolf.common.StringUtils;
+import com.golfeven.firstGolf.widget.MyToast;
 
 public class Api {
 	private static Api api;
@@ -166,10 +175,16 @@ public class Api {
 	 * @param integral
 	 * @param mCallBack
 	 */
-	public void addCredits(User user,int type,AjaxCallBack<String> mCallBack){
-		int integral = 0;
+	int integral;
+	public void addCredits(final Activity activity,User user,final int type,final String msg){
+		integral = 0;
+		if(!SharedPreferencesUtil.judgeIntegral(activity.getApplicationContext(), type)){
+			return;
+		}
+		
 		switch (type) {
 		case 0://登陆
+			
 			integral = 50;
 			break;
 		case 1://完善个人资料
@@ -200,7 +215,6 @@ public class Api {
 		
 		}
 		if(user==null){
-			mCallBack.onFailure(null, "当前用户未登陆");
 			return;
 		}
 		AjaxParams params = new AjaxParams();
@@ -209,7 +223,23 @@ public class Api {
 		params.put("token",user.getToken());
 		params.put("type",type+"");
 		params.put("credits",integral+"");
-		fh.get(Constant.URL_BASE, params, mCallBack);
+		fh.get(Constant.URL_BASE, params, new AjaxCallBack<String>() {
+
+			@Override
+			public void onSuccess(String t) {
+				// TODO Auto-generated method stub
+				super.onSuccess(t);
+				SharedPreferencesUtil.StatisticsIntegral(activity.getApplicationContext(), type);
+				MyToast.customToast(activity, Toast.LENGTH_SHORT,MyToast.TOAST_MSG_SUCCESS_TITLE, msg+"获得"+integral+"积分", Constant.TOAST_IMG_SUCCESS);
+			}
+
+			@Override
+			public void onFailure(Throwable t, String strMsg) {
+				// TODO Auto-generated method stub
+				super.onFailure(t, strMsg);
+			}
+			
+		});
 	}
 	/**
 	 * 读取积分信息
@@ -224,8 +254,46 @@ public class Api {
 		AjaxParams params = new AjaxParams();
 		params.put("cmd", "Member.getcredits");
 		params.put("uid",user.getMid());
+		
 		params.put("token",user.getToken());
 		fh.get(Constant.URL_BASE, params, mCallBack);
+	}
+	/**
+	 *更新用户信息
+	 * @param user
+	 * @param data
+	 * @param mCallBack
+	 */
+	public void updateInfo(final Activity activity,final User user,HashMap<String,String> data ,final Set<Integer> typeSet,final AjaxCallBack<String> mCallBack){
+		if(user==null){
+			mCallBack.onFailure(null, "当前用户未登陆");
+			return;
+		}
+		AjaxParams params = new AjaxParams();
+		params.put("cmd", "Member.updateinfo");
+		params.put("mid",user.getMid());
+		params.put("token",user.getToken());
+		Set<String> keys = data.keySet();
+		for (String string : keys) {
+			params.put(string,data.get(string));
+		}
+		fh.get(Constant.URL_BASE, params, new AjaxCallBack<String>() {
+			@Override
+			public void onSuccess(String t) {
+				// TODO Auto-generated method stub
+				super.onSuccess(t);
+				for (Integer type : typeSet) {
+					addCredits(activity, user, type, null);
+				}
+				mCallBack.onSuccess(t);
+			}
+			@Override
+			public void onFailure(Throwable t, String strMsg) {
+				// TODO Auto-generated method stub
+				super.onFailure(t, strMsg);
+				mCallBack.onFailure(t, strMsg);
+			}
+		});
 	}
 
 }

@@ -4,7 +4,6 @@ import java.util.List;
 
 import net.tsz.afinal.annotation.view.ViewInject;
 import net.tsz.afinal.http.AjaxCallBack;
-import android.R.integer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -93,6 +92,7 @@ public class IntegralActivity extends BaseActivity{
 			public void onFailure(Throwable t, String strMsg) {
 				// TODO Auto-generated method stub
 				super.onFailure(t, strMsg);
+				MyLog.v("error",strMsg);
 				headBack.setProgressVisible(false);
 				NetUtil.requestError(appContext, null);
 			}

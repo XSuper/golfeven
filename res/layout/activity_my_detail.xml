@@ -11,29 +11,30 @@
         android:layout_height="wrap_content"
         app:htitle="我的主页"
         app:progress_visible="false" />
-
-    <ImageView
-        android:id="@+id/activity_my_detail_photo"
+    <FrameLayout 
         android:layout_width="fill_parent"
-        android:layout_height="180dip"
-        android:src="@drawable/img_default" />
+        android:layout_height="wrap_content"
+        >
 
-    <!--  
+   <ImageView
+       android:id="@+id/activity_my_detail_photo"
+       android:layout_width="match_parent"
+       android:layout_height="176dp"
+       android:src="@drawable/img_default" />
+
     <ImageView
         android:id="@+id/activity_my_detail_count"
-        android:layout_width="15dip"
-        android:layout_height="15dip"
+        android:layout_width="25dip"
+        android:layout_height="25dip"
         android:layout_gravity="right"
-        android:layout_marginRight="5dip"
-        android:layout_marginTop="-180dip"
+        android:layout_marginRight="25dip"
         android:src="@drawable/ic_launcher" />
-    -->
+    </FrameLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="70dp"
         android:layout_gravity="right"
-        android:layout_marginTop="-30dip"
         android:orientation="horizontal" >
 
         <ImageView
@@ -58,12 +59,27 @@
                 android:gravity="left|center_vertical"
                android:id="@+id/activity_my_detail_name"
                 android:text="姓名" />
+            <LinearLayout 
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                >
+                
             <ImageView 
                 android:layout_width="10dp"
                 android:layout_height="10dp"
-                android:id="@+id/activity_my_detail_sex"
+                android:id="@+id/activity_my_detail_sex_icon"
                 android:src="@drawable/ic_launcher"
                 />
+            <TextView 
+                android:layout_width="10dp"
+                android:id="@+id/activity_my_detail_sex_text"
+                android:layout_height="10dp"
+                android:text="男"
+                />
+                
+            </LinearLayout>
 
             <TextView
                 android:layout_width="fill_parent"

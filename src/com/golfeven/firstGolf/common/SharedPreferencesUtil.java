@@ -1,5 +1,6 @@
 package com.golfeven.firstGolf.common;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -70,6 +71,43 @@ public class SharedPreferencesUtil {
 	 */
 	public static void clearUser(Context context){
 		clear(Constant.FILE_USER, context);
+	}
+	/**
+	 * 判断请求是否能再次得到积分
+	 * @param context
+	 * @param type
+	 * @return
+	 */
+	public static boolean judgeIntegral(Context context,int type){
+		if(type ==0){
+			String time =
+					read(Constant.FILE_USER, context, Constant.FILE_INTEGRAL_TYPE+type);
+			return StringUtils.isOneDay(time);
+		}
+		String flag = read(Constant.FILE_USER, context, Constant.FILE_INTEGRAL_TYPE+type);
+		if(StringUtils.isEmpty(flag)){
+			return false;
+		}else {
+			return true;
+		}
+		
+	}
+	/**
+	 * 统计积分
+	 * @param context
+	 * @param uname
+	 * @param upass
+	 */
+	public static void StatisticsIntegral(Context context,int type){
+		Map<String, String> integral = new HashMap<String, String>();
+		if(type == 0){
+			integral.put(Constant.FILE_INTEGRAL_TYPE+type, StringUtils.getDateStr(new Date()));
+		}else{
+			
+			integral.put(Constant.FILE_INTEGRAL_TYPE+type, "true");
+		}
+		SharedPreferencesUtil.keep(Constant.FILE_USER,
+				context, integral);
 	}
 
 }

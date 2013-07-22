@@ -255,7 +255,12 @@ public abstract class BaseListActivity extends BaseActivity {
 				Date date = new Date();
 				switch (tag) {
 				case LOAD:
-					datas = JSON.parseArray(t, entityClass);
+					try {
+						datas = JSON.parseArray(t, entityClass);
+						
+					} catch (Exception e) {
+						// TODO: handle exception
+					}
 					// listView.setTag(TAG_KEY_TIME,sf.format(date));
 					listView.onRefreshComplete(sf.format(date));
 					mHandler.sendEmptyMessage(LOAD_SUCCESS);

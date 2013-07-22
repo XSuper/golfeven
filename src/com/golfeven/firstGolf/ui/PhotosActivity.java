@@ -79,7 +79,16 @@ public class PhotosActivity extends BaseActivity {
 
 			Button btn = new Button(appContext);
 			btn.setText("添加照片");
-			rowAddView(btn);
+			
+				LayoutParams params = new LayoutParams(1);
+				row = new TableRow(appContext);
+				row.setLayoutParams(params);
+				mtable.addView(row);
+			
+			//view.setLayoutParams(params )
+			LayoutParams param = new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT, 1);
+			btn.setLayoutParams(param);
+			row.addView(btn);
 			
 			btn.setOnClickListener(new OnClickListener() {
 				
@@ -106,7 +115,7 @@ public class PhotosActivity extends BaseActivity {
 		}
 		
 		//view.setLayoutParams(params )
-		LayoutParams param = new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT, 1);
+		LayoutParams param = new LayoutParams(0, LayoutParams.FILL_PARENT, 1);
 		view.setLayoutParams(param);
 		row.addView(view);
 		index++;
@@ -153,7 +162,6 @@ public class PhotosActivity extends BaseActivity {
 						
 						Intent intent = new Intent();
 						intent.putParcelableArrayListExtra("photos",(ArrayList<Photo>) photos);
-						Toast.makeText(appContext, "baochunle001 ", Toast.LENGTH_SHORT).show();
 						setResult(003,intent);
 
 						
@@ -199,6 +207,17 @@ public class PhotosActivity extends BaseActivity {
 						public void onSuccess(String t) {
 							// TODO Auto-generated method stub
 							super.onSuccess(t);
+							//v.setVisibility(View.GONE);
+							photos.remove((int)(Integer)v.getTag(R.layout.activity_photos));
+							
+							
+							mtable.removeAllViews();
+							index = 0;
+							init();
+							
+							Intent intent = new Intent();
+							intent.putParcelableArrayListExtra("photos",(ArrayList<Photo>) photos);
+							setResult(003,intent);
 							Toast.makeText(appContext, t, Toast.LENGTH_LONG).show();
 						}
 

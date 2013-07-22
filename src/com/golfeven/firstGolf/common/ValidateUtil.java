@@ -1,5 +1,6 @@
 package com.golfeven.firstGolf.common;
 
+import com.alibaba.fastjson.JSON;
 import com.golfeven.firstGolf.bean.WrongResponse;
 
 public class ValidateUtil {
@@ -81,108 +82,89 @@ public class ValidateUtil {
 	
 	public static WrongResponse wrongResponse(String t){
 		WrongResponse wrongResponse =new WrongResponse();
-		if(t.startsWith("99")){
-			wrongResponse.code = 99;
+		wrongResponse = JSON.parseObject(t, WrongResponse.class);
+		if(wrongResponse.code == 99){
 			wrongResponse.show = false;
-			wrongResponse.msg = t.replaceFirst("99","").trim();
 		}
-		if(t.startsWith("100")){
-			wrongResponse.code = 100;
+		if(wrongResponse.code == 100){
 			wrongResponse.show = true;
 			wrongResponse.msg = "用户账号不能为空";
 		}
-		if(t.startsWith("101")){
-			wrongResponse.code =101;
+		if(wrongResponse.code == 101){
 			wrongResponse.show = true;
 			wrongResponse.msg = "用户已经存在";
 		}
-		if(t.startsWith("102")){
-			wrongResponse.code =102;
+		if(wrongResponse.code == 102){
 			wrongResponse.show = true;
 			wrongResponse.msg = "用户不存在";
 		}
-		if(t.startsWith("103")){
-			wrongResponse.code =103;
+		if(wrongResponse.code == 103){
 			wrongResponse.show = true;
 			wrongResponse.msg = "昵称已经存在";
 		}
-		if(t.startsWith("104")){
-			wrongResponse.code =104;
+		if(wrongResponse.code == 104){
 			wrongResponse.show = true;
 			wrongResponse.msg = "邮箱已经存在";
 		}
-		if(t.startsWith("105")){
-			wrongResponse.code =105;
+		if(wrongResponse.code == 105){
 			wrongResponse.show = true;
 			wrongResponse.msg = "密码错误";
 		}
-		if(t.startsWith("106")){
-			wrongResponse.code =106;
+		if(wrongResponse.code == 106){
 			wrongResponse.show = true;
 			wrongResponse.msg = "无效的用户ID";
 			
 		}
-		if(t.startsWith("107")){
-			wrongResponse.code =107;
+		if(wrongResponse.code == 107){
 			wrongResponse.show = false;
 			wrongResponse.msg = "无效的token";
 		}
-		if(t.startsWith("301")){
-			wrongResponse.code =301;
+		if(wrongResponse.code == 301){
 			wrongResponse.show = true;
 			wrongResponse.msg = "一天内不能领取多次积分";
 		}
-		if(t.startsWith("302")){
-			wrongResponse.code =302;
+		if(wrongResponse.code == 302){
 			wrongResponse.show = false;
 			wrongResponse.msg = "无效的积分类型";
 		}
-		if(t.startsWith("303")){
-			wrongResponse.code =303;
+		if(wrongResponse.code == 303){
 			wrongResponse.show = false;
 			wrongResponse.msg = "无效的积分";
 		}
-		if(t.startsWith("401")){
-			wrongResponse.code =401;
+		if(wrongResponse.code == 401){
 			wrongResponse.show = true;
 			wrongResponse.msg = "无效的活动";
 			
 		}
-		if(t.startsWith("402")){
+		if(wrongResponse.code == 402){
 			wrongResponse.code =402;
 			wrongResponse.show = true;
 			wrongResponse.msg = "已经报过名";
 		}
-		if(t.startsWith("403")){
-			wrongResponse.code =403;
+		if(wrongResponse.code == 403){
 			wrongResponse.show = true;
 			wrongResponse.msg = "已经过了报名时间";
 		}
-		if(t.startsWith("404")){
-			wrongResponse.code =404;
+		if(wrongResponse.code == 404){
 			wrongResponse.show = true;
 			wrongResponse.msg = "已经超过报名人数";
 		}
-		if(t.startsWith("501")){
-			wrongResponse.code =501;
+		if(wrongResponse.code == 501){
 			wrongResponse.show = false;
 			wrongResponse.msg = "无效的好友id";
 		}
 		
-		if(t.startsWith("601")){
-			wrongResponse.code =501;
+		if(wrongResponse.code == 601){
 			wrongResponse.show = false;
 			wrongResponse.msg = "无效的图片格式";
 		}
 		
-		if(t.startsWith("602")){
-			wrongResponse.code =501;
+		if(wrongResponse.code == 602){
 			wrongResponse.show = false;
 			wrongResponse.msg = "空文件";
 		}
 		
-		if(t.startsWith("603")){
-			wrongResponse.code =501;
+		if(wrongResponse.code == 603){
 			wrongResponse.show = false;
 			wrongResponse.msg = "文件超过大小";
 		}

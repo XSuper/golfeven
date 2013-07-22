@@ -22,6 +22,7 @@ import com.golfeven.firstGolf.bean.Gallery;
 import com.golfeven.firstGolf.bean.GolfInfo;
 import com.golfeven.firstGolf.bean.News;
 import com.golfeven.firstGolf.common.Constant;
+import com.golfeven.firstGolf.common.MyLog;
 import com.golfeven.firstGolf.ui.BallFriendsActivity;
 import com.golfeven.firstGolf.ui.BallParksActivity;
 import com.golfeven.firstGolf.ui.BallTeamsActivity;
@@ -149,7 +150,13 @@ public class HomeFrame extends LinearLayout {
 			public void onSuccess(String t) {
 				// TODO Auto-generated method stub
 				super.onSuccess(t);
-				List datas = JSON.parseArray(t, cls);
+				List datas = null;
+				try {
+					
+					datas = JSON.parseArray(t, cls);
+				} catch (Exception e) {
+					MyLog.v("json",t);
+				}
 				if (cls == News.class) {
 					news_complete = true;
 					listNews = datas;
