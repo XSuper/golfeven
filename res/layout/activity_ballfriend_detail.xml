@@ -194,12 +194,14 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="1"
+            android:id="@+id/activity_ballfriend_detail_attention"
             android:orientation="vertical" >
 
             <ImageView
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:gravity="center"
+                android:id="@+id/activity_ballfriend_detail_attention_img"
                 android:layout_weight="1"
                 android:src="@drawable/ic_launcher" />
 
@@ -208,6 +210,7 @@
                 android:layout_height="fill_parent"
                 android:gravity="center"
                 android:layout_weight="1"
+                android:id="@+id/activity_ballfriend_detail_attention_tex"
                 android:text="关注" />
         </LinearLayout>
 
@@ -215,6 +218,7 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="1"
+            android:id="@+id/activity_ballfriend_detail_msg"
             android:orientation="vertical" >
 
             <ImageView
@@ -222,6 +226,7 @@
                 android:layout_height="fill_parent"
                 android:gravity="center"
                 android:layout_weight="1"
+                android:id="@+id/activity_ballfriend_detail_msg_img"
                 android:src="@drawable/ic_launcher" />
 
             <TextView
@@ -229,13 +234,15 @@
                 android:layout_height="fill_parent"
                 android:gravity="center"
                 android:layout_weight="1"
-                android:text="关注" />
+                android:id="@+id/activity_ballfriend_detail_msg_tex"
+                android:text="发消息" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="1"
+            android:id="@+id/activity_ballfriend_detail_pullblack"
             android:orientation="vertical" >
 
             <ImageView
@@ -243,14 +250,16 @@
                 android:layout_height="fill_parent"
                 android:gravity="center"
                 android:layout_weight="1"
+                android:id="@+id/activity_ballfriend_detail_pullblack_img"
                 android:src="@drawable/ic_launcher" />
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:gravity="center"
+                android:id="@+id/activity_ballfriend_detail_pullblack_tex"
                 android:layout_weight="1"
-                android:text="关注" />
+                android:text="拉黑" />
         </LinearLayout>
     </LinearLayout>
 

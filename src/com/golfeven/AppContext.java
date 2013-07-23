@@ -133,7 +133,11 @@ public class AppContext extends Application {
 				if(t.trim().startsWith("{")){
 					user = JSON.parseObject(t, User.class);
 					isLogin = true;
-					Api.getInstance().updatePlace(user, longitude, latitude);
+					if(!StringUtils.isEmpty(longitude)||!StringUtils.isEmpty(latitude)){
+						
+						Api.getInstance().updatePlace(user, longitude, latitude);
+						
+					}
 //					Map<String, String> user = new HashMap<String, String>();
 //					user.put(Constant.FILE_USER_USERID, uname);
 //					user.put(Constant.FILE_USER_UPASS,upass);

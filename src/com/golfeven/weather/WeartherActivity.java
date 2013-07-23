@@ -1,8 +1,6 @@
 package com.golfeven.weather;
 
 import java.text.SimpleDateFormat;
-import java.util.HashMap;
-import java.util.Map;
 
 import net.tsz.afinal.FinalHttp;
 import net.tsz.afinal.http.AjaxCallBack;
@@ -20,12 +18,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.golfeven.AppContext;
 import com.golfeven.firstGolf.R;
 import com.golfeven.firstGolf.base.BaseActivity;
 import com.golfeven.firstGolf.common.Constant;
 import com.golfeven.firstGolf.common.MyLog;
-import com.golfeven.firstGolf.common.SharedPreferencesUtil;
 import com.golfeven.firstGolf.common.StringUtils;
 import com.golfeven.firstGolf.widget.MyToast;
 

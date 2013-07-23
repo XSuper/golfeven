@@ -296,4 +296,19 @@ public class Api {
 		});
 	}
 
+	/**
+	 * 添加关注
+	 * @param user
+	 * @param fid
+	 * @param mCallBack
+	 */
+	public void addFocus(User user,String fid,AjaxCallBack<String> mCallBack){
+		AjaxParams params = new AjaxParams();
+		params.put("cmd", "Member_friend.addToFocus");
+		params.put("mid",user.getMid());
+		params.put("token",user.getToken());
+		params.put("fid",fid);
+		fh.get(Constant.URL_BASE, params, mCallBack);
+		
+	}
 }

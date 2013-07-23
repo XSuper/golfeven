@@ -21,6 +21,7 @@ import com.golfeven.firstGolf.bean.WrongResponse;
 import com.golfeven.firstGolf.common.Constant;
 import com.golfeven.firstGolf.common.MyLog;
 import com.golfeven.firstGolf.common.SharedPreferencesUtil;
+import com.golfeven.firstGolf.common.StringUtils;
 import com.golfeven.firstGolf.common.ValidateUtil;
 import com.golfeven.firstGolf.widget.HeadBack;
 import com.golfeven.firstGolf.widget.MyToast;
@@ -75,6 +76,9 @@ public class LoginActivity extends BaseActivity {
 								appContext.isLogin = true;
 								//登陆成功后保存用户名和密码
 								SharedPreferencesUtil.saveUser(appContext, uname.getText().toString(), upass.getText().toString());
+								if(!StringUtils.isEmpty(appContext.longitude)||!StringUtils.isEmpty(appContext.latitude)){
+									Api.getInstance().updatePlace(appContext.user, appContext.longitude, appContext.latitude);
+								}
 								finish();
 							} else{
 								WrongResponse wrongResponse = ValidateUtil

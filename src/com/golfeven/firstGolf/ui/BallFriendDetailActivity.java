@@ -7,13 +7,12 @@ import net.tsz.afinal.FinalBitmap;
 import net.tsz.afinal.annotation.view.ViewInject;
 import net.tsz.afinal.http.AjaxCallBack;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.golfeven.firstGolf.R;
@@ -22,6 +21,7 @@ import com.golfeven.firstGolf.base.BaseActivity;
 import com.golfeven.firstGolf.bean.BallFriend;
 import com.golfeven.firstGolf.bean.Photo;
 import com.golfeven.firstGolf.common.Constant;
+import com.golfeven.firstGolf.common.MyLog;
 import com.golfeven.firstGolf.common.StringUtils;
 import com.golfeven.firstGolf.common.ToOtherActivity;
 import com.golfeven.firstGolf.widget.HeadBack;
@@ -39,6 +39,17 @@ public class BallFriendDetailActivity extends BaseActivity{
 	@ViewInject(id=R.id.activity_ballfriend_detail_lovemsg) TextView tlovemsg;
 	@ViewInject(id=R.id.activity_ballfriend_detail_tags) TextView ttags;
 	@ViewInject(id=R.id.activity_ballfriend_detail_teams) TextView tteams;
+	
+	
+	@ViewInject(id=R.id.activity_ballfriend_detail_msg) View msg;
+	@ViewInject(id=R.id.activity_ballfriend_detail_msg_img) ImageView msgImg;
+	@ViewInject(id=R.id.activity_ballfriend_detail_msg_tex) TextView msgTex;
+	@ViewInject(id=R.id.activity_ballfriend_detail_attention)View attention;
+	@ViewInject(id=R.id.activity_ballfriend_detail_attention_img)View attentionImg;
+	@ViewInject(id=R.id.activity_ballfriend_detail_attention_tex)View attentionTex;
+	@ViewInject(id=R.id.activity_ballfriend_detail_pullblack)View pullblack;
+	@ViewInject(id=R.id.activity_ballfriend_detail_pullblack_img)View pullblackImg;
+	@ViewInject(id=R.id.activity_ballfriend_detail_pullblack_tex)View pullblackTex;
 	
 	
 	private BallFriend ballFriend;
@@ -70,6 +81,36 @@ public class BallFriendDetailActivity extends BaseActivity{
 		tlovemsg.setText(ballFriend.getLovemsg());
 
 		ttags.setText(ballFriend.getLabel());
+		
+		
+		
+		
+		
+		attention.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Api.getInstance().addFocus(appContext.user,ballFriend.getMid() , new AjaxCallBack<String>() {
+
+					@Override
+					public void onSuccess(String t) {
+						// TODO Auto-generated method stub
+						super.onSuccess(t);
+						Toast.makeText(appContext, t, Toast.LENGTH_LONG).show();
+					}
+
+					@Override
+					public void onFailure(Throwable t, String strMsg) {
+						// TODO Auto-generated method stub
+						super.onFailure(t, strMsg);
+						Toast.makeText(appContext, strMsg+"|||"+t.toString(), Toast.LENGTH_LONG).show();
+					}
+					
+				});
+				
+			}
+		});
 	}
 	private void load() {
 		// TODO Auto-generated method stub
@@ -83,7 +124,13 @@ public class BallFriendDetailActivity extends BaseActivity{
 				// TODO Auto-generated method stub
 				super.onSuccess(t);
 				headback.setProgressVisible(false);
-				ballFriend = JSON.parseObject(t, BallFriend.class);
+				try {
+					ballFriend = JSON.parseObject(t, BallFriend.class);
+					
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+				MyLog.v("ballfriend",t);
 				initValue();
 			}
 
@@ -112,19 +159,7 @@ public class BallFriendDetailActivity extends BaseActivity{
 			}
 		});
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
 		
 
 	}

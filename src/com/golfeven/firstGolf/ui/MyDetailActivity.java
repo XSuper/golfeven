@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.zip.Inflater;
 
 import net.tsz.afinal.FinalBitmap;
 import net.tsz.afinal.annotation.view.ViewInject;
@@ -183,6 +182,7 @@ public class MyDetailActivity extends BaseActivity {
 							// TODO Auto-generated method stub
 							super.onSuccess(t);
 							Toast.makeText(appContext, t,Toast.LENGTH_LONG).show();
+							MyLog.v("success", t);
 						}
 
 						@Override
@@ -259,6 +259,24 @@ public class MyDetailActivity extends BaseActivity {
 		Api api = Api.getInstance();
 		// 加载个人相册
 		api.getPhoto(user.getMid(), new AjaxCallBack<String>() {
+			
+
+			@Override
+			public void onFailure(Throwable t, String strMsg) {
+				// TODO Auto-generated method stub
+				super.onFailure(t, strMsg);
+				mPhoto.setOnClickListener(new OnClickListener() {
+					
+					@Override 
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						Intent intent = new Intent(MyDetailActivity.this, PhotosActivity.class);
+						intent.putExtra("isMe", true);
+						intent.putParcelableArrayListExtra("photos", (ArrayList<Photo>)photos);
+						startActivityForResult(intent, 003);
+					}
+				});
+			}
 
 			@Override
 			public void onSuccess(String t) {

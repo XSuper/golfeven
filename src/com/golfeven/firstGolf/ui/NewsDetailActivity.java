@@ -214,6 +214,7 @@ public class NewsDetailActivity extends BaseActivity {
 				setbtnClickable(true);
 				if(StringUtils.responseError(t)){
 					btnNext.setClickable(false);
+					headBack.setProgressVisible(false);
 					MyToast.customToast(NewsDetailActivity.this, Toast.LENGTH_SHORT,
 							TOAST_MSG_WARNING_TITLE, TOAST_MSG_NOMORE_CONTENT,
 							Constant.TOAST_IMG_ERROR);
