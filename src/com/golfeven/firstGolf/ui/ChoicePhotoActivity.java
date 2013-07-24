@@ -1,15 +1,12 @@
 package com.golfeven.firstGolf.ui;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
 import net.tsz.afinal.annotation.view.ViewInject;
-import net.tsz.afinal.http.AjaxCallBack;
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -20,15 +17,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.golfeven.firstGolf.R;
-import com.golfeven.firstGolf.api.Api;
 import com.golfeven.firstGolf.base.BaseActivity;
 import com.golfeven.firstGolf.common.Constant;
-import com.golfeven.firstGolf.common.MyLog;
-import com.golfeven.firstGolf.common.Utils;
-import com.golfeven.firstGolf.widget.MyToast;
 
 public class ChoicePhotoActivity extends BaseActivity {
 

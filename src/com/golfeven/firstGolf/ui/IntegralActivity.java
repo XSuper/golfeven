@@ -74,7 +74,12 @@ public class IntegralActivity extends BaseActivity{
 				super.onSuccess(t);
 				headBack.setProgressVisible(false);
 				if(t.trim().startsWith("[")||t.trim().startsWith("{")){
-					integrals = JSON.parseArray(t,Integral.class);
+					try {
+						
+						integrals = JSON.parseArray(t,Integral.class);
+					} catch (Exception e) {
+						// TODO: handle exception
+					}
 					init();
 				}else{
 					WrongResponse wrongResponse = ValidateUtil

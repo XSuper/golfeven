@@ -124,6 +124,9 @@ public class AppContext extends Application {
 	}
 
 	private void loginAndUpdatePlace() {
+		if(StringUtils.isEmpty(uname)||StringUtils.isEmpty(upass)){
+			return;
+		}
 		Api.getInstance().login(uname, upass, new AjaxCallBack<String>() {
 
 			@Override

@@ -2,15 +2,12 @@ package com.golfeven.firstGolf.api;
 
 import java.io.InputStream;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Set;
 
 import net.tsz.afinal.FinalHttp;
 import net.tsz.afinal.http.AjaxCallBack;
 import net.tsz.afinal.http.AjaxParams;
-
 import android.app.Activity;
-import android.content.Context;
 import android.widget.Toast;
 
 import com.golfeven.firstGolf.bean.User;

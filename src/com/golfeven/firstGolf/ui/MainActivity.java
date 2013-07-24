@@ -20,6 +20,7 @@ import com.golfeven.firstGolf.base.BaseActivity;
 import com.golfeven.firstGolf.bean.BallPark;
 import com.golfeven.firstGolf.widget.ScrollLayout;
 import com.golfeven.firstGolf.widget.ScrollLayout.OnViewChangeListener;
+import com.golfeven.firstGolf.widget.frame.AttentitonFrame;
 import com.golfeven.firstGolf.widget.frame.HomeFrame;
 import com.golfeven.firstGolf.widget.frame.PlayBallFrame;
 import com.golfeven.firstGolf.widget.frame.SettingFrame;
@@ -40,9 +41,8 @@ public class MainActivity extends BaseActivity {
 	TextView weatherHeadPlace;
 	@ViewInject(id = R.id.head_weather_info)
 	TextView weatherHeadInfo;
-	@ViewInject(id = R.id.head_weather_progress)
-	ProgressBar mprogressBar;
-
+	
+	
 	// ******************************底部按钮start
 	@ViewInject(id = R.id.main_footbar_radiogroup)
 	RadioGroup radioGroup;
@@ -52,6 +52,7 @@ public class MainActivity extends BaseActivity {
 	RadioButton rbtn_playBall;
 	@ViewInject(id = R.id.main_footbar_attention)
 	RadioButton rbtn_attention;
+
 	@ViewInject(id = R.id.main_footbar_grade)
 	RadioButton rbtn_grade;
 	@ViewInject(id = R.id.main_footbar_setting)
@@ -76,6 +77,9 @@ public class MainActivity extends BaseActivity {
 	@ViewInject(id = R.id.frame_attention)
 	View viewAttention;
 
+	
+	@ViewInject(id = R.id.head_weather_progress)
+	public ProgressBar mprogressBar;
 	// ******************页面初始化end
 
 	int index = 0;
@@ -88,6 +92,7 @@ public class MainActivity extends BaseActivity {
 
 		@Override
 		public void OnViewChange(int view) {
+			setProgressDisplay(false);
 			index = view;
 			((RadioButton) findViewById(radioGroup.getCheckedRadioButtonId()))
 					.setChecked(false);
@@ -152,6 +157,7 @@ public class MainActivity extends BaseActivity {
 //		Intent intent = new Intent(appContext, mWelcomeActivity.class);
 //		startActivity(intent);
 		setContentView(R.layout.activity_main);
+		
 		initCommon();
 		initWeatherHead();// 更新头部天气
 		initFooter();
@@ -167,6 +173,7 @@ public class MainActivity extends BaseActivity {
 		myResume(index);
 	}
 	private void myResume(int index) {
+		
 		switch (index) {
 		case 0:
 			changeTitle(true, "第一高尔夫",true);
@@ -179,6 +186,7 @@ public class MainActivity extends BaseActivity {
 			break;
 		case 3:
 			changeTitle(false, "关注",false);
+			((AttentitonFrame)viewAttention).onResume();
 			break;
 		case 4:
 			changeTitle(false, "系统设置",false);
@@ -280,6 +288,9 @@ public class MainActivity extends BaseActivity {
 	 * @param isDisplay
 	 */
 	public void setProgressDisplay(boolean isDisplay){
+		if(mprogressBar==null){
+			return;
+		}
 		mprogressBar.setVisibility(isDisplay?View.VISIBLE:View.INVISIBLE);
 	}
 	

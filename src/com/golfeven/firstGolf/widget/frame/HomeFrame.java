@@ -201,6 +201,7 @@ public class HomeFrame extends LinearLayout {
 				} else if (cls == BallFriend.class) {
 					ballFriend_complete = true;
 				}
+				loadComplete();
 			}
 
 		});
