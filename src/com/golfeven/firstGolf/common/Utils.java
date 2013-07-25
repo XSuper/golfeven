@@ -94,5 +94,84 @@ public class Utils {
 		}
 		return totle;
 	}
+	
+	
+
+	/**
+	 * 
+	 * @param str
+	 * @return
+	 * 
+	 * mint[0] 关注按钮显示 1为关注,0为不显示,-1为取消关注
+	   mint[1] 消息按钮显示 1为发消息,0为不显示,-1为查看消息
+	   mint[2] 拉黑按钮显示 1为拉黑,0为不显示,-1为洗白
+	 */
+	public static int[] judgeShow(String str){
+		int[] mint = new int[3];
+		mint[0] = 0;
+		mint[1] = 0;
+		mint[2] = 0;
+		if(StringUtils.isEmpty(str)||str.indexOf(",")==-1){
+		}else{
+			String num[] = str.trim().split(",");
+			int m =0;
+			int o =0;
+			try {
+				m = Integer.parseInt(num[0]);
+				o = Integer.parseInt(num[1]);
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			
+			
+			//-2不存在关系
+			//-1 我把球友拉黑 
+			//0 我加球友为普通好友，
+			//1我加球友为关注好友
+
+			switch (m) {
+			case -2:
+				mint[0] = 1;
+				mint[1] = -1;
+				break;
+			case -1:
+				mint[2] = -1;
+				break;
+			case 0:
+				mint[0] = -1;
+				mint[1] = 1;
+				break;
+			case 1:
+				mint[0] = -1;
+				mint[1] = 1;
+				break;
+			}
+			switch (o) {
+			case -2:
+				mint[2] = 0;
+				if(mint[1] == -1){
+					mint[1] = 0;
+				}
+				break;
+			case -1:
+				mint[1] = -1;
+				break;
+			case 0:
+				if(mint[2] == 0){
+					mint[2] = 1;
+				}
+				break;
+			case 1:
+				if(mint[2] == 0){
+					mint[2] = 1;
+				}
+				break;
+			}
+			
+		}
+		
+		
+		return mint;
+	}
 
 }

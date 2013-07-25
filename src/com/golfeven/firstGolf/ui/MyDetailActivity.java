@@ -283,21 +283,22 @@ public class MyDetailActivity extends BaseActivity {
 				// TODO Auto-generated method stub
 				super.onSuccess(t);
 				photos = JSON.parseArray(t, Photo.class);
+				mPhoto.setOnClickListener(new OnClickListener() {
+					
+					@Override 
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						Intent intent = new Intent(MyDetailActivity.this, PhotosActivity.class);
+						intent.putExtra("isMe", true);
+						intent.putParcelableArrayListExtra("photos", (ArrayList<Photo>)photos);
+						startActivityForResult(intent, 003);
+					}
+				});
 				if (photos != null && photos.size() != 0) {
 					fb.display(mPhoto, Constant.URL_IMG_BASE
 							+ photos.get(0).getPic());
 					
-					mPhoto.setOnClickListener(new OnClickListener() {
-						
-						@Override 
-						public void onClick(View v) {
-							// TODO Auto-generated method stub
-							Intent intent = new Intent(MyDetailActivity.this, PhotosActivity.class);
-							intent.putExtra("isMe", true);
-							intent.putParcelableArrayListExtra("photos", (ArrayList<Photo>)photos);
-							startActivityForResult(intent, 003);
-						}
-					});
+					
 				}
 			}
 		});
@@ -364,7 +365,6 @@ public class MyDetailActivity extends BaseActivity {
 		}
 		if (requestCode == resultCode && resultCode == 003) {
 			photos = data.getParcelableArrayListExtra("photos");
-			Toast.makeText(appContext, "baochunle004 ", Toast.LENGTH_SHORT).show();
 			
 		}
 		super.onActivityResult(requestCode, resultCode, data);

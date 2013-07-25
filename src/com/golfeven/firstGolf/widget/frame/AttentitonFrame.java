@@ -11,6 +11,7 @@ import net.tsz.afinal.http.AjaxCallBack;
 import net.tsz.afinal.http.AjaxParams;
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
@@ -29,12 +30,6 @@ import com.golfeven.firstGolf.R;
 import com.golfeven.firstGolf.adapter.BallFriendListAdapter;
 import com.golfeven.firstGolf.base.MBaseAdapter;
 import com.golfeven.firstGolf.bean.BallFriend;
-import com.golfeven.firstGolf.bean.BallPark;
-import com.golfeven.firstGolf.bean.BallTeam;
-import com.golfeven.firstGolf.bean.Gallery;
-import com.golfeven.firstGolf.bean.GolfInfo;
-import com.golfeven.firstGolf.bean.News;
-import com.golfeven.firstGolf.bean.User;
 import com.golfeven.firstGolf.common.Constant;
 import com.golfeven.firstGolf.common.MyLog;
 import com.golfeven.firstGolf.common.StringUtils;
@@ -45,7 +40,14 @@ import com.golfeven.firstGolf.widget.PullToRefreshListView.OnRefreshListener;
 
 public class AttentitonFrame extends LinearLayout{
 	AppContext appContext;
-
+	View mto;//关注
+	View otm;//粉丝
+	
+	boolean ismto = true;//是不是我关注别人
+	public final static String CMDMTO ="Member.focusMember"; 
+	public final static String CMDOTM ="Member.getMember";
+	
+	
 	public AttentitonFrame(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		this.context = context; 
@@ -250,7 +252,7 @@ public class AttentitonFrame extends LinearLayout{
 	/**
 	 * 请求数据
 	 */
-	public void requestData() {
+	public synchronized void requestData() {
 		params.put("rowIndex", key_rowindex + "");
 		params.put("row", key_row + "");
 		// if(headBack.getProgressVisibleState()==View.VISIBLE){
@@ -358,6 +360,9 @@ public class AttentitonFrame extends LinearLayout{
 		
 		View view = LayoutInflater.from(context).inflate(
 				R.layout.frame_attention, this);
+		mto = view.findViewById(R.id.frame_attention_mto);
+		otm = view.findViewById(R.id.frame_attention_otm);
+		
 		this.entityClass = BallFriend.class ;
 		this.adapter = new BallFriendListAdapter(context, datas);
 		this.mainActivity = ((MainActivity)context);
@@ -366,6 +371,9 @@ public class AttentitonFrame extends LinearLayout{
 		this.params.put("mid",appContext.user.getMid());
 		this.params.put("token",appContext.user.getToken());
 		
+		MyOnClickListener clickListener = new MyOnClickListener();
+		mto.setOnClickListener(clickListener);
+		otm.setOnClickListener(clickListener);
 	}
 	
 	public void onResume() {
@@ -374,7 +382,14 @@ public class AttentitonFrame extends LinearLayout{
 			if(adapter==null){
 				onCreate();
 			}else{
-				
+				datas.removeAll(datas);
+				if(ismto){
+					
+					this.params.put("cmd",CMDMTO);
+				}else{
+					this.params.put("cmd",CMDOTM);
+					
+				}
 				this.params.put("mid",appContext.user.getMid());
 				this.params.put("token",appContext.user.getToken());
 				reset();
@@ -390,6 +405,30 @@ public class AttentitonFrame extends LinearLayout{
 				adapter.refresh(datas);
 			}
 		}
+	}
+	class MyOnClickListener implements OnClickListener{
+
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			mto.setBackgroundColor(Color.RED);
+			otm.setBackgroundColor(Color.RED);
+			if(v==mto){
+				params.put("cmd",CMDMTO );
+				ismto=true;
+			}
+			if(v==otm){
+				params.put("cmd",CMDOTM);
+				ismto = false;
+				
+			}
+			v.setBackgroundColor(Color.BLUE);
+			reset();
+			listView.setTag(LOAD);
+			requestData();
+			
+		}
+		
 	}
 
 }

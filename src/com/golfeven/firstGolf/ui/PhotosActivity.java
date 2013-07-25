@@ -11,6 +11,8 @@ import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -53,7 +55,7 @@ public class PhotosActivity extends BaseActivity {
 		Intent intent = getIntent();
 		photos = intent.getParcelableArrayListExtra("photos");
 		isMe = intent.getBooleanExtra("isMe", false);
-		if (photos != null && photos.size() > 0) {
+		if (photos != null) {
 			
 			init();
 		}
@@ -142,39 +144,42 @@ public class PhotosActivity extends BaseActivity {
 					// TODO Auto-generated method stub
 					super.onSuccess(t);
 					progressDialog.dismiss();
-					if(t.trim().startsWith("{")){
-						Toast.makeText(appContext, t, Toast.LENGTH_LONG).show();
-						Photo p = JSON.parseObject(t, Photo.class);
-						p.setPic(p.getFile());
-						photos.add(p);
-						//ImageView img = new ImageView(PhotosActivity.this);
-						//img.setTag(p.getId());
-						//Bitmap bitmap = BitmapFactory.decodeStream(in);
-						//img.setImageBitmap(bitmap);
-						//将图片缓存到缓存区
-						//appContext.getFB().mImageCache.addBitmapToCache(Constant.URL_IMG_BASE + p.getPic(), bitmap);
-//						rowAddView(img);
-//						PhotosActivity.this.postInvalidate();
-//						
-						mtable.removeAllViews();
-						index = 0;
-						init();
+					
+						Photo p = new Photo();
+						try {
+							p = JSON.parseObject(t, Photo.class);
+							p.setPic(p.getFile());
+							photos.add(p);
+							//ImageView img = new ImageView(PhotosActivity.this);
+							//img.setTag(p.getId());
+							Bitmap bitmap = BitmapFactory.decodeStream(in);
+							//img.setImageBitmap(bitmap);
+							//将图片缓存到缓存区
+							appContext.getFB().mImageCache.addBitmapToCache(Constant.URL_IMG_BASE + p.getPic(), bitmap);
+						//	rowAddView(img);
+//							PhotosActivity.this.postInvalidate();
+							mtable.removeAllViews();
+							index = 0;
+							init();
+							Intent intent = new Intent();
+							intent.putParcelableArrayListExtra("photos",(ArrayList<Photo>) photos);
+							setResult(003,intent);
+						} catch (Exception e) {
+							WrongResponse wrongResponse = ValidateUtil
+									.wrongResponse(t);
+							if(wrongResponse.show){
+								MyToast.centerToast(appContext, wrongResponse.msg, Toast.LENGTH_SHORT);
+							}else{
+								MyToast.centerToast(appContext, "上传失败", Toast.LENGTH_SHORT);
+								MyLog.v("上传失败",wrongResponse.msg );
+							}
+						}
 						
-						Intent intent = new Intent();
-						intent.putParcelableArrayListExtra("photos",(ArrayList<Photo>) photos);
-						setResult(003,intent);
 
 						
-					}else{
-						WrongResponse wrongResponse = ValidateUtil
-								.wrongResponse(t);
-						if(wrongResponse.show){
-							MyToast.centerToast(appContext, wrongResponse.msg, Toast.LENGTH_SHORT);
-						}else{
-							MyToast.centerToast(appContext, "上传失败", Toast.LENGTH_SHORT);
-							MyLog.v("上传失败",wrongResponse.msg );
-						}
-					}
+					
+						
+					
 				}
 
 				@Override
@@ -209,8 +214,6 @@ public class PhotosActivity extends BaseActivity {
 							super.onSuccess(t);
 							//v.setVisibility(View.GONE);
 							photos.remove((int)(Integer)v.getTag(R.layout.activity_photos));
-							
-							
 							mtable.removeAllViews();
 							index = 0;
 							init();

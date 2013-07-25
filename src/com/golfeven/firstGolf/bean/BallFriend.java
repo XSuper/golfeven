@@ -26,7 +26,7 @@ public class BallFriend extends BaseBean{
 	private String lng;
 	private String geohash;
 	private String distance;
-	private String isMyFriend;
+	private String memberRelation;
 	private String teamintroduce;
 
 	public static final Parcelable.Creator<BallFriend> CREATOR = new Creator<BallFriend>(){
@@ -81,14 +81,15 @@ public class BallFriend extends BaseBean{
 		this.lng = lng;
 		this.geohash = geohash;
 		this.distance = distance;
-		this.isMyFriend = isMyFriend;
+		this.memberRelation = isMyFriend;
 		this.teamintroduce = teamintroduce;
 	}
-	public String getIsMyFriend() {
-		return isMyFriend;
+	
+	public String getMemberRelation() {
+		return memberRelation;
 	}
-	public void setIsMyFriend(String isMyFriend) {
-		this.isMyFriend = isMyFriend;
+	public void setMemberRelation(String memberRelation) {
+		this.memberRelation = memberRelation;
 	}
 	public String getMid() {
 		return mid;
@@ -210,7 +211,7 @@ public class BallFriend extends BaseBean{
 		dest.writeString(this.lng );
 		dest.writeString(this.geohash );
 		dest.writeString(this.distance );
-		dest.writeString(this.isMyFriend);
+		dest.writeString(this.memberRelation);
 		dest.writeString(this.teamintroduce );
 		
 	}

@@ -6,6 +6,27 @@
     android:background="@color/white"
     android:orientation="vertical" 
     android:id="@+id/frame_attention">
+    <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        >
+        <Button 
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:text="关注"
+            android:gravity="center"
+            android:id="@+id/frame_attention_mto"
+            />
+        <Button 
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+             android:gravity="center"
+            android:id="@+id/frame_attention_otm"
+            android:text="粉丝"
+            />
+    </LinearLayout>
     
     <com.golfeven.firstGolf.widget.PullToRefreshListView
         android:id="@+id/frame_attention_list"
