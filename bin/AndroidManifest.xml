@@ -9,7 +9,7 @@
         android:targetSdkVersion="14" />
 
     <!-- 使用网络功能所需权限 -->
-    
+
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" >
     </uses-permission>
@@ -47,9 +47,8 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/ThemeActivity"
         android:screenOrientation="portrait"
-         >
+        android:theme="@style/ThemeActivity" >
         <activity
             android:name="com.golfeven.welcome.WelcomeActivity"
             android:label="@string/app_name" >
@@ -59,24 +58,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
-        
-         <!-- 用户微信回调 -->
-        <activity 
+
+        <!-- 用户微信回调 -->
+        <activity
             android:name="com.golfeven.firstGolf.ui.WXEntryActivity"
-            android:label="@string/app_name"
             android:exported="true"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
-            ></activity>
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" >
+        </activity>
         <!-- 用于sso回调的activity -->
-        <activity 
+        <activity
             android:name="com.baidu.sharesdk.PlatformSsoCallBackActivity"
-            android:label="@string/app_name"
             android:exported="true"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
-            ></activity>
-        
-        
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
 
         <!-- 百度Gps定位 -->
         <!-- 在application标签中声明service组件,为了避免各个app公用1个service出现的权限问题，新版本各个app单独拥有自己的定位service. -->
@@ -85,46 +80,96 @@
             android:enabled="true"
             android:process=":remote" >
         </service>
-        <activity android:name="com.golfeven.firstGolf.ui.MainActivity" 
-            android:launchMode="singleTask"
-            />
-        <activity android:name="com.golfeven.firstGolf.ui.GolfInfosActivity" />
-        <activity android:name="com.golfeven.firstGolf.ui.GolfInfoDetailActivity" />
-        <activity android:name="com.golfeven.firstGolf.ui.NewsDetailActivity" />
-        <activity android:name="com.golfeven.firstGolf.ui.NewsActivity" />
-        <activity android:name="com.golfeven.firstGolf.ui.GallerysActivity" />
-        <activity android:name="com.golfeven.firstGolf.ui.GalleryDetailActivity" />
-        <activity android:name="com.golfeven.firstGolf.ui.BallParksActivity"  />
-        <activity android:name="com.golfeven.firstGolf.ui.BallParkDetailActivity"  />
-        <activity android:name="com.golfeven.firstGolf.ui.BallTeamsActivity"  />
-        <activity android:name="com.golfeven.firstGolf.ui.BallTeamDetailActivity"  />
-        <activity android:name="com.golfeven.firstGolf.ui.PlayBallScoreActivity"  />
-        <activity android:name="com.golfeven.firstGolf.ui.BallFriendsActivity"  />
-        <activity android:name="com.golfeven.firstGolf.ui.BallFriendDetailActivity"  />
-        <activity android:name="com.golfeven.firstGolf.ui.MyDetailActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
-              />
-        <activity android:name="com.golfeven.firstGolf.ui.LoginActivity"  />
-        <activity android:name="com.golfeven.firstGolf.ui.RegisterActivity"  />
-        <activity android:name="com.golfeven.firstGolf.ui.ChoicePhotoActivity" android:theme="@style/ChoicePhotoActivity"/>
-        <activity android:name="com.golfeven.firstGolf.ui.PhotosActivity"/>
-        <activity android:name="com.golfeven.firstGolf.ui.PhotoShowActivity"/>
-        <activity android:name="com.golfeven.firstGolf.ui.IntegralActivity"/>
-        <activity android:name="com.golfeven.firstGolf.ui.MapActivity"  android:hardwareAccelerated="false"/>
-        
-        <activity android:name="com.golfeven.firstGolf.ui.mWelcomeActivity"  android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"/>
-        <activity android:name="com.golfeven.weather.WeartherActivity" android:theme="@style/ThemeActivity">
-        </activity>
-           
+
+        <activity
+            android:name="com.golfeven.firstGolf.ui.MainActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name="com.golfeven.firstGolf.ui.GolfInfosActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.golfeven.firstGolf.ui.GolfInfoDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.golfeven.firstGolf.ui.NewsDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.golfeven.firstGolf.ui.NewsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.golfeven.firstGolf.ui.GallerysActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.golfeven.firstGolf.ui.GalleryDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.golfeven.firstGolf.ui.BallParksActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.golfeven.firstGolf.ui.BallParkDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.golfeven.firstGolf.ui.BallTeamsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.golfeven.firstGolf.ui.BallTeamDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.golfeven.firstGolf.ui.PlayBallScoreActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.golfeven.firstGolf.ui.BallFriendsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.golfeven.firstGolf.ui.BallFriendDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.golfeven.firstGolf.ui.MyDetailActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+        <activity
+            android:name="com.golfeven.firstGolf.ui.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.golfeven.firstGolf.ui.RegisterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.golfeven.firstGolf.ui.ChoicePhotoActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/ChoicePhotoActivity" />
+        <activity
+            android:name="com.golfeven.firstGolf.ui.PhotosActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.golfeven.firstGolf.ui.PhotoShowActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.golfeven.firstGolf.ui.IntegralActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.golfeven.firstGolf.ui.AboutActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.golfeven.firstGolf.ui.MapActivity"
+            android:hardwareAccelerated="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.golfeven.firstGolf.ui.mWelcomeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" />
+        <activity
+            android:name="com.golfeven.weather.WeartherActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/ThemeActivity" />
     </application>
-        <!-- 百度Gps定位 -->
-        <!-- 屏幕支持 -->
-        <supports-screens
-            android:anyDensity="true"
-            android:largeScreens="true"
-            android:normalScreens="true"
-            android:resizeable="true"
-            android:smallScreens="true" />
-        <!-- 百度Gps定位 -->
+    <!-- 百度Gps定位 -->
+    <!-- 屏幕支持 -->
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:resizeable="true"
+        android:smallScreens="true" />
+    <!-- 百度Gps定位 -->
 
 </manifest>

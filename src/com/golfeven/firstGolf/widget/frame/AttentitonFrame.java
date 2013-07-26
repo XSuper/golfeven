@@ -382,7 +382,8 @@ public class AttentitonFrame extends LinearLayout{
 			if(adapter==null){
 				onCreate();
 			}else{
-				datas.removeAll(datas);
+				datas= new ArrayList();
+				adapter.refresh(datas);
 				if(ismto){
 					
 					this.params.put("cmd",CMDMTO);
@@ -401,20 +402,26 @@ public class AttentitonFrame extends LinearLayout{
 				
 				this.params.remove("mid");
 				this.params.remove("token");
-				datas.removeAll(datas);
+				datas= new ArrayList();
 				adapter.refresh(datas);
 			}
 		}
 	}
+	View selectView = mto;//设置初始显示按钮
 	class MyOnClickListener implements OnClickListener{
 
 		@Override
 		public void onClick(View v) {
+			if(v==selectView){
+				return;
+			}
+			selectView = v;
 			// TODO Auto-generated method stub
 			mto.setBackgroundColor(Color.RED);
 			otm.setBackgroundColor(Color.RED);
 			if(v==mto){
 				params.put("cmd",CMDMTO );
+				
 				ismto=true;
 			}
 			if(v==otm){
@@ -422,6 +429,8 @@ public class AttentitonFrame extends LinearLayout{
 				ismto = false;
 				
 			}
+			datas = new ArrayList();
+			adapter.refresh(datas);
 			v.setBackgroundColor(Color.BLUE);
 			reset();
 			listView.setTag(LOAD);

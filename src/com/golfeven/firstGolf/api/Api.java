@@ -308,4 +308,28 @@ public class Api {
 		fh.get(Constant.URL_BASE, params, mCallBack);
 		
 	}
+	/**
+	 * 更改拉黑状态
+	 * @param user
+	 * @param fid
+	 * @param mCallBack
+	 * @param pullblack 是否拉黑 true 为拉黑 false 为洗白
+	 */
+	public void updateStatus(User user,String fid,boolean pullblack,AjaxCallBack<String> mCallBack){
+		AjaxParams params = new AjaxParams();
+		params.put("cmd", "Member_friend.updateStatus");
+		params.put("mid",user.getMid());
+		params.put("token",user.getToken());
+		params.put("fid",fid);
+		if(pullblack){
+			params.put("ftype","bad");
+		}else{
+			params.put("ftype","good");
+			
+		}
+		
+		fh.get(Constant.URL_BASE, params, mCallBack);
+		
+	}
+	
 }

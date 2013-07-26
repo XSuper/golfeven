@@ -4,6 +4,8 @@ import java.io.File;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
@@ -21,13 +23,15 @@ import com.golfeven.firstGolf.common.FileUtils;
 import com.golfeven.firstGolf.common.SharedPreferencesUtil;
 import com.golfeven.firstGolf.common.ToOtherActivity;
 import com.golfeven.firstGolf.common.Utils;
+import com.golfeven.firstGolf.ui.AboutActivity;
 import com.golfeven.firstGolf.ui.IntegralActivity;
 import com.golfeven.firstGolf.ui.LoginActivity;
 import com.golfeven.firstGolf.ui.MainActivity;
 import com.golfeven.firstGolf.ui.MyDetailActivity;
 import com.golfeven.firstGolf.widget.MyToast;
 
-public class SettingFrame extends LinearLayout {
+public class SettingFrame extends LinearLayout implements
+		android.view.View.OnClickListener {
 	private View mydetail, integral,// 积分
 			evaluate,// 评价
 			update, about;
@@ -37,18 +41,17 @@ public class SettingFrame extends LinearLayout {
 	Context context;
 	Handler handler;
 
-	public final static int CALCING=0;//正在计算
-	public final static int CALCED=1;//计算完毕
-	public final static int CLEARING=2;//正在清除
-	public final static int CLEARSUCCESS=3;//清除完成
-	public final static int CLEARERROR=-2;//清除失败
+	public final static int CALCING = 0;// 正在计算
+	public final static int CALCED = 1;// 计算完毕
+	public final static int CLEARING = 2;// 正在清除
+	public final static int CLEARSUCCESS = 3;// 清除完成
+	public final static int CLEARERROR = -2;// 清除失败
+
 	public SettingFrame(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		this.context = context;
-		handler = new Handler(){
+		handler = new Handler() {
 
-			
-			
 			@Override
 			public void handleMessage(Message msg) {
 				// TODO Auto-generated method stub
@@ -58,9 +61,9 @@ public class SettingFrame extends LinearLayout {
 					clearTex.setText("图片缓存(计算...)");
 					break;
 				case CALCED:
-					if(msg.obj!=null){
-						clearTex.setText("图片缓存(" + msg.obj+ ")");
-					}else{
+					if (msg.obj != null) {
+						clearTex.setText("图片缓存(" + msg.obj + ")");
+					} else {
 						clearTex.setText("图片缓存");
 					}
 					break;
@@ -81,10 +84,9 @@ public class SettingFrame extends LinearLayout {
 					clear.setText("清理失败");
 					break;
 
-				
 				}
 			}
-			
+
 		};
 		initViews(context);
 		appContext = (AppContext) context.getApplicationContext();
@@ -92,7 +94,7 @@ public class SettingFrame extends LinearLayout {
 
 	public void onResume() {
 
-		 new Thread() {
+		new Thread() {
 
 			@Override
 			public void run() {
@@ -100,34 +102,16 @@ public class SettingFrame extends LinearLayout {
 				handler.sendEmptyMessage(CALCING);
 				long size = FileUtils.getDirSize(new File(
 						Constant.IMG_CACHEPATH));
-				Message msg =new Message();
-				msg.obj=size/(1024*1024)+"M";
+				Message msg = new Message();
+				msg.obj = size / (1024 * 1024) + "M";
 				msg.what = CALCED;
 				handler.sendMessage(msg);
 			}
 		}.start();
-		
+
 		clear.setText("清除");
 
-		login.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View arg0) {
-				if (appContext.isLogin) {
-
-					appContext.isLogin = false;
-					appContext.user = null;
-					SharedPreferencesUtil.clearUser(appContext);
-					mydetail.setClickable(false);
-					my.setText("请先登陆");
-					login.setText("登陆");
-				} else {
-					Utils.ToActivity((Activity) getContext(),
-							LoginActivity.class, false);
-				}
-
-			}
-		});
+		login.setOnClickListener(this);
 		if (appContext.isLogin) {
 			mydetail.setOnClickListener(new ToOtherActivity(
 					(MainActivity) getContext(), MyDetailActivity.class));
@@ -156,44 +140,74 @@ public class SettingFrame extends LinearLayout {
 		update = view.findViewById(R.id.frame_setting_updating);
 		about = view.findViewById(R.id.frame_setting_about);
 		my = (TextView) view.findViewById(R.id.frame_setting_mydetail_text);
-		integral.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				if(appContext.isLogin){
-					Utils.ToActivity((Activity)getContext(), IntegralActivity.class, false);
-				}else{
-					Utils.ToActivity((Activity)getContext(), LoginActivity.class, false);
-					
-				}
-				
+		integral.setOnClickListener(this);
+		clear.setOnClickListener(this);
+		evaluate.setOnClickListener(this);
+		about.setOnClickListener(new ToOtherActivity((MainActivity) context,
+				AboutActivity.class));
+	}
+
+	@Override
+	public void onClick(View view) {
+		if (view == login) {
+			if (appContext.isLogin) {
+
+				appContext.isLogin = false;
+				appContext.user = null;
+				SharedPreferencesUtil.clearUser(appContext);
+				mydetail.setClickable(false);
+				my.setText("请先登陆");
+				login.setText("登陆");
+			} else {
+				Utils.ToActivity((Activity) getContext(), LoginActivity.class,
+						false);
 			}
-		});
-		clear.setOnClickListener(new OnClickListener() {
+		}
+		if (view == integral) {
+			// TODO Auto-generated method stub
+			if (appContext.isLogin) {
+				Utils.ToActivity((Activity) getContext(),
+						IntegralActivity.class, false);
+			} else {
+				Utils.ToActivity((Activity) getContext(), LoginActivity.class,
+						false);
 
-			@Override
-			public void onClick(View arg0) {
+			}
+		}
+		if (view == clear) {
 
-				handler.sendEmptyMessage(CLEARING);
-				Runnable r = new Runnable() {
-					@Override
-					public void run() {
-						// TODO Auto-generated method stub
-						boolean flag = FileUtils
-								.deleteDirectory("/golfeven_cache");
-						if (flag) {
-							handler.sendEmptyMessage(CLEARSUCCESS);
-							
-						} else {
-							handler.sendEmptyMessage(CLEARERROR);
-						}
+			handler.sendEmptyMessage(CLEARING);
+			Runnable r = new Runnable() {
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					boolean flag = FileUtils.deleteDirectory("/golfeven_cache");
+					if (flag) {
+						handler.sendEmptyMessage(CLEARSUCCESS);
+
+					} else {
+						handler.sendEmptyMessage(CLEARERROR);
 					}
-				};
-				handler.post(r);
+				}
+			};
+			handler.post(r);
+		}
+		if (view == evaluate) {
+			// TODO Auto-generated method stub
+			try {
+				String packetName = appContext.getPackageName();
+				Uri uri = Uri.parse("market://details?id=" + packetName);
+				Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+				// intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				context.startActivity(intent);
 
+			} catch (Exception e) {
+				MyToast.customToast(context, Toast.LENGTH_SHORT,
+						MyToast.TOAST_MSG_ERROR_TITLE, "启动商店失败",
+						Constant.TOAST_IMG_ERROR);
 			}
-		});
+		}
+
 	}
 
 }

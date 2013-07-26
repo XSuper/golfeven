@@ -1,9 +1,12 @@
 package com.golfeven.firstGolf.ui;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import net.tsz.afinal.annotation.view.ViewInject;
 import net.tsz.afinal.http.AjaxCallBack;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +20,7 @@ import com.golfeven.firstGolf.api.Api;
 import com.golfeven.firstGolf.base.BaseActivity;
 import com.golfeven.firstGolf.bean.Integral;
 import com.golfeven.firstGolf.bean.WrongResponse;
+import com.golfeven.firstGolf.common.Constant;
 import com.golfeven.firstGolf.common.MyLog;
 import com.golfeven.firstGolf.common.NetUtil;
 import com.golfeven.firstGolf.common.Utils;
@@ -79,6 +83,7 @@ public class IntegralActivity extends BaseActivity{
 						integrals = JSON.parseArray(t,Integral.class);
 					} catch (Exception e) {
 						// TODO: handle exception
+						integrals = new ArrayList<Integral>();
 					}
 					init();
 				}else{
@@ -114,6 +119,9 @@ public class IntegralActivity extends BaseActivity{
 		b5.setClickable(true);
 		b7.setClickable(true);
 		b8.setClickable(true);
+		if(integrals == null){
+			integrals = new ArrayList<Integral>();
+		}
 		int totle = Utils.getToTleIntegral(integrals);
 		t6.setText(totle+"");
 		for (Integral integral : integrals) {
@@ -142,7 +150,6 @@ public class IntegralActivity extends BaseActivity{
 				break;
 			}
 			if(btn!=null){
-				
 				btn.setClickable(false);
 				btn.setText("已完成");
 			}
@@ -157,6 +164,16 @@ public class IntegralActivity extends BaseActivity{
 		}
 		//评价
 		if(btn==b2){
+			try {
+				String packetName = getPackageName();
+				Uri uri = Uri.parse("market://details?id=" + packetName);
+				Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+				//intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				startActivity(intent);
+				
+			} catch (Exception e) {
+				MyToast.customToast(IntegralActivity.this, Toast.LENGTH_SHORT, MyToast.TOAST_MSG_ERROR_TITLE, "启动商店失败", Constant.TOAST_IMG_ERROR);
+			}
 			
 		}
 		//标签
