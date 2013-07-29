@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.alibaba.fastjson.JSON;
+import com.golfeven.AppContext;
 import com.golfeven.firstGolf.R;
 import com.golfeven.firstGolf.bean.BallFriend;
 import com.golfeven.firstGolf.bean.BallPark;
@@ -137,6 +138,11 @@ public class HomeFrame extends LinearLayout {
 
 		AjaxParams ballfriend_params = new AjaxParams();
 		ballfriend_params.put("cmd", "Member.getMember");
+		if (((AppContext) getContext().getApplicationContext()).isLogin) {
+
+			ballfriend_params.put("mid", ((AppContext) getContext()
+					.getApplicationContext()).user.getMid());
+		}
 		ballfriend_params.put("row", Constant.HOME_NAVIGATIN_IMG_SIZE + "");
 		cLoadData(ballfriend_params, nav_ballFriends, BallFriend.class);
 
@@ -152,10 +158,10 @@ public class HomeFrame extends LinearLayout {
 				super.onSuccess(t);
 				List datas = null;
 				try {
-					
+
 					datas = JSON.parseArray(t, cls);
 				} catch (Exception e) {
-					MyLog.v("json",t);
+					MyLog.v("json", t);
 				}
 				if (cls == News.class) {
 					news_complete = true;

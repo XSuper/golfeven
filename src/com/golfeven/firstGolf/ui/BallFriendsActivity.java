@@ -35,6 +35,10 @@ public class BallFriendsActivity extends BaseListActivity {
 		this.headBack = (HeadBack)findViewById(R.id.activity_ballfriend_list_headback);
 		this.listView = (PullToRefreshListView)findViewById(R.id.activity_ballfriend_list);
 		this.params.put("cmd","Member.getMember");
+		if(appContext.isLogin){
+			
+			this.params.put("mid",appContext.user.getMid());
+		}
 		init();
 	}
 	private void init() {

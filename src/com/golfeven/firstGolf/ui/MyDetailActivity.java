@@ -233,7 +233,10 @@ public class MyDetailActivity extends BaseActivity {
 								if(id!=-1){
 									
 									RadioButton btn = (RadioButton)view.findViewById(id);
-									tage.setText(btn.getText());
+									if(btn!= null){
+										
+										tage.setText(btn.getText());
+									}
 								}
 								
 								dialog.dismiss();

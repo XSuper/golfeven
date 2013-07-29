@@ -4,11 +4,15 @@ import java.util.Date;
 import java.util.List;
 
 import net.tsz.afinal.annotation.view.ViewInject;
+import net.tsz.afinal.http.AjaxCallBack;
+import net.tsz.afinal.http.AjaxParams;
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -16,15 +20,22 @@ import android.widget.Toast;
 
 import com.golfeven.firstGolf.R;
 import com.golfeven.firstGolf.adapter.ScoreAdapter;
+import com.golfeven.firstGolf.api.Api;
 import com.golfeven.firstGolf.base.BaseActivity;
 import com.golfeven.firstGolf.base.MBaseAdapter;
 import com.golfeven.firstGolf.bean.BallPark;
 import com.golfeven.firstGolf.bean.Score;
+import com.golfeven.firstGolf.common.NetUtil;
 import com.golfeven.firstGolf.common.StringUtils;
 import com.golfeven.firstGolf.common.Utils;
+import com.golfeven.firstGolf.widget.HeadBack;
 import com.golfeven.firstGolf.widget.MyToast;
 
 public class PlayBallScoreActivity extends BaseActivity {
+	
+	
+	@ViewInject(id = R.id.activity_playball_scoring_headback)
+	private HeadBack mHeadBack;
 	@ViewInject(id = R.id.activity_playball_scoring_title)
 	private TextView title;
 	@ViewInject(id = R.id.activity_playball_scoring_time, click = "showTime")
@@ -72,11 +83,51 @@ public class PlayBallScoreActivity extends BaseActivity {
 		MBaseAdapter adapter = new ScoreAdapter(PlayBallScoreActivity.this,
 				datas);
 		list.setAdapter(adapter);
+		mHeadBack.setRbtn2ClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				if(!Utils.scoreOk(datas)){
+					MyToast.centerToast(appContext, "请输入全部成绩", Toast.LENGTH_SHORT);
+					return;
+				}
+				if(appContext.isLogin){
+					
+					Api.getInstance().uploadScore(appContext.user, time.getText().toString(), ballpark.getId(), datas, new AjaxCallBack<String>() {
+						ProgressDialog dialog;
+						@Override
+						public void onStart() {
+							// TODO Auto-generated method stub
+							super.onStart();
+							dialog = Utils.initWaitingDialog(PlayBallScoreActivity.this, "正在上传成绩");
+						}
+
+						@Override
+						public void onSuccess(String t) {
+							// TODO Auto-generated method stub
+							super.onSuccess(t);
+							dialog.dismiss();
+							MyToast.centerToast(appContext, t, Toast.LENGTH_LONG);
+						}
+
+						@Override
+						public void onFailure(Throwable t, String strMsg) {
+							// TODO Auto-generated method stub
+							super.onFailure(t, strMsg);
+							dialog.dismiss();
+							NetUtil.requestError(appContext, null);
+						}
+						
+					});
+				}
+				
+			}
+		});
 
 	}
 
 	public void showTime(View view) {
-		MyToast.centerToast(appContext, year+"", Toast.LENGTH_LONG);
 		DatePickerDialog dateDialog = new DatePickerDialog(PlayBallScoreActivity.this, new OnDateSetListener() {
 			
 			@Override
@@ -103,7 +154,6 @@ public class PlayBallScoreActivity extends BaseActivity {
 //				int month = timeView.getMonth();
 //				int day = timeView.getDayOfMonth();
 //				time.setText(year + "年" + month + "月" + day + "日");
-//
 //			}
 //		});
 //		builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {

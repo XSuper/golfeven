@@ -2,6 +2,7 @@ package com.golfeven.firstGolf.api;
 
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Set;
 
 import net.tsz.afinal.FinalHttp;
@@ -10,8 +11,10 @@ import net.tsz.afinal.http.AjaxParams;
 import android.app.Activity;
 import android.widget.Toast;
 
+import com.golfeven.firstGolf.bean.Score;
 import com.golfeven.firstGolf.bean.User;
 import com.golfeven.firstGolf.common.Constant;
+import com.golfeven.firstGolf.common.MyLog;
 import com.golfeven.firstGolf.common.SharedPreferencesUtil;
 import com.golfeven.firstGolf.common.StringUtils;
 import com.golfeven.firstGolf.widget.MyToast;
@@ -305,6 +308,41 @@ public class Api {
 		params.put("mid",user.getMid());
 		params.put("token",user.getToken());
 		params.put("fid",fid);
+		fh.get(Constant.URL_BASE, params, mCallBack);
+		
+	}
+	
+	/**
+	 * 成绩上传
+	 * @param user
+	 * @param date
+	 * @param objid
+	 * @param scores
+	 * @param mCallBack
+	 */
+	public void uploadScore(User user,String date,String objid,List<Score> scores,AjaxCallBack<String> mCallBack){
+		AjaxParams params = new AjaxParams();
+		params.put("cmd", "Member.insertGofMark");
+		params.put("mid",user.getMid());
+		params.put("token",user.getToken());
+		
+		StringBuffer data = new StringBuffer();
+		data.append("{\"markdate\":\"");
+		data.append(date);
+		data.append("\",\"objid\":");
+		data.append(objid);
+		data.append(",\"grade\":[");
+		
+		for (int i = 0;i< scores.size();i++) {
+			data.append("{\"hole\":"+scores.get(i).getId()+",\"putter\":"+scores.get(i).getTuiCount()+",\"pole\":"+scores.get(i).getTotleCount()+"}");
+			if((i+1)!=scores.size()){
+				data.append(",");
+			}
+		}
+		data.append("]}");
+		
+		MyLog.v("data",data.toString());
+		params.put("data",data.toString());
 		fh.get(Constant.URL_BASE, params, mCallBack);
 		
 	}

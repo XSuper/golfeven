@@ -82,13 +82,13 @@ public class SharedPreferencesUtil {
 		if(type ==0){
 			String time =
 					read(Constant.FILE_USER, context, Constant.FILE_INTEGRAL_TYPE+type);
-			return StringUtils.isOneDay(time);
+			return !StringUtils.isOneDay(time);
 		}
 		String flag = read(Constant.FILE_USER, context, Constant.FILE_INTEGRAL_TYPE+type);
 		if(StringUtils.isEmpty(flag)){
-			return false;
-		}else {
 			return true;
+		}else {
+			return false;
 		}
 		
 	}

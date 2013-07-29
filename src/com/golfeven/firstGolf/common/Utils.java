@@ -82,6 +82,22 @@ public class Utils {
 		return scores;
 
 	}
+	/**
+	 * 判断是否成绩都已经录入成功
+	 * @param scores
+	 * @return
+	 */
+	public static boolean scoreOk(List<Score> scores){
+		boolean flag = true;
+		for (Score score : scores) {
+			if(StringUtils.isEmpty(score.getTotleCount())){
+				flag = false;
+				break;
+			}
+		}
+		
+		return flag;
+	}
 
 	/**
 	 * 计算总积分
@@ -121,10 +137,10 @@ public class Utils {
 			String num[] = str.trim().split(",");
 
 			try {
-				m[0] = Integer.parseInt(num[0]);
-				m[1] = Integer.parseInt(num[1]);
+				m[0] = Integer.parseInt(num[0].trim());
+				m[1] = Integer.parseInt(num[1].trim());
 			} catch (Exception e) {
-				// TODO: handle exception
+				MyLog.e("000",e.toString());
 			}
 		}
 		return m;

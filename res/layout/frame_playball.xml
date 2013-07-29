@@ -6,25 +6,19 @@
     android:orientation="vertical" 
     android:id="@+id/frame_playball"
     >
-    <TextView 
-        android:layout_width="fill_parent"
-        android:layout_height="40dp"
-        android:background="@color/frame_home_title"
-        android:text="球场选择"
-        android:gravity="center_vertical"
-        />
+   
     <LinearLayout 
         android:layout_width="fill_parent"
-        android:layout_height="150dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@color/blue"
+        android:background="@drawable/settop_bg"
         >
         <TextView 
             android:layout_width="fill_parent"
             android:layout_weight="1"
             android:layout_height="fill_parent"
             android:gravity="left"
-            android:layout_gravity="center_vertical"
+            android:layout_gravity="center"
             android:text="球场"
             /> 
          <TextView 
@@ -39,15 +33,15 @@
     </LinearLayout>
     <LinearLayout 
         android:layout_width="fill_parent"
-        android:layout_height="150dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@color/blue"
+       android:background="@drawable/setbottom_bg"
         >
          <TextView 
             android:layout_width="fill_parent"
             android:layout_weight="1"
             android:layout_height="fill_parent"
-             android:layout_gravity="center_vertical"
+             android:layout_gravity="center"
             android:gravity="left"
             android:text="球洞"
             /> 
@@ -65,7 +59,10 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="打球"
+        android:background="@drawable/btn_bg"
         android:id="@+id/frame_playball_btn"
+        android:layout_marginTop="40dip"
+        android:layout_margin="20dip"
         />
 
 </LinearLayout>

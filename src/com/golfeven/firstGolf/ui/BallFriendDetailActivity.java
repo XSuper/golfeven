@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.golfeven.firstGolf.R;
@@ -256,6 +257,7 @@ public class BallFriendDetailActivity extends BaseActivity implements OnClickLis
 		}
 		if(v==pullblack){
 			pullblack.setClickable(false);
+			MyLog.v("pullback", pullblackTex.getText().toString());
 			int tag =(Integer)pullblack.getTag();
 			switch (tag) {
 			case -1:
@@ -276,7 +278,6 @@ public class BallFriendDetailActivity extends BaseActivity implements OnClickLis
 						}
 						if(response!= null&&response.code==0){
 							pullblackTex.setText("拉黑");
-							pullblack.setTag(1);
 							// -2不存在关系
 							// -1 我把球友拉黑
 							// 0 我加球友为普通好友，
@@ -300,6 +301,7 @@ public class BallFriendDetailActivity extends BaseActivity implements OnClickLis
 				});
 				break;
 			case 1:
+				
 				api.updateStatus(appContext.user, ballFriend.getMid(), true, new AjaxCallBack<String>() {
 
 					@Override
@@ -308,7 +310,7 @@ public class BallFriendDetailActivity extends BaseActivity implements OnClickLis
 						super.onSuccess(t);
 						pullblack.setClickable(true);
 						WrongResponse response = null;
-						
+						MyLog.v(getClass().getName()+"pullblack",t);
 						try {
 							response = JSON.parseObject(t,WrongResponse.class);
 						} catch (Exception e) {
@@ -316,7 +318,7 @@ public class BallFriendDetailActivity extends BaseActivity implements OnClickLis
 						}
 						if(response!= null&&response.code==0){
 							pullblackTex.setText("洗白");
-							pullblack.setTag(-1);
+							//pullblack.setTag(-1);
 							// -2不存在关系
 							// -1 我把球友拉黑
 							// 0 我加球友为普通好友，

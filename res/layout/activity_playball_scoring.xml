@@ -11,6 +11,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         app:htitle="记分卡"
+        app:rbtn2_visible="true"
+        app:rbtn2_src="@drawable/w_snow"
         android:id="@+id/activity_playball_scoring_headback"
         />
     <TextView
@@ -49,7 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textColor="@color/black"
-            android:text="地点" />
+            android:text="类型" />
 
         <TextView
             android:layout_width="fill_parent"

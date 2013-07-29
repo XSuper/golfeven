@@ -10,6 +10,7 @@ public class Score {
 	private String totleCount="";
 	private String tuiCount="";
 	
+	
 	public Score() {
 		super();
 	}
