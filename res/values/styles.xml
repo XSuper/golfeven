@@ -107,7 +107,7 @@
         <item name="android:layout_weight">1</item>
         <item name="android:minWidth">100dp</item>
     </style>
-    
+    <!-- 登录设置背景 -->
     <style name="login_register_setting_top">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:background">@drawable/settop_bg</item>
@@ -140,6 +140,7 @@
         <item name="android:layout_marginLeft">10dp</item>
         <item name="android:layout_marginRight">10dp</item>
     </style>
+    <!-- 蓝色按钮 -->
     <style name="btn_blue">
         <item name="android:background">@drawable/btn_bg</item>
         <item name="android:layout_width">fill_parent</item>
@@ -147,6 +148,23 @@
         <item name="android:layout_marginLeft">10dp</item>
         <item name="android:layout_marginRight">10dp</item>
     </style>
+    <!-- 向右箭头表示下一级 -->
+    <style name="arrow_right">
+        <item name="android:background">@drawable/arrow_right</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">right|center_vertical</item>
+    </style>
+    <!--选项卡-->
+    <style name="g_tab">
+        <item name="android:background">@drawable/g_tab_bg01</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_weight">1</item>
+        
+    </style>
+    
     
         
 

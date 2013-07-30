@@ -11,11 +11,8 @@
         android:layout_height="wrap_content"
         app:htitle="最新资讯"
         app:progress_visible="false"
-        app:rbtn1_visible="true"
-        app:rbtn2_visible="false"
-        app:rbtn1_src="@drawable/widget_bar_tweet_nor"
-        app:rbtn2_src="@drawable/widget_bar_tweet_nor"
-        
+        app:rbtn2_visible="true"
+        app:rbtn2_src="@drawable/ball_icon01"
         android:id="@+id/detail_news_headback"
         />
 

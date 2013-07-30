@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
@@ -33,7 +34,7 @@ public class MainActivity extends BaseActivity {
 	
 	
 	@ViewInject(id = R.id.main_weather_head, click = "toWeatherInfo")
-	LinearLayout weatherHead;
+	FrameLayout weatherHead;
 	
 	@ViewInject(id = R.id.head_weather_title)
 	TextView weatherHeadTitle;

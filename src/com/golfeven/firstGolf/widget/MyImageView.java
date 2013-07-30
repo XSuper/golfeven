@@ -1,18 +1,21 @@
 package com.golfeven.firstGolf.widget;
 
-import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.util.AttributeSet;
-import android.widget.ImageView;
-import android.widget.LinearLayout.LayoutParams;
-
 import com.golfeven.firstGolf.R;
 import com.golfeven.firstGolf.common.StringUtils;
 
-public class MyImageView extends ImageView{
+import android.content.Context;
+import android.util.AttributeSet;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+public class MyImageView extends LinearLayout{
 	private String describe="";
+	
+	private ImageView imageView;
+	private TextView textView;
 	
 
 	/**
@@ -21,14 +24,9 @@ public class MyImageView extends ImageView{
 	 * @return
 	 */
 	public static MyImageView CreateHomeImageView(Context context){
-		MyImageView img = new MyImageView(context);
-		LayoutParams params = new LayoutParams(240,LayoutParams.MATCH_PARENT);
-		//LayoutParams params = new LayoutParams(LayoutParams.FILL_PARENT,LayoutParams.FILL_PARENT,1);
-		img.setLayoutParams(params);
-		img.setImageResource(R.drawable.img_default);
-		img.setMinimumWidth(240);
-		img.setMinimumHeight(180);
-		return img;
+		
+		
+		return new MyImageView(context);
 	}
 	
 	
@@ -42,35 +40,42 @@ public class MyImageView extends ImageView{
 	 */
 	public void setDescribe(String describe) {
 		this.describe = describe;
+		if(textView!= null){
+			textView.setText(describe);
+		}
 		//invalidate();
 	}
-	public MyImageView(Context context, AttributeSet attrs, int defStyle) {
-		super(context, attrs, defStyle);
-		// TODO Auto-generated constructor stub
-	}
+	
+	
+
+
+	
+
 	public MyImageView(Context context, AttributeSet attrs) {
 		super(context, attrs);
+		init(context);
 		// TODO Auto-generated constructor stub
 	}
+
+
 	public MyImageView(Context context) {
 		super(context);
+		init(context);
 		// TODO Auto-generated constructor stub
 	}
-	@Override
-	protected void onDraw(Canvas canvas) {
+	private void init(Context context) {
 		// TODO Auto-generated method stub
-		super.onDraw(canvas);
-		if(!StringUtils.isEmpty(describe)){
-			
-			Paint paint = new Paint();
-			paint.setColor(Color.WHITE);
-			paint.setAlpha(100);
-			canvas.drawRect(0,getHeight()-30, getWidth(), getHeight(), paint);
-			paint.setColor(Color.WHITE);
-			paint.setTextSize(18);
-			canvas.drawText(describe,20,this.getHeight()-10, paint);
-		}
+		View view = LayoutInflater.from(context).inflate(R.layout.widget_myimage,this);
+		imageView = (ImageView)view.findViewById(R.id.myimage_img);
+		textView   =(TextView)view.findViewById(R.id.myimage_text);
+		textView.setText(describe);
+
 	}
+	public ImageView getImageView(){
+		return imageView;
+	}
+
+
 	
 	
 

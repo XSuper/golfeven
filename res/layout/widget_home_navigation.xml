@@ -36,10 +36,10 @@
     <HorizontalScrollView
         android:id="@+id/widget_home_navigation_hscroll"
         android:layout_width="fill_parent"
-        android:layout_height="150dp" >
+        android:layout_height="wrap_content" >
 
         <LinearLayout
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:orientation="horizontal"
             android:id="@+id/widget_home_navigation_imgs"

@@ -163,7 +163,7 @@ public class HomeNavigation extends LinearLayout {
 				imgs[i].setDescribe(golfInfo.getTitle());
 				imgs[i].setTag(i);
 				imgs[i].setOnClickListener(click);
-				fb.display(imgs[i],
+				fb.display(imgs[i].getImageView(),
 						Constant.URL_IMG_BASE + golfInfo.getLitpic());
 			}
 
@@ -174,7 +174,7 @@ public class HomeNavigation extends LinearLayout {
 				imgs[i].setDescribe(news.getTitle());
 				imgs[i].setOnClickListener(click);
 				imgs[i].setTag(i);
-				fb.display(imgs[i], Constant.URL_IMG_BASE + news.getLitpic());
+				fb.display(imgs[i].getImageView(), Constant.URL_IMG_BASE + news.getLitpic());
 			}
 		}else if (cls == Gallery.class) {
 			GalleryClick click = new GalleryClick();
@@ -183,7 +183,7 @@ public class HomeNavigation extends LinearLayout {
 				imgs[i].setTag(gallery.getId());
 				imgs[i].setOnClickListener(click);
 				imgs[i].setDescribe(gallery.getTitle());
-				fb.display(imgs[i], Constant.URL_IMG_BASE + gallery.getLitpic());
+				fb.display(imgs[i].getImageView(), Constant.URL_IMG_BASE + gallery.getLitpic());
 			}
 		}else if (cls == BallPark.class) {
 			BallParkClick click = new BallParkClick();
@@ -192,7 +192,7 @@ public class HomeNavigation extends LinearLayout {
 				imgs[i].setTag(ballPark);
 				imgs[i].setOnClickListener(click);
 				imgs[i].setDescribe(ballPark.getTitle());
-				fb.display(imgs[i], Constant.URL_IMG_BASE + ballPark.getLitpic());
+				fb.display(imgs[i].getImageView(), Constant.URL_IMG_BASE + ballPark.getLitpic());
 			}
 		}else if (cls == Gallery.class) {
 			GalleryClick click = new GalleryClick();
@@ -201,7 +201,7 @@ public class HomeNavigation extends LinearLayout {
 				imgs[i].setTag(gallery.getId());
 				imgs[i].setOnClickListener(click);
 				imgs[i].setDescribe(gallery.getTitle());
-				fb.display(imgs[i], Constant.URL_IMG_BASE + gallery.getLitpic());
+				fb.display(imgs[i].getImageView(), Constant.URL_IMG_BASE + gallery.getLitpic());
 			}
 		}else if (cls == BallTeam.class) {
 			BallTeamClick click = new BallTeamClick();
@@ -210,7 +210,7 @@ public class HomeNavigation extends LinearLayout {
 				imgs[i].setTag(ballTeam);
 				imgs[i].setOnClickListener(click);
 				imgs[i].setDescribe(ballTeam.getIntroduce());
-				fb.display(imgs[i], Constant.URL_IMG_BASE + ballTeam.getLogo());
+				fb.display(imgs[i].getImageView(), Constant.URL_IMG_BASE + ballTeam.getLogo());
 			}
 		}else if (cls == BallFriend.class) {
 			BallFriendClick click = new BallFriendClick();
@@ -219,7 +219,7 @@ public class HomeNavigation extends LinearLayout {
 				imgs[i].setTag(ballFriend);
 				imgs[i].setDescribe(ballFriend.getUname());
 				imgs[i].setOnClickListener(click);
-				fb.display(imgs[i], Constant.URL_IMG_BASE + ballFriend.getFace());
+				fb.display(imgs[i].getImageView(), Constant.URL_IMG_BASE + ballFriend.getFace());
 			}
 		}
 	}

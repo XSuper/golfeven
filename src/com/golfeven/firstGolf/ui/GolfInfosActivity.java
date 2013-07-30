@@ -39,11 +39,12 @@ public class GolfInfosActivity extends BaseListActivity {
 		this.params.put("cmd","golfInfo");
 	}
 	public void btnClick(View view){
-		btn1.setBackgroundColor(Color.WHITE);
-		btn2.setBackgroundColor(Color.WHITE);
-		btn3.setBackgroundColor(Color.WHITE);
-		btn4.setBackgroundColor(Color.WHITE);
-		view.setBackgroundColor(Color.BLUE);
+		btn1.setBackgroundResource(R.drawable.g_tab_bg01);
+		btn2.setBackgroundResource(R.drawable.g_tab_bg01);
+		btn3.setBackgroundResource(R.drawable.g_tab_bg01);
+		btn4.setBackgroundResource(R.drawable.g_tab_bg01);
+		view.setBackgroundResource(R.drawable.g_tab_bg02);
+		
 		String id ="137";
 		if(view == btn1){
 			id="137";

@@ -23,15 +23,16 @@
                     android:id="@+id/frame_setting_mydetail_text"
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
+                    android:layout_weight="1"
                     android:layout_gravity="left|center_vertical"
                     android:gravity="center_vertical"
                     android:text="我的主页" />
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    style="@style/arrow_right"
                     android:layout_gravity="right|center_vertical"
-                    android:background="@drawable/btn_down" />
+                    
+                    />
             </LinearLayout>
 
             <LinearLayout
@@ -42,15 +43,13 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
+                    android:layout_weight="1"
                     android:layout_gravity="left|center_vertical"
                     android:gravity="center_vertical"
                     android:text="获取积分" />
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right|center_vertical"
-                    android:background="@drawable/btn_down" />
+                    style="@style/arrow_right" />
             </LinearLayout>
 
             <LinearLayout
@@ -61,6 +60,7 @@
                     android:id="@+id/frame_setting_clearcache"
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
+                    android:layout_weight="1"
                     android:layout_gravity="left|center_vertical"
                     android:gravity="center_vertical"
                     android:text="清除缓存图片" />
@@ -70,7 +70,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right|center_vertical"
-                    android:background="@drawable/btn_down"
+                    android:background="@drawable/btn_bg"
                     android:text="清除" />
             </LinearLayout>
 
@@ -83,13 +83,11 @@
                     android:layout_height="fill_parent"
                     android:layout_gravity="left|center_vertical"
                     android:gravity="center_vertical"
+                    android:layout_weight="1"
                     android:text="评价" />
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right|center_vertical"
-                    android:background="@drawable/btn_down" />
+                   style="@style/arrow_right" />
             </LinearLayout>
 
             <LinearLayout
@@ -105,10 +103,7 @@
                     android:text="关于我们" />
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right|center_vertical"
-                    android:background="@drawable/btn_down" />
+                    style="@style/arrow_right" />
             </LinearLayout>
 
             <LinearLayout
@@ -121,13 +116,11 @@
                     android:layout_height="fill_parent"
                     android:layout_gravity="left|center_vertical"
                     android:gravity="center_vertical"
+                    android:layout_weight="1"
                     android:text="版本更新" />
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right|center_vertical"
-                    android:background="@drawable/btn_down" />
+                    style="@style/arrow_right" />
             </LinearLayout>
 
             <Button

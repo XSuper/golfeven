@@ -10,19 +10,19 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         >
-        <Button 
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
+        <TextView 
+            style="@style/g_tab"
+            android:background="@drawable/g_tab_bg02"
             android:text="关注"
-            android:gravity="center"
             android:id="@+id/frame_attention_mto"
             />
-        <Button 
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-             android:gravity="center"
+        <ImageView 
+		    android:layout_width="wrap_content"
+		    android:layout_height="fill_parent"
+		    android:background="@drawable/g_line"
+		    />
+        <TextView 
+            style="@style/g_tab"
             android:id="@+id/frame_attention_otm"
             android:text="粉丝"
             />

@@ -19,22 +19,29 @@
         >
         
         <Spinner 
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            style="@style/g_tab"
+            android:gravity="center"
             android:id="@+id/activity_news_list_spinner_xunsai"
             
             />
+        <ImageView 
+		    android:layout_width="wrap_content"
+		    android:layout_height="fill_parent"
+		    android:background="@drawable/g_line"
+		    />
         <Spinner 
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+           style="@style/g_tab"
+           android:gravity="center"
             android:id="@+id/activity_news_list_spinner_newstype"
             />
+        <ImageView 
+		    android:layout_width="wrap_content"
+		    android:layout_height="fill_parent"
+		    android:background="@drawable/g_line"
+		    />
         <Spinner 
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            style="@style/g_tab"
+            android:layout_gravity="center"
             android:id="@+id/activity_news_list_spinner_sort"
             />
     </LinearLayout>

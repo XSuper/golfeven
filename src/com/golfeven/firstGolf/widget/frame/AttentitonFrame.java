@@ -417,8 +417,8 @@ public class AttentitonFrame extends LinearLayout{
 			}
 			selectView = v;
 			// TODO Auto-generated method stub
-			mto.setBackgroundColor(Color.RED);
-			otm.setBackgroundColor(Color.RED);
+			mto.setBackgroundResource(R.drawable.g_tab_bg01);
+			otm.setBackgroundResource(R.drawable.g_tab_bg01);
 			if(v==mto){
 				params.put("cmd",CMDMTO );
 				
@@ -431,7 +431,7 @@ public class AttentitonFrame extends LinearLayout{
 			}
 			datas = new ArrayList();
 			adapter.refresh(datas);
-			v.setBackgroundColor(Color.BLUE);
+			v.setBackgroundResource(R.drawable.g_tab_bg02);
 			reset();
 			listView.setTag(LOAD);
 			requestData();

@@ -18,7 +18,7 @@
 
             <com.golfeven.firstGolf.widget.MainPageView 
                 android:layout_width="fill_parent"
-                android:layout_height="340dp"
+                android:layout_height="200dp"
                 android:id="@+id/frame_home_PageView"
                 />
             <com.golfeven.firstGolf.widget.HomeNavigation
