@@ -3,7 +3,7 @@
     android:id="@+id/main_linearlayout_footer"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/widget_bar_bg_n"
+    android:background="@drawable/bottom_bg"
     android:gravity="center_vertical"
     android:orientation="vertical" >
 
@@ -15,6 +15,7 @@
 
         <RadioGroup
             android:id="@+id/main_footbar_radiogroup"
+            android:layout_marginTop="3dp"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal" >
@@ -67,6 +68,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
+        android:layout_marginTop="-10dp"
         android:orientation="horizontal" >
 
         <TextView
@@ -98,16 +100,17 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:textColor="@color/white"
-            android:text="关注" />
+            android:text="我的关注"
+            android:textColor="@color/white" />
 
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:textColor="@color/white"
-            android:text="设置" />
+            android:text="系统设置"
+            android:textColor="@color/white" />
+
     </LinearLayout>
 
 </LinearLayout>

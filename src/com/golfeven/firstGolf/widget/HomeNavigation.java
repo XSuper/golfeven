@@ -302,10 +302,13 @@ public class HomeNavigation extends LinearLayout {
 		
 		@Override
 		public void onClick(View v) {
-			BallFriend ballFriend=(BallFriend)v.getTag();
-			Intent intent = new Intent(context, BallFriendDetailActivity.class);
-			intent.putExtra("ballFriend",ballFriend);
-			context.startActivity(intent);
+			if (((AppContext) getContext().getApplicationContext()).isLogin) {
+				
+				BallFriend ballFriend=(BallFriend)v.getTag();
+				Intent intent = new Intent(context, BallFriendDetailActivity.class);
+				intent.putExtra("ballFriend",ballFriend);
+				context.startActivity(intent);
+			}
 			
 		}
 		

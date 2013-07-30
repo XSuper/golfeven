@@ -37,7 +37,7 @@ public class BMapUtil {
 		
 		public void initEngineManager(Context context) {
 	        if (mBMapManager == null) {
-	            mBMapManager = new BMapManager(context);
+	            mBMapManager = new BMapManager(context.getApplicationContext());
 	        }
 
 	        if (!mBMapManager.init(strKey,new MyGeneralListener(context))) {

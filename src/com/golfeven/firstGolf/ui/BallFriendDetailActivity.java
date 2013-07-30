@@ -63,6 +63,8 @@ public class BallFriendDetailActivity extends BaseActivity implements OnClickLis
 	private FinalBitmap fb;
 	private List<Photo> photos;
 	
+	//public int state = -2;//拉黑前的状态
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +77,7 @@ public class BallFriendDetailActivity extends BaseActivity implements OnClickLis
 		if(ballFriend.getMid().equals(appContext.user.getMid())){
 			background.setVisibility(View.GONE);
 		}
+		
 		load();
 		initValue();
 	}
@@ -90,10 +93,16 @@ public class BallFriendDetailActivity extends BaseActivity implements OnClickLis
 		tlovemsg.setText(ballFriend.getLovemsg());
 
 		ttags.setText(ballFriend.getLabel());
+//		try {
+//			state = Integer.parseInt((ballFriend.getMemberRelation().split(","))[0]);
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//		}
 		changeBottom();
 		attention.setOnClickListener(this);
 		msg.setOnClickListener(this);
 		pullblack.setOnClickListener(this);
+		
 	}
 
 	
@@ -101,6 +110,10 @@ public class BallFriendDetailActivity extends BaseActivity implements OnClickLis
 	 * 更改底部显示状体
 	 */
 	private void changeBottom() {
+		attention.setVisibility(View.VISIBLE);
+		pullblack.setVisibility(View.VISIBLE);
+		msg.setVisibility(View.VISIBLE);
+		
 		int m[] = Utils.judgeShow(ballFriend.getMemberRelation());
 		//控制关注显示
 		attention.setTag(m[0]);
@@ -197,7 +210,47 @@ public class BallFriendDetailActivity extends BaseActivity implements OnClickLis
 			int tag =(Integer)attention.getTag();
 			switch (tag) {
 			case -1:
-				//取消关注
+				
+				attention.setClickable(false);
+				api.removeFocus(appContext.user, ballFriend.getMid(), new AjaxCallBack<String>() {
+
+					@Override
+					public void onSuccess(String t) {
+						// TODO Auto-generated method stub
+						super.onSuccess(t);
+						Log.v(getClass().getName(), t);
+						attention.setClickable(true);
+						WrongResponse response = null;
+						
+						try {
+							response = JSON.parseObject(t,WrongResponse.class);
+						} catch (Exception e) {
+							// TODO: handle exception
+						}
+						if(response!= null&&response.code==0){
+//							attentionTex.setText("取消关注");
+//							attention.setTag(1);
+							// -2不存在关系
+							// -1 我把球友拉黑
+							// 0 我加球友为普通好友，
+							// 1我加球友为关注好友
+							changeMTO(-2);
+							changeBottom();
+						}else{
+							ValidateUtil.wrongResponse(t);
+						}
+						
+					}
+
+					@Override
+					public void onFailure(Throwable t, String strMsg) {
+						// TODO Auto-generated method stub
+						super.onFailure(t, strMsg);
+						attention.setClickable(true);
+						NetUtil.requestError(appContext, null);
+					}
+					
+				});
 				break;
 			case 1:
 				//关注
@@ -282,7 +335,8 @@ public class BallFriendDetailActivity extends BaseActivity implements OnClickLis
 							// -1 我把球友拉黑
 							// 0 我加球友为普通好友，
 							// 1我加球友为关注好友
-							changeMTO(1);
+//							changeMTO(state);
+							changeMTO(-2);
 							changeBottom();
 						}else{
 							ValidateUtil.wrongResponse(t);

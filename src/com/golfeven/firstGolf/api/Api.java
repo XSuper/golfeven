@@ -311,6 +311,21 @@ public class Api {
 		fh.get(Constant.URL_BASE, params, mCallBack);
 		
 	}
+	/**
+	 * 删除关注
+	 * @param user
+	 * @param fid
+	 * @param mCallBack
+	 */
+	public void removeFocus(User user,String fid,AjaxCallBack<String> mCallBack){
+		AjaxParams params = new AjaxParams();
+		params.put("cmd", "Member_friend.removeFocus");
+		params.put("mid",user.getMid());
+		params.put("token",user.getToken());
+		params.put("fid",fid);
+		fh.get(Constant.URL_BASE, params, mCallBack);
+		
+	}
 	
 	/**
 	 * 成绩上传

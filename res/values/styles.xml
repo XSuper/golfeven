@@ -71,7 +71,6 @@
     </style>
 
     <style name="main_footbar_radio" parent="footbar">
-        <item name="android:background">@drawable/widget_bar_bg</item>
         <item name="android:padding">0dip</item>
     </style>
 
@@ -108,5 +107,47 @@
         <item name="android:layout_weight">1</item>
         <item name="android:minWidth">100dp</item>
     </style>
+    
+    <style name="login_register_setting_top">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:background">@drawable/settop_bg</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+    <style name="login_register_setting_all">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:background">@drawable/settop_bg</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+    <style name="login_register_setting_center">
+        <item name="android:orientation">horizontal</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:background">@drawable/settop_bg</item>
+        <item name="android:layout_height">wrap_content</item>
+       <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+    </style>
+    <style name="login_register_setting_bottom">
+        <item name="android:orientation">horizontal</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:background">@drawable/setbottom_bg</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+    </style>
+    <style name="btn_blue">
+        <item name="android:background">@drawable/btn_bg</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+    </style>
+    
+        
 
 </resources>

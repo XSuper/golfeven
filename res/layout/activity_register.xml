@@ -12,10 +12,8 @@
         app:htitle="注册" />
 
     <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@color/white"
+        android:layout_marginTop="20dp"
+        style="@style/login_register_setting_all"
          >
 
         <ImageView
@@ -30,10 +28,8 @@
             android:layout_weight="1" />
     </LinearLayout>
     <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@color/white"
+        android:layout_marginTop="20dp"
+        style="@style/login_register_setting_all"
          >
 
         <ImageView
@@ -49,10 +45,8 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@color/white"
+        android:layout_marginTop="20dp"
+        style="@style/login_register_setting_all"
          >
 
         <ImageView
@@ -69,15 +63,14 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" 
-        android:background="@color/white"
+        android:layout_marginTop="20dp"
+       style="@style/login_register_setting_all"
         >
 
         <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+             />
 
         <EditText
             android:id="@+id/activity_register_repeat"
@@ -94,8 +87,7 @@
         android:id="@+id/activity_register_agree"
         />
     <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        style="@style/btn_blue"
         android:text="提交注册"
         android:id="@+id/activity_register_btn"
         />

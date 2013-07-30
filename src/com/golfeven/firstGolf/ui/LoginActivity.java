@@ -71,23 +71,42 @@ public class LoginActivity extends BaseActivity {
 							// TODO Auto-generated method stub
 							super.onSuccess(t);
 							headback.setProgressVisible(false);
-							if (t.trim().startsWith("{")) {
-								appContext.user = JSON.parseObject(t, User.class);
+							try {
+								appContext.user = JSON.parseObject(t,
+										User.class);
+
+							} catch (Exception e) {
+								MyLog.e(getClass().getName(), e.toString());
+							}
+							if (appContext.user != null
+									&& !StringUtils.isEmpty(appContext.user
+											.getMid())) {
+
 								appContext.isLogin = true;
-								//登陆成功后保存用户名和密码
-								SharedPreferencesUtil.saveUser(appContext, uname.getText().toString(), upass.getText().toString());
-								if(!StringUtils.isEmpty(appContext.longitude)||!StringUtils.isEmpty(appContext.latitude)){
-									Api.getInstance().updatePlace(appContext.user, appContext.longitude, appContext.latitude);
+								// 登陆成功后保存用户名和密码
+								SharedPreferencesUtil.saveUser(appContext,
+										uname.getText().toString(), upass
+												.getText().toString());
+								if (!StringUtils.isEmpty(appContext.longitude)
+										|| !StringUtils
+												.isEmpty(appContext.latitude)) {
+									Api.getInstance().updatePlace(
+											appContext.user,
+											appContext.longitude,
+											appContext.latitude);
 								}
 								finish();
-							} else{
+							} else {
 								WrongResponse wrongResponse = ValidateUtil
 										.wrongResponse(t);
-								if(wrongResponse.show){
-									MyToast.centerToast(appContext, wrongResponse.msg, Toast.LENGTH_SHORT);
-								}else{
-									MyToast.centerToast(appContext, "登陆失败", Toast.LENGTH_SHORT);
-									MyLog.v("登陆失败",wrongResponse.msg );
+								if (wrongResponse.show) {
+									MyToast.centerToast(appContext,
+											wrongResponse.msg,
+											Toast.LENGTH_SHORT);
+								} else {
+									MyToast.centerToast(appContext, "登陆失败",
+											Toast.LENGTH_SHORT);
+									MyLog.v("登陆失败", wrongResponse.msg);
 								}
 							}
 						}
@@ -97,7 +116,8 @@ public class LoginActivity extends BaseActivity {
 							// TODO Auto-generated method stub
 							super.onFailure(t, strMsg);
 							headback.setProgressVisible(false);
-							MyToast.centerToast(appContext, "网络连接失败", Toast.LENGTH_SHORT);
+							MyToast.centerToast(appContext, "网络连接失败",
+									Toast.LENGTH_SHORT);
 						}
 
 					});

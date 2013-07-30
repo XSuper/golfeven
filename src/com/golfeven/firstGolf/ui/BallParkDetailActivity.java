@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.WebSettings;
+import android.webkit.WebSettings.LayoutAlgorithm;
 import android.webkit.WebView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -105,7 +107,8 @@ public class BallParkDetailActivity extends BaseActivity {
 		tel.setText(parkDetail.getKeywords());
 		description.setText(parkDetail.getDescription());
 		body.loadDataWithBaseURL(null, parkDetail.getBody(), "text/html", "utf-8", null);
-		
+		WebSettings	webSettings= body.getSettings();
+		webSettings.setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN);
 	}
 	public void toActivity(View view){
 		if(view ==placeLayout){

@@ -108,7 +108,7 @@
         />
     <WebView
          android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         android:id="@+id/activity_ballpark_detail_body"
          />
     

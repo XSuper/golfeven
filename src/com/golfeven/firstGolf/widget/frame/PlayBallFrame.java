@@ -19,12 +19,14 @@ import com.golfeven.firstGolf.common.Constant;
 import com.golfeven.firstGolf.ui.BallParksActivity;
 import com.golfeven.firstGolf.ui.MainActivity;
 import com.golfeven.firstGolf.ui.PlayBallScoreActivity;
+import com.golfeven.firstGolf.widget.MainPageView;
 import com.golfeven.firstGolf.widget.MyToast;
 
 public class PlayBallFrame extends LinearLayout{
 	private Spinner hole;
 	private  TextView ballPark;
 	private Button btn;
+	MainPageView mpView;
 	
 	private BallPark mBallPark;
 	/**
@@ -50,6 +52,8 @@ public class PlayBallFrame extends LinearLayout{
 		View view = LayoutInflater.from(context).inflate(R.layout.frame_playball, this);
 		hole = (Spinner)view.findViewById(R.id.frame_playball_hole);
 		btn = (Button)view.findViewById(R.id.frame_playball_btn);
+		mpView = (MainPageView)view.findViewById(R.id.frame_playball_PageView);
+		mpView.setImages(null);
 		
 		btn.setOnClickListener(new OnClickListener() {
 			
