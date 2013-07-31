@@ -22,6 +22,7 @@ import com.golfeven.firstGolf.bean.BallPark;
 import com.golfeven.firstGolf.widget.ScrollLayout;
 import com.golfeven.firstGolf.widget.ScrollLayout.OnViewChangeListener;
 import com.golfeven.firstGolf.widget.frame.AttentitonFrame;
+import com.golfeven.firstGolf.widget.frame.GradeFrame;
 import com.golfeven.firstGolf.widget.frame.HomeFrame;
 import com.golfeven.firstGolf.widget.frame.PlayBallFrame;
 import com.golfeven.firstGolf.widget.frame.SettingFrame;
@@ -184,6 +185,7 @@ public class MainActivity extends BaseActivity {
 			break;
 		case 2:
 			changeTitle(false, "成绩",false);
+			((GradeFrame)viewGrade).onResume();
 			break;
 		case 3:
 			changeTitle(false, "关注",false);

@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res/com.golfeven.firstGolf"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_"
     android:orientation="vertical" >
 
     <com.golfeven.firstGolf.widget.HeadBack
@@ -18,14 +19,15 @@
 
         <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content" 
+            
+            />
 
         <EditText
             android:id="@+id/activity_register_id"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
             android:hint="请输入手机号或邮箱"
-            android:layout_weight="1" />
+            style="@style/input_edit"
+            />
     </LinearLayout>
     <LinearLayout
         android:layout_marginTop="20dp"
@@ -38,10 +40,9 @@
 
         <EditText
             android:id="@+id/activity_register_name"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+           style="@style/input_edit"
             android:hint="昵称"
-            android:layout_weight="1" />
+            />
     </LinearLayout>
 
     <LinearLayout
@@ -55,11 +56,10 @@
 
         <EditText
             android:id="@+id/activity_register_upass"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+             style="@style/input_edit"
             android:hint="输入密码"
             android:password="true"
-            android:layout_weight="1" />
+            />
     </LinearLayout>
 
     <LinearLayout
@@ -74,11 +74,10 @@
 
         <EditText
             android:id="@+id/activity_register_repeat"
-            android:layout_width="fill_parent"
+             style="@style/input_edit"
             android:password="true"
-            android:layout_height="wrap_content"
             android:hint="请重发输入"
-            android:layout_weight="1" />
+            />
     </LinearLayout>
     <CheckBox 
         android:layout_width="fill_parent"

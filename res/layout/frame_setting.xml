@@ -3,6 +3,7 @@
     android:id="@+id/frame_setting"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_"
     android:orientation="vertical" >
 
     <ScrollView
@@ -21,11 +22,7 @@
 
                 <TextView
                     android:id="@+id/frame_setting_mydetail_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="1"
-                    android:layout_gravity="left|center_vertical"
-                    android:gravity="center_vertical"
+                    style="@style/login_set_text"
                     android:text="我的主页" />
 
                 <ImageView
@@ -41,11 +38,7 @@
                 android:layout_marginTop="20dp" >
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="1"
-                    android:layout_gravity="left|center_vertical"
-                    android:gravity="center_vertical"
+                    style="@style/login_set_text"
                     android:text="获取积分" />
 
                 <ImageView
@@ -58,19 +51,12 @@
 
                 <TextView
                     android:id="@+id/frame_setting_clearcache"
-                    android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="1"
-                    android:layout_gravity="left|center_vertical"
-                    android:gravity="center_vertical"
+                  style="@style/login_set_text"
                     android:text="清除缓存图片" />
 
                 <Button
                     android:id="@+id/frame_setting_clear"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right|center_vertical"
-                    android:background="@drawable/btn_bg"
+                   	style="@style/integral_btn"
                     android:text="清除" />
             </LinearLayout>
 
@@ -79,11 +65,7 @@
                 style="@style/login_register_setting_center" >
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
-                    android:layout_gravity="left|center_vertical"
-                    android:gravity="center_vertical"
-                    android:layout_weight="1"
+                   style="@style/login_set_text"
                     android:text="评价" />
 
                 <ImageView
@@ -95,11 +77,7 @@
                 style="@style/login_register_setting_center" >
 
                 <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_gravity="left|center_vertical"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
+                    style="@style/login_set_text"
                     android:text="关于我们" />
 
                 <ImageView
@@ -112,11 +90,7 @@
 
                 <TextView
                     android:id="@+id/frame_setting_updating_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
-                    android:layout_gravity="left|center_vertical"
-                    android:gravity="center_vertical"
-                    android:layout_weight="1"
+                   style="@style/login_set_text"
                     android:text="版本更新" />
 
                 <ImageView

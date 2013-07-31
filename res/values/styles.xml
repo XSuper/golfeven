@@ -118,7 +118,7 @@
     </style>
     <style name="login_register_setting_all">
         <item name="android:layout_width">fill_parent</item>
-        <item name="android:background">@drawable/settop_bg</item>
+        <item name="android:background">@drawable/setall_bg</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginLeft">10dp</item>
         <item name="android:layout_marginRight">10dp</item>
@@ -127,7 +127,7 @@
     <style name="login_register_setting_center">
         <item name="android:orientation">horizontal</item>
         <item name="android:layout_width">fill_parent</item>
-        <item name="android:background">@drawable/settop_bg</item>
+        <item name="android:background">@drawable/setcenter_bg</item>
         <item name="android:layout_height">wrap_content</item>
        <item name="android:layout_marginLeft">10dp</item>
         <item name="android:layout_marginRight">10dp</item>
@@ -164,8 +164,54 @@
         <item name="android:layout_weight">1</item>
         
     </style>
+    <style name="input_edit">
+        <item name="android:background">@color/white</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center|left</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:paddingLeft">5dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:maxLength">50</item>
+        <item name="android:textColorHint">#F0F0F0</item>
+        
+    </style>
     
-    
+    <!-- 获取积分的去完成按钮 -->
+    <style name="integral_btn">
+        <item name="android:background">@drawable/btn_bg_s</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginRight">8dp</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:layout_marginBottom">8dp</item>
+        <item name="android:padding">3dp</item>
+        <item name="android:paddingLeft">6dp</item>
+        <item name="android:paddingRight">6dp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:text">去完成</item>
+    </style>
+    <style name="integral_text">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+    <!-- 登录注册页面字体设置 -->
+    <style name="login_set_text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_gravity">left|center_vertical</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:paddingLeft">5dp</item>
+        <item name="android:textSize">18sp</item>
+    </style>
         
 
 </resources>

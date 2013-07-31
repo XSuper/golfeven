@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     android:orientation="vertical" 
+    android:background="@drawable/bg_"
     android:id="@+id/frame_playball"
     >
    
@@ -17,20 +17,14 @@
         style="@style/login_register_setting_top"
         >
         <TextView 
-            android:layout_width="fill_parent"
-            android:layout_weight="1"
-            android:layout_height="fill_parent"
-            android:gravity="left"
-            android:layout_gravity="center"
+            style="@style/login_set_text"
             android:text="球场"
             /> 
          <TextView 
-           android:layout_width="fill_parent"
-           android:layout_weight="1"
-           android:layout_height="wrap_content"
-           android:layout_gravity="center_vertical"
-           android:gravity="left"
+           style="@style/login_set_text"
            android:text="请选择球场"
+           android:layout_gravity="center_vertical|right"
+           android:gravity="center_vertical|right"
            android:id="@+id/frame_playball_ballpark"
            />
     </LinearLayout>
@@ -38,18 +32,15 @@
         style="@style/login_register_setting_bottom"
         >
          <TextView 
-            android:layout_width="fill_parent"
-            android:layout_weight="1"
-            android:layout_height="fill_parent"
-             android:layout_gravity="center"
-            android:gravity="left"
+          style="@style/login_set_text"
+          
             android:text="球洞"
             /> 
        <Spinner 
-           android:layout_width="fill_parent"
+           android:layout_width="0dp"
            android:layout_weight="1"
            android:layout_height="wrap_content"
-           android:layout_gravity="center_vertical"
+           android:layout_gravity="center_vertical|right"
            android:gravity="left"
            android:id="@+id/frame_playball_hole"
            />

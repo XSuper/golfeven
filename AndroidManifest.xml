@@ -83,7 +83,9 @@
 
         <activity
             android:name="com.golfeven.firstGolf.ui.MainActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask" 
+            android:screenOrientation="portrait"
+            />
         <activity
             android:name="com.golfeven.firstGolf.ui.GolfInfosActivity"
             android:screenOrientation="portrait" />

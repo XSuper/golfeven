@@ -4,7 +4,7 @@
     android:id="@+id/activity_news_detail"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@drawable/bg_"
     android:orientation="vertical" >
     <com.golfeven.firstGolf.widget.HeadBack 
         android:layout_width="fill_parent"

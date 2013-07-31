@@ -30,6 +30,7 @@ import com.golfeven.firstGolf.common.ToOtherActivity;
 import com.golfeven.firstGolf.common.Utils;
 import com.golfeven.firstGolf.common.ValidateUtil;
 import com.golfeven.firstGolf.widget.HeadBack;
+import com.golfeven.firstGolf.widget.MyToast;
 
 public class BallFriendDetailActivity extends BaseActivity implements OnClickListener{
 	@ViewInject(id=R.id.activity_ballfriend_detail_headback) HeadBack headback;
@@ -192,7 +193,12 @@ public class BallFriendDetailActivity extends BaseActivity implements OnClickLis
 			public void onSuccess(String t) {
 				// TODO Auto-generated method stub
 				super.onSuccess(t);
-				photos = JSON.parseArray(t, Photo.class);
+				try {
+					
+					photos = JSON.parseArray(t, Photo.class);
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
 				if(photos!=null&&photos.size()!=0){
 					fb.display(mPhoto, Constant.URL_IMG_BASE+photos.get(0).getPic());
 					Intent intent = new Intent(BallFriendDetailActivity.this,PhotoShowActivity.class);
@@ -237,7 +243,17 @@ public class BallFriendDetailActivity extends BaseActivity implements OnClickLis
 							changeMTO(-2);
 							changeBottom();
 						}else{
-							ValidateUtil.wrongResponse(t);
+							WrongResponse wrongResponse = ValidateUtil
+									.wrongResponse(t);
+							if (wrongResponse.show) {
+								MyToast.centerToast(appContext,
+										wrongResponse.msg,
+										Toast.LENGTH_SHORT);
+							} else {
+								MyToast.centerToast(appContext, "取消关注失败",
+										Toast.LENGTH_SHORT);
+								MyLog.v("取消关注失败", wrongResponse.msg);
+							}
 						}
 						
 					}
@@ -280,7 +296,17 @@ public class BallFriendDetailActivity extends BaseActivity implements OnClickLis
 							changeMTO(1);
 							changeBottom();
 						}else{
-							ValidateUtil.wrongResponse(t);
+							WrongResponse wrongResponse = ValidateUtil
+									.wrongResponse(t);
+							if (wrongResponse.show) {
+								MyToast.centerToast(appContext,
+										wrongResponse.msg,
+										Toast.LENGTH_SHORT);
+							} else {
+								MyToast.centerToast(appContext, "关注失败",
+										Toast.LENGTH_SHORT);
+								MyLog.v("关注失败", wrongResponse.msg);
+							}
 						}
 						
 					}
@@ -339,7 +365,17 @@ public class BallFriendDetailActivity extends BaseActivity implements OnClickLis
 							changeMTO(-2);
 							changeBottom();
 						}else{
-							ValidateUtil.wrongResponse(t);
+							WrongResponse wrongResponse = ValidateUtil
+									.wrongResponse(t);
+							if (wrongResponse.show) {
+								MyToast.centerToast(appContext,
+										wrongResponse.msg,
+										Toast.LENGTH_SHORT);
+							} else {
+								MyToast.centerToast(appContext, "洗白失败",
+										Toast.LENGTH_SHORT);
+								MyLog.v("洗白失败", wrongResponse.msg);
+							}
 						}
 						
 					}
@@ -380,7 +416,17 @@ public class BallFriendDetailActivity extends BaseActivity implements OnClickLis
 							changeMTO(-1);
 							changeBottom();
 						}else{
-							ValidateUtil.wrongResponse(t);
+							WrongResponse wrongResponse = ValidateUtil
+									.wrongResponse(t);
+							if (wrongResponse.show) {
+								MyToast.centerToast(appContext,
+										wrongResponse.msg,
+										Toast.LENGTH_SHORT);
+							} else {
+								MyToast.centerToast(appContext, "拉黑失败",
+										Toast.LENGTH_SHORT);
+								MyLog.v("拉黑失败", wrongResponse.msg);
+							}
 						}
 						
 					}

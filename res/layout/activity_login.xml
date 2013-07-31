@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" 
-    android:background="#F7F7F7"
+    android:background="@drawable/bg_"
     >
 
     <com.golfeven.firstGolf.widget.HeadBack
@@ -30,12 +30,8 @@
              />
 
         <EditText
+            style="@style/input_edit"
             android:id="@+id/activity_login_uname"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center|left"
-            android:background="@color/white"
             android:hint="请输入手机号或邮箱"
              >
             
@@ -58,11 +54,7 @@
 
         <EditText
             android:id="@+id/activity_login_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center|left"
-            android:background="@color/white"
+            style="@style/input_edit"
             android:hint="6-16位密码" />
     </LinearLayout>
 

@@ -361,6 +361,20 @@ public class Api {
 		fh.get(Constant.URL_BASE, params, mCallBack);
 		
 	}
+	
+	/**
+	 * 拿成绩接口
+	 * @param user
+	 * @param mCallBack
+	 */
+	public void getGrade(User user,AjaxCallBack<String> mCallBack){
+		AjaxParams params = new AjaxParams();
+		params.put("cmd", "Member.getmark");
+		params.put("mid",user.getMid());
+		params.put("token",user.getToken());
+		fh.get(Constant.URL_BASE, params, mCallBack);
+		
+	}
 	/**
 	 * 更改拉黑状态
 	 * @param user

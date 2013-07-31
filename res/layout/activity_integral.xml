@@ -3,232 +3,242 @@
     xmlns:app="http://schemas.android.com/apk/res/com.golfeven.firstGolf"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/lightblue"
+    android:background="@drawable/bg_"
     android:orientation="vertical" >
-    <com.golfeven.firstGolf.widget.HeadBack 
+
+    <com.golfeven.firstGolf.widget.HeadBack
+        android:id="@+id/activity_integral_headback"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         app:htitle="积分"
-        app:progress_visible="true"
-        android:id="@+id/activity_integral_headback"
-        />
-    <LinearLayout 
+        app:progress_visible="true" />
+
+    <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
-        <TextView 
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="我的积分:"
-            />
-        <TextView 
-            android:layout_width="0dp"
-            android:layout_weight="3"
-            android:layout_height="wrap_content"
+        android:layout_height="40dip"
+        android:layout_marginLeft="10dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            style="@style/integral_text"
+            android:layout_width="wrap_content"
+            android:layout_weight="0"
+            android:layout_gravity="center_vertical"
+            android:text="我的积分:" />
+
+        <TextView
             android:id="@+id/activity_integral_totle"
-            android:text="1000"
-            />
+           style="@style/integral_text"
+           android:layout_gravity="center_vertical"
+           android:layout_marginLeft="10dp"
+            android:text="1000" />
     </LinearLayout>
-    <TextView 
+
+    <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@color/blue"
+        android:background="@drawable/h_jfbg"
+        android:gravity="center_vertical|left"
+        android:paddingLeft="10dp"
         android:text="每日登陆"
-        />
-    <TextView 
+        android:textColor="@color/white"
+        android:textSize="12sp" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="10dp"
+        android:gravity="center_vertical"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:text="每日登陆可以自动获取50积分" />
+
+    <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="每日登陆可以自动获取50积分"
-        />
-    <TextView 
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/blue"
+        android:background="@drawable/h_jfbg"
+        android:gravity="center_vertical|left"
+        android:paddingLeft="10dp"
         android:text="完善个人资料"
-        />
-    <LinearLayout 
+        android:textColor="@color/white"
+        android:textSize="12sp" />
+
+    <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        >
-        <TextView 
-            android:layout_height="wrap_content"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:text="完善账户资料"
-            />
+        android:layout_height="40dip"
+        android:layout_marginLeft="10dp"
+        android:gravity="center_vertical" >
+
+        <TextView
+           style="@style/integral_text"
+            android:text="完善账户资料" />
 
         <TextView
             android:id="@+id/activity_integral_completeCount_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            style="@style/integral_text"
             android:text="100" />
 
         <Button
             android:id="@+id/activity_integral_completeCount_btn"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="去完成" />
-
+           	style="@style/integral_btn"
+            />
     </LinearLayout>
-     <LinearLayout 
+
+    <ImageView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        >
+        android:background="@drawable/line" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="40dip"
+        android:layout_marginLeft="10dp"
+        android:gravity="center_vertical" >
 
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            style="@style/integral_text"
             android:text="上传真实图片" />
 
         <TextView
             android:id="@+id/activity_integral_uploadImage_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            style="@style/integral_text"
             android:text="100" />
 
         <Button
             android:id="@+id/activity_integral_uploadImage_btn"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="去完成" />
-
+            style="@style/integral_btn"
+            />
     </LinearLayout>
-     <LinearLayout 
+
+    <ImageView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        >
+        android:background="@drawable/line" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="40dip"
+        android:layout_marginLeft="10dp"
+        android:gravity="center_vertical" >
 
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+           style="@style/integral_text"
             android:text="上传成绩" />
 
         <TextView
             android:id="@+id/activity_integral_uploadGrade_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+           style="@style/integral_text"
             android:text="100" />
 
         <Button
             android:id="@+id/activity_integral_uploadGrade_btn"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="去完成" />
-
+            style="@style/integral_btn"
+            />
     </LinearLayout>
-     
-     <LinearLayout 
+
+    <ImageView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        >
+        android:background="@drawable/line" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="40dip"
+        android:layout_marginLeft="10dp"
+        android:gravity="center_vertical" >
 
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            style="@style/integral_text"
             android:text="常出没地" />
 
         <TextView
             android:id="@+id/activity_integral_place_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            style="@style/integral_text"
             android:text="100" />
 
         <Button
             android:id="@+id/activity_integral_place_btn"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="去完成" />
-
+           style="@style/integral_btn" />
     </LinearLayout>
-     <LinearLayout 
+
+    <ImageView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        >
+        android:background="@drawable/line" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="40dip"
+        android:layout_marginLeft="10dp"
+        android:gravity="center_vertical" >
 
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+           style="@style/integral_text"
             android:text="完成签名" />
 
         <TextView
             android:id="@+id/activity_integral_loveMsg_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            style="@style/integral_text"
             android:text="100" />
 
         <Button
             android:id="@+id/activity_integral_loveMsg_btn"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="去完成" />
-
+           style="@style/integral_btn" />
     </LinearLayout>
-     <LinearLayout 
+
+    <ImageView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        >
+        android:background="@drawable/line" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="40dip"
+        android:layout_marginLeft="10dp"
+        android:gravity="center_vertical" >
 
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            style="@style/integral_text"
             android:text="完成标签" />
 
         <TextView
             android:id="@+id/activity_integral_lable_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            style="@style/integral_text"
             android:text="100" />
 
         <Button
             android:id="@+id/activity_integral_lable_btn"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="去完成" />
-
+            style="@style/integral_btn" />
     </LinearLayout>
-     <LinearLayout 
+
+    <ImageView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        >
+        android:background="@drawable/line" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="40dip"
+        android:layout_marginLeft="10dp"
+        android:gravity="center_vertical" >
 
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            style="@style/integral_text"
             android:text="客户端好评" />
 
         <TextView
             android:id="@+id/activity_integral_evaluate_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            style="@style/integral_text"
             android:text="100" />
 
         <Button
             android:id="@+id/activity_integral_evaluate_btn"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="去完成" />
-
+            style="@style/integral_btn" />
     </LinearLayout>
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/line" />
+
 </LinearLayout>

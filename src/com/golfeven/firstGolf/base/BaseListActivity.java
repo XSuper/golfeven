@@ -261,6 +261,9 @@ public abstract class BaseListActivity extends BaseActivity {
 					} catch (Exception e) {
 						// TODO: handle exception
 					}
+					if(datas!=null&&datas.size()<key_row){
+						isEnd = true;
+					}
 					// listView.setTag(TAG_KEY_TIME,sf.format(date));
 					listView.onRefreshComplete(sf.format(date));
 					mHandler.sendEmptyMessage(LOAD_SUCCESS);
@@ -268,7 +271,15 @@ public abstract class BaseListActivity extends BaseActivity {
 				case REFRESH:
 					datas.clear();
 					// listView.setTag(TAG_KEY_TIME,sf.format(date));
-					datas = JSON.parseArray(t, entityClass);
+					try {
+						
+						datas = JSON.parseArray(t, entityClass);
+					} catch (Exception e) {
+						// TODO: handle exception
+					}
+					if(datas!=null&&datas.size()<key_row){
+						isEnd = true;
+					}
 					listView.onRefreshComplete(sf.format(date));
 					mHandler.sendEmptyMessage(REFRESH_SUCCESS);
 					break;
@@ -279,7 +290,11 @@ public abstract class BaseListActivity extends BaseActivity {
 
 						return;
 					}
-					datas.addAll(JSON.parseArray(t, entityClass));
+					List mdata = JSON.parseArray(t, entityClass);
+					if(mdata!=null&&mdata.size()<key_row){
+						isEnd = true;
+					}
+					datas.addAll(mdata);
 					mHandler.sendEmptyMessage(LOADMORE_SUCCESS);
 					break;
 
