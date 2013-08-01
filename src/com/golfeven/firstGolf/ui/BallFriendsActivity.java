@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import com.golfeven.firstGolf.R;
+import com.golfeven.firstGolf.adapter.BallFriendAttentionListAdapter;
 import com.golfeven.firstGolf.adapter.BallFriendListAdapter;
 import com.golfeven.firstGolf.base.BaseListActivity;
 import com.golfeven.firstGolf.bean.BallFriend;
@@ -31,7 +32,7 @@ public class BallFriendsActivity extends BaseListActivity {
 		setContentView(layoutResid);
 		this.context = BallFriendsActivity.this;
 		this.entityClass = BallFriend.class ;
-		this.adapter = new BallFriendListAdapter(context, datas);
+		this.adapter = new BallFriendAttentionListAdapter(context, datas);
 		this.headBack = (HeadBack)findViewById(R.id.activity_ballfriend_list_headback);
 		this.listView = (PullToRefreshListView)findViewById(R.id.activity_ballfriend_list);
 		this.params.put("cmd","Member.getMember");
@@ -43,11 +44,11 @@ public class BallFriendsActivity extends BaseListActivity {
 	}
 	private void init() {
 		// TODO Auto-generated method stub
-		ageAdapter = ArrayAdapter.createFromResource(appContext, R.array.spinner_age, android.R.layout.simple_spinner_item);
-		sexAdapter = ArrayAdapter.createFromResource(appContext, R.array.spinner_sex, android.R.layout.simple_spinner_item);
+		ageAdapter = ArrayAdapter.createFromResource(appContext, R.array.spinner_age, R.layout.spinner_text);
+		sexAdapter = ArrayAdapter.createFromResource(appContext, R.array.spinner_sex, R.layout.spinner_text);
 		
-		ageAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		sexAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		ageAdapter.setDropDownViewResource(R.layout.spinner_checkedtextview);
+		sexAdapter.setDropDownViewResource(R.layout.spinner_checkedtextview);
 		
 		age.setAdapter(ageAdapter);
 		sex.setAdapter(sexAdapter);

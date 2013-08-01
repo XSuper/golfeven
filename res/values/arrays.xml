@@ -29,89 +29,9 @@
         <item >上海</item>
         <item >北京</item>
         <item >广州</item>
-        <item >上海</item>
         <item >北京</item>
-        <item >广州</item>
         <item >上海</item>
-        <item >北京</item>
-        <item >广州</item>
-        <item >上海</item>
-        <item >北京</item>
-        <item >广州</item>
-        <item >上海</item>
-        <item >北京</item>
-        <item >广州</item>
-        <item >上海</item>
-        <item >北京</item>
-        <item >广州</item>
-        <item >上海</item>
-        <item >北京</item>
-        <item >广州</item>
-        <item >上海</item>
-        <item >北京</item>
-        <item >广州</item>
-        <item >上海</item>
-        <item >北京</item>
-        <item >广州</item>
-        <item >上海</item>
-        <item >北京</item>
-        <item >广州</item>
-        <item >上海</item>
-        <item >北京</item>
-        <item >广州</item>
-        <item >上海</item>
-        <item >北京</item>
-        <item >广州</item>
-        <item >上海</item>
-        <item >北京</item>
-        <item >广州</item>
-        <item >上海</item>
-        <item >北京</item>
-        <item >广州</item>
-        <item >上海</item>
-        <item >北京</item>
-        <item >广州</item>
-        <item >上海</item>
-        <item >北京</item>
-        <item >广州</item>
-        <item >上海</item>
-        <item >北京</item>
-        <item >广州</item>
-        <item >上海</item>
-        <item >北京</item>
-        <item >广州</item>
-        <item >上海</item>
-        <item >北京</item>
-        <item >广州</item>
-        <item >上海</item>
-        <item >北京</item>
-        <item >广州</item>
-        <item >上海</item>
-        <item >北京</item>
-        <item >广州</item>
-        <item >上海</item>
-        <item >北京</item>
-        <item >广州</item>
-        <item >上海</item>
-        <item >北京</item>
-        <item >广州</item>
-        <item >上海</item>
-        <item >北京</item>
-        <item >广州</item>
-        <item >上海</item>
-        <item >北京</item>
-        <item >广州</item>
-        <item >上海</item>
-        <item >北京</item>
-        <item >广州</item>
-        <item >上海</item>
-        <item >北京</item>
-        <item >广州</item>
-        <item >上海</item>
-        <item >北京</item>
-        <item >广州</item>
-        <item >上海</item>
-        <item >北京</item>
+        <item >呼和浩特</item>
         <item >广州</item>
         <item >上海</item>
         <item >北京</item>
@@ -123,7 +43,7 @@
         <item >高级私人会所</item>
     </string-array>
     <string-array name="spinner_price">
-        <item >由高到低</item>
+        <item >由高到低 </item>
         <item >由低到高</item>
     </string-array>
     <string-array name="spinner_peoplecount">

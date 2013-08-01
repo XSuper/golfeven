@@ -72,9 +72,10 @@ public class PlayBallFrame extends LinearLayout{
 			}
 		});
 		
-		ArrayAdapter adapter = ArrayAdapter.createFromResource(getContext(), R.array.spinner_hole, android.R.layout.simple_spinner_item);
+		ArrayAdapter adapter = ArrayAdapter.createFromResource(getContext(), R.array.spinner_hole, R.layout.spinner_text);
+		
 		hole.setAdapter(adapter);
-		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		adapter.setDropDownViewResource(R.layout.spinner_checkedtextview);
 		
 		
 		ballPark = (TextView)view.findViewById(R.id.frame_playball_ballpark);

@@ -14,11 +14,58 @@ public class BallPark extends BaseBean {
 	private String pubdate;
 	private String litpic;
 	
+	private String shorttitle;
+	private String province;
+	private String areaName;
+	private String lat;
+	private String lng;
+	private String distance;
+	
+	
+	public String getShorttitle() {
+		return shorttitle;
+	}
+	public void setShorttitle(String shorttitle) {
+		this.shorttitle = shorttitle;
+	}
+	public String getProvince() {
+		return province;
+	}
+	public void setProvince(String province) {
+		this.province = province;
+	}
+	public String getAreaName() {
+		return areaName;
+	}
+	public void setAreaName(String areaName) {
+		this.areaName = areaName;
+	}
+	public String getLat() {
+		return lat;
+	}
+	public void setLat(String lat) {
+		this.lat = lat;
+	}
+	public String getLng() {
+		return lng;
+	}
+	public void setLng(String lng) {
+		this.lng = lng;
+	}
+	public String getDistance() {
+		return distance;
+	}
+	public void setDistance(String distance) {
+		this.distance = distance;
+	}
 	public static final Parcelable.Creator<BallPark> CREATOR = new Creator<BallPark>(){
 
 		@Override
 		public BallPark createFromParcel(Parcel source) {
 			return new BallPark(source.readString(), source.readString(),
+					source.readString(), source.readString(),
+					source.readString(), source.readString(),
+					source.readString(), source.readString(),
 					source.readString(), source.readString(),
 					source.readString(), source.readString(),
 					source.readString());
@@ -31,8 +78,11 @@ public class BallPark extends BaseBean {
 		}
 		
 	};
+	
 	public BallPark(String id, String typename, String title,
-			String description, String click, String pubdate, String litpic) {
+			String description, String click, String pubdate, String litpic,
+			String shorttitle, String province, String areaName, String lat,
+			String lng, String distance) {
 		super();
 		this.id = id;
 		this.typename = typename;
@@ -41,6 +91,12 @@ public class BallPark extends BaseBean {
 		this.click = click;
 		this.pubdate = pubdate;
 		this.litpic = litpic;
+		this.shorttitle = shorttitle;
+		this.province = province;
+		this.areaName = areaName;
+		this.lat = lat;
+		this.lng = lng;
+		this.distance = distance;
 	}
 	public BallPark() {
 		super();
@@ -62,6 +118,15 @@ public class BallPark extends BaseBean {
 		dest.writeString(this.click);
 		dest.writeString(this.pubdate);
 		dest.writeString(this.litpic);
+		
+		dest.writeString(this.shorttitle);
+		dest.writeString(this.province);
+		dest.writeString(this.areaName);
+		dest.writeString(this.lat);
+		dest.writeString(this.lng);
+		dest.writeString(this.distance);
+		
+		
 		
 	}
 	public String getId() {

@@ -27,6 +27,7 @@ import android.widget.Toast;
 import com.alibaba.fastjson.JSON;
 import com.golfeven.AppContext;
 import com.golfeven.firstGolf.R;
+import com.golfeven.firstGolf.adapter.BallFriendAttentionListAdapter;
 import com.golfeven.firstGolf.adapter.BallFriendListAdapter;
 import com.golfeven.firstGolf.base.MBaseAdapter;
 import com.golfeven.firstGolf.bean.BallFriend;
@@ -45,7 +46,7 @@ public class AttentitonFrame extends LinearLayout{
 	
 	boolean ismto = true;//是不是我关注别人
 	public final static String CMDMTO ="Member.focusMember"; 
-	public final static String CMDOTM ="Member.getMember";
+	public final static String CMDOTM ="Member_friend.fansList";
 	
 	
 	public AttentitonFrame(Context context, AttributeSet attrs) {
@@ -277,6 +278,9 @@ public class AttentitonFrame extends LinearLayout{
 					} catch (Exception e) {
 						// TODO: handle exception
 					}
+					if(datas!=null&&datas.size()<key_row){
+						isEnd = true;
+					}
 					// listView.setTag(TAG_KEY_TIME,sf.format(date));
 					listView.onRefreshComplete(sf.format(date));
 					mHandler.sendEmptyMessage(LOAD_SUCCESS);
@@ -290,6 +294,9 @@ public class AttentitonFrame extends LinearLayout{
 					} catch (Exception e) {
 						// TODO: handle exception
 					}
+					if(datas!=null&&datas.size()<key_row){
+						isEnd = true;
+					}
 					listView.onRefreshComplete(sf.format(date));
 					mHandler.sendEmptyMessage(REFRESH_SUCCESS);
 					break;
@@ -300,7 +307,11 @@ public class AttentitonFrame extends LinearLayout{
 
 						return;
 					}
-					datas.addAll(JSON.parseArray(t, entityClass));
+					List mdata = JSON.parseArray(t, entityClass);
+					if(mdata!=null&&mdata.size()<key_row){
+						isEnd = true;
+					}
+					datas.addAll(mdata);
 					mHandler.sendEmptyMessage(LOADMORE_SUCCESS);
 					break;
 
@@ -364,7 +375,7 @@ public class AttentitonFrame extends LinearLayout{
 		otm = view.findViewById(R.id.frame_attention_otm);
 		
 		this.entityClass = BallFriend.class ;
-		this.adapter = new BallFriendListAdapter(context, datas);
+		this.adapter = new BallFriendAttentionListAdapter(context, datas);
 		this.mainActivity = ((MainActivity)context);
 		this.listView = (PullToRefreshListView)view.findViewById(R.id.frame_attention_list);
 		this.params.put("cmd","Member.focusMember");
@@ -387,9 +398,10 @@ public class AttentitonFrame extends LinearLayout{
 				if(ismto){
 					
 					this.params.put("cmd",CMDMTO);
+					((BallFriendAttentionListAdapter)adapter).isAttention = true;
 				}else{
 					this.params.put("cmd",CMDOTM);
-					
+					((BallFriendAttentionListAdapter)adapter).isAttention = false;
 				}
 				this.params.put("mid",appContext.user.getMid());
 				this.params.put("token",appContext.user.getToken());
@@ -421,13 +433,13 @@ public class AttentitonFrame extends LinearLayout{
 			otm.setBackgroundResource(R.drawable.g_tab_bg01);
 			if(v==mto){
 				params.put("cmd",CMDMTO );
-				
+				((BallFriendAttentionListAdapter)adapter).isAttention = true;
 				ismto=true;
 			}
 			if(v==otm){
 				params.put("cmd",CMDOTM);
 				ismto = false;
-				
+				((BallFriendAttentionListAdapter)adapter).isAttention = false;
 			}
 			datas = new ArrayList();
 			adapter.refresh(datas);

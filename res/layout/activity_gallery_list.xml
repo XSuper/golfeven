@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res/com.golfeven.firstGolf"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@drawable/bg_"
     android:orientation="vertical" >
     <com.golfeven.firstGolf.widget.HeadBack 
         android:layout_width="fill_parent"
@@ -14,7 +14,7 @@
         />
     <LinearLayout 
         android:layout_width="fill_parent"
-        android:layout_height="50dip"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         >
         
@@ -22,14 +22,21 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@drawable/spinner_bg"
             android:id="@+id/activity_Gallery_list_spinner_xunsai"
             
             />
+        
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:background="@drawable/g_line" />
        
         <Spinner 
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@drawable/spinner_bg"
             android:id="@+id/activity_Gallery_list_spinner_sort"
             />
     </LinearLayout>

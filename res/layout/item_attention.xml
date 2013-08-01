@@ -2,23 +2,103 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/bg_"
     android:orientation="horizontal" >
     <ImageView 
-        android:layout_weight="1"
+        android:layout_weight="4"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:id="@+id/item_attention_face"
+        android:layout_margin="8dp"
         />
     <LinearLayout
-        android:layout_weight="4"
+        android:layout_weight="1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:background="@drawable/qy_ball"
+        android:gravity="top"
         >
         <LinearLayout 
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            ></LinearLayout>
-        <LinearLayout ></LinearLayout>
+            android:orientation="horizontal"
+            >
+            <TextView 
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/item_attention_nick"
+                android:text="球友昵称"
+                android:textSize="12sp"
+                android:textColor="@color/black"
+                android:gravity="center|left"
+                android:layout_gravity="center_vertical"
+                />
+            <LinearLayout 
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center|left"
+             
+                >
+                <ImageView 
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/item_attention_sex"
+                    android:background="@drawable/qy_man"
+                    />
+                <TextView 
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/item_attention_age"
+                    android:textSize="10sp"
+                    android:gravity="center_vertical"
+                    android:text="25-35"
+                    />
+            </LinearLayout>
+            <Button 
+                style="@style/integral_btn"
+                android:text="取消关注"
+                android:id="@+id/item_attention_btn"
+                />
+            
+            
+        </LinearLayout>
+        <LinearLayout 
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="horizontal"
+            >
+            <TextView 
+                android:layout_weight="1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/item_attention_loveMsg"
+                android:textSize="10sp"
+                android:text="个性签名"
+                
+                />
+            <LinearLayout 
+                android:layout_weight="1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                >
+                <ImageView 
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/qy_icon2"
+                    />
+                <TextView 
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/item_attention_distance"
+                    android:text="99公里"
+                    />
+            </LinearLayout>
+            
+        </LinearLayout>
     </LinearLayout>
     
 

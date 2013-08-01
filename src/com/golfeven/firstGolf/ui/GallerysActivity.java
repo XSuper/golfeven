@@ -52,12 +52,12 @@ public class GallerysActivity extends BaseListActivity {
 		// TODO Auto-generated method stub
 		types = this.db.findAll(XunsaiType.class);
 		sortAdapter = ArrayAdapter.createFromResource(appContext,
-				R.array.spinner_sort, android.R.layout.simple_spinner_item);
-		xunsaiAdapter = new ArrayAdapter(appContext,android.R.layout.simple_spinner_item,types);
+				R.array.spinner_sort, R.layout.spinner_text);
+		xunsaiAdapter = new ArrayAdapter(appContext,R.layout.spinner_text,types);
 		sortAdapter
-				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+				.setDropDownViewResource(R.layout.spinner_checkedtextview);
 		xunsaiAdapter
-				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+				.setDropDownViewResource(R.layout.spinner_checkedtextview);
 
 		intTypes();
 		sort.setAdapter(sortAdapter);
@@ -79,9 +79,9 @@ public class GallerysActivity extends BaseListActivity {
 				// TODO Auto-generated method stub
 				super.onSuccess(t);
 				types = JSON.parseArray(t, XunsaiType.class);
-				xunsaiAdapter = new ArrayAdapter(appContext,android.R.layout.simple_spinner_item,types);
+				xunsaiAdapter = new ArrayAdapter(appContext,R.layout.spinner_text,types);
 				xunsai.setAdapter(xunsaiAdapter);
-				xunsaiAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+				xunsaiAdapter.setDropDownViewResource(R.layout.spinner_checkedtextview);
 				xunsai.postInvalidate();
 			}
 		});

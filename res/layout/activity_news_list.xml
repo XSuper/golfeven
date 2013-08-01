@@ -5,54 +5,58 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_"
     android:orientation="vertical" >
-    <com.golfeven.firstGolf.widget.HeadBack 
+
+    <com.golfeven.firstGolf.widget.HeadBack
+        android:id="@+id/activity_news_list_headback"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         app:htitle="最新资讯"
-        app:progress_visible="true"
-        android:id="@+id/activity_news_list_headback"
-        />
-    <LinearLayout 
+        app:progress_visible="true" />
+
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="50dip"
-        android:orientation="horizontal"
-        >
-        
-        <Spinner 
-            style="@style/g_tab"
-            android:gravity="center"
+        android:orientation="horizontal" >
+
+        <Spinner
             android:id="@+id/activity_news_list_spinner_xunsai"
-            
-            />
-        <ImageView 
-		    android:layout_width="wrap_content"
-		    android:layout_height="fill_parent"
-		    android:background="@drawable/g_line"
-		    />
-        <Spinner 
-           style="@style/g_tab"
-           android:gravity="center"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/spinner_bg"
+            android:gravity="center" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:background="@drawable/g_line" />
+
+        <Spinner
             android:id="@+id/activity_news_list_spinner_newstype"
-            />
-        <ImageView 
-		    android:layout_width="wrap_content"
-		    android:layout_height="fill_parent"
-		    android:background="@drawable/g_line"
-		    />
-        <Spinner 
-            style="@style/g_tab"
-            android:layout_gravity="center"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/spinner_bg"
+            android:gravity="center" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:background="@drawable/g_line" />
+
+        <Spinner
             android:id="@+id/activity_news_list_spinner_sort"
-            />
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@drawable/spinner_bg" />
     </LinearLayout>
+
     <com.golfeven.firstGolf.widget.PullToRefreshListView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
         android:id="@+id/activity_news_list"
-        >
-        
-        
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
     </com.golfeven.firstGolf.widget.PullToRefreshListView>
-    
 
 </LinearLayout>

@@ -17,6 +17,7 @@ import com.golfeven.firstGolf.R;
 import com.golfeven.firstGolf.base.MBaseAdapter;
 import com.golfeven.firstGolf.bean.News;
 import com.golfeven.firstGolf.common.Constant;
+import com.golfeven.firstGolf.common.StringUtils;
 import com.golfeven.firstGolf.ui.NewsDetailActivity;
 
 public class NewsListAdapter extends MBaseAdapter{
@@ -50,17 +51,21 @@ public class NewsListAdapter extends MBaseAdapter{
 	public View getView(final int position, View convertView, ViewGroup parent) {
 		if (convertView == null) {
 			convertView = LayoutInflater.from(context).inflate(
-					R.layout.item_common, null);
+					R.layout.item_news, null);
 		}
 		// TODO Auto-generated method stub
 		final News mNews= (News)datas.get(position);
-		ImageView img = (ImageView)convertView.findViewById(R.id.item_common_img);
-		TextView title =(TextView)convertView.findViewById(R.id.item_common_title);
-		TextView digest =(TextView)convertView.findViewById(R.id.item_common_digest);
+		ImageView img = (ImageView)convertView.findViewById(R.id.item_news_img);
+		TextView title =(TextView)convertView.findViewById(R.id.item_news_title);
+		TextView description =(TextView)convertView.findViewById(R.id.item_news_description);
+		TextView time =(TextView)convertView.findViewById(R.id.item_news_time);
 		
 		
 		title.setText(mNews.getTitle());
-		digest.setText(mNews.getTypename());
+		description.setText(mNews.getDescription());
+		String timeStr = StringUtils.friendly_time(StringUtils
+				.strToDataStr(mNews.getPubdate()+"000"));
+		time.setText(timeStr);
 //		fb.configLoadfailImage(Constant.IMG_LOADING_FAIL);
 //		fb.configLoadingImage(Constant.IMG_LOADING);
 		fb.display(img, Constant.URL_IMG_BASE+mNews.getLitpic());

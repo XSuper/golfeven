@@ -18,6 +18,7 @@ import com.golfeven.firstGolf.base.MBaseAdapter;
 import com.golfeven.firstGolf.bean.GolfInfo;
 import com.golfeven.firstGolf.bean.News;
 import com.golfeven.firstGolf.common.Constant;
+import com.golfeven.firstGolf.common.StringUtils;
 import com.golfeven.firstGolf.ui.GolfInfoDetailActivity;
 
 public class GolfInfoListAdapter extends MBaseAdapter{
@@ -46,17 +47,29 @@ public class GolfInfoListAdapter extends MBaseAdapter{
 	public View getView(final int position, View convertView, ViewGroup parent) {
 		if (convertView == null) {
 			convertView = LayoutInflater.from(context).inflate(
-					R.layout.item_common, null);
+					R.layout.item_news, null);
 		}
-		// TODO Auto-generated method stub
-		GolfInfo golfInfo = (GolfInfo)datas.get(position);
-		ImageView img = (ImageView)convertView.findViewById(R.id.item_common_img);
-		TextView title =(TextView)convertView.findViewById(R.id.item_common_title);
-		TextView digest =(TextView)convertView.findViewById(R.id.item_common_digest);
+//		// TODO Auto-generated method stub
+//		GolfInfo golfInfo = (GolfInfo)datas.get(position);
+//		ImageView img = (ImageView)convertView.findViewById(R.id.item_common_img);
+//		TextView title =(TextView)convertView.findViewById(R.id.item_common_title);
+//		TextView digest =(TextView)convertView.findViewById(R.id.item_common_digest);
+//		
+//		
+//		title.setText(golfInfo.getTitle());
+//		digest.setText(golfInfo.getTypename());
+		final GolfInfo golfInfo= (GolfInfo)datas.get(position);
+		ImageView img = (ImageView)convertView.findViewById(R.id.item_news_img);
+		TextView title =(TextView)convertView.findViewById(R.id.item_news_title);
+		TextView description =(TextView)convertView.findViewById(R.id.item_news_description);
+		TextView time =(TextView)convertView.findViewById(R.id.item_news_time);
 		
 		
 		title.setText(golfInfo.getTitle());
-		digest.setText(golfInfo.getTypename());
+		description.setText(golfInfo.getDescription());
+		String timeStr = StringUtils.friendly_time(StringUtils
+				.strToDataStr(golfInfo.getPubdate()+"000"));
+		time.setText(timeStr);
 		fb.display(img, Constant.URL_IMG_BASE+golfInfo.getLitpic());
 //		fb.display(img, "http://www.a8.hk/uploads/allimg/130617/6-13061GJ959203-lp.jpg");
 		convertView.setOnClickListener(new OnClickListener() {

@@ -54,12 +54,12 @@ public class NewsActivity extends BaseListActivity {
 	private void init() {
 		types = this.db.findAll(XunsaiType.class);
 		// TODO Auto-generated method stub
-		newstypeAdapter =ArrayAdapter.createFromResource(appContext, R.array.spinner_newsType,android.R.layout.simple_spinner_item);
-		sortAdapter = ArrayAdapter.createFromResource(appContext, R.array.spinner_sort,android.R.layout.simple_spinner_item);
-		xunsaiAdapter = new ArrayAdapter(appContext,android.R.layout.simple_spinner_item,types);
-		newstypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		sortAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		xunsaiAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		newstypeAdapter =ArrayAdapter.createFromResource(appContext, R.array.spinner_newsType,R.layout.spinner_text);
+		sortAdapter = ArrayAdapter.createFromResource(appContext, R.array.spinner_sort,R.layout.spinner_text);
+		xunsaiAdapter = new ArrayAdapter(appContext,R.layout.spinner_text,types);
+		newstypeAdapter.setDropDownViewResource(R.layout.spinner_checkedtextview);
+		sortAdapter.setDropDownViewResource(R.layout.spinner_checkedtextview);
+		xunsaiAdapter.setDropDownViewResource(R.layout.spinner_checkedtextview);
 		
 		intTypes();
 		
@@ -87,9 +87,9 @@ public class NewsActivity extends BaseListActivity {
 				super.onSuccess(t);
 				types = JSON.parseArray(t, XunsaiType.class);
 				MyLog.v("xunsaiAdapter",types.size()+"");
-				xunsaiAdapter = new ArrayAdapter(appContext,android.R.layout.simple_spinner_item,types);
+				xunsaiAdapter = new ArrayAdapter(appContext,R.layout.spinner_text,types);
 				xunsai.setAdapter(xunsaiAdapter);
-				xunsaiAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+				xunsaiAdapter.setDropDownViewResource(R.layout.spinner_checkedtextview);
 				xunsai.postInvalidate();
 			}
 		});

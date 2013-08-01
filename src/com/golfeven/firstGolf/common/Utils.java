@@ -117,6 +117,20 @@ public class Utils {
 	}
 
 	/**
+	 * 得到我是否关注对方
+	 * @param str
+	 * @return
+	 */
+	public static boolean getMState(String str){
+		boolean flag = false;
+		int s = getState(str)[0];
+		if(s==0||s==1){
+			flag = true;
+		}
+		return flag;
+		
+	}
+	/**
 	 * 得到球友间关系 
 	 * 
 	 * -2不存在关系 

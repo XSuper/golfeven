@@ -49,20 +49,20 @@ public class BallParksActivity extends BaseListActivity {
 		((BallParkListAdapter)adapter).isChoice=isChoice;
 		this.headBack = (HeadBack)findViewById(R.id.activity_ballpark_list_headback);
 		this.listView = (PullToRefreshListView)findViewById(R.id.activity_ballpark_list);
-		this.params.put("cmd","getArticle");
+		this.params.put("cmd","Article.getPlayground");
 		this.params.put("typeid","125");
 		init();
 	}
 	private void init() {
 		types = this.db.findAll(PlaygroundType.class);
 		// TODO Auto-generated method stub
-		parktypeAdapter =new ArrayAdapter(appContext,android.R.layout.simple_spinner_item,types);
-		cityAdapter = ArrayAdapter.createFromResource(appContext, R.array.spinner_city, android.R.layout.simple_spinner_item);
-		priceAdapter = ArrayAdapter.createFromResource(appContext, R.array.spinner_price, android.R.layout.simple_spinner_item);
+		parktypeAdapter =new ArrayAdapter(appContext,R.layout.spinner_text,types);
+		cityAdapter = ArrayAdapter.createFromResource(appContext, R.array.spinner_city, R.layout.spinner_text);
+		priceAdapter = ArrayAdapter.createFromResource(appContext, R.array.spinner_price,R.layout.spinner_text);
 		
-		parktypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		cityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		priceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		parktypeAdapter.setDropDownViewResource(R.layout.spinner_checkedtextview);
+		cityAdapter.setDropDownViewResource(R.layout.spinner_checkedtextview);
+		priceAdapter.setDropDownViewResource(R.layout.spinner_checkedtextview);
 		
 		intTypes();
 		parktype.setAdapter(parktypeAdapter);
@@ -85,9 +85,9 @@ public class BallParksActivity extends BaseListActivity {
 				// TODO Auto-generated method stub
 				super.onSuccess(t);
 				types = JSON.parseArray(t, PlaygroundType.class);
-				parktypeAdapter = new ArrayAdapter(appContext,android.R.layout.simple_spinner_item,types);
+				parktypeAdapter = new ArrayAdapter(appContext,R.layout.spinner_text,types);
 				parktype.setAdapter(parktypeAdapter);
-				parktypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+				parktypeAdapter.setDropDownViewResource(R.layout.spinner_checkedtextview);
 				parktype.postInvalidate();
 			}
 		});

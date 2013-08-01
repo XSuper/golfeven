@@ -6,11 +6,13 @@ import net.tsz.afinal.FinalBitmap;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
 import com.golfeven.firstGolf.R;
@@ -36,19 +38,37 @@ public class BallParkListAdapter extends MBaseAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		if (convertView == null) {
 			convertView = LayoutInflater.from(context).inflate(
-					R.layout.item_common, null);
+					R.layout.item_ballpark, null);
 		}
 		// TODO Auto-generated method stub
 		final BallPark ballPark = (BallPark) datas.get(position);
 		ImageView img = (ImageView) convertView
-				.findViewById(R.id.item_common_img);
+				.findViewById(R.id.item_ballpark_img);
 		TextView title = (TextView) convertView
-				.findViewById(R.id.item_common_title);
-		TextView digest = (TextView) convertView
-				.findViewById(R.id.item_common_digest);
+				.findViewById(R.id.item_ballpark_title);
+		TextView type = (TextView) convertView
+				.findViewById(R.id.item_ballpark_type);
+		TextView distance = (TextView) convertView
+				.findViewById(R.id.item_ballpark_distance);
 
+		DisplayMetrics dm = new DisplayMetrics();
+		 ((Activity)context).getWindowManager().getDefaultDisplay().getMetrics(dm);
+		 LayoutParams params = new LayoutParams(dm.widthPixels/4, dm.widthPixels/4);
+		 params.setMargins(15, 15, 15, 15);
+		 img.setLayoutParams(params);
+		
 		title.setText(ballPark.getTitle());
-		digest.setText(ballPark.getTypename());
+		type.setText(ballPark.getTypename());
+//		
+//		if(ballPark.getDistance().indexOf("999999")>-1){
+//			float m = Float.parseFloat(ballPark.getDistance());
+//			double km = m/1000;
+//			distance.setText(km+"km");
+//		}else{
+//			distance.setText("未知");
+//		}
+			
+		
 		fb.display(img, Constant.URL_IMG_BASE + ballPark.getLitpic());
 		convertView.setOnClickListener(new OnClickListener() {
 

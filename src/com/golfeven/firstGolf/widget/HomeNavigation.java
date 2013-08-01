@@ -7,10 +7,12 @@ import net.tsz.afinal.FinalBitmap;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.HorizontalScrollView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -34,6 +36,7 @@ import com.golfeven.firstGolf.ui.NewsDetailActivity;
 public class HomeNavigation extends LinearLayout {
 	private LinearLayout mtop;
 	private TextView title, more;
+	private ImageView logo;
 	private HorizontalScrollView hScroll;
 	private MyImageView[] imgs;
 	
@@ -115,6 +118,7 @@ public class HomeNavigation extends LinearLayout {
 		this.context = context;
 		View view = LayoutInflater.from(context).inflate(
 				R.layout.widget_home_navigation, this);
+		logo = (ImageView)view.findViewById(R.id.widget_home_navigation_logo);
 		mtop = (LinearLayout) view
 				.findViewById(R.id.widget_home_navigation_top);
 		title = (TextView) view.findViewById(R.id.widget_home_navigation_title);
@@ -139,7 +143,11 @@ public class HomeNavigation extends LinearLayout {
 		try {
 			String title = a
 					.getString(R.styleable.widget_home_navigation_title);
+			Drawable dLogo = a
+					.getDrawable(R.styleable.widget_home_navigation_logo);
 
+			logo.setImageDrawable(dLogo);
+			
 			if (title != null) {
 				this.title.setText(title);
 			}

@@ -36,8 +36,14 @@ import com.golfeven.firstGolf.widget.MainPageView;
 
 public class HomeFrame extends LinearLayout {
 	public Context context;
-	private HomeNavigation nav_news, nav_hotActivity, nav_gallery,
-			nav_ballPark, nav_ballTeam, nav_ballFriends, nav_golfInfo;
+	private HomeNavigation nav_news,
+	/*nav_hotActivity,*/ 
+	nav_gallery,
+	
+			nav_ballPark,
+			/*nav_ballTeam,*/ 
+			nav_ballFriends,
+			nav_golfInfo;
 	private FinalHttp fh;
 	private boolean news_complete, hotActivity_complete, gallery_complete,
 			ballPark_complete, ballTeam_complete, ballFriend_complete,
@@ -74,14 +80,14 @@ public class HomeFrame extends LinearLayout {
 		View view = LayoutInflater.from(context).inflate(R.layout.frame_home,
 				this);
 		nav_news = (HomeNavigation) view.findViewById(R.id.frame_home_nav_news);
-		nav_hotActivity = (HomeNavigation) view
-				.findViewById(R.id.frame_home_nav_hotActivity);
+		/*nav_hotActivity = (HomeNavigation) view
+				.findViewById(R.id.frame_home_nav_hotActivity);*/
 		nav_gallery = (HomeNavigation) view
 				.findViewById(R.id.frame_home_nav_gallery);
 		nav_ballPark = (HomeNavigation) view
 				.findViewById(R.id.frame_home_nav_ball_park);
-		nav_ballTeam = (HomeNavigation) view
-				.findViewById(R.id.frame_home_nav_ball_team);
+		/*nav_ballTeam = (HomeNavigation) view
+				.findViewById(R.id.frame_home_nav_ball_team);*/
 		nav_ballFriends = (HomeNavigation) view
 				.findViewById(R.id.frame_home_nav_ball_friends);
 		nav_golfInfo = (HomeNavigation) view
@@ -96,18 +102,18 @@ public class HomeFrame extends LinearLayout {
 		nav_golfInfo.toMoreActivity(GolfInfosActivity.class);
 		nav_gallery.toMoreActivity(GallerysActivity.class);
 		nav_ballPark.toMoreActivity(BallParksActivity.class);
-		nav_ballTeam.toMoreActivity(BallTeamsActivity.class);
+		/*nav_ballTeam.toMoreActivity(BallTeamsActivity.class);*/
 		nav_ballFriends.toMoreActivity(BallFriendsActivity.class);
 	}
 
 	private void LoadData() {
 
 		nav_news.initData(listNews);
-		nav_hotActivity.initData(listHotActivity);
+		/*nav_hotActivity.initData(listHotActivity);*/
 		nav_golfInfo.initData(listGolfInfo);
 		nav_gallery.initData(listGallery);
 		nav_ballPark.initData(listBallPark);
-		nav_ballTeam.initData(listBallTeam);
+//		nav_ballTeam.initData(listBallTeam);
 		nav_ballFriends.initData(listBallFriends);
 
 		AjaxParams News_params = new AjaxParams();
@@ -131,10 +137,10 @@ public class HomeFrame extends LinearLayout {
 		BallPark_params.put("row", Constant.HOME_NAVIGATIN_IMG_SIZE + "");
 		cLoadData(BallPark_params, nav_ballPark, BallPark.class);
 
-		AjaxParams ballTeam_params = new AjaxParams();
+	/*	AjaxParams ballTeam_params = new AjaxParams();
 		ballTeam_params.put("cmd", "Clubs");
 		ballTeam_params.put("row", Constant.HOME_NAVIGATIN_IMG_SIZE + "");
-		cLoadData(ballTeam_params, nav_ballTeam, BallTeam.class);
+		cLoadData(ballTeam_params, nav_ballTeam, BallTeam.class);*/
 
 		AjaxParams ballfriend_params = new AjaxParams();
 		ballfriend_params.put("cmd", "Member.getMember");
@@ -219,7 +225,7 @@ public class HomeFrame extends LinearLayout {
 	 * @return
 	 */
 	public boolean loadComplete() {
-		if (news_complete && hotActivity_complete && gallery_complete
+		if (news_complete  && gallery_complete
 				&& ballPark_complete && ballFriend_complete
 				&& golfInfo_complete) {
 

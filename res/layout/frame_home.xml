@@ -23,43 +23,49 @@
                 />
             <com.golfeven.firstGolf.widget.HomeNavigation
                 app:title="@string/news"
+                app:logo="@drawable/index_icon01"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/frame_home_nav_news"
                 
                 />
-            <com.golfeven.firstGolf.widget.HomeNavigation
+            <!-- <com.golfeven.firstGolf.widget.HomeNavigation
                 app:title="@string/hotActivity"
+                app:logo="@drawable/index_icon02"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/frame_home_nav_hotActivity"
-                />
+                /> -->
             <com.golfeven.firstGolf.widget.HomeNavigation
                 app:title="@string/gallery"
+                app:logo="@drawable/index_icon02"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/frame_home_nav_gallery"
                 />
             <com.golfeven.firstGolf.widget.HomeNavigation
                 app:title="@string/ball_park"
+                app:logo="@drawable/index_icon02"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/frame_home_nav_ball_park"
                 />
-            <com.golfeven.firstGolf.widget.HomeNavigation
+           <!--  <com.golfeven.firstGolf.widget.HomeNavigation
                 app:title="@string/ball_team"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/frame_home_nav_ball_team"
-                />
+                /> -->
             <com.golfeven.firstGolf.widget.HomeNavigation
                 app:title="@string/ball_friends"
+                app:logo="@drawable/index_icon02"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/frame_home_nav_ball_friends"
                 />
             <com.golfeven.firstGolf.widget.HomeNavigation
                 app:title="@string/golfInfo"
+                app:logo="@drawable/index_icon02"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/frame_home_nav_golfInfo"

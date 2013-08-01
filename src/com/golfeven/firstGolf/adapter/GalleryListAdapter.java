@@ -3,13 +3,16 @@ package com.golfeven.firstGolf.adapter;
 import java.util.List;
 
 import net.tsz.afinal.FinalBitmap;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
 import com.golfeven.firstGolf.R;
@@ -35,17 +38,20 @@ public class GalleryListAdapter extends MBaseAdapter{
 	public View getView(int position, View convertView, ViewGroup parent) {
 		if (convertView == null) {
 			convertView = LayoutInflater.from(context).inflate(
-					R.layout.item_common, null);
+					R.layout.item_gallery, null);
 		}
 		// TODO Auto-generated method stub
 		final Gallery gallery = (Gallery)datas.get(position);
-		ImageView img = (ImageView)convertView.findViewById(R.id.item_common_img);
-		TextView title =(TextView)convertView.findViewById(R.id.item_common_title);
-		TextView digest =(TextView)convertView.findViewById(R.id.item_common_digest);
+		ImageView img = (ImageView)convertView.findViewById(R.id.item_gallery_img);
+		TextView title =(TextView)convertView.findViewById(R.id.item_gallery_title);
 		
 		
 		title.setText(gallery.getTitle());
-		digest.setText(gallery.getSource());
+		DisplayMetrics dm = new DisplayMetrics();
+		 ((Activity)context).getWindowManager().getDefaultDisplay().getMetrics(dm);
+		 LayoutParams params = new LayoutParams(LayoutParams.FILL_PARENT, dm.widthPixels);
+		 params.setMargins(10, 0, 10,0);
+		img.setLayoutParams(params);
 		fb.display(img, Constant.URL_IMG_BASE+gallery.getLitpic());
 //		fb.display(img, "http://www.a8.hk/uploads/allimg/130617/6-13061GJ959203-lp.jpg");
 		
