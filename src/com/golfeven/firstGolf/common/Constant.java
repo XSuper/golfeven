@@ -39,9 +39,9 @@ public class Constant {
 	
 	
 	
-	public static final int TOAST_IMG_ERROR=R.drawable.ic_launcher;//自定义toast的错误图片
-	public static final int TOAST_IMG_SUCCESS=R.drawable.ic_launcher;//自定义toast的成功图片
-	public static final int TOAST_IMG_WARNING=R.drawable.ic_launcher;//自定义toast的警告图片
+	public static final int TOAST_IMG_ERROR=R.drawable.fall;//自定义toast的错误图片
+	public static final int TOAST_IMG_SUCCESS=R.drawable.success;//自定义toast的成功图片
+	public static final int TOAST_IMG_WARNING=R.drawable.tishi;//自定义toast的警告图片
 	
 	public static final int IMG_LOADING_FAIL=R.drawable.img_default;
 	public static final int IMG_LOADING=R.drawable.ic_launcher;

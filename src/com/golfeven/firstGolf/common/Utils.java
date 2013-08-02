@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.util.DisplayMetrics;
 
 import com.golfeven.firstGolf.bean.Integral;
 import com.golfeven.firstGolf.bean.Score;
@@ -18,6 +19,19 @@ import com.golfeven.firstGolf.bean.Score;
  * 
  */
 public class Utils {
+	public static DisplayMetrics dm = null;
+	/**
+	 * 得到屏幕的宽
+	 * @param activity
+	 * @return
+	 */
+	public static int getScreenWith(Activity activity){
+		if(dm == null){
+			dm = new DisplayMetrics();
+			activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
+		}
+		return dm.widthPixels;
+	}
 
 	public static void ToActivity(Activity activity, Intent intent, boolean f) {
 		// TODO Auto-generated method stub
@@ -227,5 +241,7 @@ public class Utils {
 
 		return mint;
 	}
+	
+	
 
 }

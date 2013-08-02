@@ -8,6 +8,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -15,7 +16,7 @@ import android.widget.TextView;
 import com.golfeven.firstGolf.R;
 
 public class HeadBack extends RelativeLayout {
-	private ImageButton back, rbtn1, rbtn2;
+	private ImageView back, rbtn1, rbtn2;
 	private TextView title;
 	private ProgressBar progress;
 	
@@ -28,7 +29,7 @@ public class HeadBack extends RelativeLayout {
 		this.progress = progress;
 	}
 
-	public ImageButton getBack() {
+	public ImageView getBack() {
 		return back;
 	}
 
@@ -36,7 +37,7 @@ public class HeadBack extends RelativeLayout {
 		this.back = back;
 	}
 
-	public ImageButton getRbtn1() {
+	public ImageView getRbtn1() {
 		return rbtn1;
 	}
 
@@ -44,7 +45,7 @@ public class HeadBack extends RelativeLayout {
 		this.rbtn1 = rbtn1;
 	}
 
-	public ImageButton getRbtn2() {
+	public ImageView getRbtn2() {
 		return rbtn2;
 	}
 
@@ -128,15 +129,15 @@ public class HeadBack extends RelativeLayout {
 				R.layout.head_back, this);
 		title =(TextView)view.findViewById(R.id.head_back_title);
 		progress = (ProgressBar)view.findViewById(R.id.head_back_progress);
-		back = (ImageButton)view.findViewById(R.id.btn_back);
+		back = (ImageView)view.findViewById(R.id.btn_back);
 		back.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				((Activity)getContext()).finish();
 			}
 		});
-		rbtn1 = (ImageButton)view.findViewById(R.id.head_back_rbtn1);
-		rbtn2 = (ImageButton)view.findViewById(R.id.head_back_rbtn2);
+		rbtn1 = (ImageView)view.findViewById(R.id.head_back_rbtn1);
+		rbtn2 = (ImageView)view.findViewById(R.id.head_back_rbtn2);
 	}
 	public void setRbtn1ClickListener(OnClickListener clickListener){
 		rbtn1.setOnClickListener(clickListener);

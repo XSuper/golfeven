@@ -3,6 +3,7 @@ package com.golfeven.weather;
 import java.text.SimpleDateFormat;
 
 import net.tsz.afinal.FinalHttp;
+import net.tsz.afinal.annotation.view.ViewInject;
 import net.tsz.afinal.http.AjaxCallBack;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -23,6 +24,7 @@ import com.golfeven.firstGolf.base.BaseActivity;
 import com.golfeven.firstGolf.common.Constant;
 import com.golfeven.firstGolf.common.MyLog;
 import com.golfeven.firstGolf.common.StringUtils;
+import com.golfeven.firstGolf.widget.HeadBack;
 import com.golfeven.firstGolf.widget.MyToast;
 
 /**
@@ -33,7 +35,8 @@ import com.golfeven.firstGolf.widget.MyToast;
 
 public class WeartherActivity extends BaseActivity {
 	
-
+@ViewInject(id=R.id.weather_main_back) private HeadBack headBack;
+	
 	TextView textView_city, text_updateTime, text_currTemp_in,
 			text_currWindCondition_in, text_currAdvice_in;
 	TextView[] view_Weekdays, view_Temps, view_Weathers;
@@ -85,7 +88,7 @@ public class WeartherActivity extends BaseActivity {
 
 		SharedPreferences preferences = getPreferences(MODE_PRIVATE);
 		is_Saved = preferences.getBoolean("is_Saved", false);
-		final Button refresh = (Button) findViewById(R.id.button_refresh);
+		final ImageView refresh = (ImageView) headBack.getRbtn2();
 
 //		String pro = SharedPreferencesUtil.read(Constant.FILE_MAP,
 //				getApplicationContext(), Constant.FILE_MAP_PROVINCE);
@@ -301,7 +304,7 @@ public class WeartherActivity extends BaseActivity {
 	 * 
 	 * @param refresh
 	 */
-	private void updateWeather(final Button refresh) {
+	private void updateWeather(final ImageView refresh) {
 
 		if (appContext.city == Constant.HEAD_CITY_DEFAULT) {
 			MyToast.customToast(WeartherActivity.this, Toast.LENGTH_SHORT,
@@ -333,7 +336,7 @@ public class WeartherActivity extends BaseActivity {
 //					data.put(Constant.FILE_COMMON_WEATHERINFO, info.weather_01);
 //					SharedPreferencesUtil.keep(Constant.FILE_COMMON,
 //							getApplicationContext(), data);// 保存天气信息
-					appContext.weatherInfo = info.weather_01;
+					appContext.weatherInfo = info.img1;
 					ra.setDuration(0);
 				}
 

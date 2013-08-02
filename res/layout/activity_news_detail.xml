@@ -12,7 +12,7 @@
         app:htitle="最新资讯"
         app:progress_visible="false"
         app:rbtn2_visible="true"
-        app:rbtn2_src="@drawable/ball_icon01"
+        app:rbtn2_src="@drawable/share_btn_bg_s"
         android:id="@+id/detail_news_headback"
         />
 
@@ -24,7 +24,7 @@
         android:gravity="center"
         android:textColor="@color/black"
         android:text="标题"
-        android:textSize="20sp" />
+        android:textSize="15sp" />
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -39,6 +39,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:textColor="@color/black"
+            android:textSize="12sp"
             android:text="来源:" />
 
         <TextView
@@ -46,7 +47,8 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center"
+            android:gravity="center_vertical|left"
+            android:textSize="12sp"
             android:textColor="@color/black"
             android:text="第一高尔夫" />
 
@@ -55,6 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
+            android:textSize="12sp"
             android:textColor="@color/black"
             android:text="时间:" />
 
@@ -63,7 +66,8 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center"
+            android:gravity="center_vertical|left"
+            android:textSize="12sp"
             android:textColor="@color/black"
             android:text="今天" />
 
@@ -79,32 +83,35 @@
         android:id="@+id/detail_news_content"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="0dp"
         android:layout_weight="200"
         android:textColor="@color/black"
         android:text="内容" />
     
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:orientation="horizontal" >
+        android:layout_marginTop="-100dp"
+        >
 
         <ImageView
             android:id="@+id/detail_news_btnLast"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_alignParentLeft="true"
+            android:layout_marginRight="10dp"
             android:textColor="@color/black"
-            android:background="@drawable/button_bg" />
+            android:background="@drawable/last_page" />
 
         <ImageView
             android:id="@+id/detail_news_btnNext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/button_bg" />
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/next_page" />
 
-    </LinearLayout>
+    </RelativeLayout>
 </LinearLayout>

@@ -3,69 +3,67 @@
     xmlns:app="http://schemas.android.com/apk/res/com.golfeven.firstGolf"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-	android:background="@drawable/bg_"
-    android:orientation="vertical" 
-    >
+    android:background="@drawable/bg_"
+    android:orientation="vertical" >
 
     <com.golfeven.firstGolf.widget.HeadBack
+        android:id="@+id/activity_playball_scoring_headback"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         app:htitle="记分卡"
-        app:rbtn2_visible="true"
-        app:rbtn2_src="@drawable/w_snow"
-        android:id="@+id/activity_playball_scoring_headback"
-        />
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="上海美兰湖高尔夫俱乐部" 
-        android:textColor="@color/black"
-        android:id="@+id/activity_playball_scoring_title"
-        />
+        app:rbtn2_src="@drawable/upload_btn_bg_s"
+        app:rbtn2_visible="true" />
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingBottom="20dp"
-        android:paddingTop="20dp" >
+        android:orientation="horizontal" >
 
-        <TextView
+        <ImageView
+            android:id="@+id/activity_playball_scoring_img"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textColor="@color/black"
-            android:text="时间" />
+            android:layout_height="fill_parent"
+            android:layout_weight="3" 
+            android:layout_margin="5dp"
+            />
 
-        <TextView
+        <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:textColor="@color/black"
-            android:id="@+id/activity_playball_scoring_time"
-            android:text="2013-07-01" />
+            android:orientation="vertical" >
 
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textColor="@color/black"
-            android:text="类型" />
+            <TextView
+                android:id="@+id/activity_playball_scoring_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:drawableRight="@drawable/j_arrow"
+                android:text="2013-07-01"
+                android:textColor="#137171"
+                android:textSize="14sp" />
 
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textColor="@color/black"
-            android:id="@+id/activity_playball_scoring_place"
-            android:text="美兰湖" />
+
+            <TextView
+                android:id="@+id/activity_playball_scoring_title"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical|left"
+                android:text="上海美兰湖高尔夫俱乐部"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:layout_gravity="bottom"
+                android:textSize="15sp"
+                android:textColor="@color/black" />
+            
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@color/pink"
+        android:background="@drawable/h_jfbg"
+        android:gravity="center_vertical"
         android:orientation="horizontal" >
 
         <TextView
@@ -79,16 +77,25 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:gravity="center"
             android:text="成绩"
             android:textColor="@color/black" />
+         <TextView
+              android:layout_width="0dp"
+            android:layout_height="match_parent"
+                android:layout_weight="1"
+                />
+          <TextView
+                android:layout_width="0dp"
+            android:layout_height="match_parent"
+                android:layout_weight="1"
+                />
     </LinearLayout>
-    <ListView 
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+
+    <ListView
         android:id="@+id/activity_playball_scoring_list"
-        />
-        
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
 
 </LinearLayout>

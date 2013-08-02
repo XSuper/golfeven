@@ -2,43 +2,44 @@
 <!-- 自定义的弹框 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/toast_layout"
-    android:layout_width="fill_parent"
+    android:layout_width="220dip"
     android:layout_height="wrap_content"
-    android:background="#111111"
     android:orientation="vertical" >
 
     <TextView
         android:id="@+id/txt_Title"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center|top"
+        android:layout_gravity="center_horizontal|top"
         android:gravity="center"
+        android:background="@drawable/t_topbg"
         android:textColor="#ffffff"
-        android:textSize="20dip" >
+        android:textSize="15sp" >
     </TextView>
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="#999999"
+        android:layout_height="50dip"
+        android:background="@drawable/t_botombg"
         android:orientation="horizontal" >
 
         <ImageView
             android:id="@+id/image_toast"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
             android:layout_marginRight="10dip"
-            android:layout_weight="1" >
+            android:layout_weight="2" >
         </ImageView>
 
         <TextView
             android:id="@+id/txt_context"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center|right"
+            android:layout_gravity="center"
+            android:gravity="center"
             android:layout_weight="1"
-            android:textColor="#ffffff"
-            android:textSize="15dip" >
+            android:textColor="#000000"
+            android:textSize="10sp" >
         </TextView>
     </LinearLayout>
 

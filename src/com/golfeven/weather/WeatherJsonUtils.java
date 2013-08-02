@@ -23,6 +23,7 @@ public class WeatherJsonUtils {
 			String weather_03 = jsonObj.getString("weather3");
 			String weather_04 = jsonObj.getString("weather4");
 			String weather_05 = jsonObj.getString("weather5");
+			String img1 = jsonObj.getString("img1");
 			String temp_02 = jsonObj.getString("temp2");
 			String temp_03 = jsonObj.getString("temp3");
 			String temp_04 = jsonObj.getString("temp4");
@@ -31,6 +32,7 @@ public class WeatherJsonUtils {
 			String city = jsonObj.getString("city");
 			String temp = jsonObj.getString("temp1") ;
 			String wind_direction = jsonObj.getString("wind1");
+			info.setImg1(img1);
 			info.setCity(city);
 			info.setTemp(temp);
 			info.setWind_direction(wind_direction);

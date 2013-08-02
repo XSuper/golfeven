@@ -167,9 +167,9 @@ public class NewsDetailActivity extends BaseActivity {
 	 * @param view
 	 */
 	public void lastNews(View view) {
-		btnNext.setClickable(true);
+		btnNext.setVisibility(View.VISIBLE);
 		if(index<=0){
-			btnLast.setClickable(false);
+			btnLast.setVisibility(View.INVISIBLE);
 			MyToast.customToast(NewsDetailActivity.this,
 					Toast.LENGTH_SHORT, TOAST_MSG_WARNING_TITLE,
 					"已经是第一页了!",
@@ -177,6 +177,10 @@ public class NewsDetailActivity extends BaseActivity {
 			return;
 		}
 		index--;
+		if(index<=0){
+			btnLast.setVisibility(View.INVISIBLE);
+		}
+		
 		load();
 		
 
@@ -187,7 +191,7 @@ public class NewsDetailActivity extends BaseActivity {
 	 * @param view
 	 */
 	public void nextNews(View view) {
-
+		btnLast.setVisibility(View.VISIBLE);
 		if(index == list.size()-1){
 			LoadList();
 			return;
@@ -213,7 +217,7 @@ public class NewsDetailActivity extends BaseActivity {
 				super.onSuccess(t);
 				setbtnClickable(true);
 				if(StringUtils.responseError(t)){
-					btnNext.setClickable(false);
+					btnNext.setVisibility(View.INVISIBLE);
 					headBack.setProgressVisible(false);
 					MyToast.customToast(NewsDetailActivity.this, Toast.LENGTH_SHORT,
 							TOAST_MSG_WARNING_TITLE, TOAST_MSG_NOMORE_CONTENT,

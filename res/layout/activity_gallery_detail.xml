@@ -11,7 +11,7 @@
         app:htitle="图片浏览"
         app:progress_visible="false"
         app:rbtn2_visible="true"
-        app:rbtn2_src="@drawable/ball_icon01"
+        app:rbtn2_src="@drawable/share_btn_bg_s"
         
         android:id="@+id/detail_gallery_headback"
         />

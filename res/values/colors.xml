@@ -17,6 +17,9 @@
 	<color name="lightblue">#0083FF</color>
 	
 	
+	<color name="textGreen">#026768</color>
+	
+	
 	
     <color name="main_weather_head">#cccccc</color>
     <color name="frame_home_title">#cccccc</color>

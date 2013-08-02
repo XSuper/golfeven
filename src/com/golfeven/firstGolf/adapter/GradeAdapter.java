@@ -3,6 +3,7 @@ package com.golfeven.firstGolf.adapter;
 import java.util.List;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +45,11 @@ public class GradeAdapter extends MBaseAdapter{
 			totalputter=gradeView.totalputter;
 			totalpole = gradeView.totalpole;
 		}
+		
+		if(position%2==1){
+			convertView.setBackgroundColor(Color.rgb(0xE5, 0xE5, 0xE5));
+		}
+		
 		Grade grade = (Grade)datas.get(position);
 		if(grade!= null){
 			name.setText(grade.getGname());

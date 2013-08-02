@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.DatePicker;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +26,7 @@ import com.golfeven.firstGolf.base.BaseActivity;
 import com.golfeven.firstGolf.base.MBaseAdapter;
 import com.golfeven.firstGolf.bean.BallPark;
 import com.golfeven.firstGolf.bean.Score;
+import com.golfeven.firstGolf.common.Constant;
 import com.golfeven.firstGolf.common.NetUtil;
 import com.golfeven.firstGolf.common.StringUtils;
 import com.golfeven.firstGolf.common.Utils;
@@ -40,8 +42,9 @@ public class PlayBallScoreActivity extends BaseActivity {
 	private TextView title;
 	@ViewInject(id = R.id.activity_playball_scoring_time, click = "showTime")
 	private TextView time;
-	@ViewInject(id = R.id.activity_playball_scoring_place)
-	private TextView place;
+	@ViewInject(id = R.id.activity_playball_scoring_img)
+	private ImageView img;
+	
 	@ViewInject(id = R.id.activity_playball_scoring_list)
 	private ListView list;
 
@@ -70,7 +73,7 @@ public class PlayBallScoreActivity extends BaseActivity {
 	private void initValues() {
 		// TODO Auto-generated method stub
 		title.setText(ballpark.getTitle());
-		place.setText(ballpark.getTypename());
+		appContext.getFB().display(img,Constant.URL_IMG_BASE + ballpark.getLitpic());
 		
 		date =new Date(System.currentTimeMillis());
 		year = date.getYear()+1900;

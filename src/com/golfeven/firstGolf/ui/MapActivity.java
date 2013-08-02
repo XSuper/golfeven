@@ -68,6 +68,11 @@ public class MapActivity extends BaseActivity {
 	
 	private int stLon;
 	private int stLat;
+	
+	int endLat;
+	int endLon;
+	String place;
+	
 	private GeoPoint stPoint;
 	
 
@@ -81,7 +86,14 @@ public class MapActivity extends BaseActivity {
 		// 初始化地图
 		stLon = (int)(StringUtils.toFloat(appContext.longitude)*1E6);
 		stLat =(int)(StringUtils.toFloat(appContext.latitude)*1E6);
-		Toast.makeText(appContext, appContext.longitude+"::"+appContext.latitude,Toast.LENGTH_LONG).show();
+		String latstr = getIntent().getStringExtra("Lat");
+		String lonstr = getIntent().getStringExtra("Lon");
+		place = getIntent().getStringExtra("place");
+		endLat = (int)(StringUtils.toFloat(latstr)*1E6);
+		endLon = (int)(StringUtils.toFloat(lonstr)*1E6);
+		
+		//Toast.makeText(appContext, endLat+"::"+appContext.latitude,Toast.LENGTH_LONG).show();
+		//Toast.makeText(appContext, endLon+"::"+appContext.longitude,Toast.LENGTH_LONG).show();
 		stPoint = new GeoPoint(stLat,stLon);
 		
 		
@@ -311,7 +323,7 @@ public class MapActivity extends BaseActivity {
 		MKPlanNode stNode = new MKPlanNode();
 		MKPlanNode enNode = new MKPlanNode();
 		
-		GeoPoint enpoint = new GeoPoint(31142000, 121455000);
+		GeoPoint enpoint = new GeoPoint(endLat, endLon);
 		// stNode.name = editSt.getText().toString();
 		// enNode.name = editEn.getText().toString();
 
@@ -319,11 +331,12 @@ public class MapActivity extends BaseActivity {
 		enNode.pt = enpoint;
 		// 实际使用中请对起点终点城市进行正确的设定
 		if (mBtnDrive.equals(v)) {
+			//mSearch.drivingSearch(StringUtils.placeToString(appContext.city), stNode, "", enNode);
 			mSearch.drivingSearch(StringUtils.placeToString(appContext.city), stNode, "", enNode);
 		} else if (mBtnTransit.equals(v)) {
 			mSearch.transitSearch(StringUtils.placeToString(appContext.city), stNode, enNode);
 		} else if (mBtnWalk.equals(v)) {
-			mSearch.walkingSearch(StringUtils.placeToString(appContext.city), stNode, "", enNode);
+			mSearch.walkingSearch(StringUtils.placeToString(appContext.city), stNode, place, enNode);
 		}
 	}
 

@@ -1,51 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout 
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="50dip"
-    android:background="@drawable/topbg"
-    >
+    android:layout_height="48dp"
+    android:background="@drawable/topbg" >
+
     <LinearLayout
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="horizontal"
-     >
-
-    <ImageButton
-        android:id="@+id/btn_back"
-        android:layout_marginLeft="5dip"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:background="@drawable/back" />
+        android:orientation="horizontal" >
 
-   
-    <ProgressBar
-        android:id="@+id/head_back_progress"
-        style="@style/loading_small"
-        android:layout_marginLeft="5dip"
-        android:visibility="invisible" />
+        <ImageView
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            android:background="@drawable/back_btn_bg_s" />
 
-    
+        <ProgressBar
+            android:id="@+id/head_back_progress"
+            style="@style/loading_small"
+            android:layout_marginLeft="5dip"
+            android:visibility="invisible" />
 
-    
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+           
+            >
 
-    <ImageButton
-        android:id="@+id/head_back_rbtn2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:visibility="invisible" />
+            <ImageView
+                android:id="@+id/head_back_rbtn2"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|right"
+                android:layout_margin="5dip"
+                
+                android:visibility="invisible" />
 
-    <ImageButton
-        android:id="@+id/head_back_rbtn1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:visibility="invisible" />
+            <ImageView
+                android:id="@+id/head_back_rbtn1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="center_vertical|right"
+                android:layout_margin="5dip"
+                android:visibility="invisible" />
 
-</LinearLayout>
-<TextView
+        </RelativeLayout>
+    </LinearLayout>
+
+    <TextView
         android:id="@+id/head_back_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -53,4 +59,5 @@
         android:text="第一高尔夫"
         android:textColor="#FFFFFF"
         android:textSize="20sp" />
+
 </FrameLayout>

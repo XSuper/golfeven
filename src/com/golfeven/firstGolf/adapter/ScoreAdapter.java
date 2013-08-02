@@ -25,6 +25,7 @@ public class ScoreAdapter extends MBaseAdapter {
 
 	TextView id = null;
 	TextView score = null;
+	TextView score_tui = null;
 
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
@@ -34,18 +35,21 @@ public class ScoreAdapter extends MBaseAdapter {
 					R.layout.item_grade, null);
 			id = (TextView) convertView.findViewById(R.id.item_grade_id);
 			score = (TextView) convertView.findViewById(R.id.item_grade_score);
-			ItemGrade grade = new ItemGrade(id, score);
+			score_tui = (TextView) convertView.findViewById(R.id.item_grade_score_tui);
+			ItemGrade grade = new ItemGrade(id, score,score_tui);
 			convertView.setTag(grade);
 		} else {
 			ItemGrade grade = (ItemGrade) convertView.getTag();
 			id = grade.id;
 			score = grade.score;
+			score_tui = grade.score_tui;
 		}
 		final Score mscore = (Score) datas.get(position);
 		id.setText(mscore.getId() + "");
-		score.setText(mscore.getTotleCount() + "||" + mscore.getTuiCount());
+		score.setText(mscore.getTotleCount());
+		score_tui.setText(mscore.getTuiCount());
 
-		score.setOnClickListener(new OnClickListener() {
+		convertView.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
@@ -65,8 +69,8 @@ public class ScoreAdapter extends MBaseAdapter {
 								dialog.dismiss();
 								mscore.setTotleCount(totleCount + "");
 								mscore.setTuiCount(tuiCount + "");
-								score.setText(mscore.getTotleCount() + "||"
-										+ mscore.getTuiCount());
+								score.setText(mscore.getTotleCount());
+								score_tui.setText(mscore.getTuiCount());
 								refresh(datas);
 
 							}
@@ -94,11 +98,13 @@ public class ScoreAdapter extends MBaseAdapter {
 	class ItemGrade {
 		TextView id;
 		TextView score;
+		TextView score_tui;
 
-		public ItemGrade(TextView id, TextView score) {
+		public ItemGrade(TextView id, TextView score, TextView score_tui) {
 			super();
 			this.id = id;
 			this.score = score;
+			this.score_tui = score_tui;
 		}
 
 	}

@@ -3,114 +3,179 @@
     xmlns:app="http://schemas.android.com/apk/res/com.golfeven.firstGolf"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="@drawable/bg_"
     android:orientation="vertical" >
 
-    <com.golfeven.firstGolf.widget.HeadBack
-        android:id="@+id/activity_ballpark_detail_headback"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        app:htitle="球场"
-        app:progress_visible="true" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
 
-    <com.golfeven.firstGolf.widget.MainPageView
-        android:id="@+id/activity_ballpark_detail_PageView"
-        android:layout_width="fill_parent"
-        android:layout_height="200dip" />
-    <LinearLayout 
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/activity_ballpark_detail_layout_place"
-        >
-        <ImageView 
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-            />
-        <TextView 
-            android:layout_width="0dp"
-			android:layout_height="wrap_content"
-			android:layout_weight="1"
-			android:id="@+id/activity_ballpark_detail_place"
-			android:text="测试"
-            />
-        <ImageView 
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-            />
-    </LinearLayout>
-     <LinearLayout 
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/activity_ballpark_detail_layout_tel"
-        >
-        <ImageView 
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-            />
-        <TextView 
-            android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:text="前台"
-            />
-        <TextView 
-            android:layout_width="0dp"
-			android:layout_height="wrap_content"
-			android:layout_weight="1"
-			android:id="@+id/activity_ballpark_detail_tel"
-			android:text="测试"
-            />
-        <ImageView 
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-            />
-    </LinearLayout>
-    <LinearLayout 
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/activity_ballpark_detail_layout_money"
-        >
-        <ImageView 
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-            />
-        <TextView 
-            android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:text="今日价格"
-            />
-        <TextView 
-            android:layout_width="0dp"
-			android:layout_height="wrap_content"
-			android:layout_weight="1"
-			android:id="@+id/activity_ballpark_detail_money"
-			android:text="￥350"
-            />
-        <ImageView 
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-            />
-    </LinearLayout>
-    <TextView 
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="球场介绍"
-        />
-    <TextView 
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/activity_ballpark_detail_description"
-        
-        />
-    <TextView 
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="球会详情"
-        />
-    <WebView
-         android:layout_width="fill_parent"
-        android:layout_height="200dp"
-        android:id="@+id/activity_ballpark_detail_body"
-         />
-    
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <com.golfeven.firstGolf.widget.HeadBack
+                android:id="@+id/activity_ballpark_detail_headback"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                app:htitle="球场"
+                app:progress_visible="true" />
+
+            <com.golfeven.firstGolf.widget.MainPageView
+                android:id="@+id/activity_ballpark_detail_PageView"
+                android:layout_width="fill_parent"
+                android:layout_height="200dip" />
+
+            <LinearLayout
+                android:id="@+id/activity_ballpark_detail_layout_place"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical" >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/qc_icon01" />
+
+                <TextView
+                    android:id="@+id/activity_ballpark_detail_place"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="13sp"
+                    android:textColor="@color/black"
+                     />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/arrow_right" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line" />
+
+            <LinearLayout
+                android:id="@+id/activity_ballpark_detail_layout_tel"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical" >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/qc_icon02" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="13sp"
+                    android:textColor="@color/black"
+                    android:text="前台:" />
+
+                <TextView
+                    android:id="@+id/activity_ballpark_detail_tel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:textSize="13sp"
+                    android:textColor="@color/black"
+                     />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/arrow_right" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line" />
+
+            <LinearLayout
+                android:id="@+id/activity_ballpark_detail_layout_money"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical" >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/qc_icon03" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="13sp"
+                    android:textColor="@color/black"
+                    android:text="今日价格:" />
+
+                <TextView
+                    android:id="@+id/activity_ballpark_detail_money"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:textSize="13sp"
+                    android:textColor="@color/orange" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="球场介绍"
+                android:textColor="@color/textGreen"
+                android:textSize="18sp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                 />
+
+            <TextView
+                android:id="@+id/activity_ballpark_detail_description"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp" />
+
+            <TextView
+                android:id="@+id/activity_ballpark_detail_detail"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="球会详情" 
+                android:textColor="@color/textGreen"
+                android:textSize="18sp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                
+                android:drawableRight="@drawable/qc_arrow"
+                android:layout_marginRight="10dp"
+                />
+
+            <WebView
+                android:id="@+id/activity_ballpark_detail_body"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                 />
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

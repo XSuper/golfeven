@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,7 +45,6 @@ public class BallFriendDetailActivity extends BaseActivity implements OnClickLis
 	@ViewInject(id=R.id.activity_ballfriend_detail_place) TextView tplace;
 	@ViewInject(id=R.id.activity_ballfriend_detail_lovemsg) TextView tlovemsg;
 	@ViewInject(id=R.id.activity_ballfriend_detail_tags) TextView ttags;
-	@ViewInject(id=R.id.activity_ballfriend_detail_teams) TextView tteams;
 	
 	
 	@ViewInject(id=R.id.activity_ballfriend_detail_background) View background;
@@ -84,6 +84,10 @@ public class BallFriendDetailActivity extends BaseActivity implements OnClickLis
 	}
 	
 	private void initValue() {
+		int width = Utils.getScreenWith(BallFriendDetailActivity.this);
+		LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT,width/2);
+		mPhoto.setLayoutParams(params);
+		
 		fb.display(face,Constant.URL_IMG_BASE+ballFriend.getFace());
 		tname.setText(ballFriend.getUname());
 		tdistance.setText("距离我"+ballFriend.getDistance()+"公里");

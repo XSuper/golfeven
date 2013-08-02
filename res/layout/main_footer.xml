@@ -93,14 +93,14 @@
             android:layout_weight="1"
             android:gravity="center"
             android:textColor="@color/white"
-            android:text="成绩" />
+            android:text="我的关注" />
 
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="我的关注"
+            android:text="成绩"
             android:textColor="@color/white" />
 
         <TextView

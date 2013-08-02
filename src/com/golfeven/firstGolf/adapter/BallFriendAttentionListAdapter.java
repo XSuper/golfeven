@@ -93,9 +93,14 @@ public class BallFriendAttentionListAdapter extends MBaseAdapter {
 			friendView.btn.setText("关注");
 			
 		}
-		boolean mflag = ((AppContext)context.getApplicationContext()).user.getMid().equals(ballFriend.getMid());
-		boolean Bflag = ((AppContext)context.getApplicationContext()).user.getUname().equals(ballFriend.getUname());
-		if(mflag&&Bflag){
+		if(((AppContext)context.getApplicationContext()).isLogin){
+			
+			boolean mflag = ((AppContext)context.getApplicationContext()).user.getMid().equals(ballFriend.getMid());
+			boolean Bflag = ((AppContext)context.getApplicationContext()).user.getUname().equals(ballFriend.getUname());
+			if(mflag&&Bflag){
+				friendView.btn.setVisibility(View.INVISIBLE);
+			}
+		}else{
 			friendView.btn.setVisibility(View.INVISIBLE);
 		}
 			

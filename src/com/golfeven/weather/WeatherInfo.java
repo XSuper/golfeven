@@ -16,6 +16,16 @@ public class WeatherInfo {
 	String temp_04 = "";
 	String temp_05 = "";
 	String adivise = "";
+	String img1="";
+	
+
+	public String getImg1() {
+		return img1;
+	}
+
+	public void setImg1(String img1) {
+		this.img1 = img1;
+	}
 
 	public String getCity() {
 		return city;
@@ -34,7 +44,7 @@ public class WeatherInfo {
 				+ ", weather_03=" + weather_03 + ", weather_04=" + weather_04
 				+ ", weather_05=" + weather_05 + ", temp_02=" + temp_02
 				+ ", temp_03=" + temp_03 + ", temp_04=" + temp_04
-				+ ", temp_05=" + temp_05 + "]";
+				+ ", temp_05=" + temp_05 +", img1=" + img1 + "]";
 	}
 
 	public String getWeather_01() {

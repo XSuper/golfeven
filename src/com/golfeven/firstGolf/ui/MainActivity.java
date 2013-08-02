@@ -1,14 +1,21 @@
 package com.golfeven.firstGolf.ui;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 import net.tsz.afinal.annotation.view.ViewInject;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -34,15 +41,15 @@ public class MainActivity extends BaseActivity {
 	
 	
 	
-	@ViewInject(id = R.id.main_weather_head, click = "toWeatherInfo")
+	@ViewInject(id = R.id.main_weather_head)
 	FrameLayout weatherHead;
 	
 	@ViewInject(id = R.id.head_weather_title)
 	TextView weatherHeadTitle;
 	@ViewInject(id = R.id.head_weather_place)
 	TextView weatherHeadPlace;
-	@ViewInject(id = R.id.head_weather_info)
-	TextView weatherHeadInfo;
+	@ViewInject(id = R.id.head_weather_info, click = "toWeatherInfo")
+	ImageView weatherHeadInfo;
 	
 	
 	// ******************************底部按钮start
@@ -184,12 +191,12 @@ public class MainActivity extends BaseActivity {
 			changeTitle(false, "打球",true);
 			break;
 		case 2:
-			changeTitle(false, "成绩",false);
-			((GradeFrame)viewGrade).onResume();
-			break;
-		case 3:
 			changeTitle(false, "关注",false);
 			((AttentitonFrame)viewAttention).onResume();
+			break;
+		case 3:
+			changeTitle(false, "成绩",false);
+			((GradeFrame)viewGrade).onResume();
 			break;
 		case 4:
 			changeTitle(false, "系统设置",false);
@@ -203,9 +210,29 @@ public class MainActivity extends BaseActivity {
 
 
 	// 初始化天气头部
+	static String code=null;
 	private void initWeatherHead() {
+		
 		weatherHeadPlace.setText(this.appContext.city);
-		weatherHeadInfo.setText(appContext.weatherInfo);
+		if(code!= null&&!code.equals(appContext.weatherInfo)){
+			
+			InputStream in = null;
+			try {
+				in = getResources().getAssets().open("weather/b"+appContext.weatherInfo+".gif");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			Bitmap bm = BitmapFactory.decodeStream(in);
+			BitmapDrawable bitmapDrawable = (BitmapDrawable)weatherHeadInfo.getDrawable();  
+            //如果图片还未回收，先强制回收该图片   
+            if(bitmapDrawable !=null && !bitmapDrawable.getBitmap().isRecycled()){  
+                bitmapDrawable.getBitmap().recycle();  
+            }  
+			weatherHeadInfo.setImageBitmap(bm);
+		}
+		code =appContext.weatherInfo;
+		
 	}
 
 	// 跳转到天气页面
@@ -302,4 +329,8 @@ public class MainActivity extends BaseActivity {
 		weatherHeadInfo.setVisibility(weather?View.VISIBLE:View.INVISIBLE);
 		weatherHeadTitle.setText(title);
 	}
+	
+	
+
+	
 }

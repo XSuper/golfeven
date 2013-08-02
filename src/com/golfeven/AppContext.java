@@ -11,6 +11,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Application;
+import android.util.DisplayMetrics;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
@@ -180,7 +181,8 @@ public class AppContext extends Application {
 				JSONObject obj = null;
 				try {
 					obj = new JSONObject(t).getJSONObject("weatherinfo");
-					weatherInfo = obj.getString("weather");
+					weatherInfo = obj.getString("img1").charAt(1)+"";
+					
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -333,5 +335,7 @@ public class AppContext extends Application {
 		}
 		return fb;
 	}
+	
+	
 	
 }

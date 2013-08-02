@@ -106,10 +106,9 @@
             android:orientation="vertical" >
 
             <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:orientation="horizontal" >
+               
+style="@style/login_register_setting_top"
+                 >
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
@@ -129,10 +128,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:orientation="horizontal" >
+                style="@style/login_register_setting_bottom" >
                  <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
@@ -152,10 +148,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:orientation="horizontal" >
+               style="@style/login_register_setting_center" >
                  <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"

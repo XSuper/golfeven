@@ -286,6 +286,10 @@ public class StringUtils
 		if(str.indexOf("市")==str.length()-1){
 			str = str.substring(0,str.indexOf("市"));
 		}
+		if(str.indexOf("区")==str.length()-1){
+			str = str.substring(0,str.indexOf("区"));
+		}
+		
 		
 		return str;
 	}
