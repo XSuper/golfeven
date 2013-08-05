@@ -2,6 +2,7 @@ package com.golfeven.firstGolf.common;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.baidu.sharesdk.BaiduShareException;
 import com.baidu.sharesdk.BaiduSocialShare;
@@ -38,7 +39,7 @@ public class SharedUtil {
 		
 		sharemenu(activity, content);
 	}
-	private static void sharemenu(Activity activity,ShareContent content) {
+	private static void sharemenu(final Activity activity,ShareContent content) {
 		// TODO Auto-generated method stub
 		face.showShareMenu(activity,content, Utility. SHARE_BOX_STYLE, new ShareListener(){
 
@@ -57,8 +58,10 @@ public class SharedUtil {
 			@Override
 			public void onError(BaiduShareException arg0) {
 				// TODO Auto-generated method stub
+				Toast.makeText(activity, arg0.toString(), Toast.LENGTH_SHORT).show();
 				
 			}
+			
 			
 		} );
 	}

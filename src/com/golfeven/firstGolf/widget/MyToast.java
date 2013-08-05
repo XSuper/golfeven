@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.golfeven.firstGolf.R;
+import com.golfeven.firstGolf.common.Constant;
 
 public class MyToast {
 	// toast信息常量
@@ -68,6 +69,31 @@ public class MyToast {
 		toast.setDuration(duration);
 		toast.setView(view);
 		toast.show();
+	}
+	
+	/**
+	 * 錯誤的提示
+	 * @param context
+	 * @param content
+	 */
+	public static void ErrorToast(Context context,String content){
+		customToast(context, Toast.LENGTH_SHORT,TOAST_MSG_ERROR_TITLE , content, Constant.TOAST_IMG_ERROR);
+	}
+	/**
+	 * 成功的提示
+	 * @param context
+	 * @param content
+	 */
+	public static void SuccessToast(Context context,String content){
+		customToast(context, Toast.LENGTH_SHORT,TOAST_MSG_SUCCESS_TITLE , content, Constant.TOAST_IMG_SUCCESS);
+	}
+	/**
+	 * 警告的提示
+	 * @param context
+	 * @param content
+	 */
+	public static void WarningToast(Context context,String content){
+		customToast(context, Toast.LENGTH_SHORT,TOAST_MSG_WARNING_TITLE , content, Constant.TOAST_IMG_WARNING);
 	}
 
 }

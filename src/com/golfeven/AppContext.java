@@ -11,7 +11,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Application;
-import android.util.DisplayMetrics;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;

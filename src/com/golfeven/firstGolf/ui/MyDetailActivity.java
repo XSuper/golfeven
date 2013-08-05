@@ -29,6 +29,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.RelativeLayout.LayoutParams;
 
 import com.alibaba.fastjson.JSON;
 import com.golfeven.firstGolf.R;
@@ -50,6 +51,8 @@ public class MyDetailActivity extends BaseActivity {
 	ImageView mPhoto;
 	@ViewInject(id = R.id.activity_my_detail_face)
 	ImageView face;
+	@ViewInject(id = R.id.activity_my_detail_mcount)
+	TextView imagecount;
 
 	@ViewInject(id = R.id.activity_my_detail_name)
 	EditText tname;
@@ -73,20 +76,19 @@ public class MyDetailActivity extends BaseActivity {
 
 	private FinalBitmap fb;
 	private List<Photo> photos;
-	
+
 	private String oldName;
 	private String oldAge;
 	private String oldSex;
 	private String oldPlace;
 	private String oldLovemsg;
 	private String oldTags;
-	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		
+
 		setContentView(R.layout.activity_my_detail);
 		fb = appContext.getFB();
 		user = appContext.user;
@@ -97,6 +99,12 @@ public class MyDetailActivity extends BaseActivity {
 		tlovemsg.setEnabled(false);
 		ttags.setEnabled(false);
 
+
+		android.widget.LinearLayout.LayoutParams params = new android.widget.LinearLayout.LayoutParams(
+				Utils.getScreenWith(MyDetailActivity.this) / 4,
+				Utils.getScreenWith(MyDetailActivity.this) / 4);
+		params.setMargins(10, 10, 10, 10);
+		face.setLayoutParams(params);
 		btn.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -109,7 +117,7 @@ public class MyDetailActivity extends BaseActivity {
 					ttags.setEnabled(true);
 					btn.setText("提交");
 					btn.setTag("按下了");
-					
+
 					oldName = tname.getText().toString();
 					oldAge = tage.getText().toString();
 					oldSex = txsex.getText().toString();
@@ -123,124 +131,119 @@ public class MyDetailActivity extends BaseActivity {
 					ttags.setEnabled(false);
 					btn.setText("完善资料");
 					btn.setTag(null);
-					
-					HashMap<String,String> hashMap = new HashMap<String, String>();
+
+					HashMap<String, String> hashMap = new HashMap<String, String>();
 					Api api = Api.getInstance();
 					Set<Integer> typeSet = new HashSet<Integer>();
-					if(!oldName.equals(tname.getText().toString())){
-						//hashMap.put("mid",tname.getText().toString());
+					if (!oldName.equals(tname.getText().toString())) {
 					}
-					if(!oldAge.equals(tage.getText().toString())){
-						hashMap.put("birthday",tage.getText().toString());
-						
+					if (!oldAge.equals(tage.getText().toString())) {
+						hashMap.put("birthday", tage.getText().toString());
+
 					}
-					if(!oldSex.equals(txsex.getText().toString())){
-						hashMap.put("sex",txsex.getText().toString());
+					if (!oldSex.equals(txsex.getText().toString())) {
+						hashMap.put("sex", txsex.getText().toString());
 					}
-					if(!oldPlace.equals(tplace.getText().toString())){
-						hashMap.put("commplace",tplace.getText().toString());
+					if (!oldPlace.equals(tplace.getText().toString())) {
+						hashMap.put("commplace", tplace.getText().toString());
 						typeSet.add(5);
-//						api.addCredits(appContext, user, 5, new AjaxCallBack<String>() {
-//
-//							@Override
-//							public void onSuccess(String t) {
-//								// TODO Auto-generated method stub
-//								super.onSuccess(t);
-//								MyToast.customToast(appContext, Toast.LENGTH_SHORT,MyToast.TOAST_MSG_SUCCESS_TITLE, "更新常出没地获得100积分", Constant.TOAST_IMG_SUCCESS);
-//							}
-//							
-//						});
+						//
 					}
-					if(!oldTags.equals(ttags.getText().toString())&&StringUtils.isEmpty(ttags.getText().toString())){
-						hashMap.put("label",ttags.getText().toString());
+					if (!oldTags.equals(ttags.getText().toString())
+							&& StringUtils.isEmpty(ttags.getText().toString())) {
+						hashMap.put("label", ttags.getText().toString());
 						typeSet.add(7);
-//						api.addCredits(appContext, user, 7, new AjaxCallBack<String>() {
-//							@Override
-//							public void onSuccess(String t) {
-//								// TODO Auto-generated method stub
-//								super.onSuccess(t);
-//								MyToast.customToast(appContext, Toast.LENGTH_SHORT,MyToast.TOAST_MSG_SUCCESS_TITLE, "完成标签获得50积分", Constant.TOAST_IMG_SUCCESS);
-//							}
-//						});
+						//
 					}
-					if(!oldLovemsg.equals(tlovemsg.getText().toString())&&StringUtils.isEmpty(tlovemsg.getText().toString())){
-						hashMap.put("lovemsg",tlovemsg.getText().toString());
+					if (!oldLovemsg.equals(tlovemsg.getText().toString())
+							&& StringUtils.isEmpty(tlovemsg.getText()
+									.toString())) {
+						hashMap.put("lovemsg", tlovemsg.getText().toString());
 						typeSet.add(6);
-//						api.addCredits(appContext, user, 6, new AjaxCallBack<String>() {
-//							@Override
-//							public void onSuccess(String t) {
-//								// TODO Auto-generated method stub
-//								super.onSuccess(t);
-//								MyToast.customToast(appContext, Toast.LENGTH_SHORT,MyToast.TOAST_MSG_SUCCESS_TITLE, "完成签名获得100积分", Constant.TOAST_IMG_SUCCESS);
-//							}
-//						});
+						//
 					}
-					api.updateInfo(MyDetailActivity.this, user, hashMap, typeSet, new AjaxCallBack<String>() {
+					api.updateInfo(MyDetailActivity.this, user, hashMap,
+							typeSet, new AjaxCallBack<String>() {
 
-						@Override
-						public void onSuccess(String t) {
-							// TODO Auto-generated method stub
-							super.onSuccess(t);
-							Toast.makeText(appContext, t,Toast.LENGTH_LONG).show();
-							MyLog.v("success", t);
-						}
+								@Override
+								public void onSuccess(String t) {
+									// TODO Auto-generated method stub
+									super.onSuccess(t);
+									Toast.makeText(appContext, t,
+											Toast.LENGTH_LONG).show();
+									MyLog.v("success", t);
+								}
 
-						@Override
-						public void onFailure(Throwable t, String strMsg) {
-							// TODO Auto-generated method stub
-							super.onFailure(t, strMsg);
-							Toast.makeText(appContext, strMsg,Toast.LENGTH_LONG).show();
-							MyLog.v("erroe", t.toString());
-						}
-						
-					});
-					
-					
-					
-					
-					
+								@Override
+								public void onFailure(Throwable t, String strMsg) {
+									// TODO Auto-generated method stub
+									super.onFailure(t, strMsg);
+									Toast.makeText(appContext, strMsg,
+											Toast.LENGTH_LONG).show();
+									MyLog.v("erro", t.toString());
+								}
+
+							});
+
 				}
 			}
 		});
 	}
 
 	private void initValue() {
+		int width = Utils.getScreenWith(MyDetailActivity.this);
+		LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT,
+				width / 2);
+		mPhoto.setLayoutParams(params);
+		fb.isSquare = true;
 		fb.display(face, Constant.URL_IMG_BASE + user.getFace());
+
 		tname.setText(user.getUname());
 		tplace.setText(user.getCommplace());
+
 		txsex.setText(user.getSex());
+		if ("男".equals(user.getSex().trim())) {
+			tsex.setBackgroundResource(R.drawable.qy_man);
+		} else if ("女".equals(user.getSex().trim())) {
+			tsex.setBackgroundResource(R.drawable.qy_girl);
+		} else {
+			tsex.setBackgroundResource(R.drawable.qy_sec);
+		}
+
 		tlovemsg.setText(user.getLovemsg());
 		tage.setText(user.getBirthday());
 		ttags.setText(user.getLabel());
-		
+
 		tage.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View arg0) {
-				AlertDialog.Builder builder = new AlertDialog.Builder(MyDetailActivity.this);
+				AlertDialog.Builder builder = new AlertDialog.Builder(
+						MyDetailActivity.this);
 				builder.setIcon(android.R.drawable.ic_dialog_info);
-				final View view =LayoutInflater.from(MyDetailActivity.this).inflate(
-						R.layout.dialog_choice_age, null);
+				final View view = LayoutInflater.from(MyDetailActivity.this)
+						.inflate(R.layout.dialog_choice_age, null);
 				builder.setView(view);
 				builder.setTitle("请选择年龄段");
-				final RadioGroup rg  = (RadioGroup)view.findViewById(R.id.choice_age);
+				final RadioGroup rg = (RadioGroup) view
+						.findViewById(R.id.choice_age);
 				builder.setPositiveButton("确定",
 						new DialogInterface.OnClickListener() {
-					
+
 							public void onClick(DialogInterface dialog,
 									int which) {
 								int id = rg.getCheckedRadioButtonId();
-								if(id!=-1){
-									
-									RadioButton btn = (RadioButton)view.findViewById(id);
-									if(btn!= null){
-										
+								if (id != -1) {
+
+									RadioButton btn = (RadioButton) view
+											.findViewById(id);
+									if (btn != null) {
+
 										tage.setText(btn.getText());
 									}
 								}
-								
+
 								dialog.dismiss();
-								
 
 							}
 						});
@@ -252,7 +255,7 @@ public class MyDetailActivity extends BaseActivity {
 							}
 						});
 				builder.show();
-				
+
 			}
 		});
 	}
@@ -262,20 +265,21 @@ public class MyDetailActivity extends BaseActivity {
 		Api api = Api.getInstance();
 		// 加载个人相册
 		api.getPhoto(user.getMid(), new AjaxCallBack<String>() {
-			
 
 			@Override
 			public void onFailure(Throwable t, String strMsg) {
 				// TODO Auto-generated method stub
 				super.onFailure(t, strMsg);
 				mPhoto.setOnClickListener(new OnClickListener() {
-					
-					@Override 
+
+					@Override
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
-						Intent intent = new Intent(MyDetailActivity.this, PhotosActivity.class);
+						Intent intent = new Intent(MyDetailActivity.this,
+								PhotosActivity.class);
 						intent.putExtra("isMe", true);
-						intent.putParcelableArrayListExtra("photos", (ArrayList<Photo>)photos);
+						intent.putParcelableArrayListExtra("photos",
+								(ArrayList<Photo>) photos);
 						startActivityForResult(intent, 003);
 					}
 				});
@@ -286,22 +290,28 @@ public class MyDetailActivity extends BaseActivity {
 				// TODO Auto-generated method stub
 				super.onSuccess(t);
 				photos = JSON.parseArray(t, Photo.class);
+				if (photos != null) {
+					imagecount.setText(photos.size() + "");
+				}
 				mPhoto.setOnClickListener(new OnClickListener() {
-					
-					@Override 
+
+					@Override
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
-						Intent intent = new Intent(MyDetailActivity.this, PhotosActivity.class);
+						Intent intent = new Intent(MyDetailActivity.this,
+								PhotosActivity.class);
 						intent.putExtra("isMe", true);
-						intent.putParcelableArrayListExtra("photos", (ArrayList<Photo>)photos);
+						intent.putParcelableArrayListExtra("photos",
+								(ArrayList<Photo>) photos);
 						startActivityForResult(intent, 003);
 					}
 				});
 				if (photos != null && photos.size() != 0) {
-					fb.display(mPhoto, Constant.URL_IMG_BASE
+					FinalBitmap fbi = FinalBitmap.createNew(appContext,Constant.IMG_CACHEPATH);
+					fbi.proportion=2;
+					fbi.display(mPhoto, Constant.URL_IMG_BASE
 							+ photos.get(0).getPic());
-					
-					
+
 				}
 			}
 		});
@@ -324,7 +334,7 @@ public class MyDetailActivity extends BaseActivity {
 		// TODO Auto-generated method stub
 		if (requestCode == resultCode && resultCode == 001) {
 			ContentResolver cr = getContentResolver();
-	         InputStream in=null;
+			InputStream in = null;
 			try {
 				in = cr.openInputStream(data.getData());
 			} catch (FileNotFoundException e) {
@@ -332,46 +342,66 @@ public class MyDetailActivity extends BaseActivity {
 				e.printStackTrace();
 			}
 
-			
-			Api.getInstance().uploadFace(appContext.user, in, new AjaxCallBack<String>() {
-				ProgressDialog progressDialog = Utils.initWaitingDialog(MyDetailActivity.this,"正在上传头像...");
-				@Override
-				public void onSuccess(String t) {
-					// TODO Auto-generated method stub
-					MyToast.customToast(MyDetailActivity.this, Toast.LENGTH_SHORT, "成功","头像更换成功",Constant.TOAST_IMG_SUCCESS);
-					super.onSuccess(t);
-					progressDialog.dismiss();
-					
-					MyLog.v("face", t);
-					Bitmap map = BitmapFactory.decodeFile(Constant.IMG_CACHEPATH
-							+ "/face.jpg");
-					face.setImageBitmap(map);
-					//更新图片缓存，头像显示为新上传头像
-					appContext.getFB().mImageCache.clearCache(Constant.URL_IMG_BASE+user.getFace());
-					appContext.getFB().mImageCache.clearMemoryCache(Constant.URL_IMG_BASE+user.getFace());
-					appContext.getFB().mImageCache.addBitmapToCache(Constant.URL_IMG_BASE+user.getFace(), map);
-				}
+			Api.getInstance().uploadFace(appContext.user, in,
+					new AjaxCallBack<String>() {
+						ProgressDialog progressDialog = Utils
+								.initWaitingDialog(MyDetailActivity.this,
+										"正在上传头像...");
 
-				@Override
-				public void onFailure(Throwable t, String strMsg) {
-					// TODO Auto-generated method stub
-					super.onFailure(t, strMsg);
-					MyLog.v("face", strMsg);
-		
-					progressDialog.dismiss();
-					MyToast.customToast(MyDetailActivity.this, Toast.LENGTH_SHORT, "失败","头像更换失败",Constant.TOAST_IMG_SUCCESS);
-				}
-				
-			});
-			
-			
+						@Override
+						public void onSuccess(String t) {
+							// TODO Auto-generated method stub
+							MyToast.customToast(MyDetailActivity.this,
+									Toast.LENGTH_SHORT, "成功", "头像更换成功",
+									Constant.TOAST_IMG_SUCCESS);
+							super.onSuccess(t);
+							progressDialog.dismiss();
+
+							MyLog.v("face", t);
+							Bitmap map = BitmapFactory
+									.decodeFile(Constant.IMG_CACHEPATH
+											+ "/face.jpg");
+							face.setImageBitmap(map);
+							// 更新图片缓存，头像显示为新上传头像
+							appContext.getFB().mImageCache
+									.clearCache(Constant.URL_IMG_BASE
+											+ user.getFace());
+							appContext.getFB().mImageCache
+									.clearMemoryCache(Constant.URL_IMG_BASE
+											+ user.getFace());
+							appContext.getFB().mImageCache.addBitmapToCache(
+									Constant.URL_IMG_BASE + user.getFace(), map);
+						}
+
+						@Override
+						public void onFailure(Throwable t, String strMsg) {
+							// TODO Auto-generated method stub
+							super.onFailure(t, strMsg);
+							MyLog.v("face", strMsg);
+
+							progressDialog.dismiss();
+							MyToast.customToast(MyDetailActivity.this,
+									Toast.LENGTH_SHORT, "失败", "头像更换失败",
+									Constant.TOAST_IMG_SUCCESS);
+						}
+
+					});
+
 		}
 		if (requestCode == resultCode && resultCode == 003) {
 			photos = data.getParcelableArrayListExtra("photos");
-			
+
 		}
 		super.onActivityResult(requestCode, resultCode, data);
 
 	}
 
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		if (photos != null&&photos.size()>=1) {
+			imagecount.setText(photos.size() + "");
+		}
+	}
 }

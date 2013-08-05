@@ -74,6 +74,7 @@ public class GalleryDetailActivity extends BaseActivity implements
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		fb = appContext.getFB(false);
+		fb.proportion=0;
 		// fb = FinalBitmap.create(appContext, Constant.IMG_CACHEPATH);
 		setContentView(R.layout.activity_gallery_detail);
 		Intent intent = getIntent();

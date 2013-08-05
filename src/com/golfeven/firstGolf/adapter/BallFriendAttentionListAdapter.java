@@ -132,6 +132,13 @@ public class BallFriendAttentionListAdapter extends MBaseAdapter {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				myClick(position, ballFriend, v);
+				
+
+			}
+
+			private synchronized void myClick(final int position,
+					final BallFriend ballFriend, View v) {
 				final Button btn = (Button) v;
 				boolean tag = (Boolean)btn.getTag();
 				btn.setText("请稍候");
@@ -263,8 +270,6 @@ public class BallFriendAttentionListAdapter extends MBaseAdapter {
 
 							});
 				}
-				
-
 			}
 		});
 		convertView.setOnClickListener(new OnClickListener() {

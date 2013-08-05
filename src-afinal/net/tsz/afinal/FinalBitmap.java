@@ -58,6 +58,10 @@ public class FinalBitmap {
 	
 	public boolean isSquare = false;
 	
+	public float proportion = 0;//宽高比
+	public float width;
+	public float height;
+	
 	private static ExecutorService bitmapLoadAndDisplayExecutor;
 
 	private static FinalBitmap mFinalBitmap;
@@ -84,6 +88,18 @@ public class FinalBitmap {
 			mFinalBitmap.init();
 		}
 		return mFinalBitmap;
+	}
+	
+	/**
+	 * 创建新的finalbitmap
+	 * @param ctx
+	 * @return
+	 */
+	public static FinalBitmap createNew(Context ctx,String diskCachePath){
+		FinalBitmap nFinalBitmap = new FinalBitmap(ctx.getApplicationContext());
+		nFinalBitmap.configDiskCachePath(diskCachePath);
+		nFinalBitmap.init();
+		return nFinalBitmap;
 	}
 	
 	/**
@@ -488,11 +504,25 @@ public class FinalBitmap {
 		}
 	
 		if (bitmap != null) {
-
-			if(isSquare){
-				int a = bitmap.getWidth()>bitmap.getHeight()?bitmap.getHeight():bitmap.getWidth();
-				bitmap = Bitmap.createBitmap(bitmap, 0, 0, a, a);
+			if(proportion ==0){
+				if(isSquare){
+					int a = bitmap.getWidth()>bitmap.getHeight()?bitmap.getHeight():bitmap.getWidth();
+					bitmap = Bitmap.createBitmap(bitmap, 0, 0, a, a);
+				}
+				
+			}else{
+				if(bitmap.getWidth()<=bitmap.getHeight()||(bitmap.getWidth()>bitmap.getHeight()&&bitmap.getWidth()/proportion<=bitmap.getHeight())){
+					width = bitmap.getWidth();
+					height = bitmap.getWidth()/proportion;
+					
+				}else if(bitmap.getWidth()>bitmap.getHeight()&&bitmap.getWidth()/proportion>=bitmap.getHeight()){
+					height = bitmap.getHeight();
+					width = height*proportion;
+				}
+				bitmap = Bitmap.createBitmap(bitmap, 0, 0, (int)width, (int)height);
+				
 			}
+
 			imageView.setImageBitmap(bitmap);
 			
 		}else if (checkImageTask(uri, imageView)) {
@@ -923,11 +953,25 @@ public class FinalBitmap {
 				mImageCache.addBitmapToCache(dataString, bitmap);
 			}
 
-			if(bitmap!=null&&isSquare){
+			if(bitmap!=null&&proportion==0){
+				if(isSquare){
+					
+					int a = bitmap.getWidth()>bitmap.getHeight()?bitmap.getHeight():bitmap.getWidth();
+					
+					bitmap = Bitmap.createBitmap(bitmap, 0, 0, a, a);
+				}
 				
-				int a = bitmap.getWidth()>bitmap.getHeight()?bitmap.getHeight():bitmap.getWidth();
+			}else if(bitmap!=null&&proportion!=0){
+				if(bitmap.getWidth()<=bitmap.getHeight()||(bitmap.getWidth()>bitmap.getHeight()&&bitmap.getWidth()/proportion<=bitmap.getHeight())){
+					width = bitmap.getWidth();
+					height = bitmap.getWidth()/proportion;
+					
+				}else if(bitmap.getWidth()>bitmap.getHeight()&&bitmap.getWidth()/proportion>=bitmap.getHeight()){
+					height = bitmap.getHeight();
+					width = height*proportion;
+				}
+				bitmap = Bitmap.createBitmap(bitmap, 0, 0, (int)width, (int)height);
 				
-				bitmap = Bitmap.createBitmap(bitmap, 0, 0, a, a);
 			}
 			return bitmap;
 		}

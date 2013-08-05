@@ -31,8 +31,17 @@ public class NewsDetail {
 	private String mtype;
 	private String weight;
 	private String typename;
+	private String pageUrl;
 	private String body;
 	private String redirecturl;
+	
+	
+	public String getPageUrl() {
+		return pageUrl;
+	}
+	public void setPageUrl(String pageUrl) {
+		this.pageUrl = pageUrl;
+	}
 	public String getId() {
 		return id;
 	}

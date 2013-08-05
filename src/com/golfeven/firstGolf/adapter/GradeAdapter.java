@@ -37,6 +37,7 @@ public class GradeAdapter extends MBaseAdapter{
 			totalputter = (TextView) convertView.findViewById(R.id.item_grade_totle_totalputter);
 			totalpole = (TextView) convertView.findViewById(R.id.item_grade_totle_totalpole);
 			GradeView gradeView = new GradeView(name, time, totalpole, totalputter);
+			
 			convertView.setTag(gradeView);
 		} else {
 			GradeView gradeView = (GradeView) convertView.getTag();
@@ -44,16 +45,24 @@ public class GradeAdapter extends MBaseAdapter{
 			time = gradeView.time;
 			totalputter=gradeView.totalputter;
 			totalpole = gradeView.totalpole;
+			
+//			if(gradeView.color!=0){
+//				convertView.setBackgroundColor(gradeView.color);
+//			}
 		}
 		
 		if(position%2==1){
 			convertView.setBackgroundColor(Color.rgb(0xE5, 0xE5, 0xE5));
+			//gradeView.color=Color.rgb(0xE5, 0xE5, 0xE5);
+		}else{
+			convertView.setBackgroundColor(Color.WHITE);
 		}
+		
 		
 		Grade grade = (Grade)datas.get(position);
 		if(grade!= null){
 			name.setText(grade.getGname());
-			time.setText(grade.getMarkdate().substring(0, 9));
+			time.setText(grade.getMarkdate().substring(0, 10));
 			totalputter.setText(grade.getTotalputter());
 			totalpole.setText(grade.getTotalpole());
 		}
@@ -71,6 +80,9 @@ public class GradeAdapter extends MBaseAdapter{
 		public TextView time;
 		public TextView totalpole;
 		public TextView totalputter;
+		
+		public int color =0;//记录背景色
+		
 		public GradeView(TextView name, TextView time, TextView totalpole,
 				TextView totalputter) {
 			super();

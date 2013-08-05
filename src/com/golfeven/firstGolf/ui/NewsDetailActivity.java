@@ -1,8 +1,14 @@
 package com.golfeven.firstGolf.ui;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.xml.sax.InputSource;
 
 import net.tsz.afinal.FinalHttp;
 import net.tsz.afinal.annotation.view.ViewInject;
@@ -10,8 +16,10 @@ import net.tsz.afinal.http.AjaxCallBack;
 import net.tsz.afinal.http.AjaxParams;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.webkit.WebView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,8 +31,10 @@ import com.golfeven.firstGolf.base.BaseActivity;
 import com.golfeven.firstGolf.bean.News;
 import com.golfeven.firstGolf.bean.NewsDetail;
 import com.golfeven.firstGolf.common.Constant;
+import com.golfeven.firstGolf.common.FileUtils;
 import com.golfeven.firstGolf.common.HtmlUtil;
 import com.golfeven.firstGolf.common.MyLog;
+import com.golfeven.firstGolf.common.SharedUtil;
 import com.golfeven.firstGolf.common.StringUtils;
 import com.golfeven.firstGolf.widget.HeadBack;
 import com.golfeven.firstGolf.widget.MyToast;
@@ -141,6 +151,16 @@ public class NewsDetailActivity extends BaseActivity {
 
 	private void initData() {
 
+		headBack.setRbtn2ClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				String url = HtmlUtil.getTureImageUrl(newsDetail.getBody());
+				SharedUtil.share(NewsDetailActivity.this,newsDetail.getTitle() , newsDetail.getDescription(), newsDetail.getPageUrl(), url);
+				
+			}
+		});
 		// String body =
 		// "<div class='img_wrapper' style='text-align: center; padding-bottom: 5px; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; letter-spacing: normal; font: 14px/23px 宋体; white-space: normal; orphans: 2; color: rgb(51,51,51); word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px'> <img alt='麦克罗伊手握网球拍' src='/uploads/allimg/130627/1134114Q4-0.jpg' style='border-bottom: rgb(231,231,231) 1px solid; border-left: rgb(231,231,231) 1px solid; padding-bottom: 0px; margin: 0px auto; padding-left: 0px; padding-right: 0px; display: block; border-top: rgb(231,231,231) 1px solid; border-right: rgb(231,231,231) 1px solid; padding-top: 0px' /><span class='img_descr' style='text-align: left; padding-bottom: 6px; line-height: 20px; margin: 5px auto; padding-left: 0px; padding-right: 0px; zoom: 1; display: inline-block; color: rgb(102,102,102); font-size: 12px; padding-top: 6px'>麦克罗伊手握网球拍</span></div> <p style='padding-bottom: 0px; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 15px 0px; padding-left: 0px; letter-spacing: normal; padding-right: 0px; font: 14px/23px 宋体; white-space: normal; orphans: 2; color: rgb(51,51,51); word-spacing: 0px; padding-top: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px'> 　　第一高尔夫讯　北京时间6月27日消息，想使用温丹健身房的球员有个好消息：他们再也不用和罗里-麦克罗伊争用跑步机了。</p> <p style='padding-bottom: 0px; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 15px 0px; padding-left: 0px; letter-spacing: normal; padding-right: 0px; font: 14px/23px 宋体; white-space: normal; orphans: 2; color: rgb(51,51,51); word-spacing: 0px; padding-top: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px'> 　　在温丹网球锦标赛上陪伴女友沃兹尼亚奇时，麦克罗伊也一直使用者为球员们提供的健身房健身，不过这却引起了一些小争议。</p> <p style='padding-bottom: 0px; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 15px 0px; padding-left: 0px; letter-spacing: normal; padding-right: 0px; font: 14px/23px 宋体; white-space: normal; orphans: 2; color: rgb(51,51,51); word-spacing: 0px; padding-top: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px'> 　　在小麦使用了健身房以后，玛丽亚-基里连科的男友冰球明星亚利桑达-奥文金(Alexander Oveckin)也去健身房健身，但却被告知健身房的设施只为球员和教练提供。这引起了基里连科的不爽。</p> <p style='padding-bottom: 0px; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 15px 0px; padding-left: 0px; letter-spacing: normal; padding-right: 0px; font: 14px/23px 宋体; white-space: normal; orphans: 2; color: rgb(51,51,51); word-spacing: 0px; padding-top: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px'> 　　不过现在麦克罗伊已经离开了温丹小镇，准备周四开战斗爱尔兰公开赛了。而他的女友在不慎滑倒受伤的情况下，以两个2-6不敌捷克选手塞特科夫斯卡，爆冷出局。这也意味着，麦克罗伊将不用再牵挂这里，所有的争议也就自动消失了。</p> <div class='img_wrapper' style='text-align: center; padding-bottom: 5px; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; letter-spacing: normal; font: 14px/23px 宋体; white-space: normal; orphans: 2; color: rgb(51,51,51); word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px'> <img alt='沃兹尼亚奇受伤了' src='/uploads/allimg/130627/1134114Z4-1.jpg' style='border-bottom: rgb(231,231,231) 1px solid; border-left: rgb(231,231,231) 1px solid; padding-bottom: 0px; margin: 0px auto; padding-left: 0px; padding-right: 0px; display: block; border-top: rgb(231,231,231) 1px solid; border-right: rgb(231,231,231) 1px solid; padding-top: 0px' title='沃兹尼亚奇受伤了' /><span class='img_descr' style='text-align: left; padding-bottom: 6px; line-height: 20px; margin: 5px auto; padding-left: 0px; padding-right: 0px; zoom: 1; display: inline-block; color: rgb(102,102,102); font-size: 12px; padding-top: 6px'>沃兹尼亚奇受伤了</span></div> <p style='padding-bottom: 0px; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 15px 0px; padding-left: 0px; letter-spacing: normal; padding-right: 0px; font: 14px/23px 宋体; white-space: normal; orphans: 2; color: rgb(51,51,51); word-spacing: 0px; padding-top: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px'> 　　麦克罗伊健身一开始是受到沃兹尼亚奇的激励，但现在随着程度再次进阶，变成了自己的爱好。</p> ";
 		String body = newsDetail.getBody();
@@ -159,7 +179,31 @@ public class NewsDetailActivity extends BaseActivity {
 		String timeStr = StringUtils.friendly_time(StringUtils
 				.strToDataStr(newsDetail.getPubdate()+"000"));
 		time.setText(timeStr);
-		content.loadDataWithBaseURL(null, body, "text/html", "utf-8", null);
+//		try {
+//			
+//			File filedir = new File(Environment.getExternalStorageDirectory()+"/golfeven_cache");
+//			if(!filedir.exists()){
+//				filedir.mkdirs();
+//				
+//			}
+//			File file = new File(Environment.getExternalStorageDirectory()+"/golfeven_cache/bg.png");
+//			if(!file.exists()){
+//				file.mkdir();
+//				InputStream in = getResources().getAssets().open("img/bg.png");
+//				byte[] data = new byte[in.available()];
+//				in.read(data);
+//				//FileUtils.writeFile(data, "golfeven_cache", "bg.png");
+//				FileOutputStream out = new FileOutputStream(file);
+//				out.write(data);
+//				out.flush();
+//			}
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//			MyLog.e("file", e.toString());
+////		}
+//		body = "<body style='background: url(http://bcs.duapp.com/golfeven/bg.png?sign=MBO:7774161815c00778da72be121987c106:6mb1mnmMdO7eGn8wNCdC%2F%2BDP%2F20%3D&response-content-disposition=filename*=utf8''bg.png&response-cache-control=private)'>"+body+"</body>";
+//		body.replaceFirst("<div style=\"", "<div style=\"background: url(http://bcs.duapp.com/golfeven/bg.png?sign=MBO:7774161815c00778da72be121987c106:6mb1mnmMdO7eGn8wNCdC%2F%2BDP%2F20%3D&response-content-disposition=filename*=utf8''bg.png&response-cache-control=private)");
+		content.loadDataWithBaseURL(Environment.getExternalStorageDirectory()+"/golfeven_cache/", body, "text/html", "utf-8", null);
 	}
 
 	/**

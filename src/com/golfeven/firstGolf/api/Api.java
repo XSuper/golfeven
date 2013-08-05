@@ -391,7 +391,7 @@ public class Api {
 		if(pullblack){
 			params.put("ftype","bad");
 		}else{
-			params.put("ftype","good");
+			params.put("ftype","clear");
 			
 		}
 		

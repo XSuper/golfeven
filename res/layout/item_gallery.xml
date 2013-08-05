@@ -6,7 +6,7 @@
 
     <ImageView
         android:layout_width="fill_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         android:id="@+id/item_gallery_img"
         android:background="@drawable/tj_picbg"
         android:src="@drawable/img_default"

@@ -19,6 +19,8 @@ import com.golfeven.firstGolf.R;
 import com.golfeven.firstGolf.base.MBaseAdapter;
 import com.golfeven.firstGolf.bean.BallPark;
 import com.golfeven.firstGolf.common.Constant;
+import com.golfeven.firstGolf.common.StringUtils;
+import com.golfeven.firstGolf.common.Utils;
 import com.golfeven.firstGolf.ui.BallParkDetailActivity;
 import com.golfeven.firstGolf.ui.MainActivity;
 
@@ -59,17 +61,7 @@ public class BallParkListAdapter extends MBaseAdapter {
 		
 		title.setText(ballPark.getTitle());
 		type.setText(ballPark.getTypename());
-		
-		if(ballPark.getDistance().indexOf("999999")<=-1){
-			float m = Float.parseFloat(ballPark.getDistance());
-			double km = m/1000;
-			String dis = String.format("%.2f", km);
-			distance.setText(dis+"km");
-		}else{
-			distance.setText("未知");
-		}
-			
-		
+		distance.setText(Utils.getDestance(ballPark.getDistance()));
 		fb.display(img, Constant.URL_IMG_BASE + ballPark.getLitpic());
 		convertView.setOnClickListener(new OnClickListener() {
 

@@ -12,7 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
-import android.widget.LinearLayout.LayoutParams;
+import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +38,8 @@ public class BallFriendDetailActivity extends BaseActivity implements OnClickLis
 	@ViewInject(id=R.id.activity_ballfriend_detail_photo) ImageView mPhoto;
 	@ViewInject(id=R.id.activity_ballfriend_detail_face) ImageView face;
 	
+	@ViewInject(id=R.id.activity_ballfriend_detail_mcount) TextView imgCount;
+	
 	@ViewInject(id=R.id.activity_ballfriend_detail_name) TextView tname;
 	@ViewInject(id=R.id.activity_ballfriend_detail_sex) ImageView tsex;
 	@ViewInject(id=R.id.activity_ballfriend_detail_distance) TextView tdistance;
@@ -59,6 +61,8 @@ public class BallFriendDetailActivity extends BaseActivity implements OnClickLis
 	@ViewInject(id=R.id.activity_ballfriend_detail_pullblack_tex)TextView pullblackTex;
 	
 	
+	
+	
 	private BallFriend ballFriend;
 	
 	private FinalBitmap fb;
@@ -75,25 +79,45 @@ public class BallFriendDetailActivity extends BaseActivity implements OnClickLis
 		fb = appContext.getFB();
 		Intent intent = getIntent();
 		ballFriend = intent.getParcelableExtra("ballFriend");
-		if(ballFriend.getMid().equals(appContext.user.getMid())){
-			background.setVisibility(View.GONE);
+		if(appContext.isLogin == true&&appContext.user!= null){
+			if(ballFriend.getMid().equals(appContext.user.getMid())){
+				background.setVisibility(View.GONE);
+			}
+			
 		}
+		
+		imgCount = (TextView)findViewById(R.id.activity_ballfriend_detail_mcount);
+		
+		android.widget.LinearLayout.LayoutParams params = new android.widget.LinearLayout.LayoutParams(Utils.getScreenWith(BallFriendDetailActivity.this)/4,Utils.getScreenWith(BallFriendDetailActivity.this)/4);
+		params.setMargins(10, 10, 10, 10);
+		face.setLayoutParams(params);
+		int width = Utils.getScreenWith(BallFriendDetailActivity.this);
+		LayoutParams params2 = new LayoutParams(LayoutParams.MATCH_PARENT,width/2);
+		mPhoto.setLayoutParams(params2);
 		
 		load();
 		initValue();
 	}
 	
 	private void initValue() {
-		int width = Utils.getScreenWith(BallFriendDetailActivity.this);
-		LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT,width/2);
-		mPhoto.setLayoutParams(params);
 		
+		fb.isSquare = true;
 		fb.display(face,Constant.URL_IMG_BASE+ballFriend.getFace());
+		
 		tname.setText(ballFriend.getUname());
-		tdistance.setText("距离我"+ballFriend.getDistance()+"公里");
+		tdistance.setText("距离我: "+Utils.getDestance(ballFriend.getDistance()));
 		String timeStr = StringUtils.friendly_time(StringUtils
-				.strToDataStr(ballFriend.getLogintime()));
+				.strToDataStr(ballFriend.getLogintime()+"000"));
 		ttime.setText("上次登录时间："+timeStr);
+		
+		if("男".equals(ballFriend.getSex().trim())){
+			tsex.setBackgroundResource(R.drawable.qy_man);
+		}
+		else if("女".equals(ballFriend.getSex().trim())){
+			tsex.setBackgroundResource(R.drawable.qy_girl);
+		}else {
+			tsex.setBackgroundResource(R.drawable.qy_sec);
+		}
 		tplace.setText(ballFriend.getCommplace());
 		tlovemsg.setText(ballFriend.getLovemsg());
 
@@ -204,7 +228,12 @@ public class BallFriendDetailActivity extends BaseActivity implements OnClickLis
 					// TODO: handle exception
 				}
 				if(photos!=null&&photos.size()!=0){
-					fb.display(mPhoto, Constant.URL_IMG_BASE+photos.get(0).getPic());
+					
+					FinalBitmap fbi = FinalBitmap.createNew(appContext,Constant.IMG_CACHEPATH);
+					fbi.proportion=2;
+					fbi.display(mPhoto, Constant.URL_IMG_BASE+photos.get(0).getPic());
+					imgCount.setText(photos.size()+"");
+					
 					Intent intent = new Intent(BallFriendDetailActivity.this,PhotoShowActivity.class);
 					intent.putParcelableArrayListExtra("photos", (ArrayList<Photo>)photos);
 					mPhoto.setOnClickListener(new ToOtherActivity(BallFriendDetailActivity.this, intent, false));

@@ -21,6 +21,7 @@ import com.golfeven.firstGolf.bean.Gallery;
 import com.golfeven.firstGolf.bean.GolfInfo;
 import com.golfeven.firstGolf.common.Constant;
 import com.golfeven.firstGolf.ui.GalleryDetailActivity;
+import com.golfeven.firstGolf.ui.GallerysActivity;
 
 public class GalleryListAdapter extends MBaseAdapter{
 	
@@ -30,6 +31,7 @@ public class GalleryListAdapter extends MBaseAdapter{
 		this.context = context;
 		this.datas = golfInfos;
 		fb = getAppContext().getFB();
+		fb.proportion = 2;
 	}
 	
 
@@ -49,7 +51,7 @@ public class GalleryListAdapter extends MBaseAdapter{
 		title.setText(gallery.getTitle());
 		DisplayMetrics dm = new DisplayMetrics();
 		 ((Activity)context).getWindowManager().getDefaultDisplay().getMetrics(dm);
-		 LayoutParams params = new LayoutParams(LayoutParams.FILL_PARENT, dm.widthPixels);
+		 LayoutParams params = new LayoutParams(LayoutParams.FILL_PARENT, (int)(dm.widthPixels/GallerysActivity.PROPORTION));
 		 params.setMargins(10, 0, 10,0);
 		img.setLayoutParams(params);
 		fb.display(img, Constant.URL_IMG_BASE+gallery.getLitpic());

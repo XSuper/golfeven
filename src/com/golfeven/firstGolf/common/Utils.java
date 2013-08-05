@@ -243,5 +243,21 @@ public class Utils {
 	}
 	
 	
+	/**
+	 * 根据后台传出的距离数据 得到距离
+	 * @param distance
+	 * @return
+	 */
+	public static String getDestance(String distance){
+		String s = "未知";
+		if(!StringUtils.isEmpty(distance)&&distance.indexOf("9999")<=-1){
+			float m = Float.parseFloat(distance);
+			double km = m/1000;
+			String dis = String.format("%.2f", km);
+			s=dis+"km";
+		}
+		return s;
+	}
+	
 
 }

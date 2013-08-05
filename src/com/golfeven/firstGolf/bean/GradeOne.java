@@ -2,8 +2,8 @@ package com.golfeven.firstGolf.bean;
 
 public class GradeOne {
 	private String hole;
-	private String pole;//推杆数
-	private String putter;//总杆数
+	private String pole;//总杆数
+	private String putter;//推杆数
 	public String getHole() {
 		return hole;
 	}

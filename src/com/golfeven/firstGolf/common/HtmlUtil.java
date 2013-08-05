@@ -6,6 +6,25 @@ import java.util.regex.Pattern;
 
 
 public class HtmlUtil {
+	
+	/**
+	 * 拿到图片的真实地址
+	 * @param s
+	 * @return
+	 */
+public static String getTureImageUrl(String s){
+	String url = null;
+	Pattern p = Pattern
+			.compile("<img[^>]+src\\s*=\\s*['\"]([^'\"]+)['\"][^>]*>");
+	Matcher m = p.matcher(s);
+	if (m.find()) {
+		String src=m.group(1);
+		url = Constant.URL_IMG_BASE+src;
+
+	}
+	return url;
+
+}
 
 	/**
 	 * 改变一段html 代码里面 img的大小

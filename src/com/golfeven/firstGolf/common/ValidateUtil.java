@@ -84,7 +84,8 @@ public class ValidateUtil {
 		WrongResponse wrongResponse =new WrongResponse();
 		wrongResponse = JSON.parseObject(t, WrongResponse.class);
 		if(wrongResponse.code == 99){
-			wrongResponse.show = false;
+			wrongResponse.show = true;
+			
 		}
 		if(wrongResponse.code == 100){
 			wrongResponse.show = true;

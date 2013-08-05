@@ -31,6 +31,8 @@ public class GallerysActivity extends BaseListActivity {
 
 	private ArrayAdapter sortAdapter;
 	private ArrayAdapter xunsaiAdapter;
+	
+	public static float PROPORTION = 2;
 
 	/**
 	 * 必须按照这个顺序排列
@@ -123,6 +125,24 @@ public class GallerysActivity extends BaseListActivity {
 
 		}
 
+	}
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		appContext.getFB().proportion=0;
+	}
+	@Override
+	protected void onStop() {
+		// TODO Auto-generated method stub
+		super.onStop();
+		appContext.getFB().proportion=0;
+	}
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		appContext.getFB().proportion=PROPORTION;
 	}
 
 }
