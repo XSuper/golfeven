@@ -102,7 +102,7 @@
         <TextView
             android:id="@+id/activity_integral_uploadImage_text"
             style="@style/integral_text"
-            android:text="100" />
+            android:text="50" />
 
         <Button
             android:id="@+id/activity_integral_uploadImage_btn"
@@ -127,8 +127,8 @@
 
         <TextView
             android:id="@+id/activity_integral_uploadGrade_text"
-           style="@style/integral_text"
-            android:text="100" />
+            style="@style/integral_text"
+            android:text="150" />
 
         <Button
             android:id="@+id/activity_integral_uploadGrade_btn"
@@ -179,7 +179,7 @@
         <TextView
             android:id="@+id/activity_integral_loveMsg_text"
             style="@style/integral_text"
-            android:text="100" />
+            android:text="50" />
 
         <Button
             android:id="@+id/activity_integral_loveMsg_btn"
@@ -204,7 +204,7 @@
         <TextView
             android:id="@+id/activity_integral_lable_text"
             style="@style/integral_text"
-            android:text="100" />
+            android:text="50" />
 
         <Button
             android:id="@+id/activity_integral_lable_btn"

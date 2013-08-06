@@ -63,13 +63,14 @@ public class IntegralActivity extends BaseActivity{
 		b5.setClickable(false);
 		b7.setClickable(false);
 		b8.setClickable(false);
+		
 	}
 	
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		
+		headBack.setProgressVisible(true);
 		Api.getInstance().readCredits(appContext.user, new AjaxCallBack<String>() {
 
 			@Override
@@ -77,7 +78,8 @@ public class IntegralActivity extends BaseActivity{
 				// TODO Auto-generated method stub
 				super.onSuccess(t);
 				headBack.setProgressVisible(false);
-				if(t.trim().startsWith("[")||t.trim().startsWith("{")){
+				MyLog.v("ssss", t);
+				if(t.trim().startsWith("[")){
 					try {
 						
 						integrals = JSON.parseArray(t,Integral.class);
@@ -92,8 +94,8 @@ public class IntegralActivity extends BaseActivity{
 					if(wrongResponse.show){
 						MyToast.centerToast(appContext, wrongResponse.msg, Toast.LENGTH_SHORT);
 					}else{
-						MyToast.centerToast(appContext, "陆失败", Toast.LENGTH_SHORT);
-						MyLog.v("登陆失败",wrongResponse.msg );
+						MyToast.centerToast(appContext, "积分获取失败", Toast.LENGTH_SHORT);
+						MyLog.v("积分获取失败",wrongResponse.msg );
 					}
 				}
 			}
@@ -126,7 +128,7 @@ public class IntegralActivity extends BaseActivity{
 		t6.setText(totle+"");
 		for (Integral integral : integrals) {
 			Button btn = null;
-			switch (integral.getType()) {
+			switch (Integer.parseInt(integral.getType())) {
 			case 1://完善个人资料
 				btn=b1;
 				break;
@@ -160,7 +162,7 @@ public class IntegralActivity extends BaseActivity{
 		Button btn = (Button)view;
 		//完善账户
 		if(btn==b1){
-			
+			Utils.ToActivity(this, MyInfoActivity.class, false);
 		}
 		//评价
 		if(btn==b2){

@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
 import com.golfeven.firstGolf.R;
@@ -70,6 +71,9 @@ public class GolfInfoListAdapter extends MBaseAdapter{
 		String timeStr = StringUtils.friendly_time(StringUtils
 				.strToDataStr(golfInfo.getPubdate()+"000"));
 		time.setText(timeStr);
+//		LayoutParams param = new LayoutParams(img.getWidth(), img.getWidth());
+//		img.setLayoutParams(param);
+		fb.isSquare= true;
 		fb.display(img, Constant.URL_IMG_BASE+golfInfo.getLitpic());
 //		fb.display(img, "http://www.a8.hk/uploads/allimg/130617/6-13061GJ959203-lp.jpg");
 		convertView.setOnClickListener(new OnClickListener() {

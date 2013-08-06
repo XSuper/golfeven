@@ -68,7 +68,7 @@ public class HomeFrame extends LinearLayout {
 	private void initViews(Context context) {
 
 		listNews = fd.findAllByWhere(News.class, null);
-		listHotActivity = new ArrayList();
+		//listHotActivity = new ArrayList();
 		listGallery = fd.findAll(Gallery.class);
 		listBallPark = fd.findAllByWhere(BallPark.class, null);
 		listBallTeam = fd.findAllByWhere(BallTeam.class, null);

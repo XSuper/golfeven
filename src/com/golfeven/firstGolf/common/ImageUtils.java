@@ -1,5 +1,6 @@
 package com.golfeven.firstGolf.common;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -15,18 +16,18 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.Bitmap.CompressFormat;
+import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.LinearGradient;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.PixelFormat;
+import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.graphics.Bitmap.CompressFormat;
-import android.graphics.Bitmap.Config;
-import android.graphics.PorterDuff.Mode;
 import android.graphics.Shader.TileMode;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -626,4 +627,19 @@ public class ImageUtils{
         }
         return (b[0] == 0x42) && (b[1] == 0x4d);
     }
+    
+    public static InputStream compressImage(Bitmap image) {  
+    	  
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();  
+        image.compress(Bitmap.CompressFormat.JPEG, 75, baos);//质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中  
+        int options = 100;  
+        while ( baos.toByteArray().length / 1024>200) {  //循环判断如果压缩后图片是否大于100kb,大于继续压缩         
+            baos.reset();//重置baos即清空baos  
+            image.compress(Bitmap.CompressFormat.JPEG, options, baos);//这里压缩options%，把压缩后的数据存放到baos中  
+            options -= 10;//每次都减少10  
+        }  
+        ByteArrayInputStream isBm = new ByteArrayInputStream(baos.toByteArray());//把压缩后的数据baos存放到ByteArrayInputStream中  
+        //Bitmap bitmap = BitmapFactory.decodeStream(isBm, null, null);//把ByteArrayInputStream数据生成图片  
+        return isBm;  
+    }  
 }

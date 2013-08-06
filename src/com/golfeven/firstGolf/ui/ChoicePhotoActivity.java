@@ -46,6 +46,7 @@ public class ChoicePhotoActivity extends BaseActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		//setTheme(android.R.style.Theme_Translucent_NoTitleBar);
 		setContentView(R.layout.activity_choicephoto);
 		// imageView = (ImageView) findViewById(R.id.imageID);
 		dontCut = getIntent().getBooleanExtra("dontCut",false);

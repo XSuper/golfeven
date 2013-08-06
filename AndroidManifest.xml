@@ -149,6 +149,9 @@
             android:name="com.golfeven.firstGolf.ui.IntegralActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name="com.golfeven.firstGolf.ui.MyInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name="com.golfeven.firstGolf.ui.AboutActivity"
             android:screenOrientation="portrait" />
         <activity

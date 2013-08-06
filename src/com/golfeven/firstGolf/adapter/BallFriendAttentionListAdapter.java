@@ -125,8 +125,13 @@ public class BallFriendAttentionListAdapter extends MBaseAdapter {
 			friendView.place.setText("未知");
 
 		}
-		fb.display(friendView.face,
-				Constant.URL_IMG_BASE + ballFriend.getFace());
+		if (!StringUtils.isEmpty(ballFriend.getFace())) {
+
+			fb.isSquare = true;
+			fb.display(friendView.face, Constant.URL_IMG_BASE + ballFriend.getFace());
+		}else{
+			friendView.face.setImageResource(R.drawable.qy_tx);
+		}
 		friendView.btn.setOnClickListener(new OnClickListener() {
 
 			@Override

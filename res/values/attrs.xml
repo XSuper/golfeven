@@ -3,6 +3,7 @@
     <declare-styleable name="widget_home_navigation">
 	<attr name="title" format="string|reference"/>
 	<attr name="logo" format="reference"/>
+	<attr name="friend" format="boolean"/>
     </declare-styleable>
     <declare-styleable name="head_back">
 	<attr name="htitle" format="string|reference"/>

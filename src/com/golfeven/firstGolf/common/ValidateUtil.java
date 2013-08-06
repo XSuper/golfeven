@@ -82,7 +82,12 @@ public class ValidateUtil {
 	
 	public static WrongResponse wrongResponse(String t){
 		WrongResponse wrongResponse =new WrongResponse();
-		wrongResponse = JSON.parseObject(t, WrongResponse.class);
+		try {
+			
+			wrongResponse = JSON.parseObject(t, WrongResponse.class);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		if(wrongResponse.code == 99){
 			wrongResponse.show = true;
 			

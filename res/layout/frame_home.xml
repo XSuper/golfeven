@@ -56,19 +56,21 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/frame_home_nav_ball_team"
                 /> -->
-            <com.golfeven.firstGolf.widget.HomeNavigation
-                app:title="@string/ball_friends"
-                app:logo="@drawable/index_icon02"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/frame_home_nav_ball_friends"
-                />
+            
             <com.golfeven.firstGolf.widget.HomeNavigation
                 app:title="@string/golfInfo"
                 app:logo="@drawable/index_icon02"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/frame_home_nav_golfInfo"
+                />
+            <com.golfeven.firstGolf.widget.HomeNavigation
+                app:title="@string/ball_friends"
+                app:logo="@drawable/index_icon02"
+                app:friend="true"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/frame_home_nav_ball_friends"
                 />
             </LinearLayout>
 

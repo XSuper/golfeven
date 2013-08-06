@@ -1,7 +1,5 @@
 package com.golfeven.firstGolf.common;
 
-import com.tencent.mm.sdk.platformtools.Util;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.view.View;

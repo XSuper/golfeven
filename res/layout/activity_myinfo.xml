@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.golfeven.firstGolf"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="@drawable/bg_"
+    >
+
+    <com.golfeven.firstGolf.widget.HeadBack
+        android:id="@+id/activity_myinfo_headback"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        app:htitle="完善资料"
+        app:rbtn2_src="@drawable/upload_btn_bg_s"
+        app:rbtn2_visible="true" />
+    
+    <TextView 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:text="*温馨提示：完善资料可以更方便的找到球友、拓展人脉  享受第一高尔夫的高品质服务
+        "
+        android:textColor="@color/black"
+        android:layout_margin="20dp"
+        />
+    
+    <LinearLayout
+       style="@style/login_register_setting_top"
+       android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="horizontal"
+         >
+
+        <TextView 
+            style="@style/input_edit"
+            android:textColorHint="@color/black"
+            android:hint="email:"
+            android:layout_weight="3"
+            />
+
+        <EditText
+            style="@style/input_edit"
+            android:id="@+id/activity_myinfo_email"
+            android:hint="输入邮箱"
+             >
+            
+        <requestFocus />
+        </EditText>
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/login_register_setting_bottom"
+         android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        >
+
+       <TextView 
+            style="@style/input_edit"
+             android:textColorHint="@color/black"
+            android:hint="QQ/MSN:"
+            android:layout_weight="3"
+            />
+        <EditText
+            android:id="@+id/activity_myinfo_qq"
+            style="@style/input_edit"
+            android:hint="QQ号或MSN号" />
+    </LinearLayout>
+
+    
+
+</LinearLayout>

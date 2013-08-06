@@ -9,14 +9,19 @@ import net.tsz.afinal.FinalHttp;
 import net.tsz.afinal.http.AjaxCallBack;
 import net.tsz.afinal.http.AjaxParams;
 import android.app.Activity;
+import android.content.Context;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
 import com.golfeven.firstGolf.bean.Score;
 import com.golfeven.firstGolf.bean.User;
+import com.golfeven.firstGolf.bean.WrongResponse;
 import com.golfeven.firstGolf.common.Constant;
 import com.golfeven.firstGolf.common.MyLog;
+import com.golfeven.firstGolf.common.NetUtil;
 import com.golfeven.firstGolf.common.SharedPreferencesUtil;
 import com.golfeven.firstGolf.common.StringUtils;
+import com.golfeven.firstGolf.common.ValidateUtil;
 import com.golfeven.firstGolf.widget.MyToast;
 
 public class Api {
@@ -176,7 +181,7 @@ public class Api {
 	 * @param mCallBack
 	 */
 	int integral;
-	public void addCredits(final Activity activity,User user,final int type,final String msg){
+	public void addCredits(final Context activity,User user,final int type,final String msg){
 		integral = 0;
 		if(!SharedPreferencesUtil.judgeIntegral(activity.getApplicationContext(), type)){
 			return;
@@ -219,24 +224,61 @@ public class Api {
 		}
 		AjaxParams params = new AjaxParams();
 		params.put("cmd", "Member.setcredits");
-		params.put("uid",user.getMid());
+		params.put("mid",user.getMid());
 		params.put("token",user.getToken());
 		params.put("type",type+"");
 		params.put("credits",integral+"");
 		fh.get(Constant.URL_BASE, params, new AjaxCallBack<String>() {
 
+			
 			@Override
 			public void onSuccess(String t) {
 				// TODO Auto-generated method stub
 				super.onSuccess(t);
 				SharedPreferencesUtil.StatisticsIntegral(activity.getApplicationContext(), type);
-				MyToast.customToast(activity, Toast.LENGTH_SHORT,MyToast.TOAST_MSG_SUCCESS_TITLE, msg+"获得"+integral+"积分", Constant.TOAST_IMG_SUCCESS);
+				
+				WrongResponse response = null;
+
+				try {
+					response = JSON.parseObject(t,
+							WrongResponse.class);
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+				if (response != null && response.code == 0) {
+					// attentionTex.setText("取消关注");
+					// attention.setTag(1);
+					// -2不存在关系
+					// -1 我把球友拉黑
+					// 0 我加球友为普通好友，
+					// 1我加球友为关注好友
+					if(activity instanceof Activity){
+						MyToast.customToast(activity, Toast.LENGTH_SHORT,MyToast.TOAST_MSG_SUCCESS_TITLE, msg+"您获得"+integral+"积分", Constant.TOAST_IMG_SUCCESS);
+					}
+					
+					
+				} else {
+					WrongResponse wrongResponse = ValidateUtil
+							.wrongResponse(t);
+					if (wrongResponse.show) {
+						MyToast.centerToast(activity,
+								wrongResponse.msg,
+								Toast.LENGTH_SHORT);
+					} else {
+						MyToast.centerToast(activity,
+								"积分获取失败", Toast.LENGTH_SHORT);
+						MyLog.v("积分获取失败", wrongResponse.msg);
+					}
+				}
+
 			}
 
 			@Override
 			public void onFailure(Throwable t, String strMsg) {
 				// TODO Auto-generated method stub
 				super.onFailure(t, strMsg);
+				
+				NetUtil.requestError(activity, null);
 			}
 			
 		});
@@ -253,7 +295,7 @@ public class Api {
 		}
 		AjaxParams params = new AjaxParams();
 		params.put("cmd", "Member.getcredits");
-		params.put("uid",user.getMid());
+		params.put("mid",user.getMid());
 		
 		params.put("token",user.getToken());
 		fh.get(Constant.URL_BASE, params, mCallBack);
@@ -283,7 +325,7 @@ public class Api {
 				// TODO Auto-generated method stub
 				super.onSuccess(t);
 				for (Integer type : typeSet) {
-					addCredits(activity, user, type, null);
+					addCredits(activity, user, type, user.getUname());
 				}
 				mCallBack.onSuccess(t);
 			}

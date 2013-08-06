@@ -20,6 +20,7 @@ import com.golfeven.firstGolf.base.MBaseAdapter;
 import com.golfeven.firstGolf.bean.BallFriend;
 import com.golfeven.firstGolf.bean.BallPark;
 import com.golfeven.firstGolf.common.Constant;
+import com.golfeven.firstGolf.common.StringUtils;
 import com.golfeven.firstGolf.ui.BallFriendDetailActivity;
 import com.golfeven.firstGolf.ui.BallParkDetailActivity;
 import com.golfeven.firstGolf.ui.MainActivity;
@@ -52,7 +53,14 @@ public class BallFriendListAdapter extends MBaseAdapter {
 
 		title.setText(ballFriend.getUname());
 		digest.setText(ballFriend.getDistance());
-		fb.display(img, Constant.URL_IMG_BASE + ballFriend.getFace());
+		if (!StringUtils.isEmpty(ballFriend.getFace())) {
+
+			fb.isSquare = true;
+			fb.display(img, Constant.URL_IMG_BASE + ballFriend.getFace());
+		}else{
+			img.setImageResource(R.drawable.qy_tx);
+		}
+
 		convertView.setOnClickListener(new OnClickListener() {
 
 			@Override

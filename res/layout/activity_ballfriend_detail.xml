@@ -78,7 +78,7 @@
                     android:layout_margin="10dp"
                     android:layout_weight="2"
                      android:background="@drawable/pic_bg"
-                    android:src="@drawable/ic_launcher" />
+                    android:src="@drawable/qy_tx" />
 
                 <LinearLayout
                     android:layout_width="fill_parent"

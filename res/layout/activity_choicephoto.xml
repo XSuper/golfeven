@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:alpha="10"
-    android:background="#00000000"
+    android:background="@null"
     android:orientation="vertical" >
    <Button 
        android:layout_width="fill_parent"

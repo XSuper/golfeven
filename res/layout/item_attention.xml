@@ -9,9 +9,12 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:id="@+id/item_attention_face"
-        android:layout_margin="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="-15dp"
         />
     <LinearLayout
+         android:layout_marginTop="-15dp"
         android:layout_weight="1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -59,6 +62,7 @@
             </LinearLayout>
             <Button 
                 style="@style/integral_btn"
+                android:layout_height="28dp"
                 android:text="取消关注"
                 android:id="@+id/item_attention_btn"
                 />

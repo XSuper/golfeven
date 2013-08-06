@@ -93,6 +93,10 @@ public class PlayBallScoreActivity extends BaseActivity {
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
+				if(!appContext.isLogin&&appContext.user==null){
+					MyToast.centerToast(appContext, "请先登录后提交成绩", Toast.LENGTH_SHORT);
+					return;
+				}
 				if (!Utils.scoreOk(datas)) {
 					MyToast.centerToast(appContext, "请输入全部成绩",
 							Toast.LENGTH_SHORT);
@@ -135,6 +139,7 @@ public class PlayBallScoreActivity extends BaseActivity {
 												MyToast.TOAST_MSG_SUCCESS_TITLE,
 												"成绩提交成功",
 												Constant.TOAST_IMG_SUCCESS);
+										Api.getInstance().addCredits(PlayBallScoreActivity.this, appContext.user, 3, "首次上传成绩,");
 										finish();
 										MainActivity m = (MainActivity)AppManager.getAppManager().getActivity(MainActivity.class);
 										m.mScrollLayout.scrollToScreen(3);

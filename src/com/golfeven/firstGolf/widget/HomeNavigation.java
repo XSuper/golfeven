@@ -25,6 +25,7 @@ import com.golfeven.firstGolf.bean.Gallery;
 import com.golfeven.firstGolf.bean.GolfInfo;
 import com.golfeven.firstGolf.bean.News;
 import com.golfeven.firstGolf.common.Constant;
+import com.golfeven.firstGolf.common.StringUtils;
 import com.golfeven.firstGolf.ui.BallFriendDetailActivity;
 import com.golfeven.firstGolf.ui.BallParkDetailActivity;
 import com.golfeven.firstGolf.ui.BallTeamDetailActivity;
@@ -46,6 +47,10 @@ public class HomeNavigation extends LinearLayout {
 	private Context context;
 	
 	private List datas;
+	
+	private boolean isFriend = false;
+	private String mtitle;
+	private Drawable dLogo;
 
 	
 	
@@ -108,8 +113,8 @@ public class HomeNavigation extends LinearLayout {
 	public HomeNavigation(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		
-		initViews(context);
 		init(attrs);
+		initViews(context);
 
 		// TODO Auto-generated constructor stub
 	}
@@ -128,29 +133,35 @@ public class HomeNavigation extends LinearLayout {
 		imgLayout =(LinearLayout)view.findViewById(R.id.widget_home_navigation_imgs);
 		imgs = new MyImageView[Constant.HOME_NAVIGATIN_IMG_SIZE];
 		for(int i = 0;i<Constant.HOME_NAVIGATIN_IMG_SIZE;i++){
-			MyImageView img = MyImageView.CreateHomeImageView(context);
+			MyImageView img = MyImageView.CreateHomeImageView(context,isFriend);
 			imgLayout.addView(img);
 			imgs[i] = img;
 		}
 		
 		
-		fb = ((AppContext)context.getApplicationContext()).getFB();
+		fb = FinalBitmap.createNew(context, Constant.IMG_CACHEPATH);
+		fb.configLoadingImage(R.drawable.download);
+		fb.configLoadfailImage(R.drawable.fail);
+		fb.proportion=1.5F;
+		
+		
+		logo.setImageDrawable(dLogo);
+		if (title != null) {
+			this.title.setText(mtitle);
+		}
 	}
 
 	private void init(AttributeSet attrs) {
 		TypedArray a = getContext().obtainStyledAttributes(attrs,
 				R.styleable.widget_home_navigation);
 		try {
-			String title = a
+			mtitle = a
 					.getString(R.styleable.widget_home_navigation_title);
-			Drawable dLogo = a
+			dLogo = a
 					.getDrawable(R.styleable.widget_home_navigation_logo);
 
-			logo.setImageDrawable(dLogo);
+			isFriend = a.getBoolean(R.styleable.widget_home_navigation_friend, false);
 			
-			if (title != null) {
-				this.title.setText(title);
-			}
 		} finally {
 			a.recycle();
 		}
@@ -224,10 +235,21 @@ public class HomeNavigation extends LinearLayout {
 			BallFriendClick click = new BallFriendClick();
 			for (int i = 0; i < Constant.HOME_NAVIGATIN_IMG_SIZE  && i < datas.size(); i++) {
 				BallFriend ballFriend = (BallFriend) datas.get(i);
+//				LayoutParams params = new LayoutParams(imgs[i].getWidth(), imgs[i].getWidth());
+//				imgs[i].setLayoutParams(params);
+				imgs[i].isFriend = true;
 				imgs[i].setTag(ballFriend);
 				imgs[i].setDescribe(ballFriend.getUname());
 				imgs[i].setOnClickListener(click);
-				fb.display(imgs[i].getImageView(), Constant.URL_IMG_BASE + ballFriend.getFace());
+				
+				if (!StringUtils.isEmpty(ballFriend.getFace())) {
+
+					fb.proportion =1;
+					
+					fb.display(imgs[i].getImageView(), Constant.URL_IMG_BASE + ballFriend.getFace());
+				}else{
+					imgs[i].getImageView().setImageResource(R.drawable.qy_tx);
+				}
 			}
 		}
 	}

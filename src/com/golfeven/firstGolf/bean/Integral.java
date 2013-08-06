@@ -1,18 +1,18 @@
 package com.golfeven.firstGolf.bean;
 
 public class Integral {
-	private int type;
-	private int credits;
-	public int getType() {
+	private String type;
+	private String credits;
+	public String getType() {
 		return type;
 	}
-	public void setType(int type) {
+	public void setType(String type) {
 		this.type = type;
 	}
-	public int getCredits() {
+	public String getCredits() {
 		return credits;
 	}
-	public void setCredits(int credits) {
+	public void setCredits(String credits) {
 		this.credits = credits;
 	}
 	

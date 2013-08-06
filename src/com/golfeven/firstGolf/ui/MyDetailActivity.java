@@ -11,6 +11,7 @@ import java.util.Set;
 import net.tsz.afinal.FinalBitmap;
 import net.tsz.afinal.annotation.view.ViewInject;
 import net.tsz.afinal.http.AjaxCallBack;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
@@ -27,20 +28,25 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.RelativeLayout.LayoutParams;
 
 import com.alibaba.fastjson.JSON;
+import com.golfeven.AppContext;
+import com.golfeven.AppManager;
 import com.golfeven.firstGolf.R;
 import com.golfeven.firstGolf.api.Api;
 import com.golfeven.firstGolf.base.BaseActivity;
 import com.golfeven.firstGolf.bean.Photo;
 import com.golfeven.firstGolf.bean.User;
+import com.golfeven.firstGolf.bean.WrongResponse;
 import com.golfeven.firstGolf.common.Constant;
 import com.golfeven.firstGolf.common.MyLog;
+import com.golfeven.firstGolf.common.NetUtil;
 import com.golfeven.firstGolf.common.StringUtils;
 import com.golfeven.firstGolf.common.Utils;
+import com.golfeven.firstGolf.common.ValidateUtil;
 import com.golfeven.firstGolf.widget.HeadBack;
 import com.golfeven.firstGolf.widget.MyToast;
 
@@ -84,12 +90,32 @@ public class MyDetailActivity extends BaseActivity {
 	private String oldLovemsg;
 	private String oldTags;
 
+	ProgressDialog dialog;
+
+	// private void getView(){
+	// headback = (HeadBack)findViewById(R.id.activity_my_detail_headback);
+	// mPhoto = (ImageView)findViewById(R.id.activity_my_detail_photo);
+	// face = (ImageView)findViewById(R.id.activity_my_detail_face);
+	// imagecount = (TextView)findViewById(R.id.activity_my_detail_mcount);
+	// tname = (EditText)findViewById(R.id.activity_my_detail_name);
+	// tage = (TextView)findViewById(R.id.activity_my_detail_age);
+	// tsex = (ImageView)findViewById(R.id.activity_my_detail_sex_icon);
+	// txsex = (TextView)findViewById(R.id.activity_my_detail_sex_text);
+	// tplace = (EditText)findViewById(R.id.activity_my_detail_place);
+	// tlovemsg = (EditText)findViewById(R.id.activity_my_detail_lovemsg);
+	// ttags = (EditText)findViewById(R.id.activity_my_detail_tags);
+	// btn = (Button)findViewById(R.id.activity_my_detail_btn);
+	//
+	// }
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.activity_my_detail);
+		// getView();
+
 		fb = appContext.getFB();
 		user = appContext.user;
 		load();
@@ -99,12 +125,17 @@ public class MyDetailActivity extends BaseActivity {
 		tlovemsg.setEnabled(false);
 		ttags.setEnabled(false);
 
-
 		android.widget.LinearLayout.LayoutParams params = new android.widget.LinearLayout.LayoutParams(
 				Utils.getScreenWith(MyDetailActivity.this) / 4,
 				Utils.getScreenWith(MyDetailActivity.this) / 4);
 		params.setMargins(10, 10, 10, 10);
 		face.setLayoutParams(params);
+
+		int width = Utils.getScreenWith(MyDetailActivity.this);
+		LayoutParams params2 = new LayoutParams(LayoutParams.MATCH_PARENT,
+				width / 2);
+		mPhoto.setLayoutParams(params2);
+
 		btn.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -149,19 +180,18 @@ public class MyDetailActivity extends BaseActivity {
 						typeSet.add(5);
 						//
 					}
-					if (!oldTags.equals(ttags.getText().toString())
-							&& StringUtils.isEmpty(ttags.getText().toString())) {
+					if (!oldTags.equals(ttags.getText().toString())) {
 						hashMap.put("label", ttags.getText().toString());
 						typeSet.add(7);
 						//
 					}
-					if (!oldLovemsg.equals(tlovemsg.getText().toString())
-							&& StringUtils.isEmpty(tlovemsg.getText()
-									.toString())) {
+					if (!oldLovemsg.equals(tlovemsg.getText().toString())) {
 						hashMap.put("lovemsg", tlovemsg.getText().toString());
 						typeSet.add(6);
 						//
 					}
+					dialog = Utils.initWaitingDialog(MyDetailActivity.this,
+							"正在更新资料");
 					api.updateInfo(MyDetailActivity.this, user, hashMap,
 							typeSet, new AjaxCallBack<String>() {
 
@@ -169,18 +199,78 @@ public class MyDetailActivity extends BaseActivity {
 								public void onSuccess(String t) {
 									// TODO Auto-generated method stub
 									super.onSuccess(t);
-									Toast.makeText(appContext, t,
-											Toast.LENGTH_LONG).show();
-									MyLog.v("success", t);
+									dialog.dismiss();
+									WrongResponse response = null;
+
+									try {
+										response = JSON.parseObject(t,
+												WrongResponse.class);
+									} catch (Exception e) {
+										// TODO: handle exception
+									}
+									if (response != null && response.code == 0) {
+
+										MyToast.customToast(
+												MyDetailActivity.this,
+												Toast.LENGTH_SHORT,
+												MyToast.TOAST_MSG_SUCCESS_TITLE,
+												"资料更新成功",
+												Constant.TOAST_IMG_SUCCESS);
+										tname.setEnabled(false);
+										tplace.setEnabled(false);
+										tlovemsg.setEnabled(false);
+										ttags.setEnabled(false);
+										MyDetailActivity.this.btn
+												.setText("完善资料");
+										MyDetailActivity.this.btn.setTag(null);
+
+										appContext.user.setUname(tname
+												.getText().toString());
+										appContext.user.setCommplace(tplace
+												.getText().toString());
+										appContext.user.setLovemsg(tlovemsg
+												.getText().toString());
+										appContext.user.setLabel(ttags
+												.getText().toString());
+										appContext.user.setSex(txsex.getText()
+												.toString());
+
+										// finish();
+										// MainActivity m =
+										// (MainActivity)AppManager.getAppManager().getActivity(MainActivity.class);
+										// m.mScrollLayout.scrollToScreen(3);
+
+									} else {
+										WrongResponse wrongResponse = ValidateUtil
+												.wrongResponse(t);
+										if (wrongResponse.show) {
+											MyToast.customToast(
+													MyDetailActivity.this,
+													Toast.LENGTH_SHORT,
+													MyToast.TOAST_MSG_ERROR_TITLE,
+													wrongResponse.msg,
+													Constant.TOAST_IMG_ERROR);
+
+										} else {
+											MyToast.customToast(
+													MyDetailActivity.this,
+													Toast.LENGTH_SHORT,
+													MyToast.TOAST_MSG_ERROR_TITLE,
+													"资料更新失败",
+													Constant.TOAST_IMG_ERROR);
+											MyLog.v("资料更新失败", wrongResponse.msg);
+										}
+
+									}
 								}
 
 								@Override
 								public void onFailure(Throwable t, String strMsg) {
 									// TODO Auto-generated method stub
 									super.onFailure(t, strMsg);
-									Toast.makeText(appContext, strMsg,
-											Toast.LENGTH_LONG).show();
-									MyLog.v("erro", t.toString());
+									dialog.dismiss();
+									NetUtil.requestError(appContext, null);
+									MyDetailActivity.this.btn.setText("点击重新提交");
 								}
 
 							});
@@ -191,12 +281,12 @@ public class MyDetailActivity extends BaseActivity {
 	}
 
 	private void initValue() {
-		int width = Utils.getScreenWith(MyDetailActivity.this);
-		LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT,
-				width / 2);
-		mPhoto.setLayoutParams(params);
-		fb.isSquare = true;
-		fb.display(face, Constant.URL_IMG_BASE + user.getFace());
+
+		if (!StringUtils.isEmpty(user.getFace())) {
+
+			fb.isSquare = true;
+			fb.display(face, Constant.URL_IMG_BASE + user.getFace());
+		}
 
 		tname.setText(user.getUname());
 		tplace.setText(user.getCommplace());
@@ -307,8 +397,9 @@ public class MyDetailActivity extends BaseActivity {
 					}
 				});
 				if (photos != null && photos.size() != 0) {
-					FinalBitmap fbi = FinalBitmap.createNew(appContext,Constant.IMG_CACHEPATH);
-					fbi.proportion=2;
+					FinalBitmap fbi = FinalBitmap.createNew(appContext,
+							Constant.IMG_CACHEPATH);
+					fbi.proportion = 2;
 					fbi.display(mPhoto, Constant.URL_IMG_BASE
 							+ photos.get(0).getPic());
 
@@ -354,6 +445,7 @@ public class MyDetailActivity extends BaseActivity {
 							MyToast.customToast(MyDetailActivity.this,
 									Toast.LENGTH_SHORT, "成功", "头像更换成功",
 									Constant.TOAST_IMG_SUCCESS);
+							Api.getInstance().addCredits(MyDetailActivity.this, appContext.user, 2, "成功上传头像");
 							super.onSuccess(t);
 							progressDialog.dismiss();
 
@@ -400,7 +492,7 @@ public class MyDetailActivity extends BaseActivity {
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		if (photos != null&&photos.size()>=1) {
+		if (photos != null && photos.size() >= 1) {
 			imagecount.setText(photos.size() + "");
 		}
 	}

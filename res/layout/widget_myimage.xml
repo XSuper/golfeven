@@ -8,7 +8,7 @@
     
    	<ImageView 
 		android:layout_width="160dip"
-		android:layout_height="160dip"
+		android:layout_height="110dip"
 		android:layout_margin="4dp"
 		android:background="@drawable/index_picbg"
 		android:id="@+id/myimage_img"

@@ -524,6 +524,7 @@ public class FinalBitmap {
 			}
 
 			imageView.setImageBitmap(bitmap);
+			//imageView.setBackgroundDrawable(new BitmapDrawable(bitmap));
 			
 		}else if (checkImageTask(uri, imageView)) {
 			
@@ -531,7 +532,7 @@ public class FinalBitmap {
 			//设置默认图片
 			final AsyncDrawable asyncDrawable = new AsyncDrawable(mContext.getResources(), displayConfig.getLoadingBitmap(), task);
 	        imageView.setImageDrawable(asyncDrawable);
-	        
+	        //imageView.setBackgroundDrawable(asyncDrawable);
 	        task.executeOnExecutor(bitmapLoadAndDisplayExecutor, uri);
 	    }
 	}

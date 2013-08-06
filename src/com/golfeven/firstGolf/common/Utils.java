@@ -125,7 +125,7 @@ public class Utils {
 		}
 		int totle = 0;
 		for (int i = 0; i < integrals.size(); i++) {
-			totle += integrals.get(i).getCredits();
+			totle += Integer.parseInt(integrals.get(i).getCredits());
 		}
 		return totle;
 	}
