@@ -9,14 +9,40 @@
 			android:layout_width="fill_parent"
 			android:layout_height="fill_parent"
          >
-         <TableLayout 
+          <LinearLayout 
              android:layout_width="fill_parent"
              android:layout_height="fill_parent"
-             
+             android:orientation="vertical"
+             >
+         <LinearLayout 
+             android:layout_width="fill_parent"
+             android:layout_height="fill_parent"
+             android:orientation="vertical"
+             android:gravity="left"
              android:id="@+id/activity_photos_mytable"
              >
              
-         </TableLayout>
+         </LinearLayout>
+         <Button 
+             android:layout_width="fill_parent"
+             android:layout_height="wrap_content"
+             android:id="@+id/activity_photos_btn"
+             android:text="添加照片"
+             android:textColor="@color/white"
+             android:background="@drawable/btn_bg"
+             android:layout_marginLeft="20dip"
+             android:layout_marginRight="20dip"
+             />
+         <TextView 
+             android:layout_marginTop="5dip"
+             android:layout_width="fill_parent"
+             android:layout_height="wrap_content"
+             android:text="*长按图片可以删除该图片"
+             android:textSize="12sp"
+             android:gravity="center"
+             android:textColor="@color/red"
+             />
+         </LinearLayout>
      </ScrollView>
     
 

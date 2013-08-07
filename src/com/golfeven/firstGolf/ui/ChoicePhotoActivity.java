@@ -56,6 +56,7 @@ public class ChoicePhotoActivity extends BaseActivity {
 			@Override
 			public void onClick(View v) {
 				finish();
+				overridePendingTransition(R.anim.push_up_out, R.anim.push_up_out);
 				
 			}
 		});

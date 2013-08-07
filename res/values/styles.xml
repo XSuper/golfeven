@@ -44,10 +44,10 @@
         <item name="android:activityOpenEnterAnimation">@anim/push_up_in</item>
         <item name="android:activityOpenExitAnimation">@anim/nothing</item>
         <item name="android:activityCloseEnterAnimation">@anim/nothing</item>
-        <item name="android:activityCloseExitAnimation">@anim/cycle_7</item>
+        <item name="android:activityCloseExitAnimation">@anim/push_up_out</item>
         <item name="android:windowBackground">@color/transparent</item>
         <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowAnimationStyle">@+android:style/Animation.Translucent</item>
+       <!--  <item name="android:windowAnimationStyle">@+android:style/Animation.Translucent</item> -->
     </style>
 
     <style name="footbar">

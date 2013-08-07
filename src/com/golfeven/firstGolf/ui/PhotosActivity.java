@@ -18,17 +18,20 @@ import android.graphics.BitmapFactory.Options;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.TableLayout;
 import android.widget.TableRow;
-import android.widget.TableRow.LayoutParams;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
+import com.golfeven.AppManager;
 import com.golfeven.firstGolf.R;
 import com.golfeven.firstGolf.api.Api;
 import com.golfeven.firstGolf.base.BaseActivity;
@@ -45,12 +48,15 @@ import com.golfeven.firstGolf.widget.MyToast;
 public class PhotosActivity extends BaseActivity {
 
 	@ViewInject(id = R.id.activity_photos_mytable)
-	TableLayout mtable;
+	LinearLayout mtable;
 	private List<Photo> photos;
 
 	private boolean isMe = false;
-	TableRow row = null;
+	LinearLayout row = null;
 	int index = 0;
+	Button btn;
+	
+	int w ;//屏幕宽度
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +66,7 @@ public class PhotosActivity extends BaseActivity {
 		Intent intent = getIntent();
 		photos = intent.getParcelableArrayListExtra("photos");
 		isMe = intent.getBooleanExtra("isMe", false);
+		w = Utils.getScreenWith(PhotosActivity.this);
 		if (photos != null) {
 
 			init();
@@ -84,19 +91,23 @@ public class PhotosActivity extends BaseActivity {
 		}
 		if (isMe) {
 
-			Button btn = new Button(appContext);
-			btn.setText("添加照片");
-
-			LayoutParams params = new LayoutParams(1);
-			row = new TableRow(appContext);
-			row.setLayoutParams(params);
-			mtable.addView(row);
-
-			// view.setLayoutParams(params )
-			LayoutParams param = new LayoutParams(LayoutParams.FILL_PARENT,
-					LayoutParams.FILL_PARENT, 1);
-			btn.setLayoutParams(param);
-			row.addView(btn);
+			btn = (Button)findViewById(R.id.activity_photos_btn);
+			btn.setVisibility(View.VISIBLE);
+			
+//			btn.setText("添加照片");
+//
+//			LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT,w/3);
+//			row = new LinearLayout(appContext);
+//			row.setLayoutParams(params);
+//			mtable.addView(row);
+//
+//			// view.setLayoutParams(params )
+//			LayoutParams param = new LayoutParams(LayoutParams.FILL_PARENT,
+//					LayoutParams.WRAP_CONTENT);
+//			params.gravity=Gravity.LEFT;
+//			btn.setLayoutParams(param);
+//			btn.setBackgroundResource(R.drawable.bg_);
+//			row.addView(btn);
 
 			btn.setOnClickListener(new OnClickListener() {
 
@@ -116,14 +127,17 @@ public class PhotosActivity extends BaseActivity {
 
 	public void rowAddView(View view) {
 		if (index % 3 == 0) {
-			LayoutParams params = new LayoutParams(3);
-			row = new TableRow(appContext);
+			LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT,w/3);
+			params.gravity=Gravity.LEFT;
+			row = new LinearLayout(appContext);
 			row.setLayoutParams(params);
 			mtable.addView(row);
 		}
 
 		// view.setLayoutParams(params )
-		LayoutParams param = new LayoutParams(0, LayoutParams.FILL_PARENT, 1);
+		LayoutParams param = new LayoutParams(w/3, w/3, 1);
+		param.setMargins(5, 5, 5, 5);
+		param.gravity=Gravity.LEFT;
 		view.setLayoutParams(param);
 		row.addView(view);
 		index++;
@@ -150,36 +164,39 @@ public class PhotosActivity extends BaseActivity {
 					ContentResolver cr = getContentResolver();
 					try {
 						in = cr.openInputStream(data.getData());
-						Uri uri = data.getData();
-						// BitmapFactory.decodeStream(in);
-						String[] proj = { MediaStore.Images.Media.DATA };
-						Cursor actualimagecursor = managedQuery(uri, proj, null, null,
-								null);
-						int actual_image_column_index = actualimagecursor
-								.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-						actualimagecursor.moveToFirst();
-						String img_path = actualimagecursor
-								.getString(actual_image_column_index);
-						Options opts = new Options();
-						opts.inJustDecodeBounds = true;
-						int len = in.available()/1024;
-						opts.inSampleSize = 2;
-						while ( (len = len / 2)>300){
-							opts.inSampleSize*=2;
-							if(opts.inSampleSize>=4){
-								break;
+						if(in.available()/1024>=300){
+							Uri uri = data.getData();
+							// BitmapFactory.decodeStream(in);
+							String[] proj = { MediaStore.Images.Media.DATA };
+							Cursor actualimagecursor = managedQuery(uri, proj, null, null,
+									null);
+							int actual_image_column_index = actualimagecursor
+									.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+							actualimagecursor.moveToFirst();
+							String img_path = actualimagecursor
+									.getString(actual_image_column_index);
+							Options opts = new Options();
+							opts.inJustDecodeBounds = true;
+							int len = in.available()/1024;
+							opts.inSampleSize = 2;
+							while ( (len = len / 2)>300){
+								opts.inSampleSize*=2;
+								if(opts.inSampleSize>=4){
+									break;
+								}
 							}
+							BitmapFactory.decodeFile(img_path, opts);
+							opts.inJustDecodeBounds = false;
+							Bitmap mbit = BitmapFactory.decodeFile(img_path, opts);
+							in = null;
+							in = ImageUtils.compressImage(mbit);
+							mbit.recycle();
+							ss=false;
+				}
+						} catch (Exception e) {
+							MyLog.e("input-file not found", e.toString());
 						}
-						BitmapFactory.decodeFile(img_path, opts);
-						opts.inJustDecodeBounds = false;
-						Bitmap mbit = BitmapFactory.decodeFile(img_path, opts);
-						in = null;
-						in = ImageUtils.compressImage(mbit);
-						mbit.recycle();
-						ss=false;
-					} catch (Exception e) {
-						MyLog.e("input-file not found", e.toString());
-					}
+						
 //				}
 //				
 //			}.start();
@@ -232,8 +249,8 @@ public class PhotosActivity extends BaseActivity {
 											wrongResponse.msg,
 											Toast.LENGTH_SHORT);
 								} else {
-									MyToast.centerToast(appContext, "上传失败",
-											Toast.LENGTH_SHORT);
+									MyToast.ErrorToast(PhotosActivity.this,"照片上传失败");
+											
 									MyLog.v("上传失败", t);
 								}
 							}
@@ -267,28 +284,69 @@ public class PhotosActivity extends BaseActivity {
 					new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int which) {
 							dialog.dismiss();
+							progressDialog = null;
+							System.gc();
+							progressDialog = Utils
+									.initWaitingDialog(PhotosActivity.this,
+											"正在删除照片...");
 							Api.getInstance().deletPhoto(appContext.user,
 									v.getTag() + "",
 									new AjaxCallBack<String>() {
 
 										@Override
 										public void onSuccess(String t) {
+											
 											// TODO Auto-generated method stub
 											super.onSuccess(t);
 											// v.setVisibility(View.GONE);
-											photos.remove((int) (Integer) v
-													.getTag(R.layout.activity_photos));
-											mtable.removeAllViews();
-											index = 0;
-											init();
+											progressDialog.dismiss();
+											
+											
+											WrongResponse response = null;
 
-											Intent intent = new Intent();
-											intent.putParcelableArrayListExtra(
-													"photos",
-													(ArrayList<Photo>) photos);
-											setResult(003, intent);
-											Toast.makeText(appContext, t,
-													Toast.LENGTH_LONG).show();
+											try {
+												response = JSON.parseObject(t,
+														WrongResponse.class);
+											} catch (Exception e) {
+												// TODO: handle exception
+											}
+											if (response != null && response.code == 0) {
+												photos.remove((int) (Integer) v
+														.getTag(R.layout.activity_photos));
+												mtable.removeAllViews();
+												index = 0;
+												init();
+
+												Intent intent = new Intent();
+												intent.putParcelableArrayListExtra(
+														"photos",
+														(ArrayList<Photo>) photos);
+												setResult(003, intent);
+												MyToast.SuccessToast(PhotosActivity.this, "照片删除成功");
+												
+
+											} else {
+												WrongResponse wrongResponse = ValidateUtil
+														.wrongResponse(t);
+												if (wrongResponse.show) {
+													MyToast.customToast(
+															PhotosActivity.this,
+															Toast.LENGTH_SHORT,
+															MyToast.TOAST_MSG_ERROR_TITLE,
+															wrongResponse.msg,
+															Constant.TOAST_IMG_ERROR);
+													
+												} else {
+													MyToast.customToast(
+															PhotosActivity.this,
+															Toast.LENGTH_SHORT,
+															MyToast.TOAST_MSG_ERROR_TITLE,
+															"成绩提交失败",
+															Constant.TOAST_IMG_ERROR);
+													MyLog.v("成绩提交失败", wrongResponse.msg);
+												}
+												
+											}
 										}
 
 										@Override
@@ -296,9 +354,8 @@ public class PhotosActivity extends BaseActivity {
 												String strMsg) {
 											// TODO Auto-generated method stub
 											super.onFailure(t, strMsg);
-											Toast.makeText(appContext,
-													"======error==" + strMsg,
-													Toast.LENGTH_LONG).show();
+											progressDialog.dismiss();
+											NetUtil.requestError(appContext, "网络连接失败");
 										}
 
 									});

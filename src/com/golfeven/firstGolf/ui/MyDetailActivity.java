@@ -13,7 +13,9 @@ import net.tsz.afinal.annotation.view.ViewInject;
 import net.tsz.afinal.http.AjaxCallBack;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.app.DatePickerDialog.OnDateSetListener;
 import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -24,6 +26,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -120,10 +123,7 @@ public class MyDetailActivity extends BaseActivity {
 		user = appContext.user;
 		load();
 		initValue();
-		tname.setEnabled(false);
-		tplace.setEnabled(false);
-		tlovemsg.setEnabled(false);
-		ttags.setEnabled(false);
+		setAble(false);
 
 		android.widget.LinearLayout.LayoutParams params = new android.widget.LinearLayout.LayoutParams(
 				Utils.getScreenWith(MyDetailActivity.this) / 4,
@@ -142,10 +142,7 @@ public class MyDetailActivity extends BaseActivity {
 			public void onClick(View v) {
 				Button btn = (Button) v;
 				if (btn.getTag() == null) {
-					tname.setEnabled(true);
-					tplace.setEnabled(true);
-					tlovemsg.setEnabled(true);
-					ttags.setEnabled(true);
+					setAble(true);
 					btn.setText("提交");
 					btn.setTag("按下了");
 
@@ -156,40 +153,32 @@ public class MyDetailActivity extends BaseActivity {
 					oldLovemsg = tlovemsg.getText().toString();
 					oldTags = ttags.getText().toString();
 				} else {
-					tname.setEnabled(false);
-					tplace.setEnabled(false);
-					tlovemsg.setEnabled(false);
-					ttags.setEnabled(false);
+					setAble(false);
 					btn.setText("完善资料");
 					btn.setTag(null);
 
 					HashMap<String, String> hashMap = new HashMap<String, String>();
 					Api api = Api.getInstance();
 					Set<Integer> typeSet = new HashSet<Integer>();
-					if (!oldName.equals(tname.getText().toString())) {
-					}
-					if (!oldAge.equals(tage.getText().toString())) {
-						hashMap.put("birthday", tage.getText().toString());
+					
+						//hashMap.put("birthday", tage.getText().toString());
+						hashMap.put("birthday", "1991-01-01");
 
-					}
-					if (!oldSex.equals(txsex.getText().toString())) {
 						hashMap.put("sex", txsex.getText().toString());
-					}
-					if (!oldPlace.equals(tplace.getText().toString())) {
 						hashMap.put("commplace", tplace.getText().toString());
+					if (!oldPlace.equals(tplace.getText().toString())) {
 						typeSet.add(5);
-						//
 					}
+					hashMap.put("label", ttags.getText().toString());
 					if (!oldTags.equals(ttags.getText().toString())) {
-						hashMap.put("label", ttags.getText().toString());
 						typeSet.add(7);
-						//
 					}
+					hashMap.put("lovemsg", tlovemsg.getText().toString());
 					if (!oldLovemsg.equals(tlovemsg.getText().toString())) {
-						hashMap.put("lovemsg", tlovemsg.getText().toString());
 						typeSet.add(6);
 						//
 					}
+					hashMap.put("uname", tname.getText().toString());
 					dialog = Utils.initWaitingDialog(MyDetailActivity.this,
 							"正在更新资料");
 					api.updateInfo(MyDetailActivity.this, user, hashMap,
@@ -216,14 +205,12 @@ public class MyDetailActivity extends BaseActivity {
 												MyToast.TOAST_MSG_SUCCESS_TITLE,
 												"资料更新成功",
 												Constant.TOAST_IMG_SUCCESS);
-										tname.setEnabled(false);
-										tplace.setEnabled(false);
-										tlovemsg.setEnabled(false);
-										ttags.setEnabled(false);
+										setAble(false);
 										MyDetailActivity.this.btn
 												.setText("完善资料");
 										MyDetailActivity.this.btn.setTag(null);
 
+										appContext.user.setBirthday(tage.getText().toString());
 										appContext.user.setUname(tname
 												.getText().toString());
 										appContext.user.setCommplace(tplace
@@ -280,6 +267,18 @@ public class MyDetailActivity extends BaseActivity {
 		});
 	}
 
+	
+	//设置控件是否可以操作
+	private void setAble(boolean able) {
+		tname.setEnabled(able);
+		tplace.setEnabled(able);
+		tlovemsg.setEnabled(able);
+		ttags.setEnabled(able);
+		tsex.setEnabled(able);
+		txsex.setEnabled(able);
+		tage.setEnabled(able);
+	}
+
 	private void initValue() {
 
 		if (!StringUtils.isEmpty(user.getFace())) {
@@ -305,51 +304,101 @@ public class MyDetailActivity extends BaseActivity {
 		ttags.setText(user.getLabel());
 
 		tage.setOnClickListener(new OnClickListener() {
-
+			
 			@Override
-			public void onClick(View arg0) {
-				AlertDialog.Builder builder = new AlertDialog.Builder(
-						MyDetailActivity.this);
-				builder.setIcon(android.R.drawable.ic_dialog_info);
-				final View view = LayoutInflater.from(MyDetailActivity.this)
-						.inflate(R.layout.dialog_choice_age, null);
-				builder.setView(view);
-				builder.setTitle("请选择年龄段");
-				final RadioGroup rg = (RadioGroup) view
-						.findViewById(R.id.choice_age);
-				builder.setPositiveButton("确定",
-						new DialogInterface.OnClickListener() {
-
-							public void onClick(DialogInterface dialog,
-									int which) {
-								int id = rg.getCheckedRadioButtonId();
-								if (id != -1) {
-
-									RadioButton btn = (RadioButton) view
-											.findViewById(id);
-									if (btn != null) {
-
-										tage.setText(btn.getText());
-									}
-								}
-
-								dialog.dismiss();
-
-							}
-						});
-				builder.setNegativeButton("取消",
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog,
-									int which) {
-								dialog.cancel();
-							}
-						});
-				builder.show();
-
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				showTime();
 			}
 		});
+		
+		
+		
+		
+		txsex.setOnClickListener(sexcs);
+		tsex.setOnClickListener(sexcs);
+	}
+	
+	/**
+	 * 显示时间框
+	 */
+	int year = 1980;
+	int month = 1;
+	int day = 1;
+	public void showTime() {
+	
+		DatePickerDialog dateDialog = new DatePickerDialog(
+				MyDetailActivity.this, new OnDateSetListener() {
+
+					@Override
+					public void onDateSet(DatePicker view, int myear,
+							int monthOfYear, int dayOfMonth) {
+						year = myear;
+						month = monthOfYear + 1;
+						day = dayOfMonth;
+						tage.setText(year + "-"
+								+ (month > 9 ? month : "0" + month) + "-"
+								+ (day > 9 ? day : "0" + day));
+
+					}
+				}, year, month, day);
+		dateDialog.show();
 	}
 
+	
+	public OnClickListener sexcs = new OnClickListener() {
+
+		@Override
+		public void onClick(View arg0) {
+			AlertDialog.Builder builder = new AlertDialog.Builder(
+					MyDetailActivity.this);
+			builder.setIcon(android.R.drawable.ic_dialog_info);
+			final View view = LayoutInflater.from(MyDetailActivity.this)
+					.inflate(R.layout.dialog_choice_sex, null);
+			builder.setView(view);
+			builder.setTitle("请选择");
+			final RadioGroup rg = (RadioGroup) view
+					.findViewById(R.id.choice_age);
+			builder.setPositiveButton("确定",
+					new DialogInterface.OnClickListener() {
+
+						public void onClick(DialogInterface dialog,
+								int which) {
+							int id = rg.getCheckedRadioButtonId();
+							if (id != -1) {
+
+								RadioButton btn = (RadioButton) view
+										.findViewById(id);
+								if (btn != null) {
+
+									String sex = btn.getText().toString().trim();
+									txsex.setText(sex);
+									if ("男".equals(sex)) {
+										tsex.setBackgroundResource(R.drawable.qy_man);
+									} else if ("女".equals(sex)) {
+										tsex.setBackgroundResource(R.drawable.qy_girl);
+									} else {
+										tsex.setBackgroundResource(R.drawable.qy_sec);
+									}
+								}
+							}
+
+							dialog.dismiss();
+
+						}
+					});
+			builder.setNegativeButton("取消",
+					new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog,
+								int which) {
+							dialog.cancel();
+						}
+					});
+			builder.show();
+
+		}
+	};
+	
 	private void load() {
 		// TODO Auto-generated method stub
 		Api api = Api.getInstance();

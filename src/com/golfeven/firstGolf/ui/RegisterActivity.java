@@ -18,6 +18,7 @@ import com.golfeven.firstGolf.bean.WrongResponse;
 import com.golfeven.firstGolf.common.MyLog;
 import com.golfeven.firstGolf.common.NetUtil;
 import com.golfeven.firstGolf.common.SharedPreferencesUtil;
+import com.golfeven.firstGolf.common.StringUtils;
 import com.golfeven.firstGolf.common.ValidateUtil;
 import com.golfeven.firstGolf.widget.HeadBack;
 import com.golfeven.firstGolf.widget.MyToast;
@@ -76,17 +77,30 @@ public class RegisterActivity extends BaseActivity{
 				public void onSuccess(String t) {
 					// TODO Auto-generated method stub
 					super.onSuccess(t);
-					if (t.trim().startsWith("{")) {
-						String mid = "";
-						String token="";
+					try {
+						appContext.user = JSON.parseObject(t,
+								User.class);
+
+					} catch (Exception e) {
+						MyLog.e(getClass().getName(), e.toString());
+					}
+					if (appContext.user != null
+							&& !StringUtils.isEmpty(appContext.user
+									.getMid())) {
+
 						appContext.isLogin = true;
-						appContext.user = new User();
-						appContext.user.setMid(mid);
-						appContext.user.setUserid(mUid);
-						appContext.user.setToken(token);
-						//保存用户名和密码
-						SharedPreferencesUtil.saveUser(appContext, mUid, mPass);
-						
+						Api.getInstance().addCredits(RegisterActivity.this, appContext.user, 0, "完成每天登录,");
+						// 登陆成功后保存用户名和密码
+						SharedPreferencesUtil.saveUser(appContext,
+								appContext.user.getUname(),mPass );
+						if (!StringUtils.isEmpty(appContext.longitude)
+								|| !StringUtils
+										.isEmpty(appContext.latitude)) {
+							Api.getInstance().updatePlace(
+									appContext.user,
+									appContext.longitude,
+									appContext.latitude);
+						}
 						finish();
 					} else{
 						WrongResponse wrongResponse = ValidateUtil
