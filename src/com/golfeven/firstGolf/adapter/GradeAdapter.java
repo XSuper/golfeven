@@ -10,10 +10,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.golfeven.firstGolf.R;
-import com.golfeven.firstGolf.adapter.ScoreAdapter.ItemGrade;
 import com.golfeven.firstGolf.base.MBaseAdapter;
 import com.golfeven.firstGolf.bean.Grade;
-import com.golfeven.firstGolf.bean.Score;
 
 public class GradeAdapter extends MBaseAdapter{
 	

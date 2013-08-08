@@ -39,7 +39,7 @@ public class RegisterActivity extends BaseActivity{
 	}
 	public void register(View view){
 		final String mUid=userid.getText().toString();
-		String mNick=nick.getText().toString();
+		final String mNick=nick.getText().toString();
 		final String mPass=pass.getText().toString();
 		String mRPass=rPass.getText().toString();
 		int code = ValidateUtil.registerValidate(mUid,mNick ,mPass ,mRPass);
@@ -89,6 +89,10 @@ public class RegisterActivity extends BaseActivity{
 									.getMid())) {
 
 						appContext.isLogin = true;
+						appContext.user.setUserid(mUid);
+						appContext.user.setUname(mNick);
+						appContext.user.setSex("保密");
+						appContext.user.setBirthday("1900-01-01");
 						Api.getInstance().addCredits(RegisterActivity.this, appContext.user, 0, "完成每天登录,");
 						// 登陆成功后保存用户名和密码
 						SharedPreferencesUtil.saveUser(appContext,

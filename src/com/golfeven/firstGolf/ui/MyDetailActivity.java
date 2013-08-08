@@ -161,8 +161,8 @@ public class MyDetailActivity extends BaseActivity {
 					Api api = Api.getInstance();
 					Set<Integer> typeSet = new HashSet<Integer>();
 					
-						//hashMap.put("birthday", tage.getText().toString());
-						hashMap.put("birthday", "1991-01-01");
+						hashMap.put("birthday", tage.getText().toString());
+						//hashMap.put("birthday", "1991-01-01");
 
 						hashMap.put("sex", txsex.getText().toString());
 						hashMap.put("commplace", tplace.getText().toString());

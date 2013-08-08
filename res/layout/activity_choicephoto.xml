@@ -1,29 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:alpha="10"
-    android:background="@null"
-    android:orientation="vertical" >
-   <Button 
-       android:layout_width="fill_parent"
-       android:layout_height="100dp" 
-       android:layout_marginTop="100dp"
-       android:text="拍照"
-       android:id="@+id/activity_choicephoto_take"
-       />
-   <Button 
-       android:layout_width="fill_parent"
-       android:layout_height="100dp" 
-       android:text="现有"
-       android:id="@+id/activity_choicephoto_choice"
-       />
-   <Button 
-       android:layout_width="fill_parent"
-       android:layout_height="100dp" 
-       android:text="取消"
-       android:id="@+id/activity_choicephoto_cancle"
-       />
-    
+    android:background="#00000000" >
 
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical" >
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="40dip"
+            android:background="@drawable/t_topbg" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/t_botombg"
+            android:orientation="vertical" >
+
+            <Button
+                android:id="@+id/activity_choicephoto_take"
+                android:layout_width="fill_parent"
+                android:layout_height="35dip"
+                android:background="@drawable/btn_bg_s"
+                android:layout_margin="5dip"
+                android:text="拍照" />
+
+            <Button
+                android:id="@+id/activity_choicephoto_choice"
+                android:layout_width="fill_parent"
+                android:layout_height="35dip"
+                 android:layout_margin="5dip"
+                android:background="@drawable/btn_bg_s"
+                android:text="现有" />
+
+            <Button
+                android:id="@+id/activity_choicephoto_cancle"
+                android:layout_width="fill_parent"
+                android:layout_height="35dip"
+                 android:layout_margin="5dip"
+                android:background="@drawable/btn02_bg"
+                android:text="取消" />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

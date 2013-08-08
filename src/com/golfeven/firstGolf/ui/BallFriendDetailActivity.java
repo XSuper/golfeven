@@ -224,8 +224,9 @@ public class BallFriendDetailActivity extends BaseActivity implements
 						super.onSuccess(t);
 						headback.setProgressVisible(false);
 						try {
+							MyLog.v("ballfriend---0", ballFriend.getDistance());
 							ballFriend = JSON.parseObject(t, BallFriend.class);
-
+							MyLog.v("ballfriend---1", ballFriend.getDistance());
 						} catch (Exception e) {
 							// TODO: handle exception
 						}

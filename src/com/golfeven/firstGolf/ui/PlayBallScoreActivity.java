@@ -94,7 +94,7 @@ public class PlayBallScoreActivity extends BaseActivity {
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
 				if(!appContext.isLogin&&appContext.user==null){
-					MyToast.centerToast(appContext, "请先登录后提交成绩", Toast.LENGTH_SHORT);
+					Utils.toLogin(PlayBallScoreActivity.this);
 					return;
 				}
 				if (!Utils.scoreOk(datas)) {

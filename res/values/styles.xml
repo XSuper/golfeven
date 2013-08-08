@@ -43,13 +43,20 @@
     <style name="photoAnimationActivity" parent="@android:style/Animation.Activity">
         <item name="android:activityOpenEnterAnimation">@anim/push_up_in</item>
         <item name="android:activityOpenExitAnimation">@anim/nothing</item>
-        <item name="android:activityCloseEnterAnimation">@anim/nothing</item>
+        <item name="android:activityCloseEnterAnimation">@anim/push_up_out</item>
         <item name="android:activityCloseExitAnimation">@anim/push_up_out</item>
         <item name="android:windowBackground">@color/transparent</item>
         <item name="android:windowIsTranslucent">true</item>
        <!--  <item name="android:windowAnimationStyle">@+android:style/Animation.Translucent</item> -->
     </style>
 
+    
+    <style name="translucent">
+  <item name="android:windowBackground">@color/transparent</item>
+  <item name="android:windowIsTranslucent">true</item>
+  <item name="android:windowAnimationStyle">@+android:style/Animation.Translucent</item>
+ </style>
+    
     <style name="footbar">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">fill_parent</item>
@@ -123,6 +130,7 @@
         <item name="android:layout_marginLeft">10dp</item>
         <item name="android:layout_marginRight">10dp</item>
         <item name="android:orientation">horizontal</item>
+        <item name="android:gravity">center_vertical</item>
     </style>
     <style name="login_register_setting_center">
         <item name="android:orientation">horizontal</item>

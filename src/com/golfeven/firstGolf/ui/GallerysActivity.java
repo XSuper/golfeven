@@ -33,6 +33,8 @@ public class GallerysActivity extends BaseListActivity {
 	private ArrayAdapter xunsaiAdapter;
 	
 	public static float PROPORTION = 2;
+	
+	public boolean isFrist=true;//判断是否是刚刚进入该页面,刚进入不触发下拉框的刷新
 
 	/**
 	 * 必须按照这个顺序排列
@@ -52,7 +54,7 @@ public class GallerysActivity extends BaseListActivity {
 
 	private void init() {
 		// TODO Auto-generated method stub
-		types = this.db.findAll(XunsaiType.class);
+		types = this.db.findAll(XunsaiType.class,"tag=2");
 		sortAdapter = ArrayAdapter.createFromResource(appContext,
 				R.array.spinner_sort, R.layout.spinner_text);
 		xunsaiAdapter = new ArrayAdapter(appContext,R.layout.spinner_text,types);
@@ -80,7 +82,22 @@ public class GallerysActivity extends BaseListActivity {
 			public void onSuccess(String t) {
 				// TODO Auto-generated method stub
 				super.onSuccess(t);
-				types = JSON.parseArray(t, XunsaiType.class);
+				List old = types;
+				types.removeAll(types);
+//				XunsaiType x = new XunsaiType();
+//				x.setTypeid(0);
+//				x.setTypeName("选择赛事");
+//				types.add(x);
+				try {
+					
+					types.addAll(JSON.parseArray(t, XunsaiType.class));
+					
+				} catch (Exception e) {
+					// TODO: handle exception
+					types = old;
+				}
+				old = null;
+				
 				xunsaiAdapter = new ArrayAdapter(appContext,R.layout.spinner_text,types);
 				xunsai.setAdapter(xunsaiAdapter);
 				xunsaiAdapter.setDropDownViewResource(R.layout.spinner_checkedtextview);
@@ -94,6 +111,10 @@ public class GallerysActivity extends BaseListActivity {
 		@Override
 		public void onItemSelected(AdapterView<?> parent, View view,
 				int position, long id) {
+			if(isFrist){
+				isFrist = false;
+				return;
+			}
 			// TODO Auto-generated method stub
 			if (parent == xunsai) {
 				XunsaiType o = (XunsaiType)xunsai.getItemAtPosition(position);
@@ -131,6 +152,11 @@ public class GallerysActivity extends BaseListActivity {
 		// TODO Auto-generated method stub
 		super.onDestroy();
 		appContext.getFB().proportion=0;
+		db.deleteByWhere(XunsaiType.class, "tag=2");
+		for (XunsaiType type : types) {
+			type.setTag(2);
+			db.save(type);
+		}
 	}
 	@Override
 	protected void onStop() {

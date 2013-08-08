@@ -117,14 +117,7 @@ public class BallFriendAttentionListAdapter extends MBaseAdapter {
 		}
 
 		String distance = ballFriend.getDistance();
-		if (!StringUtils.isEmpty(distance) && distance.indexOf("9999") <= -1) {
-			float m = Integer.parseInt(distance);
-			double k = m / 1000;
-			friendView.place.setText(k + "km");
-		} else {
-			friendView.place.setText("未知");
-
-		}
+		friendView.place.setText(Utils.getDestance(distance));
 		if (!StringUtils.isEmpty(ballFriend.getFace())) {
 
 			fb.isSquare = true;

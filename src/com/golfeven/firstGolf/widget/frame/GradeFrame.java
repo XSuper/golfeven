@@ -38,6 +38,7 @@ import com.golfeven.firstGolf.common.Constant;
 import com.golfeven.firstGolf.common.MyLog;
 import com.golfeven.firstGolf.common.NetUtil;
 import com.golfeven.firstGolf.common.StringUtils;
+import com.golfeven.firstGolf.common.Utils;
 import com.golfeven.firstGolf.common.ValidateUtil;
 import com.golfeven.firstGolf.ui.MainActivity;
 import com.golfeven.firstGolf.widget.HomeNavigation;
@@ -104,6 +105,9 @@ public class GradeFrame extends LinearLayout{
 	public static final int LOAD = 0x7;
 	public static final int LOADMORE = 0x8;
 	public static final int REFRESH = 0x9;
+	
+	
+	public int resumNum = 0;
 
 	// public static final int TAG_KEY_TIME = R.string.list_lastUpdate;
 
@@ -228,7 +232,7 @@ public class GradeFrame extends LinearLayout{
 					listView.setTag(LOADMORE);
 					mainActivity.setProgressDisplay(true);
 
-					key_rowindex += key_row;
+					key_rowindex += 1;
 
 					requestData();
 				}
@@ -357,7 +361,7 @@ public class GradeFrame extends LinearLayout{
 					break;
 				case LOADMORE:
 					mHandler.sendEmptyMessage(LOADMORE_FAIL);
-					key_rowindex -= key_row;
+					key_rowindex -= 1;
 					isEnd = true;
 
 					break;
@@ -420,6 +424,7 @@ public class GradeFrame extends LinearLayout{
 		}else{
 			info.setVisibility(View.VISIBLE);
 			info.setText("请先登录");
+			
 			if(adapter!=null){
 				
 				this.params.remove("mid");

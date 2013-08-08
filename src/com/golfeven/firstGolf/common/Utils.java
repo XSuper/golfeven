@@ -11,6 +11,7 @@ import android.util.DisplayMetrics;
 
 import com.golfeven.firstGolf.bean.Integral;
 import com.golfeven.firstGolf.bean.Score;
+import com.golfeven.firstGolf.ui.LoginActivity;
 
 /**
  * 其让杂乱的帮助类
@@ -19,6 +20,17 @@ import com.golfeven.firstGolf.bean.Score;
  * 
  */
 public class Utils {
+	
+	/**
+	 * 弹出登录框
+	 * @param activity
+	 */
+	public static void toLogin(Activity activity){
+		Intent intent = new Intent(activity, LoginActivity.class);
+		intent.putExtra("dialog",true);
+		activity.startActivity(intent);
+	}
+	
 	public static DisplayMetrics dm = null;
 	/**
 	 * 得到屏幕的宽

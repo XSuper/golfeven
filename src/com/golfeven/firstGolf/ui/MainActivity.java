@@ -26,6 +26,7 @@ import com.golfeven.AppManager;
 import com.golfeven.firstGolf.R;
 import com.golfeven.firstGolf.base.BaseActivity;
 import com.golfeven.firstGolf.bean.BallPark;
+import com.golfeven.firstGolf.common.Utils;
 import com.golfeven.firstGolf.widget.ScrollLayout;
 import com.golfeven.firstGolf.widget.ScrollLayout.OnViewChangeListener;
 import com.golfeven.firstGolf.widget.frame.AttentitonFrame;
@@ -106,6 +107,7 @@ public class MainActivity extends BaseActivity {
 			((RadioButton) findViewById(radioGroup.getCheckedRadioButtonId()))
 					.setChecked(false);
 			mRbtns[view].setChecked(true);
+			showLogon = view;
 			myResume(view);
 			
 
@@ -181,6 +183,8 @@ public class MainActivity extends BaseActivity {
 		initWeatherHead();// 更新头部天气，更新地址信息
 		myResume(index);
 	}
+	
+	int showLogon = -1;
 	private void myResume(int index) {
 		
 		switch (index) {
@@ -193,10 +197,20 @@ public class MainActivity extends BaseActivity {
 		case 2:
 			changeTitle(false, "关注",false);
 			((AttentitonFrame)viewAttention).onResume();
+if(!appContext.isLogin&&showLogon==2){
+				
+				Utils.toLogin(MainActivity.this);
+				showLogon=-1;
+			}
 			break;
 		case 3:
 			changeTitle(false, "成绩",false);
 			((GradeFrame)viewGrade).onResume();
+			if(!appContext.isLogin&&showLogon==3){
+				
+				Utils.toLogin(MainActivity.this);
+				showLogon=-1;
+			}
 			break;
 		case 4:
 			changeTitle(false, "系统设置",false);

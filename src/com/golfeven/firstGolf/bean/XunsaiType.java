@@ -7,6 +7,8 @@ public class XunsaiType {
 	@Id
 	 private int typeid;
 	 private String typeName;
+	 private int tag;//标示 是资讯的还是图集的  1 表示资讯,2表示图集
+	 
 	public int getTypeid() {
 		return typeid;
 	}
@@ -24,4 +26,11 @@ public class XunsaiType {
 		// TODO Auto-generated method stub
 		return typeName;
 	}
+	public int getTag() {
+		return tag;
+	}
+	public void setTag(int tag) {
+		this.tag = tag;
+	}
+	 
 }

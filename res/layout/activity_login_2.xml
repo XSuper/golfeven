@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.golfeven.firstGolf"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/bg_"
+        android:orientation="vertical" >
+
+        <com.golfeven.firstGolf.widget.HeadBack
+            android:id="@+id/activity_login_headback"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            app:htitle="您需要先登录" />
+
+        <LinearLayout
+            style="@style/login_register_setting_top"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|left"
+                android:src="@drawable/d_mobile" />
+
+            <EditText
+                android:id="@+id/activity_login_uname"
+                style="@style/input_edit"
+                android:hint="请输入手机号或邮箱" >
+
+                <requestFocus />
+            </EditText>
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/login_register_setting_bottom"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|left"
+                android:src="@drawable/d_secret" />
+
+            <EditText
+                android:id="@+id/activity_login_password"
+                style="@style/input_edit"
+                android:hint="6-16位密码" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/activity_login_register"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/btn02_bg"
+                android:text="注册" />
+
+            <Button
+                android:id="@+id/activity_login_login"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/btn_bg"
+                android:text="登陆" />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

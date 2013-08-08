@@ -193,7 +193,7 @@ public abstract class BaseListActivity extends BaseActivity {
 					listView.setTag(LOADMORE);
 					headBack.setProgressVisible(true);
 
-					key_rowindex += key_row;
+					key_rowindex += 1;
 
 					requestData();
 				}
@@ -255,11 +255,14 @@ public abstract class BaseListActivity extends BaseActivity {
 				Date date = new Date();
 				switch (tag) {
 				case LOAD:
+					List mdatas = datas;
 					try {
+						datas = null;
 						datas = JSON.parseArray(t, entityClass);
 						
 					} catch (Exception e) {
 						// TODO: handle exception
+						datas = mdatas;
 					}
 					if(datas!=null&&datas.size()<key_row){
 						isEnd = true;
@@ -285,16 +288,17 @@ public abstract class BaseListActivity extends BaseActivity {
 					break;
 				case LOADMORE:
 					if (StringUtils.responseError(t)) {
+						//Toast.makeText(appContext, t, Toast.LENGTH_LONG).show();
 						isEnd = true;
 						mHandler.sendEmptyMessage(NOMORE);
 
 						return;
 					}
 					List mdata = JSON.parseArray(t, entityClass);
+					datas.addAll(mdata);
 					if(mdata!=null&&mdata.size()<key_row){
 						isEnd = true;
 					}
-					datas.addAll(mdata);
 					mHandler.sendEmptyMessage(LOADMORE_SUCCESS);
 					break;
 
@@ -320,7 +324,7 @@ public abstract class BaseListActivity extends BaseActivity {
 					break;
 				case LOADMORE:
 					mHandler.sendEmptyMessage(LOADMORE_FAIL);
-					key_rowindex -= key_row;
+					key_rowindex -= 1;
 					isEnd = true;
 
 					break;

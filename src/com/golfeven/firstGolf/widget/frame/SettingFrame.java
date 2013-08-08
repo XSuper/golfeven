@@ -112,16 +112,18 @@ public class SettingFrame extends LinearLayout implements
 		clear.setText("清除");
 
 		login.setOnClickListener(this);
+		mydetail.setOnClickListener(this);
 		if (appContext.isLogin) {
-			mydetail.setOnClickListener(new ToOtherActivity(
-					(MainActivity) getContext(), MyDetailActivity.class));
-			mydetail.setClickable(true);
+//			mydetail.setOnClickListener(new ToOtherActivity(
+//					(MainActivity) getContext(), MyDetailActivity.class));
+//			mydetail.setClickable(true);
 			my.setText(appContext.user.getUname());
 			login.setText("注销");
 
 		} else {
-			mydetail.setOnClickListener(null);
-			mydetail.setClickable(false);
+//			mydetail.setOnClickListener(new ToOtherActivity(
+//					(MainActivity) getContext(), LoginActivity.class));
+			//mydetail.setClickable(false);
 			login.setText("登陆");
 			my.setText("请先登陆");
 		}
@@ -155,12 +157,26 @@ public class SettingFrame extends LinearLayout implements
 				appContext.isLogin = false;
 				appContext.user = null;
 				SharedPreferencesUtil.clearUser(appContext);
-				mydetail.setClickable(false);
+				
 				my.setText("请先登陆");
 				login.setText("登陆");
 			} else {
+				
 				Utils.ToActivity((Activity) getContext(), LoginActivity.class,
 						false);
+				((Activity)getContext()).overridePendingTransition(R.anim.slide_right, R.anim.slide_right_out);
+			}
+		}
+		if(view == mydetail){
+			if (appContext.isLogin) {
+				Utils.ToActivity((Activity) getContext(), MyDetailActivity.class,
+						false);
+				
+			} else {
+				
+				Utils.ToActivity((Activity) getContext(), LoginActivity.class,
+						false);
+				((Activity)getContext()).overridePendingTransition(R.anim.slide_right, R.anim.slide_right_out);
 			}
 		}
 		if (view == integral) {
@@ -168,11 +184,7 @@ public class SettingFrame extends LinearLayout implements
 			if (appContext.isLogin) {
 				Utils.ToActivity((Activity) getContext(),
 						IntegralActivity.class, false);
-			} else {
-				Utils.ToActivity((Activity) getContext(), LoginActivity.class,
-						false);
-
-			}
+			} 
 		}
 		if (view == clear) {
 

@@ -20,7 +20,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" 
-            
+            android:background="@drawable/email_icon"
             />
 
         <EditText
@@ -36,7 +36,9 @@
 
         <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="@drawable/d_mobile"
+             />
 
         <EditText
             android:id="@+id/activity_register_name"
@@ -52,7 +54,9 @@
 
         <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="@drawable/d_secret"
+             />
 
         <EditText
             android:id="@+id/activity_register_upass"
@@ -70,6 +74,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/email_icon_02"
              />
 
         <EditText
@@ -80,10 +85,14 @@
             />
     </LinearLayout>
     <CheckBox 
+        android:layout_margin="10dp"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
         android:text="同意注册条款"
         android:id="@+id/activity_register_agree"
+        android:checked="true"
+        android:button="@drawable/checkbox_bg"
         />
     <Button
         style="@style/btn_blue"

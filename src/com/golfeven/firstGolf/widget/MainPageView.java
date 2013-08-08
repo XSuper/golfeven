@@ -162,7 +162,7 @@ public class MainPageView extends LinearLayout {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}  
-				System.out.println("currentItem: " + currentItem);
+				//System.out.println("currentItem: " + currentItem);
 				currentItem = ++currentItem  % imageViews.size();
 				handler.obtainMessage().sendToTarget(); // 通过Handler切换图片
 			}

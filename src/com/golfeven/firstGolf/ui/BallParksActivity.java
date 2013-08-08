@@ -1,5 +1,6 @@
 package com.golfeven.firstGolf.ui;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import net.tsz.afinal.FinalHttp;
@@ -32,6 +33,8 @@ public class BallParksActivity extends BaseListActivity {
 	private ArrayAdapter parktypeAdapter;
 	private ArrayAdapter cityAdapter;
 	private ArrayAdapter priceAdapter;
+	
+	public boolean isFrist = true;
 
 	private List<PlaygroundType> types;
 	private boolean isChoice = false;//判断进来是 选择球场 还是 展示列表
@@ -84,7 +87,15 @@ public class BallParksActivity extends BaseListActivity {
 			public void onSuccess(String t) {
 				// TODO Auto-generated method stub
 				super.onSuccess(t);
-				types = JSON.parseArray(t, PlaygroundType.class);
+				List old = types;
+				types.removeAll(types);
+				try {
+					
+					types = JSON.parseArray(t, PlaygroundType.class);
+				} catch (Exception e) {
+					// TODO: handle exception
+					types = old;
+				}
 				parktypeAdapter = new ArrayAdapter(appContext,R.layout.spinner_text,types);
 				parktype.setAdapter(parktypeAdapter);
 				parktypeAdapter.setDropDownViewResource(R.layout.spinner_checkedtextview);
@@ -98,11 +109,36 @@ public class BallParksActivity extends BaseListActivity {
 		public void onItemSelected(AdapterView<?> parent, View view, int position,
 				long id) {
 			// TODO Auto-generated method stub
+			if(isFrist){
+				try {
+					if(types==null||types.size()>=1){
+						return;
+					}
+					String value = parktype.getItemAtPosition(0).toString();
+					if("练习场".equals(value.trim())){
+						
+						parktype.setSelection(1);
+					}
+					
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+				
+				isFrist = false;
+				return;
+			}
 			if(parent == parktype){
 				PlaygroundType value = (PlaygroundType)parktype.getItemAtPosition(position);
 				params.put("typeid",value.getTypeid()+"");
 			}
 			if(parent ==city){
+				String value = city.getItemAtPosition(position).toString();
+				
+				if("全部城市".equals(value)){
+					params.remove("city");
+				}else{
+					params.put("city",value);
+				}
 				
 			}
 			if(parent ==price){

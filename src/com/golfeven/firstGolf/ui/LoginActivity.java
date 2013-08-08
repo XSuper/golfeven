@@ -1,10 +1,8 @@
 package com.golfeven.firstGolf.ui;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import net.tsz.afinal.annotation.view.ViewInject;
 import net.tsz.afinal.http.AjaxCallBack;
+import android.app.PendingIntent.OnFinished;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -18,7 +16,6 @@ import com.golfeven.firstGolf.api.Api;
 import com.golfeven.firstGolf.base.BaseActivity;
 import com.golfeven.firstGolf.bean.User;
 import com.golfeven.firstGolf.bean.WrongResponse;
-import com.golfeven.firstGolf.common.Constant;
 import com.golfeven.firstGolf.common.MyLog;
 import com.golfeven.firstGolf.common.SharedPreferencesUtil;
 import com.golfeven.firstGolf.common.StringUtils;
@@ -42,9 +39,14 @@ public class LoginActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_login);
+		if(getIntent().getBooleanExtra("dialog",false)){
+			setContentView(R.layout.activity_login_2);
+		}else{
+			setTheme(R.style.ThemeActivity);
+			setContentView(R.layout.activity_login);
+		}
 	}
-
+	
 	public void login(View view) {
 		// TODO Auto-generated method stub
 		switch (ValidateUtil.loginValidate(uname.getText().toString(), upass

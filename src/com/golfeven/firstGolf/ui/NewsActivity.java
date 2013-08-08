@@ -1,5 +1,6 @@
 package com.golfeven.firstGolf.ui;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import net.tsz.afinal.FinalHttp;
@@ -35,6 +36,8 @@ public class NewsActivity extends BaseListActivity {
 	
 	
 	private List<XunsaiType> types;
+	
+	public boolean isFrist = true;
 	/**
 	 * 必须按照这个顺序排列
 	 */
@@ -52,7 +55,7 @@ public class NewsActivity extends BaseListActivity {
 	}
 	
 	private void init() {
-		types = this.db.findAll(XunsaiType.class);
+		types = this.db.findAll(XunsaiType.class,"tag=1");
 		// TODO Auto-generated method stub
 		newstypeAdapter =ArrayAdapter.createFromResource(appContext, R.array.spinner_newsType,R.layout.spinner_text);
 		sortAdapter = ArrayAdapter.createFromResource(appContext, R.array.spinner_sort,R.layout.spinner_text);
@@ -85,7 +88,20 @@ public class NewsActivity extends BaseListActivity {
 			public void onSuccess(String t) {
 				// TODO Auto-generated method stub
 				super.onSuccess(t);
-				types = JSON.parseArray(t, XunsaiType.class);
+//				XunsaiType x = new XunsaiType();
+//				x.setTypeid(0);
+//				x.setTypeName("选择赛事");
+				List old = types;
+				types.removeAll(types);
+				try{
+//					
+//					types.add(x);
+					types.addAll(JSON.parseArray(t, XunsaiType.class)) ;
+				}catch (Exception e) {
+					// TODO: handle exception
+					types = old;
+					MyLog.v("xunsaiAdapter",e.toString()+"");
+				}
 				MyLog.v("xunsaiAdapter",types.size()+"");
 				xunsaiAdapter = new ArrayAdapter(appContext,R.layout.spinner_text,types);
 				xunsai.setAdapter(xunsaiAdapter);
@@ -106,10 +122,19 @@ public class NewsActivity extends BaseListActivity {
 		public void onItemSelected(AdapterView<?> parent, View view, int position,
 				long id) {
 			// TODO Auto-generated method stub
+			if(isFrist){
+				isFrist = false;
+				return;
+			}
 			if(parent == xunsai){
 				XunsaiType o = (XunsaiType)xunsai.getItemAtPosition(position);
-				params.put("typeid",o.getTypeid()+"");
-				((NewsListAdapter)adapter).setTypeid(o.getTypeid()+"");
+//				if(o.getTypeid()==0){
+//					params.remove("typeid");
+//				}else{
+					params.put("typeid",o.getTypeid()+"");
+					((NewsListAdapter)adapter).setTypeid(o.getTypeid()+"");
+					
+//				}
 			}
 			if(parent ==sort){
 				String sortStr ="day";
@@ -154,8 +179,9 @@ public class NewsActivity extends BaseListActivity {
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
-		db.deleteByWhere(XunsaiType.class, null);
+		db.deleteByWhere(XunsaiType.class, "tag=1");
 		for (XunsaiType type : types) {
+			type.setTag(1);
 			db.save(type);
 		}
 	}
