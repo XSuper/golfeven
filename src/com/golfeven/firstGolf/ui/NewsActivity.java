@@ -55,7 +55,7 @@ public class NewsActivity extends BaseListActivity {
 	}
 	
 	private void init() {
-		types = this.db.findAll(XunsaiType.class,"tag=1");
+		types = this.db.findAllByWhere(XunsaiType.class,"tag=1");
 		// TODO Auto-generated method stub
 		newstypeAdapter =ArrayAdapter.createFromResource(appContext, R.array.spinner_newsType,R.layout.spinner_text);
 		sortAdapter = ArrayAdapter.createFromResource(appContext, R.array.spinner_sort,R.layout.spinner_text);

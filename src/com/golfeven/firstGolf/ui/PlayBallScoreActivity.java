@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.DatePicker;
 import android.widget.ImageView;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -74,6 +75,10 @@ public class PlayBallScoreActivity extends BaseActivity {
 	private void initValues() {
 		// TODO Auto-generated method stub
 		title.setText(ballpark.getTitle());
+		int w = Utils.getScreenWith(PlayBallScoreActivity.this);
+		LayoutParams params = new LayoutParams(w/4, w/4);
+		params.setMargins(5, 5, 5, 5);
+		img.setLayoutParams(params);
 		appContext.getFB().display(img,
 				Constant.URL_IMG_BASE + ballpark.getLitpic());
 

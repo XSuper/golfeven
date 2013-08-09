@@ -31,6 +31,7 @@ import com.golfeven.firstGolf.bean.News;
 import com.golfeven.firstGolf.common.Constant;
 import com.golfeven.firstGolf.common.MyLog;
 import com.golfeven.firstGolf.common.StringUtils;
+import com.golfeven.firstGolf.common.Utils;
 import com.golfeven.firstGolf.widget.HeadBack;
 import com.golfeven.firstGolf.widget.MyToast;
 import com.golfeven.firstGolf.widget.PullToRefreshListView;
@@ -303,6 +304,7 @@ public abstract class BaseListActivity extends BaseActivity {
 					break;
 
 				}
+				datas = Utils.RemoveSame((ArrayList)datas);
 				adapter.refresh(datas);
 			}
 
@@ -351,6 +353,7 @@ public abstract class BaseListActivity extends BaseActivity {
 				super.run();
 					
 					db.deleteByWhere(entityClass, null);
+					datas = Utils.RemoveSame((ArrayList)datas);
 				// 数据保存
 				for (Object data : datas) {
 					if (entityClass == GolfInfo.class) {

@@ -1,6 +1,7 @@
 package com.golfeven.firstGolf.widget.frame;
 
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import net.tsz.afinal.FinalDb;
@@ -23,16 +24,16 @@ import com.golfeven.firstGolf.bean.Gallery;
 import com.golfeven.firstGolf.bean.GolfInfo;
 import com.golfeven.firstGolf.bean.News;
 import com.golfeven.firstGolf.common.Constant;
-import com.golfeven.firstGolf.common.MyLog;
 import com.golfeven.firstGolf.ui.BallFriendsActivity;
 import com.golfeven.firstGolf.ui.BallParksActivity;
-import com.golfeven.firstGolf.ui.BallTeamsActivity;
 import com.golfeven.firstGolf.ui.GallerysActivity;
 import com.golfeven.firstGolf.ui.GolfInfosActivity;
 import com.golfeven.firstGolf.ui.MainActivity;
 import com.golfeven.firstGolf.ui.NewsActivity;
 import com.golfeven.firstGolf.widget.HomeNavigation;
 import com.golfeven.firstGolf.widget.MainPageView;
+import com.golfeven.firstGolf.widget.PullToRefreshLayout;
+import com.golfeven.firstGolf.widget.PullToRefreshLayout.OnRefreshListener;
 
 public class HomeFrame extends LinearLayout {
 	public Context context;
@@ -53,6 +54,8 @@ public class HomeFrame extends LinearLayout {
 	public static List listNews, listHotActivity, listGallery, listBallPark,
 			listBallTeam, listBallFriends, listGolfInfo;
 
+	private PullToRefreshLayout mscroll;
+	
 	public FinalDb fd;
 
 	public HomeFrame(Context context, AttributeSet attrs) {
@@ -66,7 +69,7 @@ public class HomeFrame extends LinearLayout {
 	}
 
 	private void initViews(Context context) {
-
+		
 		listNews = fd.findAllByWhere(News.class, null);
 		//listHotActivity = new ArrayList();
 		listGallery = fd.findAll(Gallery.class);
@@ -79,6 +82,21 @@ public class HomeFrame extends LinearLayout {
 
 		View view = LayoutInflater.from(context).inflate(R.layout.frame_home,
 				this);
+		mscroll = (PullToRefreshLayout)view.findViewById(R.id.home_frame_mScoll);
+	       
+		((LinearLayout)mscroll.getChildAt(0)).addView(mscroll.headView,0);
+		mscroll.setOnRefreshListener(new OnRefreshListener() {
+			
+			@Override
+			public void onRefresh() {
+				
+				
+				LoadData();
+				
+				
+			}
+		});
+		
 		nav_news = (HomeNavigation) view.findViewById(R.id.frame_home_nav_news);
 		/*nav_hotActivity = (HomeNavigation) view
 				.findViewById(R.id.frame_home_nav_hotActivity);*/
@@ -133,7 +151,7 @@ public class HomeFrame extends LinearLayout {
 
 		AjaxParams BallPark_params = new AjaxParams();
 		BallPark_params.put("cmd", "Article.getPlayground");
-		BallPark_params.put("typeid", "127");
+		BallPark_params.put("typeid", "125");
 		BallPark_params.put("row", Constant.HOME_NAVIGATIN_IMG_SIZE + "");
 		cLoadData(BallPark_params, nav_ballPark, BallPark.class);
 
@@ -163,12 +181,36 @@ public class HomeFrame extends LinearLayout {
 				// TODO Auto-generated method stub
 				super.onSuccess(t);
 				List datas = null;
+				
 				try {
 
 					datas = JSON.parseArray(t, cls);
 				} catch (Exception e) {
-					MyLog.v("json", t);
+					if (cls == News.class) {
+						news_complete = true;
+						datas = listNews;
+					} else if (cls == GolfInfo.class) {
+						golfInfo_complete = true;
+						datas = listGolfInfo;
+					} else if (cls == Gallery.class) {
+						gallery_complete = true;
+						datas  = listGallery;
+
+					} else if (cls == BallPark.class) {
+						ballPark_complete = true;
+						datas = listBallPark;
+
+					} else if (cls == BallTeam.class) {
+						ballTeam_complete = true;
+						datas = listBallTeam;
+
+					} else if (cls == BallFriend.class) {
+						ballFriend_complete = true;
+						datas = listBallFriends;
+
+					}
 				}
+				
 				if (cls == News.class) {
 					news_complete = true;
 					listNews = datas;
@@ -200,18 +242,32 @@ public class HomeFrame extends LinearLayout {
 			public void onFailure(Throwable t, String strMsg) {
 				// TODO Auto-generated method stub
 				super.onFailure(t, strMsg);
+				List datas = null;
 				if (cls == News.class) {
 					news_complete = true;
+					datas = listNews;
 				} else if (cls == GolfInfo.class) {
-					gallery_complete = true;
+					golfInfo_complete = true;
+					datas = listGolfInfo;
 				} else if (cls == Gallery.class) {
 					gallery_complete = true;
+					datas  = listGallery;
+
 				} else if (cls == BallPark.class) {
 					ballPark_complete = true;
+					datas = listBallPark;
+
 				} else if (cls == BallTeam.class) {
 					ballTeam_complete = true;
+					datas = listBallTeam;
+
 				} else if (cls == BallFriend.class) {
 					ballFriend_complete = true;
+					datas = listBallFriends;
+
+				}
+				if(datas!= null){
+					hn.initData(datas);
 				}
 				loadComplete();
 			}
@@ -230,6 +286,8 @@ public class HomeFrame extends LinearLayout {
 				&& golfInfo_complete) {
 
 			((MainActivity) context).setProgressDisplay(false);
+			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			mscroll.onRefreshComplete(sf.format(new Date()));
 			return true;
 		} else {
 			return false;
@@ -259,7 +317,35 @@ public class HomeFrame extends LinearLayout {
 	}
 
 	public void onStart() {
+		
 		mpage.onStart();
+		
+//		if(listNews ==null||listNews.size()==0){
+//			listNews = fd.findAllByWhere(News.class, null);
+//			//listHotActivity = new ArrayList();
+//			listBallTeam = fd.findAllByWhere(BallTeam.class, null);
+//			listBallFriends = fd.findAllByWhere(BallFriend.class, null);
+//			listGolfInfo = fd.findAll(GolfInfo.class);
+//
+//		}
+//		if(listGallery ==null||listGallery.size()==0){
+//			listGallery = fd.findAll(Gallery.class);
+//			
+//		}
+//		if(listBallPark ==null||listBallPark.size()==0){
+//			listBallPark = fd.findAllByWhere(BallPark.class, null);
+//			
+//		}
+//		if(listBallTeam ==null||listBallTeam.size()==0){
+//			
+//		}
+//		if(listBallFriends ==null||listBallFriends.size()==0){
+//			
+//		}
+//		if(listGolfInfo ==null||listGolfInfo.size()==0){
+//			
+//		}
+		
 	}
 
 }

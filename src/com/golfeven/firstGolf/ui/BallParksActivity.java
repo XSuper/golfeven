@@ -1,6 +1,5 @@
 package com.golfeven.firstGolf.ui;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import net.tsz.afinal.FinalHttp;
@@ -19,7 +18,6 @@ import com.golfeven.firstGolf.adapter.BallParkListAdapter;
 import com.golfeven.firstGolf.base.BaseListActivity;
 import com.golfeven.firstGolf.bean.BallPark;
 import com.golfeven.firstGolf.bean.PlaygroundType;
-import com.golfeven.firstGolf.bean.XunsaiType;
 import com.golfeven.firstGolf.common.Constant;
 import com.golfeven.firstGolf.widget.HeadBack;
 import com.golfeven.firstGolf.widget.PullToRefreshListView;
@@ -92,6 +90,18 @@ public class BallParksActivity extends BaseListActivity {
 				try {
 					
 					types = JSON.parseArray(t, PlaygroundType.class);
+//					if("练习场".equals(types.get(types.size()-1).getTypeName())){
+//						PlaygroundType temp = types.get(types.size()-1);
+//						types.remove(types.size()-1);
+//						types.add(types.size()-2,temp);
+//					}
+					for (PlaygroundType object : types) {
+						if("俱乐部".equals(object.getTypeName().trim())){
+							types.remove(object);
+							types.add(0,object);
+							break;
+						}
+					}
 				} catch (Exception e) {
 					// TODO: handle exception
 					types = old;
@@ -110,19 +120,19 @@ public class BallParksActivity extends BaseListActivity {
 				long id) {
 			// TODO Auto-generated method stub
 			if(isFrist){
-				try {
-					if(types==null||types.size()>=1){
-						return;
-					}
-					String value = parktype.getItemAtPosition(0).toString();
-					if("练习场".equals(value.trim())){
-						
-						parktype.setSelection(1);
-					}
-					
-				} catch (Exception e) {
-					// TODO: handle exception
-				}
+//				try {
+//					if(types==null||types.size()<=1){
+//						return;
+//					}
+//					String value = parktype.getItemAtPosition(0).toString();
+//					if("练习场".equals(value.trim())){
+//						
+//						parktype.setSelection(1);
+//					}
+//					
+//				} catch (Exception e) {
+//					// TODO: handle exception
+//				}
 				
 				isFrist = false;
 				return;

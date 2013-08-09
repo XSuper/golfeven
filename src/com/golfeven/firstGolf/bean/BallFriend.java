@@ -22,6 +22,9 @@ public class BallFriend extends BaseBean{
 	private String lovemsg;
 	private String commplace;
 	private String label;
+	
+	private String agestr;
+	
 	private String lat;
 	private String lng;
 	private String geohash;
@@ -42,7 +45,7 @@ public class BallFriend extends BaseBean{
 					source.readString(), source.readString(),
 					source.readString(), source.readString(),
 					source.readString(), source.readString(), 
-					source.readString(), source.readString()
+					source.readString(), source.readString(),source.readString()
 					);
 		}
 
@@ -61,7 +64,7 @@ public class BallFriend extends BaseBean{
 	}
 	public BallFriend(String mid, String mtype, String userid, String uname,
 			String sex, String face, String jointime, String logintime,
-			String birthday, String lovemsg, String commplace, String label,
+			String birthday, String lovemsg, String commplace, String label,String agestr,
 			String lat, String lng, String geohash, String distance,
 			String isMyFriend, String teamintroduce) {
 		super();
@@ -77,6 +80,7 @@ public class BallFriend extends BaseBean{
 		this.lovemsg = lovemsg;
 		this.commplace = commplace;
 		this.label = label;
+		this.agestr = agestr;
 		this.lat = lat;
 		this.lng = lng;
 		this.geohash = geohash;
@@ -85,6 +89,13 @@ public class BallFriend extends BaseBean{
 		this.teamintroduce = teamintroduce;
 	}
 	
+	
+	public String getAgestr() {
+		return agestr;
+	}
+	public void setAgestr(String agestr) {
+		this.agestr = agestr;
+	}
 	public String getMemberRelation() {
 		return memberRelation;
 	}
@@ -207,6 +218,8 @@ public class BallFriend extends BaseBean{
 		dest.writeString(this.lovemsg);
 		dest.writeString(this.commplace);
 		dest.writeString(this.label);
+		dest.writeString(this.agestr);
+		
 		dest.writeString(this.lat );
 		dest.writeString(this.lng );
 		dest.writeString(this.geohash );

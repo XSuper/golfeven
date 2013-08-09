@@ -107,7 +107,7 @@ public class BallFriendAttentionListAdapter extends MBaseAdapter {
 		
 		friendView.nick.setText(ballFriend.getUname());
 		friendView.loveMsg.setText(ballFriend.getLovemsg());
-		friendView.age.setText(ballFriend.getBirthday());
+		friendView.age.setText(ballFriend.getAgestr());
 		if (ballFriend.getSex().trim().equals("男")) {
 			friendView.sex.setBackgroundResource(R.drawable.qy_man);
 		} else if (ballFriend.getSex().trim().equals("女")) {

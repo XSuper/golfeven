@@ -22,10 +22,10 @@
             android:text="杆数"
             />
         <ImageView 
-             android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@drawable/btn_up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/shang_icon"
             android:id="@+id/dialog_playcount_totlecount_add"
             />
         <TextView 
@@ -39,20 +39,14 @@
             android:id="@+id/dialog_playcount_totlecount"
             />
          <ImageView 
-             android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@drawable/btn_down"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/xia_icon"
             android:id="@+id/dialog_playcount_totlecount_subtract"
             />
     </LinearLayout>
-    <TextView  
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="4"
-        android:textColor="@color/red"
-        android:textSize="50sp"
-        android:text="00"/>
+    
    
     <LinearLayout
         android:layout_width="match_parent"
@@ -70,10 +64,10 @@
             android:text="推杆"
             />
         <ImageView 
-             android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@drawable/btn_up"
+             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/shang_icon"
             android:id="@+id/dialog_playcount_tuicount_add"
             />
         <TextView 
@@ -87,10 +81,10 @@
             android:id="@+id/dialog_playcount_tuicount"
             />
          <ImageView 
-             android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@drawable/btn_down"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/xia_icon"
             android:id="@+id/dialog_playcount_tuicount_subtract"
             />
     </LinearLayout>

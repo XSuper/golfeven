@@ -1,5 +1,6 @@
 package com.golfeven.firstGolf.bean;
 
+import net.tsz.afinal.annotation.sqlite.Transient;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -15,6 +16,7 @@ public class Gallery extends BaseBean {
 	private String source;
 	private String litpic;
 	private String description;
+	@Transient
 	public static final Parcelable.Creator<Gallery> CREATOR = new Creator<Gallery>() {
 
 		@Override

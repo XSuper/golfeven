@@ -67,7 +67,14 @@ public class BallFriendsActivity extends BaseListActivity {
 			// TODO Auto-generated method stub
 			
 			if(parent ==age){
-				
+				String value = age.getItemAtPosition(position).toString();
+				String ageStr = "选择年龄";
+				if("选择年龄".equals(value)){
+					ageStr = "选择年龄";
+					params.remove("age");
+				}else{
+					params.put("age",value);
+				}
 			}
 			if(parent ==sex){
 				String value = sex.getItemAtPosition(position).toString();

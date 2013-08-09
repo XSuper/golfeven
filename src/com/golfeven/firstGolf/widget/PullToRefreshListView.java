@@ -112,7 +112,7 @@ public class PullToRefreshListView extends ListView implements OnScrollListener 
 
         //System.out.println("初始高度："+headContentHeight); 
         //System.out.println("初始TopPad："+headContentOriginalTopPadding);
-        
+        headView.setVisibility(View.GONE);
         addHeaderView(headView);        
         setOnScrollListener(this); 
     }  
@@ -239,7 +239,7 @@ public class PullToRefreshListView extends ListView implements OnScrollListener 
     private void changeHeaderViewByState() {  
         switch (state) {  
         case RELEASE_To_REFRESH:  
-        	
+        	 headView.setVisibility(View.VISIBLE);
             arrowImageView.setVisibility(View.VISIBLE);  
             progressBar.setVisibility(View.GONE);  
             tipsTextview.setVisibility(View.VISIBLE);  
@@ -253,7 +253,7 @@ public class PullToRefreshListView extends ListView implements OnScrollListener 
             //Log.v(TAG, "当前状态，松开刷新");  
             break;  
         case PULL_To_REFRESH:
-        	
+        	 headView.setVisibility(View.VISIBLE);
             progressBar.setVisibility(View.GONE);  
             tipsTextview.setVisibility(View.VISIBLE);  
             lastUpdatedTextView.setVisibility(View.VISIBLE);  
@@ -270,6 +270,7 @@ public class PullToRefreshListView extends ListView implements OnScrollListener 
             break;  
   
         case REFRESHING:   
+        	 headView.setVisibility(View.VISIBLE);
         	//System.out.println("刷新REFRESHING-TopPad："+headContentOriginalTopPadding);
         	headView.setPadding(headView.getPaddingLeft(), headContentOriginalTopPadding, headView.getPaddingRight(), headView.getPaddingBottom());   
             headView.invalidate();  
@@ -296,6 +297,8 @@ public class PullToRefreshListView extends ListView implements OnScrollListener 
             lastUpdatedTextView.setVisibility(View.VISIBLE);  
   
             //Log.v(TAG, "当前状态，done");  
+            
+            headView.setVisibility(View.GONE);
             break;  
         }  
     }  

@@ -54,7 +54,7 @@ public class GallerysActivity extends BaseListActivity {
 
 	private void init() {
 		// TODO Auto-generated method stub
-		types = this.db.findAll(XunsaiType.class,"tag=2");
+		types = this.db.findAllByWhere(XunsaiType.class,"tag=2");
 		sortAdapter = ArrayAdapter.createFromResource(appContext,
 				R.array.spinner_sort, R.layout.spinner_text);
 		xunsaiAdapter = new ArrayAdapter(appContext,R.layout.spinner_text,types);

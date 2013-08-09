@@ -23,7 +23,7 @@
         <item >月排序</item>
     </string-array>
     <string-array name="spinner_city">
-        <item >上海</item>
+        <item >选择城市</item>
         <item >北京</item>
         <item >广州</item>
         <item >上海</item>
@@ -56,10 +56,11 @@
         <item >女</item>
     </string-array>
     <string-array name="spinner_age">
-        <item >全部</item>
-        <item >18-20</item>
-        <item >20-30</item>
-        <item >30-40</item>
-        <item >40-50</item>
+        <item >选择年龄</item>
+        <item >0-18</item>
+        <item >18-25</item>
+        <item >26-35</item>
+        <item >36-50</item>
+        <item >50以上</item>
     </string-array>
 </resources>
