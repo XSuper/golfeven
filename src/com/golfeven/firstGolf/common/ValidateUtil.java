@@ -126,7 +126,7 @@ public class ValidateUtil {
 			wrongResponse.msg = "无效的token";
 		}
 		if(wrongResponse.code == 301){
-			wrongResponse.show = true;
+			wrongResponse.show = false;
 			wrongResponse.msg = "一天内不能领取多次积分";
 		}
 		if(wrongResponse.code == 302){

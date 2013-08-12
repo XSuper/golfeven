@@ -32,6 +32,7 @@ import com.golfeven.firstGolf.common.Utils;
 import com.golfeven.firstGolf.common.ValidateUtil;
 import com.golfeven.firstGolf.widget.HeadBack;
 import com.golfeven.firstGolf.widget.MyToast;
+import com.golfeven.xmpp.activity.XMPPActivity;
 
 public class BallFriendDetailActivity extends BaseActivity implements
 		OnClickListener {
@@ -62,6 +63,9 @@ public class BallFriendDetailActivity extends BaseActivity implements
 
 	@ViewInject(id = R.id.activity_ballfriend_detail_background)
 	View background;
+	@ViewInject(id = R.id.activity_ballfriend_detail_loading)
+	View loading;
+	
 	@ViewInject(id = R.id.activity_ballfriend_detail_msg)
 	View msg;
 	@ViewInject(id = R.id.activity_ballfriend_detail_msg_img)
@@ -213,6 +217,7 @@ public class BallFriendDetailActivity extends BaseActivity implements
 	private void load() {
 		// TODO Auto-generated method stub
 		// 加载详细信息
+		showLoad(true);
 		api.getBallFriendDetail(ballFriend.getMid(),
 				appContext.user == null ? null : appContext.user.getMid(),
 				appContext.latitude, appContext.longitude,
@@ -232,6 +237,7 @@ public class BallFriendDetailActivity extends BaseActivity implements
 						}
 						MyLog.v("ballfriend", t);
 						initValue();
+						showLoad(false);
 					}
 
 					@Override
@@ -239,6 +245,7 @@ public class BallFriendDetailActivity extends BaseActivity implements
 						// TODO Auto-generated method stub
 						super.onFailure(t, strMsg);
 						headback.setProgressVisible(false);
+						showLoad(false);
 					}
 
 				});
@@ -278,6 +285,7 @@ public class BallFriendDetailActivity extends BaseActivity implements
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
+		showLoad(true);
 		if (v == attention) {
 			int tag = (Integer) attention.getTag();
 			switch (tag) {
@@ -291,6 +299,7 @@ public class BallFriendDetailActivity extends BaseActivity implements
 							public void onSuccess(String t) {
 								// TODO Auto-generated method stub
 								super.onSuccess(t);
+								showLoad(false);
 								Log.v(getClass().getName(), t);
 								attention.setClickable(true);
 								WrongResponse response = null;
@@ -330,6 +339,7 @@ public class BallFriendDetailActivity extends BaseActivity implements
 							public void onFailure(Throwable t, String strMsg) {
 								// TODO Auto-generated method stub
 								super.onFailure(t, strMsg);
+								showLoad(false);
 								attention.setClickable(true);
 								NetUtil.requestError(appContext, null);
 							}
@@ -346,6 +356,7 @@ public class BallFriendDetailActivity extends BaseActivity implements
 							public void onSuccess(String t) {
 								// TODO Auto-generated method stub
 								super.onSuccess(t);
+								showLoad(false);
 								Log.v(getClass().getName(), t);
 								attention.setClickable(true);
 								WrongResponse response = null;
@@ -385,6 +396,7 @@ public class BallFriendDetailActivity extends BaseActivity implements
 							public void onFailure(Throwable t, String strMsg) {
 								// TODO Auto-generated method stub
 								super.onFailure(t, strMsg);
+								showLoad(false);
 								attention.setClickable(true);
 								NetUtil.requestError(appContext, null);
 							}
@@ -394,7 +406,10 @@ public class BallFriendDetailActivity extends BaseActivity implements
 			}
 		}
 		if (v == msg) {
-			msg.setClickable(false);
+			showLoad(false);
+			Intent intent = new Intent(appContext, XMPPActivity.class);
+			startActivity(intent);
+//			msg.setClickable(false);
 			int tag = (Integer) msg.getTag();
 			switch (tag) {
 			case -1:
@@ -417,6 +432,7 @@ public class BallFriendDetailActivity extends BaseActivity implements
 							public void onSuccess(String t) {
 								// TODO Auto-generated method stub
 								super.onSuccess(t);
+								showLoad(false);
 								MyLog.v(getClass().getName() + "pullblack", t);
 								pullblack.setClickable(true);
 								WrongResponse response = null;
@@ -456,6 +472,7 @@ public class BallFriendDetailActivity extends BaseActivity implements
 							public void onFailure(Throwable t, String strMsg) {
 								// TODO Auto-generated method stub
 								super.onFailure(t, strMsg);
+								showLoad(false);
 								pullblack.setClickable(true);
 								NetUtil.requestError(appContext, null);
 							}
@@ -471,6 +488,7 @@ public class BallFriendDetailActivity extends BaseActivity implements
 							public void onSuccess(String t) {
 								// TODO Auto-generated method stub
 								super.onSuccess(t);
+								showLoad(false);
 								pullblack.setClickable(true);
 								WrongResponse response = null;
 								MyLog.v(getClass().getName() + "pullblack", t);
@@ -509,6 +527,7 @@ public class BallFriendDetailActivity extends BaseActivity implements
 							public void onFailure(Throwable t, String strMsg) {
 								// TODO Auto-generated method stub
 								super.onFailure(t, strMsg);
+								showLoad(false);
 								pullblack.setClickable(true);
 								NetUtil.requestError(appContext, null);
 							}
@@ -529,4 +548,22 @@ public class BallFriendDetailActivity extends BaseActivity implements
 		ballFriend.setMemberRelation(mnew);
 		MyLog.v("00", ballFriend.getMemberRelation());
 	}
+	/**
+	 * 显示操作正在加载
+	 * 
+	 * @param show
+	 */
+	public void showLoad(boolean show){
+		
+		if(show){
+			
+			loading.setVisibility(View.VISIBLE);
+			background.setVisibility(View.GONE);
+		}else{
+			loading.setVisibility(View.GONE);
+			background.setVisibility(View.VISIBLE);
+			
+		}
+	}
+	
 }

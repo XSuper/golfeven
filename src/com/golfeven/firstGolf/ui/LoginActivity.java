@@ -2,7 +2,6 @@ package com.golfeven.firstGolf.ui;
 
 import net.tsz.afinal.annotation.view.ViewInject;
 import net.tsz.afinal.http.AjaxCallBack;
-import android.app.PendingIntent.OnFinished;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;

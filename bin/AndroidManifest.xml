@@ -163,6 +163,14 @@
             android:hardwareAccelerated="false"
             android:screenOrientation="portrait" />
         <activity
+            android:name="com.golfeven.xmpp.activity.XMPPActivity"
+            android:hardwareAccelerated="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.golfeven.xmpp.activity.Chat"
+            android:hardwareAccelerated="false"
+            android:screenOrientation="portrait" />
+        <activity
             android:name="com.golfeven.firstGolf.ui.mWelcomeActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" />
@@ -170,6 +178,8 @@
             android:name="com.golfeven.weather.WeartherActivity"
             android:screenOrientation="portrait"
             android:theme="@style/ThemeActivity" />
+        <service
+            android:name="com.golfeven.xmpp.service.XmppService"/>
     </application>
     <!-- 百度Gps定位 -->
     <!-- 屏幕支持 -->

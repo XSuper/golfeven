@@ -265,8 +265,8 @@ public class Api {
 								wrongResponse.msg,
 								Toast.LENGTH_SHORT);
 					} else {
-						MyToast.centerToast(activity,
-								"积分获取失败", Toast.LENGTH_SHORT);
+//						MyToast.centerToast(activity,
+//								"积分获取失败", Toast.LENGTH_SHORT);
 						MyLog.v("积分获取失败", wrongResponse.msg);
 					}
 				}

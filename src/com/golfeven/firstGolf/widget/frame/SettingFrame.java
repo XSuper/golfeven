@@ -22,6 +22,7 @@ import com.golfeven.firstGolf.common.Constant;
 import com.golfeven.firstGolf.common.FileUtils;
 import com.golfeven.firstGolf.common.SharedPreferencesUtil;
 import com.golfeven.firstGolf.common.ToOtherActivity;
+import com.golfeven.firstGolf.common.UpdateManager;
 import com.golfeven.firstGolf.common.Utils;
 import com.golfeven.firstGolf.ui.AboutActivity;
 import com.golfeven.firstGolf.ui.IntegralActivity;
@@ -144,6 +145,7 @@ public class SettingFrame extends LinearLayout implements
 		my = (TextView) view.findViewById(R.id.frame_setting_mydetail_text);
 		integral.setOnClickListener(this);
 		clear.setOnClickListener(this);
+		update.setOnClickListener(this);
 		evaluate.setOnClickListener(this);
 		about.setOnClickListener(new ToOtherActivity((MainActivity) context,
 				AboutActivity.class));
@@ -218,6 +220,11 @@ public class SettingFrame extends LinearLayout implements
 						MyToast.TOAST_MSG_ERROR_TITLE, "启动商店失败",
 						Constant.TOAST_IMG_ERROR);
 			}
+		}
+		if(view ==update){
+			//这里来检测版本是否需要更新
+	       UpdateManager mUpdateManager = new UpdateManager(getContext());
+	        mUpdateManager.checkUpdateInfo();
 		}
 
 	}
