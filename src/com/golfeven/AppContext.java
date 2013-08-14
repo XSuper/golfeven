@@ -31,7 +31,7 @@ public class AppContext extends Application {
 	
 	
 	//****************初始化一些全局用到的变量
-	private FinalBitmap fb; //用到的图片加载,设置统一的加载图片和  统一的失败图片
+	//private FinalBitmap fb; //用到的图片加载,设置统一的加载图片和  统一的失败图片
 	
 	
 	
@@ -311,29 +311,28 @@ public class AppContext extends Application {
 	
 	//  工具----------------------
 	
-	/**
-	 * 得到统一的finalbitmap
-	 * @return
-	 */
-	public FinalBitmap getFB(boolean isSquare){
-		
-		FinalBitmap mfb = FinalBitmap.create(this, Constant.IMG_CACHEPATH,100);
-			mfb.configLoadfailImage(Constant.IMG_LOADING_FAIL);
-			mfb.configLoadingImage(Constant.IMG_LOADING);
-			mfb.setSquare(isSquare);
-		
-		return mfb;
+//	/**
+//	 * 得到统一的finalbitmap
+//	 * @return
+//	 */
+//	public FinalBitmap getFB(boolean isSquare){
+//		
+//		FinalBitmap mfb = FinalBitmap.create(this, Constant.IMG_CACHEPATH,100);
+//			mfb.configLoadfailImage(Constant.IMG_LOADING_FAIL);
+//			mfb.configLoadingImage(Constant.IMG_LOADING);
+//			mfb.setSquare(isSquare);
+//		
+//		return mfb;
 	}
-	public FinalBitmap getFB(){
-		if(fb==null){
-			fb = FinalBitmap.create(this, Constant.IMG_CACHEPATH,100);
-			fb.configLoadfailImage(Constant.IMG_LOADING_FAIL);
-			fb.configLoadingImage(Constant.IMG_LOADING);
-			fb.setSquare(true);
-		}
-		return fb;
-	}
+//	public FinalBitmap getFB(){
+//		if(fb==null){
+//			fb = FinalBitmap.createNew(this, Constant.IMG_CACHEPATH);
+//			fb.configLoadfailImage(Constant.IMG_LOADING_FAIL);
+//			fb.configLoadingImage(Constant.IMG_LOADING);
+//			fb.setSquare(true);
+//		}
+//		return fb;
+//	}
 	
 	
 	
-}

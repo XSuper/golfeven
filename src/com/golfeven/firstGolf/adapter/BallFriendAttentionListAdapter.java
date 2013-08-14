@@ -19,6 +19,7 @@ import com.alibaba.fastjson.JSON;
 import com.golfeven.AppContext;
 import com.golfeven.firstGolf.R;
 import com.golfeven.firstGolf.api.Api;
+import com.golfeven.firstGolf.base.BaseActivity;
 import com.golfeven.firstGolf.base.MBaseAdapter;
 import com.golfeven.firstGolf.bean.BallFriend;
 import com.golfeven.firstGolf.bean.WrongResponse;
@@ -40,13 +41,13 @@ public class BallFriendAttentionListAdapter extends MBaseAdapter {
 			List<BallFriend> datas) {
 		this.context = context;
 		this.datas = datas;
-		fb = getAppContext().getFB();
+		fb = ((BaseActivity)context).fb;
 	}
 	public BallFriendAttentionListAdapter(Context context,
 			List<BallFriend> datas,boolean isAttention) {
 		this.context = context;
 		this.datas = datas;
-		fb = getAppContext().getFB();
+		fb = ((BaseActivity)context).fb;
 		this.isAttention = isAttention;
 	}
 	

@@ -79,7 +79,7 @@ public class PlayBallScoreActivity extends BaseActivity {
 		LayoutParams params = new LayoutParams(w/4, w/4);
 		params.setMargins(5, 5, 5, 5);
 		img.setLayoutParams(params);
-		appContext.getFB().display(img,
+		fb.display(img,
 				Constant.URL_IMG_BASE + ballpark.getLitpic());
 
 		date = new Date(System.currentTimeMillis());

@@ -17,12 +17,24 @@ import org.jivesoftware.smack.packet.Presence;
 import org.jivesoftware.smack.packet.Presence.Mode;
 import org.jivesoftware.smack.packet.RosterPacket;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Handler;
 import android.os.IBinder;
 import android.text.TextUtils;
+import android.widget.RemoteViews;
+import android.widget.Toast;
 
+import com.golfeven.firstGolf.R;
+import com.golfeven.firstGolf.common.MyLog;
+import com.golfeven.firstGolf.ui.BallFriendDetailActivity;
+import com.golfeven.firstGolf.ui.LoginActivity;
+import com.golfeven.firstGolf.ui.MainActivity;
+import com.golfeven.xmpp.activity.Chat;
 import com.golfeven.xmpp.db.DbHelper;
 import com.golfeven.xmpp.entity.ChatMsg;
 import com.golfeven.xmpp.entity.FriendInfo;
@@ -34,6 +46,10 @@ public class XmppService extends Service {
 
 	XMPPConnection connection;
 	
+	RemoteViews view;
+	Notification notification;
+	NotificationManager manager;
+	
 	@Override
 	public IBinder onBind(Intent intent) {
 		return null;
@@ -42,7 +58,22 @@ public class XmppService extends Service {
 	private Handler mHandler = new Handler(){
 		public void handleMessage(android.os.Message msg) {
 			ChatMsg chatMsg = (ChatMsg) msg.obj;
-			//MyToast.showToast(, "用户【" + chatMsg.getUsername() + "】，body = " + chatMsg.getMsg());
+			Toast.makeText(XmppService.this, "用户【" + chatMsg.getUsername() + "】，body = " + chatMsg.getMsg(),Toast.LENGTH_SHORT).show();
+			MyLog.v("xmpp","用户【" + chatMsg.getUsername() + "】，body = " + chatMsg.getMsg());
+			
+//			notification=new Notification(R.drawable.h091, "开始下载", System.currentTimeMillis());
+//			view=new RemoteViews(getPackageName(),R.layout.notification_xmppnews );
+//			notification.contentView=view;
+//			view.setTextViewText(R.id.n_xmpp_text, "用户【" + chatMsg.getUsername() + "】，body = " + chatMsg.getMsg().toString());
+//			notification.contentIntent=PendingIntent.getActivity(getBaseContext(), 1,new Intent(getBaseContext(),MainActivity.class),0);
+//			notification.flags=Notification.FLAG_NO_CLEAR;
+//			manager=(NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+//			
+			FriendInfo info = new FriendInfo();
+			info.setNickname(chatMsg.getUsername());
+			info.setUsername(chatMsg.getUsername());
+			
+			showNotification("新消息",chatMsg.getMsg(),info);
 		};
 	};
 	@Override
@@ -251,5 +282,48 @@ public class XmppService extends Service {
 //		message.obj = fInfo;
 		//FriendListActivity.friendListActivity.mHandler.sendMessage(message);
 	}
+	
+	 private void showNotification(String title,String content,FriendInfo info){
+
+	        // 创建一个NotificationManager的引用  
+
+	        NotificationManager notificationManager = (NotificationManager)   
+	            this.getSystemService(android.content.Context.NOTIFICATION_SERVICE);  
+	        // 定义Notification的各种属性  
+	        Notification notification =new Notification(R.drawable.h091,  
+	                "新消息", System.currentTimeMillis());
+
+	        //FLAG_AUTO_CANCEL   该通知能被状态栏的清除按钮给清除掉
+
+	        //FLAG_NO_CLEAR      该通知不能被状态栏的清除按钮给清除掉
+
+	        //FLAG_ONGOING_EVENT 通知放置在正在运行
+
+	        //FLAG_INSISTENT     是否一直进行，比如音乐一直播放，知道用户响应
+
+	        //notification.flags |= Notification.FLAG_ONGOING_EVENT; // 将此通知放到通知栏的"Ongoing"即"正在运行"组中  
+	     //   notification.flags |= Notification.FLAG_NO_CLEAR; // 表明在点击了通知栏中的"清除通知"后，此通知不清除，经常与FLAG_ONGOING_EVENT一起使用  
+	      //  notification.flags |= Notification.FLAG_SHOW_LIGHTS;  
+
+	        //DEFAULT_ALL     使用所有默认值，比如声音，震动，闪屏等等
+	        //DEFAULT_LIGHTS  使用默认闪光提示
+	        //DEFAULT_SOUNDS  使用默认提示声音
+	        //DEFAULT_VIBRATE 使用默认手机震动，需加上<uses-permission android:name="android.permission.VIBRATE" />权限
+	        notification.defaults = Notification.DEFAULT_LIGHTS;
+	        //叠加效果常量
+	        //notification.defaults=Notification.DEFAULT_LIGHTS|Notification.DEFAULT_SOUND;
+	        notification.ledARGB = Color.BLUE;  
+	        notification.ledOnMS =5000; //闪光时间，毫秒
+	     // 设置通知的事件消息  
+	        CharSequence contentTitle =title; // 通知栏标题  
+	        CharSequence contentText =content; // 通知栏内容  
+	        Intent notificationIntent =new Intent(XmppService.this, Chat.class); // 点击该通知后要跳转的Activity  
+	        notificationIntent.putExtra("info", info);
+	        PendingIntent contentItent = PendingIntent.getActivity(this, 0, notificationIntent, 0);  
+	        notification.setLatestEventInfo(this, contentTitle, contentText, contentItent);  
+	        // 把Notification传递给NotificationManager  
+	        notificationManager.notify(0, notification);  
+
+	    }
 	
 }

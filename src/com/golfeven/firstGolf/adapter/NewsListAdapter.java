@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.golfeven.firstGolf.R;
+import com.golfeven.firstGolf.base.BaseActivity;
 import com.golfeven.firstGolf.base.MBaseAdapter;
 import com.golfeven.firstGolf.bean.News;
 import com.golfeven.firstGolf.common.Constant;
@@ -42,7 +43,7 @@ public class NewsListAdapter extends MBaseAdapter{
 	public NewsListAdapter(Context context,List<News> news) {
 		this.context = context;
 		this.datas = news;
-		fb = getAppContext().getFB();
+		fb = ((BaseActivity)context).fb;
 	}
 	
 
@@ -68,7 +69,12 @@ public class NewsListAdapter extends MBaseAdapter{
 		time.setText(timeStr);
 //		fb.configLoadfailImage(Constant.IMG_LOADING_FAIL);
 //		fb.configLoadingImage(Constant.IMG_LOADING);
-		fb.display(img, Constant.URL_IMG_BASE+mNews.getLitpic());
+		if(StringUtils.isEmpty(mNews.getLitpic())){
+			img.setVisibility(View.GONE);
+		}else{
+			img.setVisibility(View.VISIBLE);
+			fb.display(img, Constant.URL_IMG_BASE+mNews.getLitpic());
+		}
 		//fb.display(img, "http://www.a8.hk/uploads/allimg/130617/6-13061GJ959203-lp.jpg");
 		convertView.setOnClickListener(new OnClickListener() {
 			

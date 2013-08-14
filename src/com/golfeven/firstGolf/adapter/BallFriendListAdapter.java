@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.golfeven.AppContext;
 import com.golfeven.firstGolf.R;
+import com.golfeven.firstGolf.base.BaseActivity;
 import com.golfeven.firstGolf.base.MBaseAdapter;
 import com.golfeven.firstGolf.bean.BallFriend;
 import com.golfeven.firstGolf.bean.BallPark;
@@ -33,7 +34,7 @@ public class BallFriendListAdapter extends MBaseAdapter {
 	public BallFriendListAdapter(Context context, List<BallFriend> datas) {
 		this.context = context;
 		this.datas = datas;
-		fb = getAppContext().getFB();
+		fb = ((BaseActivity)context).fb;
 	}
 
 	@Override

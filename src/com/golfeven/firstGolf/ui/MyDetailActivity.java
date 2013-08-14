@@ -83,7 +83,7 @@ public class MyDetailActivity extends BaseActivity {
 
 	private User user;
 
-	private FinalBitmap fb;
+	//private FinalBitmap fb;
 	private List<Photo> photos;
 
 	private String oldName;
@@ -119,7 +119,7 @@ public class MyDetailActivity extends BaseActivity {
 		setContentView(R.layout.activity_my_detail);
 		// getView();
 
-		fb = appContext.getFB();
+		//fb = appContext.getFB();
 		user = appContext.user;
 		load();
 		initValue();
@@ -504,13 +504,13 @@ public class MyDetailActivity extends BaseActivity {
 											+ "/face.jpg");
 							face.setImageBitmap(map);
 							// 更新图片缓存，头像显示为新上传头像
-							appContext.getFB().mImageCache
+							fb.mImageCache
 									.clearCache(Constant.URL_IMG_BASE
 											+ user.getFace());
-							appContext.getFB().mImageCache
+							fb.mImageCache
 									.clearMemoryCache(Constant.URL_IMG_BASE
 											+ user.getFace());
-							appContext.getFB().mImageCache.addBitmapToCache(
+							fb.mImageCache.addBitmapToCache(
 									Constant.URL_IMG_BASE + user.getFace(), map);
 						}
 

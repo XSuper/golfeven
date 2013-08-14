@@ -16,6 +16,7 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
 import com.golfeven.firstGolf.R;
+import com.golfeven.firstGolf.base.BaseActivity;
 import com.golfeven.firstGolf.base.MBaseAdapter;
 import com.golfeven.firstGolf.bean.Gallery;
 import com.golfeven.firstGolf.bean.GolfInfo;
@@ -30,7 +31,7 @@ public class GalleryListAdapter extends MBaseAdapter{
 	public GalleryListAdapter(Context context,List<GolfInfo> golfInfos) {
 		this.context = context;
 		this.datas = golfInfos;
-		fb = getAppContext().getFB();
+		fb = ((BaseActivity)context).fb;
 		fb.proportion = 2;
 	}
 	

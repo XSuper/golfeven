@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.golfeven.firstGolf.R;
+import com.golfeven.firstGolf.base.BaseActivity;
 import com.golfeven.firstGolf.base.MBaseAdapter;
 import com.golfeven.firstGolf.bean.BallTeam;
 import com.golfeven.firstGolf.bean.GolfInfo;
@@ -27,7 +28,7 @@ public class BallTeamListAdapter extends MBaseAdapter{
 	public BallTeamListAdapter(Context context,List<GolfInfo> golfInfos) {
 		this.context = context;
 		this.datas = golfInfos;
-		fb = getAppContext().getFB();
+		fb = ((BaseActivity)context).fb;
 	}
 	
 

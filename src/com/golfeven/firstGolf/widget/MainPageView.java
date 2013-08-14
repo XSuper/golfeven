@@ -25,6 +25,7 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSONArray;
 import com.golfeven.AppContext;
 import com.golfeven.firstGolf.R;
+import com.golfeven.firstGolf.base.BaseActivity;
 import com.golfeven.firstGolf.bean.Image;
 import com.golfeven.firstGolf.common.Constant;
 
@@ -60,7 +61,7 @@ public class MainPageView extends LinearLayout {
 		super(context, attrs);
 		
 		this.context = context;
-		fb = ((AppContext)context.getApplicationContext()).getFB(true);
+		fb = ((BaseActivity)context).fb;
 		view = LayoutInflater.from(context).inflate(
 				R.layout.main_pageview, this);
 		parent = (LinearLayout)view.findViewById(R.id.main_pageview);

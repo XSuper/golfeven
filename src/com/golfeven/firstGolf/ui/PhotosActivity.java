@@ -82,7 +82,7 @@ public class PhotosActivity extends BaseActivity {
 
 			img.setTag(photos.get(index).getId());
 			img.setTag(R.layout.activity_photos, index);
-			appContext.getFB().display(img,
+			fb.display(img,
 					Constant.URL_IMG_BASE + photos.get(index).getPic());
 			img.setOnLongClickListener(mLong);
 			img.setOnClickListener(onClick);

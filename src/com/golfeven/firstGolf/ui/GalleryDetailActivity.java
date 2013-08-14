@@ -1,5 +1,6 @@
 package com.golfeven.firstGolf.ui;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import net.tsz.afinal.FinalBitmap;
@@ -62,26 +63,30 @@ public class GalleryDetailActivity extends BaseActivity implements
 	private ImageView[] imgs_indicators;
 
 	private FinalHttp fh = new FinalHttp();
-	private FinalBitmap fb;
+	// private FinalBitmap fb;
 
 	private int currentItem = 0;
 
 	private GalleryDetail galleryDetail;
 	private List<Image> iamgelist;
 
+	private List<FinalBitmap> fbs;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		fb = appContext.getFB(false);
-		fb.proportion=0;
+		fbs = new ArrayList<FinalBitmap>();
+		// fb = appContext.getFB(false);
+		fb.isSquare = false;
+		fb.configMemoryCacheSize(200);
+
 		// fb = FinalBitmap.create(appContext, Constant.IMG_CACHEPATH);
 		setContentView(R.layout.activity_gallery_detail);
 		Intent intent = getIntent();
 		id = intent.getStringExtra("galleryId");
 		content.getBackground().setAlpha(100);
 		scrollLayout.SetOnViewChangeListener(this);
-		
 
 		initData();
 
@@ -122,6 +127,13 @@ public class GalleryDetailActivity extends BaseActivity implements
 							MeasureSpec.EXACTLY);
 					scrollLayout.layout(0, 0, 0, 0);
 					img = (ImageView) scrollLayout.getChildAt(i);
+
+//					FinalBitmap fbtemp = FinalBitmap.createNew(
+//							GalleryDetailActivity.this, Constant.IMG_CACHEPATH);
+//					fbtemp.configLoadfailImage(Constant.IMG_LOADING_FAIL);
+//					fbtemp.configLoadingImage(Constant.IMG_LOADING);
+//					fbtemp.configBitmapLoadThreadSize(20);
+//					fbs.add(fbtemp);
 					fb.display(img, Constant.URL_IMG_BASE
 							+ iamgelist.get(i).getDdimg(),
 							scrollLayout.getWidth(), scrollLayout.getHeight());
@@ -164,8 +176,6 @@ public class GalleryDetailActivity extends BaseActivity implements
 		});
 	}
 
-	
-
 	public ImageView getIndicatorImage() {
 		ImageView img = new ImageView(GalleryDetailActivity.this);
 		LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT,
@@ -203,24 +213,36 @@ public class GalleryDetailActivity extends BaseActivity implements
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
-		fb.setSquare(true);
-		fb.clearMemoryCache();
+		if (fbs != null && fbs.size() > 0) {
+			for (int i = 0;i<fbs.size();i++) {
+				fbs.get(i).onDestroy();
+			}
+			fbs.removeAll(fbs);
+			fbs = null;
+			
+		}
 	}
 
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		//fb.setSquare(false);
+		if (fbs != null && fbs.size() > 0) {
+			for (int i = 0;i<fbs.size();i++) {
+				fbs.get(i).onResume();
+			}
+		}
 	}
 
 	@Override
-	protected void onStop() {
+	protected void onPause() {
 		// TODO Auto-generated method stub
-		super.onStop();
-		fb.setSquare(true);
+		super.onPause();
+		if (fbs != null && fbs.size() > 0) {
+			for (int i = 0;i<fbs.size();i++) {
+				fbs.get(i).onPause();
+			}
+		}
 	}
-	
-	
 
 }

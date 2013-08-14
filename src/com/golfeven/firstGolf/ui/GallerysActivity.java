@@ -151,7 +151,7 @@ public class GallerysActivity extends BaseListActivity {
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
-		appContext.getFB().proportion=0;
+		//appContext.getFB().proportion=0;
 		db.deleteByWhere(XunsaiType.class, "tag=2");
 		for (XunsaiType type : types) {
 			type.setTag(2);
@@ -162,13 +162,13 @@ public class GallerysActivity extends BaseListActivity {
 	protected void onStop() {
 		// TODO Auto-generated method stub
 		super.onStop();
-		appContext.getFB().proportion=0;
+		//appContext.getFB().proportion=0;
 	}
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		appContext.getFB().proportion=PROPORTION;
+		//appContext.getFB().proportion=PROPORTION;
 	}
 
 }

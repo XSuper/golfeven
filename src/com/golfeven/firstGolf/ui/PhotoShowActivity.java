@@ -48,7 +48,7 @@ public class PhotoShowActivity extends BaseActivity implements
 	private ImageView[] imgs;
 	private ImageView[] imgs_indicators;
 
-	private FinalBitmap fb;
+	//private FinalBitmap fb;
 
 	private int currentItem = 0;
 
@@ -58,7 +58,8 @@ public class PhotoShowActivity extends BaseActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		fb = appContext.getFB(false);
+		//fb = appContext.getFB(false);
+		fb.isSquare = false;
 		// fb = FinalBitmap.create(appContext, Constant.IMG_CACHEPATH);
 		setContentView(R.layout.activity_show_photo);
 		Intent intent = getIntent();
@@ -127,26 +128,8 @@ public class PhotoShowActivity extends BaseActivity implements
 				Constant.URL_IMG_BASE + photos.get(position).getPic());
 	}
 
-	@Override
-	protected void onDestroy() {
-		// TODO Auto-generated method stub
-		super.onDestroy();
-		fb.setSquare(true);
-		fb.clearMemoryCache();
-	}
 
-	@Override
-	protected void onResume() {
-		// TODO Auto-generated method stub
-		super.onResume();
-		// fb.setSquare(false);
-	}
 
-	@Override
-	protected void onStop() {
-		// TODO Auto-generated method stub
-		super.onStop();
-		fb.setSquare(true);
-	}
+
 
 }

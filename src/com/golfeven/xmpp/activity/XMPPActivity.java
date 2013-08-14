@@ -1,25 +1,15 @@
 package com.golfeven.xmpp.activity;
 
-import org.jivesoftware.smack.XMPPException;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.Editable;
-import android.text.TextUtils;
-import android.text.TextWatcher;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.EditText;
 
-import com.golfeven.firstGolf.R;
 import com.golfeven.xmpp.entity.FriendInfo;
 import com.golfeven.xmpp.service.XmppService;
-import com.golfeven.xmpp.utils.Logs;
 import com.golfeven.xmpp.utils.MyToast;
+import com.golfeven.xmpp.utils.XmppRunnable;
 import com.golfeven.xmpp.xmppmanager.XmppUtils;
 
 /**
@@ -30,13 +20,7 @@ import com.golfeven.xmpp.xmppmanager.XmppUtils;
  */
 public  class XMPPActivity extends Activity {
 
-	private EditText username;
-	private EditText password;
-	private EditText host;
-	private EditText port;
-	private EditText servername;
-	private Button login;
-	private Button register;
+	
 	public static final int DIALOG_SHOW = 0;
 	public static final int DIALOG_CANCLE = 1;
 	ProgressDialog dialog ;
@@ -59,9 +43,6 @@ public  class XMPPActivity extends Activity {
 				MyToast.showToast(XMPPActivity.this, "登录成功");
 				Intent intentService = new Intent(XMPPActivity.this,XmppService.class);
 				startService(intentService);
-//				Intent intent = new Intent(MainActivity.this,FriendListActivity.class);
-//				startActivity(intent);
-				
 				new Thread(){
 					public void run() {
 						XmppUtils.getInstance().sendOnLine();
@@ -92,46 +73,12 @@ public  class XMPPActivity extends Activity {
 		};
 	};
 	
+	int loginCode= 200;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		
 		super.onCreate(savedInstanceState);
-//		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		//setContentView(R.layout.main);
-//		findView();
-//		
-//		setListener();
-		int loginCode= 200;
-		try {
-			if(XmppUtils.getInstance().getConnection() == null||!XmppUtils.getInstance().getConnection().isConnected()){
-				XmppUtils.getInstance().createConnection();
-				XmppUtils.getInstance().getConnection().login("a","a","golfeven");
-			}
-		} catch (XMPPException ex) {
-			ex.printStackTrace();
-			if (ex.getXMPPError() != null) {
-				loginCode = ex.getXMPPError().getCode();
-			}
-			//这里可能还有一些是没有写出来
-			switch (loginCode) {
-			case 409://重复登录
-				loginCode = XmppUtils.LOGIN_ERROR_REPEAT;
-				break;
-			case 502://
-				loginCode = XmppUtils.LOGIN_ERROR_NET;
-				break;
-			case 401://认证错误
-				loginCode = XmppUtils.LOGIN_ERROR_PWD;
-				break;
-			default://未知
-				loginCode = XmppUtils.LOGIN_ERROR;
-				break;
-			}
-		} catch (Exception e){
-			loginCode = XmppUtils.LOGIN_ERROR_NET;
-		}
-		//loginHandler.sendEmptyMessage(MainActivity.DIALOG_CANCLE);
-		loginHandler.sendEmptyMessage(loginCode);
+		new XmppRunnable(loginHandler, XmppRunnable.LOGIN, new String[]{"b","b"});
 		
 	}
 

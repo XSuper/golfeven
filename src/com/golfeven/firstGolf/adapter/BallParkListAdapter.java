@@ -16,6 +16,7 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
 import com.golfeven.firstGolf.R;
+import com.golfeven.firstGolf.base.BaseActivity;
 import com.golfeven.firstGolf.base.MBaseAdapter;
 import com.golfeven.firstGolf.bean.BallPark;
 import com.golfeven.firstGolf.common.Constant;
@@ -33,7 +34,7 @@ public class BallParkListAdapter extends MBaseAdapter {
 	public BallParkListAdapter(Context context, List<BallPark> datas) {
 		this.context = context;
 		this.datas = datas;
-		fb = getAppContext().getFB();
+		fb = ((BaseActivity)context).fb;
 	}
 
 	@Override

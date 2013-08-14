@@ -86,7 +86,7 @@ public class WelcomeActivity extends BaseActivity implements OnViewChangeListene
 		public void onClick(View v) {
 			switch (v.getId()) {
 			case R.id.startBtn:
-				mScrollLayout.setVisibility(View.GONE);
+				/*mScrollLayout.setVisibility(View.GONE);
 				pointLLayout.setVisibility(View.GONE);
 				animLayout.setVisibility(View.VISIBLE);
 				mainRLayout.setBackgroundResource(R.drawable.whatsnew_bg);
@@ -107,13 +107,13 @@ public class WelcomeActivity extends BaseActivity implements OnViewChangeListene
 					@Override
 					public void onAnimationEnd(Animation animation) {
 						leftLayout.setVisibility(View.GONE);
-						rightLayout.setVisibility(View.GONE);
+						rightLayout.setVisibility(View.GONE);*/
 						Intent intent = new Intent(WelcomeActivity.this,MainActivity.class);
 						WelcomeActivity.this.startActivity(intent);
 						WelcomeActivity.this.finish();
-						overridePendingTransition(R.anim.zoom_out_enter, R.anim.zoom_out_exit);
-					}
-				});
+						//overridePendingTransition(R.anim.zoom_out_enter, R.anim.zoom_out_exit);
+			/*		}
+				});*/
 				break;
 			}
 		}

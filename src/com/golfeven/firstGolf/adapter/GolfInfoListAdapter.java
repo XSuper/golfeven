@@ -15,6 +15,7 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
 import com.golfeven.firstGolf.R;
+import com.golfeven.firstGolf.base.BaseActivity;
 import com.golfeven.firstGolf.base.MBaseAdapter;
 import com.golfeven.firstGolf.bean.GolfInfo;
 import com.golfeven.firstGolf.bean.News;
@@ -39,7 +40,7 @@ public class GolfInfoListAdapter extends MBaseAdapter{
 	public GolfInfoListAdapter(Context context,List<GolfInfo> golfInfos) {
 		this.context = context;
 		this.datas = golfInfos;
-		fb = getAppContext().getFB();
+		fb = ((BaseActivity)context).fb;
 	}
 	
 
@@ -73,8 +74,12 @@ public class GolfInfoListAdapter extends MBaseAdapter{
 		time.setText(timeStr);
 //		LayoutParams param = new LayoutParams(img.getWidth(), img.getWidth());
 //		img.setLayoutParams(param);
-		fb.isSquare= true;
-		fb.display(img, Constant.URL_IMG_BASE+golfInfo.getLitpic());
+		if(StringUtils.isEmpty(golfInfo.getLitpic())){
+			img.setVisibility(View.GONE);
+		}else{
+			img.setVisibility(View.VISIBLE);
+			fb.display(img, Constant.URL_IMG_BASE+golfInfo.getLitpic());
+		}
 //		fb.display(img, "http://www.a8.hk/uploads/allimg/130617/6-13061GJ959203-lp.jpg");
 		convertView.setOnClickListener(new OnClickListener() {
 			

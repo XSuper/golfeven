@@ -12,7 +12,7 @@
 	  android:layout_height="fill_parent"
 	  android:visibility="visible"
 	  >
-      <RelativeLayout  android:background="@drawable/w01"    
+     <!--  <RelativeLayout  android:background="@drawable/w01"    
 	  android:layout_width="fill_parent"    
 	  android:layout_height="fill_parent"
 	  >
@@ -57,16 +57,16 @@
       <RelativeLayout  android:background="@drawable/w06"    
 	  android:layout_width="fill_parent"    
 	  android:layout_height="fill_parent"
-	  />
-      <RelativeLayout  android:background="@drawable/w07"    
-	  android:layout_width="fill_parent"    
-	  android:layout_height="fill_parent"
-	  />
-      <RelativeLayout  android:background="@drawable/w08"    
-	  android:layout_width="fill_parent"    
-	  android:layout_height="fill_parent"
-	  />
+	  /> -->
       <RelativeLayout  android:background="@drawable/w01"    
+	  android:layout_width="fill_parent"    
+	  android:layout_height="fill_parent"
+	  />
+      <RelativeLayout  android:background="@drawable/w02"    
+	  android:layout_width="fill_parent"    
+	  android:layout_height="fill_parent"
+	  />
+      <RelativeLayout  android:background="@drawable/w03"    
 	  android:layout_width="fill_parent"    
 	  android:layout_height="fill_parent">
           <Button
@@ -96,13 +96,14 @@
     	android:layout_centerHorizontal="true"
     	android:visibility="visible">
     	
-        <ImageView android:clickable="true"  android:padding="5.0dip" android:layout_gravity="center_vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/page_indicator_bg" />
+        <!-- <ImageView android:clickable="true"  android:padding="5.0dip" android:layout_gravity="center_vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/page_indicator_bg" />
         <ImageView android:clickable="true"  android:padding="5.0dip"  android:layout_gravity="center_vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/page_indicator_bg" />
         <ImageView android:clickable="true"  android:padding="5.0dip"  android:layout_gravity="center_vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/page_indicator_bg" />
         <ImageView android:clickable="true"  android:padding="5.0dip"  android:layout_gravity="center_vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/page_indicator_bg" />
         <ImageView android:clickable="true"  android:padding="5.0dip"  android:layout_gravity="center_vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/page_indicator_bg" />
         <ImageView android:clickable="true"  android:padding="5.0dip"  android:layout_gravity="center_vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/page_indicator_bg" />
-        <ImageView android:clickable="true"  android:padding="5.0dip"  android:layout_gravity="center_vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/page_indicator_bg" />
+         -->
+         <ImageView android:clickable="true"  android:padding="5.0dip"  android:layout_gravity="center_vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/page_indicator_bg" />
         <ImageView android:clickable="true"  android:padding="5.0dip"  android:layout_gravity="center_vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/page_indicator_bg" />
         <ImageView android:clickable="true"  android:padding="5.0dip"  android:layout_gravity="center_vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/page_indicator_bg" />
     </LinearLayout>

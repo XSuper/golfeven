@@ -352,7 +352,7 @@ public class FinalBitmap {
 	 * 配置内存缓存大小 大于2MB以上有效
 	 * @param size 缓存大小
 	 */
-	private FinalBitmap configMemoryCacheSize(int size){
+	public FinalBitmap configMemoryCacheSize(int size){
 		mConfig.memCacheSize = size;
 		return this;
 	}
@@ -381,7 +381,7 @@ public class FinalBitmap {
 	 * 设置加载图片的线程并发数量
 	 * @param size
 	 */
-	private FinalBitmap configBitmapLoadThreadSize(int size){
+	public FinalBitmap configBitmapLoadThreadSize(int size){
 		if(size >= 1)
 			mConfig.poolSize = size;
 		return this;
@@ -560,7 +560,7 @@ public class FinalBitmap {
 		}
 	}
 
-	private void clearCacheInternalInBackgroud() {
+	public void clearCacheInternalInBackgroud() {
 		if (mImageCache != null) {
 			mImageCache.clearCache();
 		}
@@ -570,7 +570,7 @@ public class FinalBitmap {
 	}
 	
 	
-	private void clearMemoryCacheInBackgroud(){
+	public void clearMemoryCacheInBackgroud(){
 		if (mImageCache != null) {
 			mImageCache.clearMemoryCache();
 		}

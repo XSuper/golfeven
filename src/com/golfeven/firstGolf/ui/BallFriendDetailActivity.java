@@ -87,7 +87,7 @@ public class BallFriendDetailActivity extends BaseActivity implements
 
 	private BallFriend ballFriend;
 
-	private FinalBitmap fb;
+//	private FinalBitmap fb;
 	private List<Photo> photos;
 
 	// public int state = -2;//拉黑前的状态
@@ -97,7 +97,7 @@ public class BallFriendDetailActivity extends BaseActivity implements
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_ballfriend_detail);
-		fb = appContext.getFB();
+//		fb = appContext.getFB();
 		Intent intent = getIntent();
 		ballFriend = intent.getParcelableExtra("ballFriend");
 		if (appContext.isLogin == true && appContext.user != null) {
