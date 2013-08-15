@@ -33,7 +33,7 @@ public class UpdateManager {
 	private String updateMsg = "有最新的软件包，可以立即更新";
 	
 	//返回的安装包url
-	private String apkUrl = "http://softfile.3g.qq.com:8080/msoft/179/24659/43549/qq_hd_mini_1.4.apk";
+	private String apkUrl = "http://bcs.duapp.com/golfevendevelop/firstGolf.apk?sign=MBO:D4801c0ffb53ed2950bca30cb035fecf:tzLQmli1dh2L0B716IJ3dlnN7ZI%3D&response-content-disposition=filename*=utf8''firstGolf.apk&response-cache-control=private";
 	
 	
 	private Dialog noticeDialog;

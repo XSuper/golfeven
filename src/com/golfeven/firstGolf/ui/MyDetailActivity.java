@@ -283,7 +283,10 @@ public class MyDetailActivity extends BaseActivity {
 
 		if (!StringUtils.isEmpty(user.getFace())) {
 
+			fb.configLoadfailImage(R.drawable.qzx);
+			fb.configLoadingImage(R.drawable.qzx);
 			fb.isSquare = true;
+			fb.proportion = 1;
 			fb.display(face, Constant.URL_IMG_BASE + user.getFace());
 		}
 
@@ -446,10 +449,12 @@ public class MyDetailActivity extends BaseActivity {
 					}
 				});
 				if (photos != null && photos.size() != 0) {
-					FinalBitmap fbi = FinalBitmap.createNew(appContext,
-							Constant.IMG_CACHEPATH);
-					fbi.proportion = 2;
-					fbi.display(mPhoto, Constant.URL_IMG_BASE
+//					FinalBitmap fbi = FinalBitmap.createNew(appContext,
+//							Constant.IMG_CACHEPATH);
+					fb.configLoadfailImage(R.drawable.page_pic);
+					fb.configLoadingImage(R.drawable.page_pic);
+					fb.proportion = 2;
+					fb.display(mPhoto, Constant.URL_IMG_BASE
 							+ photos.get(0).getPic());
 
 				}

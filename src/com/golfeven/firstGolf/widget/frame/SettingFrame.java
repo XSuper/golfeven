@@ -59,7 +59,7 @@ public class SettingFrame extends LinearLayout implements
 				super.handleMessage(msg);
 				switch (msg.what) {
 				case CALCING:
-					clearTex.setText("图片缓存(计算...)");
+					clearTex.setText("图片缓存(计算)");
 					break;
 				case CALCED:
 					if (msg.obj != null) {

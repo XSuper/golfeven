@@ -12,13 +12,13 @@ import com.baidu.sharesdk.Utility;
 import com.baidu.sharesdk.ui.BaiduSocialShareUserInterface;
 
 public class SharedUtil {
-	private static String key = "kMDGgXvgG7VAgxD5nKpd6Obr";
+	private static String key = "szbxCLKXkqne7bte9nRGnmoC";
 	private static BaiduSocialShare mSocialShare;
 	private static BaiduSocialShareUserInterface face;
 	private static ShareContent content;
 	
-	private static final String WEIBOKEY="716382633";
-	private static final String WEIXINKEY="wxe16e7a9066639dcd";
+	private static final String WEIBOKEY="2177641727";
+	private static final String WEIXINKEY="wxbd13120806c0d64c";
 
 	public static void share(Activity activity,String title,String contentStr,String url,String imageUrl) {
 

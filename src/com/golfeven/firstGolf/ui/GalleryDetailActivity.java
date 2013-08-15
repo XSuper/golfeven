@@ -12,6 +12,9 @@ import net.tsz.afinal.http.AjaxParams;
 import org.json.JSONObject;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -123,6 +126,7 @@ public class GalleryDetailActivity extends BaseActivity implements
 
 					ImageView img = new ImageView(appContext);
 					scrollLayout.addView(img);
+					imgs[i] = img;
 					scrollLayout.measure(MeasureSpec.EXACTLY,
 							MeasureSpec.EXACTLY);
 					scrollLayout.layout(0, 0, 0, 0);
@@ -205,44 +209,45 @@ public class GalleryDetailActivity extends BaseActivity implements
 		indicators.getChildAt(position).setEnabled(false);
 
 		currentItem = position;
+		
 		fb.display(imgs[position],
 				Constant.URL_IMG_BASE + iamgelist.get(position).getDdimg());
 	}
 
-	@Override
-	protected void onDestroy() {
-		// TODO Auto-generated method stub
-		super.onDestroy();
-		if (fbs != null && fbs.size() > 0) {
-			for (int i = 0;i<fbs.size();i++) {
-				fbs.get(i).onDestroy();
-			}
-			fbs.removeAll(fbs);
-			fbs = null;
-			
-		}
-	}
-
-	@Override
-	protected void onResume() {
-		// TODO Auto-generated method stub
-		super.onResume();
-		if (fbs != null && fbs.size() > 0) {
-			for (int i = 0;i<fbs.size();i++) {
-				fbs.get(i).onResume();
-			}
-		}
-	}
-
-	@Override
-	protected void onPause() {
-		// TODO Auto-generated method stub
-		super.onPause();
-		if (fbs != null && fbs.size() > 0) {
-			for (int i = 0;i<fbs.size();i++) {
-				fbs.get(i).onPause();
-			}
-		}
-	}
+//	@Override
+//	protected void onDestroy() {
+//		// TODO Auto-generated method stub
+//		super.onDestroy();
+//		if (fbs != null && fbs.size() > 0) {
+//			for (int i = 0;i<fbs.size();i++) {
+//				fbs.get(i).onDestroy();
+//			}
+//			fbs.removeAll(fbs);
+//			fbs = null;
+//			
+//		}
+//	}
+//
+//	@Override
+//	protected void onResume() {
+//		// TODO Auto-generated method stub
+//		super.onResume();
+//		if (fbs != null && fbs.size() > 0) {
+//			for (int i = 0;i<fbs.size();i++) {
+//				fbs.get(i).onResume();
+//			}
+//		}
+//	}
+//
+//	@Override
+//	protected void onPause() {
+//		// TODO Auto-generated method stub
+//		super.onPause();
+//		if (fbs != null && fbs.size() > 0) {
+//			for (int i = 0;i<fbs.size();i++) {
+//				fbs.get(i).onPause();
+//			}
+//		}
+//	}
 
 }

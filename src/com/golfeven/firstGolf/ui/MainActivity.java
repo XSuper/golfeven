@@ -2,6 +2,7 @@ package com.golfeven.firstGolf.ui;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Random;
 
 import net.tsz.afinal.annotation.view.ViewInject;
 import android.app.AlertDialog;
@@ -11,7 +12,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 
@@ -110,7 +111,8 @@ public class MainActivity extends BaseActivity {
 			((RadioButton) findViewById(radioGroup.getCheckedRadioButtonId()))
 					.setChecked(false);
 			mRbtns[view].setChecked(true);
-			showLogon = view;
+			//showLogon = view;
+		//	Toast.makeText(appContext, new Random().nextInt()+"", Toast.LENGTH_SHORT).show();
 			myResume(view);
 
 		}
@@ -202,19 +204,19 @@ public class MainActivity extends BaseActivity {
 		case 2:
 			changeTitle(false, "关注", false);
 			((AttentitonFrame) viewAttention).onResume();
-			if (!appContext.isLogin && showLogon == 2) {
+			if (!appContext.isLogin && showLogon != 2) {
 
 				Utils.toLogin(MainActivity.this);
-				showLogon = -1;
+				showLogon = 2;
 			}
 			break;
 		case 3:
 			changeTitle(false, "成绩", false);
 			((GradeFrame) viewGrade).onResume();
-			if (!appContext.isLogin && showLogon == 3) {
+			if (!appContext.isLogin && showLogon != 3) {
 
 				Utils.toLogin(MainActivity.this);
-				showLogon = -1;
+				showLogon = 3;
 			}
 			break;
 		case 4:
@@ -224,6 +226,7 @@ public class MainActivity extends BaseActivity {
 			break;
 
 		}
+		showLogon = index;
 	}
 
 	// 初始化天气头部

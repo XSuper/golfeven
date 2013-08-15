@@ -57,8 +57,8 @@
                 <Button
                     android:id="@+id/frame_setting_clear"
                    	style="@style/integral_btn"
-                   	android:layout_height="28dp"
                     android:text="清除" />
+<!--                    	android:layout_height="28dp" -->
             </LinearLayout>
 
             <LinearLayout
