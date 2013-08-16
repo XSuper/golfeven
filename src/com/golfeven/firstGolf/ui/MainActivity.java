@@ -2,9 +2,10 @@ package com.golfeven.firstGolf.ui;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Random;
 
 import net.tsz.afinal.annotation.view.ViewInject;
+import net.tsz.afinal.http.AjaxCallBack;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,6 +13,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -19,15 +21,21 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
+import com.golfeven.AppContext;
 import com.golfeven.AppManager;
 import com.golfeven.firstGolf.R;
+import com.golfeven.firstGolf.api.Api;
 import com.golfeven.firstGolf.base.BaseActivity;
 import com.golfeven.firstGolf.bean.BallPark;
+import com.golfeven.firstGolf.bean.User;
+import com.golfeven.firstGolf.common.StringUtils;
 import com.golfeven.firstGolf.common.Utils;
+import com.golfeven.firstGolf.widget.MyToast;
 import com.golfeven.firstGolf.widget.ScrollLayout;
 import com.golfeven.firstGolf.widget.ScrollLayout.OnViewChangeListener;
 import com.golfeven.firstGolf.widget.frame.AttentitonFrame;
@@ -36,9 +44,12 @@ import com.golfeven.firstGolf.widget.frame.HomeFrame;
 import com.golfeven.firstGolf.widget.frame.PlayBallFrame;
 import com.golfeven.firstGolf.widget.frame.SettingFrame;
 import com.golfeven.weather.WeartherActivity;
+import com.golfeven.xmpp.service.XmppService;
+import com.golfeven.xmpp.xmppmanager.XmppUtils;
 
 public class MainActivity extends BaseActivity {
 
+	private static MainActivity mainActivity;
 	public static final int PLAYBALLFRAMEGETBALLPARKCODE = 0;// 打球页面的得到球场码
 
 	@ViewInject(id = R.id.main_weather_head)
@@ -128,6 +139,10 @@ public class MainActivity extends BaseActivity {
 		mScrollLayout.setIsScroll(appContext.isScroll);
 	}
 
+	
+	public static MainActivity getMainActivity(){
+		return mainActivity;
+	}
 	/**
 	 * 下方导航按钮的点击事件
 	 * 
@@ -169,12 +184,106 @@ public class MainActivity extends BaseActivity {
 
 	}
 
+	private void loginAndUpdatePlace() {
+		if(StringUtils.isEmpty(appContext.uname)||StringUtils.isEmpty(appContext.upass)){
+			return;
+		}
+		
+		Api.getInstance().login(appContext.uname, appContext.upass, new AjaxCallBack<String>() {
+
+			@Override
+			public void onSuccess(String t) {
+				// TODO Auto-generated method stub
+				super.onSuccess(t);
+				if(t.trim().startsWith("{")){
+					appContext.user = JSON.parseObject(t, User.class);
+					appContext.isLogin = true;
+					
+					Api.getInstance().addCredits(appContext, appContext.user, 0, "完成每天登录,");
+					if(!StringUtils.isEmpty(appContext.longitude)||!StringUtils.isEmpty(appContext.latitude)){
+						Api.getInstance().updatePlace(appContext.user, appContext.longitude, appContext.latitude);
+					}
+//					Map<String, String> user = new HashMap<String, String>();
+//					user.put(Constant.FILE_USER_USERID, uname);
+//					user.put(Constant.FILE_USER_UPASS,upass);
+//					SharedPreferencesUtil.keep(Constant.FILE_USER,
+//							getApplicationContext(), user);
+				}
+			}
+
+			@Override
+			public void onFailure(Throwable t, String strMsg) {
+				// TODO Auto-generated method stub
+				super.onFailure(t, strMsg);
+				MyToast.centerToast(getApplicationContext(),"自动登陆失败",Toast.LENGTH_SHORT);
+			}
+			
+		});
+
+	}
+	
+	
+
+	public  Handler loginHandler = new Handler(){
+		public void handleMessage(android.os.Message msg) {
+			switch (msg.what) {
+			case XmppUtils.LOGIN_ERROR:
+				MyToast.centerToast(MainActivity.this, "登录失败",Toast.LENGTH_SHORT);
+				break;
+			case XmppUtils.LOGIN_ERROR_NET:
+				MyToast.centerToast(MainActivity.this, "连接服务器失败",Toast.LENGTH_SHORT);
+				break;
+			case XmppUtils.LOGIN_ERROR_PWD:
+				MyToast.centerToast(MainActivity.this, "密码错误",Toast.LENGTH_SHORT);
+				break;
+			case XmppUtils.LOGIN_ERROR_REPEAT:
+				MyToast.centerToast(MainActivity.this, "重复登录",Toast.LENGTH_SHORT);
+				break;
+			case 200:
+				MyToast.centerToast(MainActivity.this, "登录成功",Toast.LENGTH_SHORT);
+				Intent intentService = new Intent(MainActivity.this,XmppService.class);
+				startService(intentService);
+				new Thread(){
+					public void run() {
+						XmppUtils.getInstance().sendOnLine();
+					};
+				}.start();
+				
+//				FriendInfo info = new FriendInfo();
+//				info.setUsername("11");
+//				info.setNickname("110");
+//				Intent intent = new Intent(this,Chat.class);
+//				intent.putExtra("info", info);
+//				startActivity(intent);
+				
+//				break;
+//
+//			case DIALOG_SHOW:
+//				dialog = new ProgressDialog(XMPPActivity.this);
+//				dialog.setMessage("Loding");
+//				dialog.show();
+//				break;
+//			case DIALOG_CANCLE:
+//				if(dialog != null){
+//					dialog.dismiss();
+//					dialog = null;
+//				}
+//				break;
+			}
+		};
+	};
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		// Intent intent = new Intent(appContext, mWelcomeActivity.class);
 		// startActivity(intent);
+		mainActivity = this;
+		
 		setContentView(R.layout.activity_main);
+		loginAndUpdatePlace();
+		fb.configBitmapLoadThreadSize(60);
+		fb.configMemoryCacheSize(200);
 
 		initCommon();
 		initWeatherHead();// 更新头部天气
@@ -278,6 +387,8 @@ public class MainActivity extends BaseActivity {
 						public void onClick(DialogInterface dialog, int which) {
 							dialog.dismiss();
 							AppManager.getAppManager().AppExit(appContext);
+							//关闭xmpp 链接
+							XmppUtils.getInstance().closeConn();
 							// 退出
 
 						}
@@ -298,6 +409,7 @@ public class MainActivity extends BaseActivity {
 		super.onDestroy();
 		appContext.saveInfo();
 		((HomeFrame) viewHome).onDestroy();
+		XmppUtils.getInstance().closeConn();
 	}
 
 	@Override
@@ -356,4 +468,5 @@ public class MainActivity extends BaseActivity {
 		weatherHeadTitle.setText(title);
 	}
 
+	
 }

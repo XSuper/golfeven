@@ -1,6 +1,7 @@
 package com.golfeven.xmpp.activity;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.jivesoftware.smack.packet.Message;
@@ -24,11 +25,15 @@ import android.view.Window;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.golfeven.firstGolf.R;
+import com.golfeven.firstGolf.base.BaseActivity;
+import com.golfeven.firstGolf.common.StringUtils;
 import com.golfeven.xmpp.db.DbHelper;
 import com.golfeven.xmpp.entity.ChatMsg;
 import com.golfeven.xmpp.entity.FriendInfo;
@@ -41,13 +46,14 @@ import com.golfeven.xmpp.xmppmanager.XmppUtils;
  * 
  * @author by_wsc
  */
-public class Chat extends Activity {
+public class Chat extends BaseActivity {
 
 	private static final String TAG = "Chat";
 
 	public static final int SEND_MSG = 1;
 	public static final int RECEIVER_MSG = 2;
 	private static final int NOTIF_MSG = 3;
+	private static final int TIME_MSG = 3;
 
 	private static final int TYPE_SIZE = 3;// listview中有多少布局
 
@@ -57,11 +63,15 @@ public class Chat extends Activity {
 	private ListView chat_list;
 	private ChatListAdapter adapter;
 	private FriendInfo info;
+	private String imgFace;
 	private FriendInfo myInfo;
 
 	private List<ChatMsg> chatMsgList = new ArrayList<ChatMsg>();
 	private ChatMsg msg_me;
 	private ChatMsg msg_other;
+	private LinearLayout linearLayout;
+	
+	private boolean showSend = false;
 
 	private LayoutInflater inflater;
 	
@@ -96,15 +106,23 @@ public class Chat extends Activity {
 		if (getIntent().getExtras() != null
 				&& getIntent().getExtras().getSerializable("info") != null) {
 			info = (FriendInfo) getIntent().getExtras().getSerializable("info");
+			imgFace =getIntent().getStringExtra("face");
 		} else {
 			MyToast.showToast(this, "获取好友信息失败");
 			finish();
 		}
 
+		showSend = getIntent().getBooleanExtra("show",false);
 		chat_msg = (EditText) findViewById(R.id.chat_msg);
 		send_msg = (Button) findViewById(R.id.send_msg);
 		chat_list = (ListView) findViewById(R.id.chat_list);
-		((TextView) findViewById(R.id.title)).setText(info.getUsername());
+		linearLayout = (LinearLayout)findViewById(R.id.linearlayout);
+		if(showSend){
+			linearLayout.setVisibility(View.VISIBLE);
+		}else{
+			linearLayout.setVisibility(View.GONE);
+		}
+		((TextView) findViewById(R.id.title)).setText(info.getNickname());
 		inflater = LayoutInflater.from(this);
 		adapter = new ChatListAdapter();
 		chatMsgList = DbHelper.getInstance(this).getChatMsgByUserName(info.getUsername());
@@ -128,7 +146,17 @@ public class Chat extends Activity {
 				msg_me.setMsg(sendmsg);
 				msg_me.setType(SEND_MSG);
 				msg_me.setUsername(info.getUsername());
+				
+//				ChatMsg msg_time = new ChatMsg();
+//				
+//				msg_time.setMsg(new Date().toLocaleString());
+//				msg_time.setType(TIME_MSG);
+//				msg_time.setUsername(info.getUsername());
+//				
+//				chatMsgList.add(msg_time);
 				chatMsgList.add(msg_me);
+				
+				
 				DbHelper.getInstance(Chat.this).saveChatMsg(msg_me);
 				msg_me = null;
 				sendmsg = null;
@@ -209,6 +237,14 @@ public class Chat extends Activity {
 			int type = getItemViewType(position);
 			if (convertView == null) {
 				switch (type) {
+				case TIME_MSG:
+					convertView = inflater.inflate(R.layout.chat_me, null);
+					holder = new Holder();
+					holder.msg = (TextView) convertView
+							.findViewById(R.id.msg_me);
+					convertView.setTag(holder);
+					Logs.i(Chat.class, "chat_time");
+					break;
 				case SEND_MSG:
 					convertView = inflater.inflate(R.layout.chat_me, null);
 					holder = new Holder();
@@ -222,7 +258,7 @@ public class Chat extends Activity {
 					holder = new Holder();
 					holder.msg = (TextView) convertView
 							.findViewById(R.id.msg_other);
-					holder.icon = (Button) convertView
+					holder.icon = (ImageView) convertView
 							.findViewById(R.id.header_icon);
 					convertView.setTag(holder);
 					Logs.i(Chat.class, "chat_other");
@@ -234,13 +270,22 @@ public class Chat extends Activity {
 			ChatMsg chatMsg = chatMsgList.get(position);
 
 			switch (type) {
+			case TIME_MSG:
+				holder.msg.setText(chatMsg.getMsg());
+				
+				break;
 			case SEND_MSG:
 				holder.msg.setText(chatMsg.getMsg());
 
 				break;
 			case RECEIVER_MSG:
 				holder.msg.setText(chatMsg.getMsg());
-				holder.icon.setBackgroundResource(R.drawable.h091);
+				if(StringUtils.isEmpty(imgFace)){
+					
+					holder.icon.setBackgroundResource(R.drawable.qzx);
+				}else{
+					fb.display(holder.icon, imgFace);
+				}
 				break;
 			}
 
@@ -249,7 +294,7 @@ public class Chat extends Activity {
 
 		class Holder {
 			TextView msg;
-			Button icon;
+			ImageView icon;
 		}
 	}
 
@@ -306,6 +351,13 @@ public class Chat extends Activity {
 			if("msg_in".equals(intent.getAction())){
 				ChatMsg chatMsg = (ChatMsg) intent.getExtras().getSerializable("msg_in");
 				if(info.getUsername().equals(chatMsg.getUsername())){
+					
+//					ChatMsg msg_time = new ChatMsg();
+//					msg_time.setMsg(new Date().toLocaleString());
+//					msg_time.setType(TIME_MSG);
+//					msg_time.setUsername(info.getUsername());
+//					
+//					chatMsgList.add(msg_time);
 					
 					chatMsgList.add(chatMsg);
 					mHandler.sendEmptyMessage(NOTIF_MSG);

@@ -2,6 +2,8 @@ package com.golfeven.xmpp.service;
 
 import java.util.Collection;
 
+import net.tsz.afinal.FinalDb;
+
 import org.jivesoftware.smack.ConnectionListener;
 import org.jivesoftware.smack.PacketCollector;
 import org.jivesoftware.smack.PacketListener;
@@ -30,6 +32,8 @@ import android.widget.RemoteViews;
 import android.widget.Toast;
 
 import com.golfeven.firstGolf.R;
+import com.golfeven.firstGolf.bean.BallFriend;
+import com.golfeven.firstGolf.common.Constant;
 import com.golfeven.firstGolf.common.MyLog;
 import com.golfeven.firstGolf.ui.BallFriendDetailActivity;
 import com.golfeven.firstGolf.ui.LoginActivity;
@@ -290,7 +294,7 @@ public class XmppService extends Service {
 	        NotificationManager notificationManager = (NotificationManager)   
 	            this.getSystemService(android.content.Context.NOTIFICATION_SERVICE);  
 	        // 定义Notification的各种属性  
-	        Notification notification =new Notification(R.drawable.h091,  
+	        Notification notification =new Notification(R.drawable.golf_icon,  
 	                "新消息", System.currentTimeMillis());
 
 	        //FLAG_AUTO_CANCEL   该通知能被状态栏的清除按钮给清除掉
@@ -317,8 +321,17 @@ public class XmppService extends Service {
 	     // 设置通知的事件消息  
 	        CharSequence contentTitle =title; // 通知栏标题  
 	        CharSequence contentText =content; // 通知栏内容  
-	        Intent notificationIntent =new Intent(XmppService.this, Chat.class); // 点击该通知后要跳转的Activity  
-	        notificationIntent.putExtra("info", info);
+	       FinalDb db = FinalDb.create(getBaseContext(), Constant.SQLITE_NAME);
+	       BallFriend ballFriend =  db.findById(info.getUsername(), BallFriend.class);
+	       Intent notificationIntent =null; // 点击该通知后要跳转的Activity  
+	       if(ballFriend != null){
+	    	   notificationIntent =new Intent(XmppService.this, BallFriendDetailActivity.class);
+	    	   notificationIntent.putExtra("ballFriend",ballFriend);
+	       }else{
+	    	   notificationIntent =new Intent(XmppService.this, Chat.class);
+	    	   notificationIntent.putExtra("info", info);
+	       }
+	        
 	        PendingIntent contentItent = PendingIntent.getActivity(this, 0, notificationIntent, 0);  
 	        notification.setLatestEventInfo(this, contentTitle, contentText, contentItent);  
 	        // 把Notification传递给NotificationManager  

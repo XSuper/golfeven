@@ -13,6 +13,7 @@ import android.content.Context;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
+import com.golfeven.AppContext;
 import com.golfeven.firstGolf.bean.Score;
 import com.golfeven.firstGolf.bean.User;
 import com.golfeven.firstGolf.bean.WrongResponse;
@@ -22,7 +23,9 @@ import com.golfeven.firstGolf.common.NetUtil;
 import com.golfeven.firstGolf.common.SharedPreferencesUtil;
 import com.golfeven.firstGolf.common.StringUtils;
 import com.golfeven.firstGolf.common.ValidateUtil;
+import com.golfeven.firstGolf.ui.MainActivity;
 import com.golfeven.firstGolf.widget.MyToast;
+import com.golfeven.xmpp.utils.XmppRunnable;
 
 public class Api {
 	private static Api api;
@@ -46,13 +49,27 @@ public class Api {
 	 * @param upass
 	 * @param mCallBack
 	 */
-	public void login(String uname,String upass,AjaxCallBack<String> mCallBack) {
+	public void login(String uname,String upass,final AjaxCallBack<String> mCallBack) {
 		// TODO Auto-generated method stub
 		AjaxParams params = new AjaxParams();
 		params.put("cmd", "Member.login");
 		params.put("userid", uname);
 		params.put("pwd", upass);
-		fh.get(Constant.URL_BASE, params, mCallBack);
+		fh.get(Constant.URL_BASE, params, new AjaxCallBack<String>() {
+
+			@Override
+			public void onSuccess(String t) {
+				// TODO Auto-generated method stub
+				super.onSuccess(t);
+				mCallBack.onSuccess(t);
+				MainActivity mainActivity = MainActivity.getMainActivity();
+				AppContext appContext = AppContext.getAppContext();
+				if(appContext.isLogin&&appContext.user != null){
+					new XmppRunnable(mainActivity.loginHandler, XmppRunnable.LOGIN, new String[]{appContext.user.getMid(),appContext.upass});
+				}
+			}
+			
+		});
 		
 
 	}

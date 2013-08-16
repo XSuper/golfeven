@@ -32,7 +32,9 @@ import com.golfeven.firstGolf.common.Utils;
 import com.golfeven.firstGolf.common.ValidateUtil;
 import com.golfeven.firstGolf.widget.HeadBack;
 import com.golfeven.firstGolf.widget.MyToast;
+import com.golfeven.xmpp.activity.Chat;
 import com.golfeven.xmpp.activity.XMPPActivity;
+import com.golfeven.xmpp.entity.FriendInfo;
 
 public class BallFriendDetailActivity extends BaseActivity implements
 		OnClickListener {
@@ -89,7 +91,8 @@ public class BallFriendDetailActivity extends BaseActivity implements
 
 //	private FinalBitmap fb;
 	private List<Photo> photos;
-
+ 
+	private boolean isme = false;
 	// public int state = -2;//拉黑前的状态
 
 	@Override
@@ -103,6 +106,7 @@ public class BallFriendDetailActivity extends BaseActivity implements
 		if (appContext.isLogin == true && appContext.user != null) {
 			if (ballFriend.getMid().equals(appContext.user.getMid())) {
 				background.setVisibility(View.GONE);
+				isme = true;
 			}
 
 		}
@@ -407,17 +411,27 @@ public class BallFriendDetailActivity extends BaseActivity implements
 		}
 		if (v == msg) {
 			showLoad(false);
-			Intent intent = new Intent(appContext, XMPPActivity.class);
-			startActivity(intent);
-//			msg.setClickable(false);
+			FriendInfo info = new FriendInfo();
+			info.setUsername(ballFriend.getMid());
+			info.setNickname(ballFriend.getUname());
+			Intent intent = new Intent(BallFriendDetailActivity.this,Chat.class);
+			intent.putExtra("info", info);
 			int tag = (Integer) msg.getTag();
 			switch (tag) {
 			case -1:
-
+				intent.putExtra("show", false);
 				break;
 			case 1:
+				intent.putExtra("show", true);
 				break;
 			}
+			if(!StringUtils.isEmpty(ballFriend.getFace())){
+				intent.putExtra("face", Constant.URL_IMG_BASE+ballFriend.getFace());
+			}
+			startActivity(intent);
+			
+//			msg.setClickable(false);
+			
 		}
 		if (v == pullblack) {
 			pullblack.setClickable(false);
@@ -554,7 +568,9 @@ public class BallFriendDetailActivity extends BaseActivity implements
 	 * @param show
 	 */
 	public void showLoad(boolean show){
-		
+		if(isme){
+			return;
+		}
 		if(show){
 			
 			loading.setVisibility(View.VISIBLE);

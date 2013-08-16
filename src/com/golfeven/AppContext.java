@@ -3,37 +3,39 @@ package com.golfeven;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.tsz.afinal.FinalBitmap;
 import net.tsz.afinal.FinalHttp;
 import net.tsz.afinal.http.AjaxCallBack;
 
+import org.jivesoftware.smack.XMPPConnection;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Application;
-import android.widget.Toast;
 
-import com.alibaba.fastjson.JSON;
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
-import com.golfeven.firstGolf.api.Api;
 import com.golfeven.firstGolf.bean.User;
 import com.golfeven.firstGolf.common.Constant;
 import com.golfeven.firstGolf.common.MyLog;
 import com.golfeven.firstGolf.common.SharedPreferencesUtil;
 import com.golfeven.firstGolf.common.StringUtils;
-import com.golfeven.firstGolf.widget.MyToast;
 import com.golfeven.weather.WeatherUtil;
 
 public class AppContext extends Application {
+	public static AppContext appContext;
+	
+	public static AppContext getAppContext(){
+		return appContext;
+	}
+	
 	
 	
 	//****************初始化一些全局用到的变量
 	//private FinalBitmap fb; //用到的图片加载,设置统一的加载图片和  统一的失败图片
 	
-	
+	//public XMPPConnection conn;
 	
 	public User user;
 	public String uname;
@@ -123,47 +125,13 @@ public class AppContext extends Application {
 				getApplicationContext(), map_data);
 	}
 
-	private void loginAndUpdatePlace() {
-		if(StringUtils.isEmpty(uname)||StringUtils.isEmpty(upass)){
-			return;
-		}
-		Api.getInstance().login(uname, upass, new AjaxCallBack<String>() {
-
-			@Override
-			public void onSuccess(String t) {
-				// TODO Auto-generated method stub
-				super.onSuccess(t);
-				if(t.trim().startsWith("{")){
-					user = JSON.parseObject(t, User.class);
-					isLogin = true;
-					Api.getInstance().addCredits(AppContext.this, user, 0, "完成每天登录,");
-					if(!StringUtils.isEmpty(longitude)||!StringUtils.isEmpty(latitude)){
-						Api.getInstance().updatePlace(user, longitude, latitude);
-					}
-//					Map<String, String> user = new HashMap<String, String>();
-//					user.put(Constant.FILE_USER_USERID, uname);
-//					user.put(Constant.FILE_USER_UPASS,upass);
-//					SharedPreferencesUtil.keep(Constant.FILE_USER,
-//							getApplicationContext(), user);
-				}
-			}
-
-			@Override
-			public void onFailure(Throwable t, String strMsg) {
-				// TODO Auto-generated method stub
-				super.onFailure(t, strMsg);
-				MyToast.centerToast(getApplicationContext(),"自动登陆失败",Toast.LENGTH_SHORT);
-			}
-			
-		});
-
-	}
 	@Override
 	public void onCreate() {
 		getInfo();
 		initBaiduMap();// 百度地图定位
-		loginAndUpdatePlace();
+		//loginAndUpdatePlace();
 		super.onCreate();
+		appContext = this;
 	}
 
 	// 更新天气

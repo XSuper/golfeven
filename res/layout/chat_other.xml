@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:background="@null" >
 
-    <Button
+    <ImageView
         android:id="@+id/header_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -21,6 +21,7 @@
         android:gravity="center"
         android:layout_marginRight="30dip"
         android:textSize="16.0sp"
+        android:textColor="@color/white"
         android:layout_toRightOf="@id/header_icon"
         android:background="@drawable/f_infor02"
         android:drawablePadding="12.0dip"

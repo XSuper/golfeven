@@ -30,6 +30,7 @@ import com.golfeven.firstGolf.ui.LoginActivity;
 import com.golfeven.firstGolf.ui.MainActivity;
 import com.golfeven.firstGolf.ui.MyDetailActivity;
 import com.golfeven.firstGolf.widget.MyToast;
+import com.golfeven.xmpp.xmppmanager.XmppUtils;
 
 public class SettingFrame extends LinearLayout implements
 		android.view.View.OnClickListener {
@@ -159,7 +160,7 @@ public class SettingFrame extends LinearLayout implements
 				appContext.isLogin = false;
 				appContext.user = null;
 				SharedPreferencesUtil.clearUser(appContext);
-				
+				XmppUtils.getInstance().closeConn();
 				my.setText("请先登陆");
 				login.setText("登陆");
 			} else {

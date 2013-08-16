@@ -36,10 +36,10 @@ import com.golfeven.xmpp.entity.FriendInfo;
 
 public class XmppUtils {
 
-	public static String SERVER_HOST = "192.168.0.137";//你openfire服务器所在的ip
-	public static  String SERVER_NAME = "xsuper";//设置openfire时的服务器名
+	public static String SERVER_HOST = "112.124.13.12";//你openfire服务器所在的ip
+	public static  String SERVER_NAME = "112.124.13.12";//设置openfire时的服务器名
 	public static int    SERVER_PORT = 5222;//服务端口 可以在openfire上设置
-	public static final String RESOURCE = "golfeven";
+	public static final String RESOURCE = "golfeven_android";
 	public static final int LOGIN_ERROR_REPEAT = 409;//重复登录
 	public static final int LOGIN_ERROR_NET = 502;//服务不可用
 	public static final int LOGIN_ERROR_PWD = 401;//密码错误 或其他

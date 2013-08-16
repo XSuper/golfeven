@@ -12,7 +12,7 @@
         android:paddingLeft="10dip"
         android:paddingRight="15dip"
         android:text="wsc"
-        android:textColor="@color/texthink"
+        android:textColor="@color/black"
         android:background="@drawable/f_infor03"
         android:layout_alignParentRight="true"
         />

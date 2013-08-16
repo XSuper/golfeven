@@ -50,8 +50,8 @@ public  class XMPPActivity extends Activity {
 				}.start();
 				
 				FriendInfo info = new FriendInfo();
-				info.setUsername("admin");
-				info.setNickname("admin");
+				info.setUsername("11");
+				info.setNickname("110");
 				Intent intent = new Intent(XMPPActivity.this,Chat.class);
 				intent.putExtra("info", info);
 				startActivity(intent);
@@ -78,7 +78,7 @@ public  class XMPPActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		
 		super.onCreate(savedInstanceState);
-		new XmppRunnable(loginHandler, XmppRunnable.LOGIN, new String[]{"b","b"});
+		new XmppRunnable(loginHandler, XmppRunnable.LOGIN, new String[]{"19","114"});
 		
 	}
 
