@@ -30,6 +30,7 @@ import com.golfeven.firstGolf.common.StringUtils;
 import com.golfeven.firstGolf.common.ToOtherActivity;
 import com.golfeven.firstGolf.common.Utils;
 import com.golfeven.firstGolf.common.ValidateUtil;
+import com.golfeven.firstGolf.common.XmppUtil;
 import com.golfeven.firstGolf.widget.HeadBack;
 import com.golfeven.firstGolf.widget.MyToast;
 import com.golfeven.xmpp.activity.Chat;
@@ -38,6 +39,7 @@ import com.golfeven.xmpp.entity.FriendInfo;
 
 public class BallFriendDetailActivity extends BaseActivity implements
 		OnClickListener {
+	
 	@ViewInject(id = R.id.activity_ballfriend_detail_headback)
 	HeadBack headback;
 	@ViewInject(id = R.id.activity_ballfriend_detail_photo)
@@ -74,6 +76,8 @@ public class BallFriendDetailActivity extends BaseActivity implements
 	ImageView msgImg;
 	@ViewInject(id = R.id.activity_ballfriend_detail_msg_tex)
 	TextView msgTex;
+	@ViewInject(id = R.id.activity_ballfriend_detail_msg_count)
+	TextView msgCount;
 	@ViewInject(id = R.id.activity_ballfriend_detail_attention)
 	View attention;
 	@ViewInject(id = R.id.activity_ballfriend_detail_attention_img)
@@ -95,6 +99,7 @@ public class BallFriendDetailActivity extends BaseActivity implements
 	private boolean isme = false;
 	// public int state = -2;//拉黑前的状态
 
+	public static String mid = null;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -103,16 +108,20 @@ public class BallFriendDetailActivity extends BaseActivity implements
 //		fb = appContext.getFB();
 		Intent intent = getIntent();
 		ballFriend = intent.getParcelableExtra("ballFriend");
+//MyLog.e("状态",ballFriend.getMemberRelation());
+		if(ballFriend!= null){
+			initValue();
+			mid = ballFriend.getMid();
+		}else{
+			mid = getIntent().getStringExtra("mid");
+		}
 		if (appContext.isLogin == true && appContext.user != null) {
-			if (ballFriend.getMid().equals(appContext.user.getMid())) {
+			if (mid.equals(appContext.user.getMid())) {
 				background.setVisibility(View.GONE);
 				isme = true;
 			}
-
 		}
-
 		imgCount = (TextView) findViewById(R.id.activity_ballfriend_detail_mcount);
-
 		android.widget.LinearLayout.LayoutParams params = new android.widget.LinearLayout.LayoutParams(
 				Utils.getScreenWith(BallFriendDetailActivity.this) / 4,
 				Utils.getScreenWith(BallFriendDetailActivity.this) / 4);
@@ -122,9 +131,7 @@ public class BallFriendDetailActivity extends BaseActivity implements
 		LayoutParams params2 = new LayoutParams(LayoutParams.MATCH_PARENT,
 				width / 2);
 		mPhoto.setLayoutParams(params2);
-
-		load();
-		initValue();
+		load(mid);
 	}
 
 	private void initValue() {
@@ -172,6 +179,15 @@ public class BallFriendDetailActivity extends BaseActivity implements
 		attention.setVisibility(View.VISIBLE);
 		pullblack.setVisibility(View.VISIBLE);
 		msg.setVisibility(View.VISIBLE);
+		int mcount = XmppUtil.getCount(ballFriend.getMid()); 
+		//MyToast.centerToast(appContext, mcount+"||"+ballFriend.getMid(),Toast.LENGTH_SHORT);
+		if(mcount == 0){
+			msgCount.setVisibility(View.INVISIBLE);
+			
+		}else{
+			msgCount.setVisibility(View.VISIBLE);
+			msgCount.setText(mcount+"");
+		}
 
 		int m[] = Utils.judgeShow(ballFriend.getMemberRelation());
 		// 控制关注显示
@@ -218,11 +234,11 @@ public class BallFriendDetailActivity extends BaseActivity implements
 
 	Api api = Api.getInstance();
 
-	private void load() {
+	private void load(String mid) {
 		// TODO Auto-generated method stub
 		// 加载详细信息
 		showLoad(true);
-		api.getBallFriendDetail(ballFriend.getMid(),
+		api.getBallFriendDetail(mid,
 				appContext.user == null ? null : appContext.user.getMid(),
 				appContext.latitude, appContext.longitude,
 				new AjaxCallBack<String>() {
@@ -233,14 +249,19 @@ public class BallFriendDetailActivity extends BaseActivity implements
 						super.onSuccess(t);
 						headback.setProgressVisible(false);
 						try {
-							MyLog.v("ballfriend---0", ballFriend.getDistance());
+							//MyLog.v("ballfriend---0", ballFriend.getDistance());
 							ballFriend = JSON.parseObject(t, BallFriend.class);
-							MyLog.v("ballfriend---1", ballFriend.getDistance());
+							//MyLog.v("ballfriend---1", ballFriend.getDistance());
 						} catch (Exception e) {
 							// TODO: handle exception
+							MyLog.e("获取球友详细信息失败", e.toString());
+							ballFriend = null;
 						}
 						MyLog.v("ballfriend", t);
-						initValue();
+						if(ballFriend!= null){
+							
+							initValue();
+						}
 						showLoad(false);
 					}
 
@@ -254,7 +275,7 @@ public class BallFriendDetailActivity extends BaseActivity implements
 
 				});
 		// 加载个人相册
-		api.getPhoto(ballFriend.getMid(), new AjaxCallBack<String>() {
+		api.getPhoto(mid, new AjaxCallBack<String>() {
 
 			@Override
 			public void onSuccess(String t) {
@@ -580,6 +601,59 @@ public class BallFriendDetailActivity extends BaseActivity implements
 			background.setVisibility(View.VISIBLE);
 			
 		}
+	}
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		int mcount = XmppUtil.getCount(mid); 
+		//MyToast.centerToast(appContext, mcount+"||"+ballFriend.getMid(),Toast.LENGTH_SHORT);
+		if(mcount == 0){
+			msgCount.setVisibility(View.INVISIBLE);
+			
+		}else{
+			msgCount.setVisibility(View.VISIBLE);
+			msgCount.setText(mcount+"");
+		}
+	}
+	
+	@Override
+	protected void onNewIntent(Intent intent) {
+		// TODO Auto-generated method stub
+		super.onNewIntent(intent);
+		
+		//ballFriend = null;
+		//mid = null;
+	//	intent = getIntent();
+		ballFriend = intent.getParcelableExtra("ballFriend");
+//MyLog.e("状态",ballFriend.getMemberRelation());
+		if(ballFriend!= null){
+			initValue();
+			mid = ballFriend.getMid();
+		}
+//		else{
+//			mid = getIntent().getStringExtra("mid");
+//			
+//		}
+		MyLog.e("这个mid", mid+"");
+		if (appContext.isLogin == true && appContext.user != null) {
+			if (mid.equals(appContext.user.getMid())) {
+				background.setVisibility(View.GONE);
+				isme = true;
+			}
+		}
+		imgCount = (TextView) findViewById(R.id.activity_ballfriend_detail_mcount);
+		android.widget.LinearLayout.LayoutParams params = new android.widget.LinearLayout.LayoutParams(
+				Utils.getScreenWith(BallFriendDetailActivity.this) / 4,
+				Utils.getScreenWith(BallFriendDetailActivity.this) / 4);
+		params.setMargins(10, 10, 10, 10);
+		face.setLayoutParams(params);
+		int width = Utils.getScreenWith(BallFriendDetailActivity.this);
+		LayoutParams params2 = new LayoutParams(LayoutParams.MATCH_PARENT,
+				width / 2);
+		mPhoto.setLayoutParams(params2);
+		load(mid);
 	}
 	
 }

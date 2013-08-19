@@ -30,6 +30,7 @@ import com.golfeven.firstGolf.ui.LoginActivity;
 import com.golfeven.firstGolf.ui.MainActivity;
 import com.golfeven.firstGolf.ui.MyDetailActivity;
 import com.golfeven.firstGolf.widget.MyToast;
+import com.golfeven.xmpp.service.XmppService;
 import com.golfeven.xmpp.xmppmanager.XmppUtils;
 
 public class SettingFrame extends LinearLayout implements
@@ -126,6 +127,7 @@ public class SettingFrame extends LinearLayout implements
 //			mydetail.setOnClickListener(new ToOtherActivity(
 //					(MainActivity) getContext(), LoginActivity.class));
 			//mydetail.setClickable(false);
+			
 			login.setText("登陆");
 			my.setText("请先登陆");
 		}
@@ -157,10 +159,12 @@ public class SettingFrame extends LinearLayout implements
 		if (view == login) {
 			if (appContext.isLogin) {
 
+				Intent service = new Intent(getContext(),XmppService.class);
+				getContext().stopService(service);
+				
 				appContext.isLogin = false;
 				appContext.user = null;
 				SharedPreferencesUtil.clearUser(appContext);
-				XmppUtils.getInstance().closeConn();
 				my.setText("请先登陆");
 				login.setText("登陆");
 			} else {

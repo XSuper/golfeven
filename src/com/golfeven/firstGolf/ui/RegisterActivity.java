@@ -22,6 +22,7 @@ import com.golfeven.firstGolf.common.StringUtils;
 import com.golfeven.firstGolf.common.ValidateUtil;
 import com.golfeven.firstGolf.widget.HeadBack;
 import com.golfeven.firstGolf.widget.MyToast;
+import com.golfeven.xmpp.utils.XmppRunnable;
 
 public class RegisterActivity extends BaseActivity{
 	@ViewInject(id=R.id.activity_register_id) EditText userid;
@@ -93,6 +94,8 @@ public class RegisterActivity extends BaseActivity{
 						appContext.user.setUname(mNick);
 						appContext.user.setSex("保密");
 						appContext.user.setBirthday("1900-01-01");
+						MainActivity mainActivity = MainActivity.getMainActivity();
+						new XmppRunnable(mainActivity.loginHandler, XmppRunnable.LOGIN, new String[]{appContext.user.getMid(),mPass});
 						Api.getInstance().addCredits(RegisterActivity.this, appContext.user, 0, "完成每天登录,");
 						// 登陆成功后保存用户名和密码
 						SharedPreferencesUtil.saveUser(appContext,

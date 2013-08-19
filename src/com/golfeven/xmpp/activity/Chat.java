@@ -34,6 +34,7 @@ import android.widget.Toast;
 import com.golfeven.firstGolf.R;
 import com.golfeven.firstGolf.base.BaseActivity;
 import com.golfeven.firstGolf.common.StringUtils;
+import com.golfeven.firstGolf.common.XmppUtil;
 import com.golfeven.xmpp.db.DbHelper;
 import com.golfeven.xmpp.entity.ChatMsg;
 import com.golfeven.xmpp.entity.FriendInfo;
@@ -103,9 +104,15 @@ public class Chat extends BaseActivity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.chat);
 
+		
+		
 		if (getIntent().getExtras() != null
 				&& getIntent().getExtras().getSerializable("info") != null) {
 			info = (FriendInfo) getIntent().getExtras().getSerializable("info");
+			if(info!= null&&info.getUsername()!= null){
+				XmppUtil.removeOldFriend(info.getUsername());
+				XmppUtil.id = info.getUsername();
+			}
 			imgFace =getIntent().getStringExtra("face");
 		} else {
 			MyToast.showToast(this, "获取好友信息失败");
@@ -336,6 +343,7 @@ public class Chat extends BaseActivity {
 	@Override
 	protected void onStop() {
 		super.onStop();
+		XmppUtil.id = null;
 	}
 
 	@Override

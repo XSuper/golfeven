@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
+import org.jivesoftware.smack.XMPPException;
+
 import net.tsz.afinal.FinalHttp;
 import net.tsz.afinal.http.AjaxCallBack;
 import net.tsz.afinal.http.AjaxParams;
@@ -26,6 +28,7 @@ import com.golfeven.firstGolf.common.ValidateUtil;
 import com.golfeven.firstGolf.ui.MainActivity;
 import com.golfeven.firstGolf.widget.MyToast;
 import com.golfeven.xmpp.utils.XmppRunnable;
+import com.golfeven.xmpp.xmppmanager.XmppUtils;
 
 public class Api {
 	private static Api api;
@@ -65,6 +68,13 @@ public class Api {
 				MainActivity mainActivity = MainActivity.getMainActivity();
 				AppContext appContext = AppContext.getAppContext();
 				if(appContext.isLogin&&appContext.user != null){
+//					try {
+//						XmppUtils.getInstance().createConnection();
+//					} catch (XMPPException e) {
+//						// TODO Auto-generated catch block
+//						e.printStackTrace();
+//						MyLog.e("XMPP", "登录前链接错误");
+//					}
 					new XmppRunnable(mainActivity.loginHandler, XmppRunnable.LOGIN, new String[]{appContext.user.getMid(),appContext.upass});
 				}
 			}

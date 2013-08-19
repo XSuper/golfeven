@@ -33,6 +33,7 @@ import com.golfeven.firstGolf.api.Api;
 import com.golfeven.firstGolf.base.BaseActivity;
 import com.golfeven.firstGolf.bean.BallPark;
 import com.golfeven.firstGolf.bean.User;
+import com.golfeven.firstGolf.common.MyLog;
 import com.golfeven.firstGolf.common.StringUtils;
 import com.golfeven.firstGolf.common.Utils;
 import com.golfeven.firstGolf.widget.MyToast;
@@ -243,9 +244,16 @@ public class MainActivity extends BaseActivity {
 				MyToast.centerToast(MainActivity.this, "登录成功",Toast.LENGTH_SHORT);
 				Intent intentService = new Intent(MainActivity.this,XmppService.class);
 				startService(intentService);
+				
 				new Thread(){
 					public void run() {
-						XmppUtils.getInstance().sendOnLine();
+						try {
+							
+							XmppUtils.getInstance().sendOnLine();
+						} catch (Exception e) {
+							// TODO: handle exception
+							MyLog.e("在线",e.toString());
+						}
 					};
 				}.start();
 				
@@ -388,8 +396,10 @@ public class MainActivity extends BaseActivity {
 							dialog.dismiss();
 							AppManager.getAppManager().AppExit(appContext);
 							//关闭xmpp 链接
-							XmppUtils.getInstance().closeConn();
+							//XmppUtils.getInstance().closeConn();
 							// 退出
+							Intent service = new Intent(MainActivity.this,XmppService.class);
+							stopService(service);
 
 						}
 					});

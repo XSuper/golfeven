@@ -19,6 +19,7 @@ import org.jivesoftware.smack.packet.Presence;
 import org.jivesoftware.smack.packet.Presence.Mode;
 import org.jivesoftware.smack.packet.RosterPacket;
 
+import android.R.integer;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -31,10 +32,12 @@ import android.text.TextUtils;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 
+import com.golfeven.AppContext;
 import com.golfeven.firstGolf.R;
 import com.golfeven.firstGolf.bean.BallFriend;
 import com.golfeven.firstGolf.common.Constant;
 import com.golfeven.firstGolf.common.MyLog;
+import com.golfeven.firstGolf.common.XmppUtil;
 import com.golfeven.firstGolf.ui.BallFriendDetailActivity;
 import com.golfeven.firstGolf.ui.LoginActivity;
 import com.golfeven.firstGolf.ui.MainActivity;
@@ -76,8 +79,13 @@ public class XmppService extends Service {
 			FriendInfo info = new FriendInfo();
 			info.setNickname(chatMsg.getUsername());
 			info.setUsername(chatMsg.getUsername());
+			if(XmppUtil.id == null||!chatMsg.getUsername().equals(XmppUtil.id)){
+				
+				showNotification("新消息",chatMsg.getUsername(),chatMsg.getMsg(),info);
+				XmppUtil.addNewFriend(chatMsg.getUsername());
+			}
 			
-			showNotification("新消息",chatMsg.getMsg(),info);
+			
 		};
 	};
 	@Override
@@ -211,6 +219,8 @@ public class XmppService extends Service {
 			
 			@Override
 			public void connectionClosed() {
+				MyLog.e("链接关闭", "链接关闭");
+				//stopSelf();
 				
 			}
 		});
@@ -221,6 +231,7 @@ public class XmppService extends Service {
 	public void onDestroy() {
 		Logs.i(XmppService.class, "onDestroy");
 		super.onDestroy();
+		XmppUtils.getInstance().closeConn();
 	}
 	
 	/**
@@ -287,7 +298,7 @@ public class XmppService extends Service {
 		//FriendListActivity.friendListActivity.mHandler.sendMessage(message);
 	}
 	
-	 private void showNotification(String title,String content,FriendInfo info){
+	 private void showNotification(String title,String id,String content,FriendInfo info){
 
 	        // 创建一个NotificationManager的引用  
 
@@ -305,6 +316,7 @@ public class XmppService extends Service {
 
 	        //FLAG_INSISTENT     是否一直进行，比如音乐一直播放，知道用户响应
 
+	        notification.flags |= Notification.FLAG_AUTO_CANCEL; // 将此通知放到通知栏的"Ongoing"即"正在运行"组中  
 	        //notification.flags |= Notification.FLAG_ONGOING_EVENT; // 将此通知放到通知栏的"Ongoing"即"正在运行"组中  
 	     //   notification.flags |= Notification.FLAG_NO_CLEAR; // 表明在点击了通知栏中的"清除通知"后，此通知不清除，经常与FLAG_ONGOING_EVENT一起使用  
 	      //  notification.flags |= Notification.FLAG_SHOW_LIGHTS;  
@@ -324,18 +336,31 @@ public class XmppService extends Service {
 	       FinalDb db = FinalDb.create(getBaseContext(), Constant.SQLITE_NAME);
 	       BallFriend ballFriend =  db.findById(info.getUsername(), BallFriend.class);
 	       Intent notificationIntent =null; // 点击该通知后要跳转的Activity  
-	       if(ballFriend != null){
-	    	   notificationIntent =new Intent(XmppService.this, BallFriendDetailActivity.class);
-	    	   notificationIntent.putExtra("ballFriend",ballFriend);
+	       notificationIntent =new Intent(XmppService.this, BallFriendDetailActivity.class);
+	       BallFriendDetailActivity.mid = id;
+	       if(ballFriend == null){
+	    	   notificationIntent.putExtra("mid",id);
 	       }else{
-	    	   notificationIntent =new Intent(XmppService.this, Chat.class);
-	    	   notificationIntent.putExtra("info", info);
+	    	   
+	    	   notificationIntent.putExtra("ballFriend",ballFriend);
 	       }
+//	       }else{
+//	    	   notificationIntent =new Intent(XmppService.this, Chat.class);
+//	    	   notificationIntent.putExtra("info", info);
+//	       }
 	        
-	        PendingIntent contentItent = PendingIntent.getActivity(this, 0, notificationIntent, 0);  
+	       int myId = 0;
+	       try {
+	    	   myId = Integer.parseInt(id);
+	       } catch (Exception e) {
+	    	   // TODO: handle exception
+	    	   myId = 0;
+	       }
+	        PendingIntent contentItent = PendingIntent.getActivity(this, myId, notificationIntent, myId);  
 	        notification.setLatestEventInfo(this, contentTitle, contentText, contentItent);  
 	        // 把Notification传递给NotificationManager  
-	        notificationManager.notify(0, notification);  
+	        notificationManager.notify(myId, notification);  
+	       // notificationManager.notify(0, notification);  
 
 	    }
 	
