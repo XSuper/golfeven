@@ -4,106 +4,116 @@
     android:layout_height="wrap_content"
     android:background="@drawable/bg_"
     android:orientation="horizontal" >
-    <ImageView 
-        android:layout_weight="4"
+
+    <FrameLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:id="@+id/item_attention_face"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="-15dp"
-        />
+        android:layout_weight="4" >
+
+        <ImageView
+            android:id="@+id/item_attention_face"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
+
+        <TextView
+            android:layout_marginTop="16dp"
+            android:id="@+id/item_attention_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/badge_ifaux"
+            android:gravity="center"
+            android:text="1"
+            android:textColor="@color/white"
+            android:textSize="10sp" />
+    </FrameLayout>
+
     <LinearLayout
-         android:layout_marginTop="-15dp"
-        android:layout_weight="1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:layout_marginTop="-15dp"
+        android:layout_weight="1"
         android:background="@drawable/qy_ball"
         android:gravity="top"
-        >
-        <LinearLayout 
+        android:orientation="vertical" >
+
+        <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:orientation="horizontal"
-            >
-            <TextView 
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+            android:orientation="horizontal" >
+
+            <TextView
                 android:id="@+id/item_attention_nick"
-                android:text="球友昵称"
-                android:textSize="12sp"
-                android:textColor="@color/black"
-                android:gravity="center|left"
-                android:layout_gravity="center_vertical"
-                />
-            <LinearLayout 
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:layout_weight="1"
+                android:gravity="center|left"
+                android:text="球友昵称"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center|left"
-             
-                >
-                <ImageView 
+                android:layout_weight="1" >
+
+                <ImageView
+                    android:id="@+id/item_attention_sex"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/item_attention_sex"
-                    android:background="@drawable/qy_man"
-                    />
-                <TextView 
+                    android:background="@drawable/qy_man" />
+
+                <TextView
+                    android:id="@+id/item_attention_age"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/item_attention_age"
-                    android:textSize="10sp"
                     android:gravity="center_vertical"
                     android:text="25-35"
-                    />
+                    android:textSize="10sp" />
             </LinearLayout>
-            <Button 
+
+            <Button
+                android:id="@+id/item_attention_btn"
                 style="@style/integral_btn"
                 android:layout_height="28dp"
-                android:text="取消关注"
-                android:id="@+id/item_attention_btn"
-                />
-            
-            
+                android:text="取消关注" />
         </LinearLayout>
-        <LinearLayout 
+
+        <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:orientation="horizontal"
-            >
-            <TextView 
-                android:layout_weight="1"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
                 android:id="@+id/item_attention_loveMsg"
-                android:textSize="10sp"
-                android:text="个性签名"
-                
-                />
-            <LinearLayout 
-                android:layout_weight="1"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                >
-                <ImageView 
+                android:layout_weight="1"
+                android:text="个性签名"
+                android:textSize="10sp" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical" >
+
+                <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/qy_icon2"
-                    />
-                <TextView 
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:background="@drawable/qy_icon2" />
+
+                <TextView
                     android:id="@+id/item_attention_distance"
-                    android:text="99公里"
-                    />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="99公里" />
             </LinearLayout>
-            
         </LinearLayout>
     </LinearLayout>
-    
 
 </LinearLayout>

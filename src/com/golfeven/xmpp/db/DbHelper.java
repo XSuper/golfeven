@@ -37,7 +37,7 @@ public class DbHelper {
 	private class SqlLiteHelper extends SQLiteOpenHelper {
 
 		private static final int DB_VERSION = 1;
-		private static final String DB_NAME = "xmpp_with_wsc";
+		private static final String DB_NAME = "xmpp_with_golfeven";
 
 		public SqlLiteHelper(Context context) {
 			super(context, DB_NAME, null, DB_VERSION);
@@ -61,7 +61,7 @@ public class DbHelper {
 			String sql = "DROP TABLE IF EXISTS chat";
 			db.execSQL(sql);
 		}
-
+		
 	}
 	
 	/**
@@ -79,6 +79,12 @@ public class DbHelper {
 		long count = db.insert("chat", "_id", values);
 		Logs.i(DbHelper.class, "save ChatMsg user = "+msg.getUsername()+" , msg = " + msg.getMsg()+" ,count = " +count);
 	}
+	
+	public void dropTable() {
+		String sql = "delete from chat where 1=1";
+		db.execSQL(sql);
+	}
+
 	
 	/**
 	 * 获取聊天记录

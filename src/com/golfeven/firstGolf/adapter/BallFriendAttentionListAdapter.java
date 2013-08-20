@@ -29,6 +29,7 @@ import com.golfeven.firstGolf.common.NetUtil;
 import com.golfeven.firstGolf.common.StringUtils;
 import com.golfeven.firstGolf.common.Utils;
 import com.golfeven.firstGolf.common.ValidateUtil;
+import com.golfeven.firstGolf.common.XmppUtil;
 import com.golfeven.firstGolf.ui.BallFriendDetailActivity;
 import com.golfeven.firstGolf.widget.MyToast;
 
@@ -72,11 +73,13 @@ public class BallFriendAttentionListAdapter extends MBaseAdapter {
 					.findViewById(R.id.item_attention_distance);
 			TextView age = (TextView) convertView
 					.findViewById(R.id.item_attention_age);
+			TextView count = (TextView) convertView
+					.findViewById(R.id.item_attention_count);
 			Button btn = (Button) convertView
 					.findViewById(R.id.item_attention_btn);
 
 			friendView = new FriendView(face, sex, nick, loveMsg, place, age,
-					btn);
+					btn,count);
 			convertView.setTag(friendView);
 		} else {
 
@@ -126,6 +129,20 @@ public class BallFriendAttentionListAdapter extends MBaseAdapter {
 		}else{
 			friendView.face.setImageResource(R.drawable.qy_tx);
 		}
+		
+		
+		
+		int mcount = XmppUtil.getCount(ballFriend.getMid()); 
+		//MyToast.centerToast(appContext, mcount+"||"+ballFriend.getMid(),Toast.LENGTH_SHORT);
+		if(mcount == 0){
+			friendView.count.setVisibility(View.INVISIBLE);
+			
+		}else{
+			friendView.count.setVisibility(View.VISIBLE);
+			friendView.count.setText(mcount+"");
+		}
+		
+		
 		friendView.btn.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -304,11 +321,11 @@ public class BallFriendAttentionListAdapter extends MBaseAdapter {
 
 	class FriendView {
 		public ImageView face, sex;
-		public TextView nick, loveMsg, place, age;
+		public TextView nick, loveMsg, place, age,count;
 		public Button btn;
 
 		public FriendView(ImageView face, ImageView sex, TextView nick,
-				TextView loveMsg, TextView place, TextView age, Button btn) {
+				TextView loveMsg, TextView place, TextView age, Button btn,TextView count) {
 			super();
 			this.face = face;
 			this.sex = sex;
@@ -317,6 +334,9 @@ public class BallFriendAttentionListAdapter extends MBaseAdapter {
 			this.place = place;
 			this.age = age;
 			this.btn = btn;
+			this.count = count;
+			
+			
 		}
 
 	}

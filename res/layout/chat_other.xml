@@ -6,11 +6,10 @@
 
     <ImageView
         android:id="@+id/header_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="45dip"
+        android:layout_height="45dip"
         android:layout_alignParentLeft="true"
-        android:minWidth="45dip"
-        android:minHeight="45dip"
+        
         />
 
     <TextView

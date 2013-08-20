@@ -2,8 +2,8 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/zx_bg"
-    android:layout_margin="3dp"
     android:layout_marginTop="-4dp"
+    
     android:orientation="vertical" >
 <TextView 
     android:layout_width="fill_parent"
@@ -13,11 +13,15 @@
     android:textSize="15sp"
     android:id="@+id/item_news_title"
     android:text="最新资讯新闻标题"
+     android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
     />
 <LinearLayout 
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="horizontal"
+     android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
     >
     <LinearLayout 
         android:layout_width="fill_parent"
@@ -30,7 +34,7 @@
             android:layout_height="wrap_content"
             android:lines="6"
             android:textSize="13sp"
-            android:textColor="#DDDDDD"
+            android:textColor="@color/texthink"
             android:text="新闻简介"
             android:id="@+id/item_news_description"
             />

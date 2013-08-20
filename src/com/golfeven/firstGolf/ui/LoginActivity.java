@@ -84,6 +84,8 @@ public class LoginActivity extends BaseActivity {
 											.getMid())) {
 
 								appContext.isLogin = true;
+								appContext.upass = upass
+										.getText().toString();
 								Api.getInstance().addCredits(LoginActivity.this, appContext.user, 0, "完成每天登录,");
 								// 登陆成功后保存用户名和密码
 								SharedPreferencesUtil.saveUser(appContext,

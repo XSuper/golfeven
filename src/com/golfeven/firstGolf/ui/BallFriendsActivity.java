@@ -1,6 +1,7 @@
 package com.golfeven.firstGolf.ui;
 
 import net.tsz.afinal.annotation.view.ViewInject;
+import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -109,6 +110,22 @@ public class BallFriendsActivity extends BaseListActivity {
 		
 	}
 	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		reset();
+		listView.setTag(LOAD);
+		requestData();
+	}
 	
+	@Override
+	protected void onNewIntent(Intent intent) {
+		// TODO Auto-generated method stub
+		super.onNewIntent(intent);
+		reset();
+		listView.setTag(LOAD);
+		requestData();
+	}
 
 }

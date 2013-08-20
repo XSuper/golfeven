@@ -39,6 +39,7 @@ import com.golfeven.firstGolf.common.Constant;
 import com.golfeven.firstGolf.common.MyLog;
 import com.golfeven.firstGolf.common.XmppUtil;
 import com.golfeven.firstGolf.ui.BallFriendDetailActivity;
+import com.golfeven.firstGolf.ui.BallFriendsActivity;
 import com.golfeven.firstGolf.ui.LoginActivity;
 import com.golfeven.firstGolf.ui.MainActivity;
 import com.golfeven.xmpp.activity.Chat;
@@ -81,8 +82,8 @@ public class XmppService extends Service {
 			info.setUsername(chatMsg.getUsername());
 			if(XmppUtil.id == null||!chatMsg.getUsername().equals(XmppUtil.id)){
 				
-				showNotification("新消息",chatMsg.getUsername(),chatMsg.getMsg(),info);
 				XmppUtil.addNewFriend(chatMsg.getUsername());
+				showNotification("新消息",chatMsg.getUsername(),"您有"+XmppUtil.getTotleCount()+"条未读信息",info);
 			}
 			
 			
@@ -93,6 +94,8 @@ public class XmppService extends Service {
 		
 		try {
 			connection = XmppUtils.getInstance().getConnection();
+			
+			
 			connection.addPacketListener(new PacketListener() {
 				
 				@Override
@@ -231,7 +234,7 @@ public class XmppService extends Service {
 	public void onDestroy() {
 		Logs.i(XmppService.class, "onDestroy");
 		super.onDestroy();
-		XmppUtils.getInstance().closeConn();
+		//XmppUtils.getInstance().closeConn();
 	}
 	
 	/**
@@ -325,30 +328,34 @@ public class XmppService extends Service {
 	        //DEFAULT_LIGHTS  使用默认闪光提示
 	        //DEFAULT_SOUNDS  使用默认提示声音
 	        //DEFAULT_VIBRATE 使用默认手机震动，需加上<uses-permission android:name="android.permission.VIBRATE" />权限
-	        notification.defaults = Notification.DEFAULT_LIGHTS;
+	        //notification.defaults = Notification.DEFAULT_LIGHTS;
 	        //叠加效果常量
-	        //notification.defaults=Notification.DEFAULT_LIGHTS|Notification.DEFAULT_SOUND;
+	        notification.defaults=Notification.DEFAULT_LIGHTS|Notification.DEFAULT_SOUND;
 	        notification.ledARGB = Color.BLUE;  
 	        notification.ledOnMS =5000; //闪光时间，毫秒
 	     // 设置通知的事件消息  
 	        CharSequence contentTitle =title; // 通知栏标题  
 	        CharSequence contentText =content; // 通知栏内容  
-	       FinalDb db = FinalDb.create(getBaseContext(), Constant.SQLITE_NAME);
-	       BallFriend ballFriend =  db.findById(info.getUsername(), BallFriend.class);
-	       Intent notificationIntent =null; // 点击该通知后要跳转的Activity  
-	       notificationIntent =new Intent(XmppService.this, BallFriendDetailActivity.class);
-	       BallFriendDetailActivity.mid = id;
-	       if(ballFriend == null){
-	    	   notificationIntent.putExtra("mid",id);
-	       }else{
-	    	   
-	    	   notificationIntent.putExtra("ballFriend",ballFriend);
-	       }
+//	       FinalDb db = FinalDb.create(getBaseContext(), Constant.SQLITE_NAME);
+//	       BallFriend ballFriend =  db.findById(info.getUsername(), BallFriend.class);
+//	       Intent notificationIntent =null; // 点击该通知后要跳转的Activity  
+//	       notificationIntent =new Intent(XmppService.this, BallFriendDetailActivity.class);
+//	       BallFriendDetailActivity.mid = id;
+//	       if(ballFriend == null){
+//	    	   notificationIntent.putExtra("mid",id);
+//	       }else{
+//	    	   
+//	    	   notificationIntent.putExtra("ballFriend",ballFriend);
+//	       }
 //	       }else{
 //	    	   notificationIntent =new Intent(XmppService.this, Chat.class);
 //	    	   notificationIntent.putExtra("info", info);
 //	       }
 	        
+	       Intent notificationIntent =null; // 点击该通知后要跳转的Activity  
+	       notificationIntent =new Intent(XmppService.this, BallFriendsActivity.class);
+	       
+	       
 	       int myId = 0;
 	       try {
 	    	   myId = Integer.parseInt(id);
@@ -359,8 +366,8 @@ public class XmppService extends Service {
 	        PendingIntent contentItent = PendingIntent.getActivity(this, myId, notificationIntent, myId);  
 	        notification.setLatestEventInfo(this, contentTitle, contentText, contentItent);  
 	        // 把Notification传递给NotificationManager  
-	        notificationManager.notify(myId, notification);  
-	       // notificationManager.notify(0, notification);  
+	        //notificationManager.notify(myId, notification);  
+	        notificationManager.notify(0, notification);  
 
 	    }
 	

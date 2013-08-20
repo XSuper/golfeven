@@ -11,6 +11,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Application;
+import android.widget.Toast;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -21,6 +22,7 @@ import com.golfeven.firstGolf.common.Constant;
 import com.golfeven.firstGolf.common.MyLog;
 import com.golfeven.firstGolf.common.SharedPreferencesUtil;
 import com.golfeven.firstGolf.common.StringUtils;
+import com.golfeven.firstGolf.widget.MyToast;
 import com.golfeven.weather.WeatherUtil;
 
 public class AppContext extends Application {
@@ -148,7 +150,7 @@ public class AppContext extends Application {
 				try {
 					obj = new JSONObject(t).getJSONObject("weatherinfo");
 					weatherInfo = obj.getString("img1").charAt(1)+"";
-					
+					//MyToast.centerToast(appContext, weatherInfo,Toast.LENGTH_SHORT);
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

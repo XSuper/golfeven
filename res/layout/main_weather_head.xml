@@ -1,55 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="48dip"
-    android:background="@drawable/topbg"
-     >
-   
-<LinearLayout
-    android:layout_width="match_parent"
-    android:gravity="center_vertical"
-    android:layout_height="fill_parent"
-    android:orientation="horizontal"
     android:background="@drawable/topbg" >
-    <TextView 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:text="上海"
-        android:id="@+id/head_weather_place"
-        />
-    
-    
-    <ProgressBar 
-		android:id="@+id/head_weather_progress" 
-		style="@style/loading_small"
-		android:layout_centerVertical="true"
-		android:layout_marginLeft="15.0dip"
-		/>
-    <TextView 
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        />
-    <ImageView 
-        android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
-        android:layout_margin="10dp"
-        android:layout_gravity="center_vertical|right"
-        android:gravity="right"
-        android:text="晴"
-        android:id="@+id/head_weather_info"
-        />
 
-</LinearLayout>
-<TextView 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/topbg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/head_weather_place"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="上海" />
+
+        <ProgressBar
+            android:id="@+id/head_weather_progress"
+            style="@style/loading_small"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15.0dip" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/head_weather_info"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center_vertical|right"
+            android:layout_margin="10dp"
+            android:gravity="right"
+            android:text="晴" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/head_weather_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        android:id="@+id/head_weather_title"
         android:text="首页"
-        />
+        android:textColor="#FFFFFF"
+        android:textSize="20sp" />
+
 </FrameLayout>

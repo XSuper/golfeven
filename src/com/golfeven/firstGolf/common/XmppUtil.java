@@ -22,6 +22,14 @@ public class XmppUtil {
 	
 	public  static String id = null;//用来保存当前聊天页面的id  如果不是聊天页面 id= null;
 	
+	
+	public static void removeAll(){
+		haveMsg.removeAll(haveMsg);
+		haveMsg = null;
+		haveMsg = new ArrayList<String>();
+		System.gc();
+		
+	}
 	/**
 	 * 
 	* 描述 : <描述函数实现的功能>. <br>
@@ -61,6 +69,13 @@ public class XmppUtil {
 			}
 		}
 		return i;
+	}
+	public static int getTotleCount(){
+		int c = 0;
+		if(haveMsg!= null){
+			c = haveMsg.size();
+		}
+		return c;
 	}
 
 }

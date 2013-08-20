@@ -89,6 +89,7 @@ public class RegisterActivity extends BaseActivity{
 							&& !StringUtils.isEmpty(appContext.user
 									.getMid())) {
 
+						appContext.upass = mPass;
 						appContext.isLogin = true;
 						appContext.user.setUserid(mUid);
 						appContext.user.setUname(mNick);

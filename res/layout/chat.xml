@@ -21,20 +21,22 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/sc_labbar_bg_normal"
+        android:background="@drawable/qy_bottombg"
         android:gravity="center_vertical"
         android:orientation="horizontal" >
 
         <EditText
             android:id="@+id/chat_msg"
             android:layout_width="fill_parent"
-            android:layout_height="37dip"
+            android:layout_height="fill_parent"
             android:layout_weight="100"
+            android:layout_margin="8dp"
+            android:textColor="@color/black"
             android:background="@drawable/sc_shurukuangfocus" />
 
         <Button
             android:id="@+id/send_msg"
-            android:layout_width="43dip"
+            android:layout_width="55dip"
             android:layout_height="37dip"
             android:layout_margin="3dip"
             android:layout_weight="1"

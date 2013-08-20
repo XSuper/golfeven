@@ -24,12 +24,14 @@ import com.golfeven.firstGolf.common.SharedPreferencesUtil;
 import com.golfeven.firstGolf.common.ToOtherActivity;
 import com.golfeven.firstGolf.common.UpdateManager;
 import com.golfeven.firstGolf.common.Utils;
+import com.golfeven.firstGolf.common.XmppUtil;
 import com.golfeven.firstGolf.ui.AboutActivity;
 import com.golfeven.firstGolf.ui.IntegralActivity;
 import com.golfeven.firstGolf.ui.LoginActivity;
 import com.golfeven.firstGolf.ui.MainActivity;
 import com.golfeven.firstGolf.ui.MyDetailActivity;
 import com.golfeven.firstGolf.widget.MyToast;
+import com.golfeven.xmpp.db.DbHelper;
 import com.golfeven.xmpp.service.XmppService;
 import com.golfeven.xmpp.xmppmanager.XmppUtils;
 
@@ -165,6 +167,11 @@ public class SettingFrame extends LinearLayout implements
 				appContext.isLogin = false;
 				appContext.user = null;
 				SharedPreferencesUtil.clearUser(appContext);
+				DbHelper.getInstance(appContext).dropTable();
+				Intent serviceIntent = new Intent(MainActivity.getMainActivity(),XmppService.class);
+				MainActivity.getMainActivity().stopService(serviceIntent);
+				XmppUtil.removeAll();
+				XmppUtils.getInstance().closeConn();
 				my.setText("请先登陆");
 				login.setText("登陆");
 			} else {

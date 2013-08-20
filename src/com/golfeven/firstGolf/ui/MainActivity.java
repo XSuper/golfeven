@@ -3,6 +3,8 @@ package com.golfeven.firstGolf.ui;
 import java.io.IOException;
 import java.io.InputStream;
 
+import org.jivesoftware.smack.XMPPException;
+
 import net.tsz.afinal.annotation.view.ViewInject;
 import net.tsz.afinal.http.AjaxCallBack;
 import android.app.Activity;
@@ -46,6 +48,7 @@ import com.golfeven.firstGolf.widget.frame.PlayBallFrame;
 import com.golfeven.firstGolf.widget.frame.SettingFrame;
 import com.golfeven.weather.WeartherActivity;
 import com.golfeven.xmpp.service.XmppService;
+import com.golfeven.xmpp.utils.XmppRunnable;
 import com.golfeven.xmpp.xmppmanager.XmppUtils;
 
 public class MainActivity extends BaseActivity {
@@ -229,7 +232,23 @@ public class MainActivity extends BaseActivity {
 		public void handleMessage(android.os.Message msg) {
 			switch (msg.what) {
 			case XmppUtils.LOGIN_ERROR:
+				
 				MyToast.centerToast(MainActivity.this, "登录失败",Toast.LENGTH_SHORT);
+				if(appContext.isLogin&&appContext.user != null){
+//					try {
+//						XmppUtils.getInstance().createConnection();
+//					} catch (XMPPException e) {
+//						// TODO Auto-generated catch block
+//						e.printStackTrace();
+//						MyLog.e("XMPP", "登录前链接错误");
+//					}
+//					Intent intentService = new Intent(MainActivity.this,XmppService.class);
+//					stopService(intentService);
+					if(!XmppUtils.getInstance().isLogin()){
+						
+						new XmppRunnable(mainActivity.loginHandler, XmppRunnable.LOGIN, new String[]{appContext.user.getMid(),appContext.upass});
+					}
+				}
 				break;
 			case XmppUtils.LOGIN_ERROR_NET:
 				MyToast.centerToast(MainActivity.this, "连接服务器失败",Toast.LENGTH_SHORT);
@@ -243,6 +262,7 @@ public class MainActivity extends BaseActivity {
 			case 200:
 				MyToast.centerToast(MainActivity.this, "登录成功",Toast.LENGTH_SHORT);
 				Intent intentService = new Intent(MainActivity.this,XmppService.class);
+				stopService(intentService);
 				startService(intentService);
 				
 				new Thread(){
@@ -256,6 +276,28 @@ public class MainActivity extends BaseActivity {
 						}
 					};
 				}.start();
+//				
+//				new Thread(){
+//					@Override
+//					public void run() {
+//						// TODO Auto-generated method stub
+//						super.run();
+//						while(appContext.isLogin){
+//							try {
+//								sleep(5000);
+//							} catch (InterruptedException e) {
+//								// TODO Auto-generated catch block
+//								e.printStackTrace();
+//							}
+//							if(!XmppUtils.getInstance().isLogin()){
+//								Intent intentService = new Intent(MainActivity.this,XmppService.class);
+//								stopService(intentService);
+//								new XmppRunnable(mainActivity.loginHandler, XmppRunnable.LOGIN, new String[]{appContext.user.getMid(),appContext.upass});
+//							}
+//							
+//						}
+//					}
+//				}.start();
 				
 //				FriendInfo info = new FriendInfo();
 //				info.setUsername("11");
@@ -296,6 +338,10 @@ public class MainActivity extends BaseActivity {
 		initCommon();
 		initWeatherHead();// 更新头部天气
 		initFooter();
+		
+		
+		
+		
 
 	}
 
@@ -347,12 +393,13 @@ public class MainActivity extends BaseActivity {
 	}
 
 	// 初始化天气头部
-	static String code = null;
+	//static String code = null;
 
 	private void initWeatherHead() {
 
 		weatherHeadPlace.setText(this.appContext.city);
-		if (code != null && !code.equals(appContext.weatherInfo)) {
+	//	if (code != null && !code.equals(appContext.weatherInfo)) {
+			if (appContext.weatherInfo != null ) {
 
 			InputStream in = null;
 			try {
@@ -361,8 +408,16 @@ public class MainActivity extends BaseActivity {
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				MyLog.e("天气未找到文件", e.toString());
 			}
 			Bitmap bm = BitmapFactory.decodeStream(in);
+			try {
+				MyLog.e("天气文件大小", in.available()+"");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				MyLog.e("天气文件大小", e.toString());
+			}
 			BitmapDrawable bitmapDrawable = (BitmapDrawable) weatherHeadInfo
 					.getDrawable();
 			// 如果图片还未回收，先强制回收该图片
@@ -372,7 +427,7 @@ public class MainActivity extends BaseActivity {
 			}
 			weatherHeadInfo.setImageBitmap(bm);
 		}
-		code = appContext.weatherInfo;
+		//code = appContext.weatherInfo;
 
 	}
 
@@ -396,7 +451,7 @@ public class MainActivity extends BaseActivity {
 							dialog.dismiss();
 							AppManager.getAppManager().AppExit(appContext);
 							//关闭xmpp 链接
-							//XmppUtils.getInstance().closeConn();
+							XmppUtils.getInstance().closeConn();
 							// 退出
 							Intent service = new Intent(MainActivity.this,XmppService.class);
 							stopService(service);
